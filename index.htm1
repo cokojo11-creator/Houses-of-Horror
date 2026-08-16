@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Houses of Horror</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: #111;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#menu {
+    background:
+        radial-gradient(circle at center, #292929 0%, #090909 65%, #000 100%);
+}
+
+h1 {
+    font-size: 48px;
+    letter-spacing: 5px;
+    margin: 0 0 10px;
+    text-shadow: 0 0 20px #ff0000;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 40px;
+}
+
+button {
+    width: 220px;
+    padding: 16px;
+    margin: 8px;
+    border: 2px solid #777;
+    background: #151515;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+button:active {
+    background: #444;
+    transform: scale(.97);
+}
+
+#gameScreen {
+    display: none;
+    background: #080808;
+}
+
+#room {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, #050505 0%, #191919 50%, #050505 100%);
+}
+
+#room:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,.85) 100%);
+    pointer-events: none;
+}
+
+#hud {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 5;
+    font-size: 16px;
+}
+
+#message {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 175px;
+    text-align: center;
+    font-size: 18px;
+    min-height: 45px;
+    z-index: 5;
+    text-shadow: 0 2px 5px black;
+}
+
+#controls {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 10;
+}
+
+.control {
+    width: 95px;
+    height: 60px;
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
+    background: rgba(20,20,20,.9);
+}
+
+#scare {
+    display: none;
+    background: #000;
+    z-index: 50;
+}
+
+#scareFace {
+    font-size: 130px;
+    animation: shake .08s infinite;
+}
+
+#scareText {
+    font-size: 28px;
+    color: #f00;
+    font-weight: bold;
+}
+
+@keyframes shake {
+    0% { transform: translate(3px, 2px); }
+    50% { transform: translate(-3px, -2px); }
+    100% { transform: translate(2px, -3px); }
+}
+
+#end {
+    display: none;
+    background: #050505;
+    z-index: 40;
+}
+
+.small {
+    color: #888;
+    font-size: 14px;
+    max-width: 300px;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+    <div id="menu" class="screen">
+        <h1>HOUSES<br>OF HORROR</h1>
+        <div class="subtitle">VERSION 1.0</div>
+
+        <button onclick="startGame()">START GAME</button>
+        <button onclick="showHow()">HOW TO PLAY</button>
+
+        <div id="how" class="small" style="display:none;">
+            Explore the house, find the key, and escape.
+            Something is watching you.
+        </div>
+    </div>
+
+    <div id="gameScreen" class="screen">
+
+        <div id="room"></div>
+
+        <div id="hud">
+            <div>❤️ <span id="health">100</span></div>
+            <div>🔑 <span id="key">NO</span></div>
+        </div>
+
+        <div id="message">
+            You wake up in a strange house...
+        </div>
+
+        <div id="controls">
+            <button class="control" onclick="move('left')">◀ LEFT</button>
+            <button class="control" onclick="search()">SEARCH</button>
+            <button class="control" onclick="move('right')">RIGHT ▶</button>
+        </div>
+
+    </div>
+
+    <div id="scare" class="screen">
+        <div id="scareFace">☠️</div>
+        <div id="scareText">YOU ARE NOT ALONE.</div>
+    </div>
+
+    <div id="end" class="screen">
+        <h1 id="endTitle">ESCAPED</h1>
+        <p id="endText"></p>
+        <button onclick="startGame()">PLAY AGAIN</button>
+        <button onclick="location.reload()">MAIN MENU</button>
+    </div>
+
+</div>
+
+<script>
+
+let room = 0;
+let health = 100;
+let hasKey = false;
+let searched = {};
+let monsterChance = 0;
+
+const rooms = [
+    "You are in the living room. The front door is locked.",
+    "You enter a dark hallway. You hear something upstairs.",
+    "This bedroom has been abandoned for years.",
+    "A bathroom. The mirror is cracked.",
+    "A basement door stands slightly open.",
+    "The basement is freezing cold.",
+    "You find an old storage room.",
+    "A staircase leads back toward the entrance."
+];
+
+function startGame() {
+
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("end").style.display = "none";
+    document.getElementById("scare").style.display = "none";
+    document.getElementById("gameScreen").style.display = "flex";
+
+    room = 0;
+    health = 100;
+    hasKey = false;
+    searched = {};
+    monsterChance = 0;
+
+    update();
+}
+
+function update() {
+
+    document.getElementById("health").textContent = health;
+    document.getElementById("key").textContent = hasKey ? "YES" : "NO";
+
+    document.getElementById("message").textContent = rooms[room];
+}
+
+function move(direction) {
+
+    if (direction === "right") {
+        room++;
+
+        if (room >= rooms.length) {
+            room = rooms.length - 1;
+        }
+    }
+
+    if (direction === "left") {
+        room--;
+
+        if (room < 0) {
+            room = 0;
+        }
+    }
+
+    monsterChance++;
+
+    if (monsterChance >= 4 && Math.random() < .35) {
+        scare();
+        monsterChance = 0;
+        return;
+    }
+
+    update();
+}
+
+function search() {
+
+    if (searched[room]) {
+        document.getElementById("message").textContent =
+            "You search again. There's nothing useful here.";
+        return;
+    }
+
+    searched[room] = true;
+
+    if (room === 2) {
+
+        hasKey = true;
+
+        document.getElementById("message").textContent =
+            "You found an old rusty KEY under the bed.";
+
+    } else if (room === 3) {
+
+        document.getElementById("message").textContent =
+            "The mirror suddenly moves... but nothing is behind you.";
+
+        if (Math.random() < .5) {
+            scare();
+        }
+
+    } else if (room === 5) {
+
+        health -= 15;
+
+        document.getElementById("message").textContent =
+            "Something scratched you in the darkness. -15 HP";
+
+    } else if (room === 6) {
+
+        document.getElementById("message").textContent =
+            "You find a note: GET OUT WHILE YOU CAN.";
+
+    } else if (room === 0) {
+
+        if (hasKey) {
+            win();
+            return;
+        }
+
+        document.getElementById("message").textContent =
+            "The front door is locked. You need a key.";
+
+    } else {
+
+        document.getElementById("message").textContent =
+            "You search the room but find nothing useful.";
+    }
+
+    if (health <= 0) {
+        lose();
+        return;
+    }
+
+    update();
+}
+
+function scare() {
+
+    document.getElementById("scare").style.display = "flex";
+
+    setTimeout(() => {
+
+        document.getElementById("scare").style.display = "none";
+
+        health -= 25;
+
+        if (health <= 0) {
+            lose();
+        } else {
+            update();
+        }
+
+    }, 900);
+}
+
+function win() {
+
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("end").style.display = "flex";
+
+    document.getElementById("endTitle").textContent = "YOU ESCAPED";
+
+    document.getElementById("endText").textContent =
+        "You unlocked the front door and escaped the house... for now.";
+}
+
+function lose() {
+
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("end").style.display = "flex";
+
+    document.getElementById("endTitle").textContent = "YOU DIED";
+
+    document.getElementById("endText").textContent =
+        "The house got you. Maybe next time you'll find the key faster.";
+}
+
+function showHow() {
+
+    const how = document.getElementById("how");
+
+    if (how.style.display === "none") {
+        how.style.display = "block";
+    } else {
+        how.style.display = "none";
+    }
+}
+
+</script>
+
+</body>
+</html>

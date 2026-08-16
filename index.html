@@ -8,1139 +8,1099 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 
-<title>Houses of Horror — Overhaul: Mission Quality</title>
+<title>Houses of Horror 1.2</title>
 
 <style>
 
 *{
 
-box-sizing:border-box;
+    box-sizing:border-box;
 
--webkit-tap-highlight-color:transparent;
+    -webkit-tap-highlight-color:transparent;
 
 }
 
 html,body{
 
-margin:0;
+    margin:0;
 
-padding:0;
+    padding:0;
 
-width:100%;
+    width:100%;
 
-height:100%;
+    height:100%;
 
-overflow:hidden;
+    overflow:hidden;
 
-background:#050505;
+    background:#050505;
 
-color:#fff;
+    color:white;
 
-font-family:Arial,sans-serif;
+    font-family:Arial,sans-serif;
 
-touch-action:none;
+    touch-action:none;
 
 }
 
 button{
 
-font-family:inherit;
+    font-family:inherit;
 
 }
 
 #game{
 
-position:relative;
+    width:100vw;
 
-width:100vw;
+    height:100vh;
 
-height:100vh;
+    position:relative;
 
-overflow:hidden;
-
-background:#080808;
+    overflow:hidden;
 
 }
 
 .screen{
 
-position:absolute;
+    position:absolute;
 
-inset:0;
-
-display:none;
+    inset:0;
 
 }
 
+/* ================= MENU ================= */
+
 #menu{
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    flex-direction:column;
 
-align-items:center;
+    align-items:center;
 
-justify-content:center;
+    justify-content:center;
 
-text-align:center;
+    text-align:center;
 
-background:
+    background:
 
-radial-gradient(circle at 50% 45%,#333 0%,#111 38%,#030303 100%);
+        radial-gradient(circle at 50% 40%,#333 0%,#111 42%,#020202 100%);
 
 }
 
 .title{
 
-font-size:clamp(38px,11vw,70px);
+    font-size:clamp(42px,12vw,75px);
 
-font-weight:900;
+    font-weight:900;
 
-letter-spacing:5px;
+    letter-spacing:6px;
 
-line-height:.9;
+    line-height:.9;
 
-text-shadow:0 0 25px #900;
-
-}
-
-.mission{
-
-margin-top:18px;
-
-font-size:14px;
-
-letter-spacing:4px;
-
-color:#aaa;
+    text-shadow:0 0 25px #900;
 
 }
 
 .version{
 
-margin:8px 0 30px;
+    color:#aaa;
 
-font-size:13px;
+    letter-spacing:4px;
 
-color:#777;
-
-letter-spacing:3px;
+    margin:20px 0 30px;
 
 }
 
-.menuButton{
+.menuBtn{
 
-width:245px;
+    width:240px;
 
-padding:16px;
+    padding:16px;
 
-margin:7px;
+    margin:7px;
 
-border:2px solid #666;
+    border:2px solid #666;
 
-border-radius:8px;
+    border-radius:8px;
 
-background:#151515;
+    background:#151515;
 
-color:#fff;
+    color:white;
 
-font-size:18px;
+    font-size:18px;
 
-font-weight:bold;
+    font-weight:bold;
+
+}
+
+.menuBtn:active{
+
+    background:#444;
+
+    transform:scale(.97);
 
 }
 
-.menuButton:active{
-
-background:#444;
-
-transform:scale(.97);
-
-}
+/* ================= KILLER SELECT ================= */
 
 #killerSelect{
 
-display:none;
+    display:none;
 
-align-items:center;
+    flex-direction:column;
 
-justify-content:center;
+    align-items:center;
 
-flex-direction:column;
+    justify-content:center;
 
-text-align:center;
+    text-align:center;
 
-background:#090909;
+    background:#080808;
 
 }
 
 .killerCards{
 
-display:flex;
+    display:flex;
 
-gap:15px;
+    gap:15px;
 
-margin:20px;
+    margin:20px;
 
 }
 
 .killerCard{
 
-width:165px;
+    width:165px;
 
-min-height:215px;
+    min-height:220px;
 
-padding:15px;
+    padding:15px;
 
-background:#151515;
+    background:#151515;
 
-border:2px solid #555;
+    border:2px solid #444;
 
-border-radius:10px;
+    border-radius:10px;
 
 }
 
 .killerCard.selected{
 
-border-color:#fff;
+    border-color:white;
 
-box-shadow:0 0 22px #777;
+    box-shadow:0 0 25px #777;
 
 }
 
-.killerFace{
+.killerVisual{
 
-font-size:70px;
+    font-size:70px;
 
-height:100px;
+    height:100px;
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    justify-content:center;
 
-justify-content:center;
+    align-items:center;
 
 }
 
 .killerName{
 
-font-weight:bold;
+    font-weight:bold;
 
-font-size:18px;
+    font-size:18px;
+
+}
+
+.killerDesc{
+
+    color:#999;
+
+    font-size:12px;
+
+    margin-top:8px;
 
 }
 
-.killerDescription{
-
-margin-top:8px;
-
-font-size:12px;
-
-color:#999;
-
-line-height:1.4;
-
-}
+/* ================= GAME ================= */
 
 #gameScreen{
 
-display:none;
+    display:none;
 
-background:#080808;
-
-}
-
-#world{
-
-position:absolute;
-
-left:50%;
-
-top:50%;
-
-transform:translate(-50%,-50%);
-
-width:900px;
-
-height:650px;
-
-overflow:hidden;
-
-background:#171717;
+    background:#171717;
 
 }
 
-#sky{
+/* OUTSIDE */
 
-position:absolute;
+#outside{
 
-inset:0;
+    position:absolute;
 
-background:
+    inset:0;
 
-linear-gradient(#111 0%,#202020 48%,#090909 49%,#080808 100%);
+    background:
 
-}
-
-#road{
-
-position:absolute;
-
-left:33%;
-
-right:33%;
-
-top:0;
-
-bottom:0;
-
-background:
-
-linear-gradient(90deg,#202020,#292929,#202020);
+        linear-gradient(#31506b 0 36%,#6c824d 36% 100%);
 
 }
 
-#roadLine{
+#sun{
 
-position:absolute;
+    position:absolute;
 
-left:49.5%;
+    width:80px;
 
-top:0;
+    height:80px;
 
-width:1%;
+    border-radius:50%;
 
-height:100%;
+    background:#e6d58c;
 
-background:
+    right:12%;
 
-repeating-linear-gradient(
+    top:8%;
 
-to bottom,
+    box-shadow:0 0 50px #e6d58c;
 
-transparent 0 28px,
+}
 
-#666 28px 58px
+#street{
 
-);
+    position:absolute;
 
-opacity:.35;
+    left:30%;
+
+    right:30%;
+
+    top:0;
+
+    bottom:0;
+
+    background:#292929;
+
+}
+
+#streetLine{
+
+    position:absolute;
+
+    left:49%;
+
+    width:2%;
+
+    top:0;
+
+    bottom:0;
+
+    background:repeating-linear-gradient(
+
+        to bottom,
+
+        #777 0 45px,
+
+        transparent 45px 90px
+
+    );
+
+    opacity:.55;
 
 }
 
 .sidewalk{
 
-position:absolute;
+    position:absolute;
 
-top:0;
+    top:0;
 
-bottom:0;
+    bottom:0;
 
-width:17%;
+    width:12%;
 
-background:#4a4a4a;
-
-}
-
-#sidewalkLeft{
-
-left:16%;
+    background:#888;
 
 }
 
-#sidewalkRight{
+#walkL{left:18%}
 
-right:16%;
+#walkR{right:18%}
 
-}
+.houseOutside{
 
-.house{
+    position:absolute;
 
-position:absolute;
+    width:150px;
 
-width:210px;
+    height:130px;
 
-height:235px;
+    background:#735b4b;
 
-background:#3b3b3b;
+    border:5px solid #27201d;
 
-border:4px solid #171717;
+    border-radius:5px;
 
-box-shadow:0 10px 25px #000;
-
-}
-
-.houseRoof{
-
-position:absolute;
-
-left:-12px;
-
-top:-58px;
-
-width:226px;
-
-height:70px;
-
-background:#1c1c1c;
-
-border:4px solid #111;
-
-clip-path:polygon(50% 0,100% 100%,0 100%);
+    box-shadow:0 12px 20px #111;
 
 }
 
-.houseDoor{
+.houseOutside:before{
 
-position:absolute;
+    content:"";
 
-bottom:0;
+    position:absolute;
 
-left:50%;
+    left:-15px;
 
-transform:translateX(-50%);
+    top:-55px;
 
-width:48px;
+    width:170px;
 
-height:85px;
+    height:65px;
 
-background:#151515;
+    background:#292020;
 
-border:3px solid #080808;
+    border:5px solid #171313;
 
-}
-
-.houseWindow{
-
-position:absolute;
-
-width:48px;
-
-height:48px;
-
-background:#121212;
-
-border:5px solid #171717;
-
-box-shadow:inset 0 0 12px #000;
+    clip-path:polygon(50% 0,100% 100%,0 100%);
 
 }
 
-.houseWindow.w1{
+.windowOutside{
 
-left:22px;
+    position:absolute;
 
-top:40px;
+    width:35px;
 
-}
+    height:35px;
 
-.houseWindow.w2{
+    top:27px;
 
-right:22px;
+    background:#26343c;
 
-top:40px;
-
-}
-
-.houseWindow.w3{
-
-left:22px;
-
-bottom:35px;
+    border:4px solid #151515;
 
 }
 
-.houseLabel{
+.windowOutside.left{left:18px}
 
-position:absolute;
+.windowOutside.right{right:18px}
 
-bottom:-27px;
+.doorOutside{
 
-left:0;
+    position:absolute;
 
-right:0;
+    bottom:0;
 
-text-align:center;
+    left:50%;
 
-font-weight:bold;
+    transform:translateX(-50%);
 
-font-size:14px;
+    width:38px;
 
-}
+    height:60px;
 
-#house1{
+    background:#211b18;
 
-left:20px;
-
-top:170px;
+    border:2px solid #111;
 
 }
 
-#house2{
+.houseName{
 
-right:20px;
+    position:absolute;
 
-top:170px;
+    top:135px;
 
-}
+    width:100%;
 
-#streetSign{
+    text-align:center;
 
-position:absolute;
+    font-weight:bold;
 
-left:50%;
-
-top:35px;
-
-transform:translateX(-50%);
-
-padding:9px 22px;
-
-background:#101010;
-
-border:2px solid #555;
-
-font-size:12px;
-
-letter-spacing:3px;
+    text-shadow:0 2px 4px black;
 
 }
 
-#player{
+/* ================= KILLER ================= */
 
-position:absolute;
+#killer{
 
-width:38px;
+    position:absolute;
 
-height:62px;
+    width:48px;
 
-z-index:30;
+    height:75px;
 
-transform:translate(-50%,-50%);
-
-}
-
-.playerHead{
-
-position:absolute;
-
-width:26px;
-
-height:26px;
-
-left:6px;
-
-top:-12px;
-
-border-radius:50%;
+    z-index:20;
 
 }
 
-.playerBody{
+.kHead{
 
-position:absolute;
+    position:absolute;
 
-left:0;
+    width:32px;
 
-top:10px;
+    height:32px;
 
-width:38px;
+    left:8px;
 
-height:45px;
+    top:0;
 
-border-radius:13px 13px 7px 7px;
-
-}
-
-.playerWeapon{
-
-position:absolute;
-
-right:-10px;
-
-top:18px;
-
-width:7px;
-
-height:40px;
-
-transform:rotate(25deg);
-
-border-radius:4px;
+    border-radius:50%;
 
 }
 
-#player.killer1 .playerHead{
+.kBody{
 
-background:#ddd;
+    position:absolute;
 
-}
+    width:48px;
 
-#player.killer1 .playerBody{
+    height:48px;
 
-background:#161616;
+    bottom:0;
 
-}
-
-#player.killer1 .playerWeapon{
-
-background:#aaa;
+    border-radius:15px 15px 8px 8px;
 
 }
 
-#player.killer2 .playerHead{
+.kWeapon{
 
-background:#111;
+    position:absolute;
 
-border:3px solid #aaa;
+    width:8px;
 
-}
+    height:52px;
 
-#player.killer2 .playerBody{
+    right:-12px;
 
-background:#711010;
+    top:24px;
 
-}
+    transform:rotate(25deg);
 
-#player.killer2 .playerWeapon{
-
-background:#ccc;
+    border-radius:5px;
 
 }
 
-.survivor{
+/* hunter */
 
-position:absolute;
+#killer.hunter .kHead{
 
-width:24px;
-
-height:43px;
-
-z-index:20;
-
-transform:translate(-50%,-50%);
-
-transition:left .08s linear,top .08s linear;
+    background:#d0b49a;
 
 }
 
-.survivorHead{
+#killer.hunter .kBody{
 
-position:absolute;
-
-width:17px;
-
-height:17px;
-
-left:4px;
-
-top:-8px;
-
-border-radius:50%;
-
-background:#c7a080;
+    background:#171717;
 
 }
 
-.survivorBody{
+#killer.hunter .kWeapon{
 
-position:absolute;
-
-left:0;
-
-top:7px;
-
-width:25px;
-
-height:31px;
-
-border-radius:8px 8px 4px 4px;
+    background:#aaa;
 
 }
 
-.survivor.s1 .survivorBody{
+/* butcher */
 
-background:#31506b;
+#killer.butcher .kHead{
 
-}
+    background:#bbb;
 
-.survivor.s2 .survivorBody{
-
-background:#6b3131;
+    border:4px solid #222;
 
 }
 
-.survivor.s3 .survivorBody{
+#killer.butcher .kBody{
 
-background:#536b31;
-
-}
-
-.survivor.s4 .survivorBody{
-
-background:#6a4c2c;
+    background:#6d1616;
 
 }
 
-.survivor.s5 .survivorBody{
+#killer.butcher .kWeapon{
 
-background:#49316b;
-
-}
-
-.survivor.s6 .survivorBody{
-
-background:#315f59;
+    background:#ddd;
 
 }
 
-.survivor.captured{
-
-filter:grayscale(1) brightness(.4);
-
-}
+/* ================= HUD ================= */
 
 #hud{
 
-position:absolute;
+    position:absolute;
 
-top:0;
+    top:0;
 
-left:0;
+    left:0;
 
-right:0;
+    right:0;
 
-z-index:50;
+    z-index:50;
 
-display:flex;
+    display:flex;
 
-justify-content:space-between;
+    justify-content:space-between;
 
-padding:12px;
+    padding:12px;
 
-background:linear-gradient(#000e,transparent);
-
-pointer-events:none;
+    background:linear-gradient(#000c,transparent);
 
 }
 
 .hudBox{
 
-background:#000b;
+    background:#000b;
 
-border:1px solid #555;
+    border:1px solid #666;
 
-padding:8px 10px;
+    padding:8px 10px;
 
-border-radius:6px;
+    border-radius:7px;
 
-font-size:12px;
-
-}
-
-#timer{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#fff;
+    font-size:13px;
 
 }
 
 #objective{
 
-position:absolute;
+    position:absolute;
 
-z-index:50;
+    top:62px;
 
-top:62px;
+    left:50%;
 
-left:50%;
+    transform:translateX(-50%);
 
-transform:translateX(-50%);
+    z-index:50;
 
-padding:8px 14px;
+    background:#000c;
 
-background:#000c;
+    border:1px solid #555;
 
-border-radius:20px;
+    border-radius:20px;
 
-font-size:12px;
+    padding:8px 13px;
 
-white-space:nowrap;
+    font-size:13px;
 
-}
+    text-align:center;
 
-#message{
-
-position:absolute;
-
-z-index:70;
-
-left:50%;
-
-bottom:125px;
-
-transform:translateX(-50%);
-
-width:min(430px,90vw);
-
-padding:12px;
-
-text-align:center;
-
-background:#000e;
-
-border:1px solid #555;
-
-border-radius:8px;
-
-display:none;
+    white-space:nowrap;
 
 }
 
-#searchButton{
+/* ================= HOUSE INTERIOR ================= */
 
-position:absolute;
+#interior{
 
-z-index:60;
+    display:none;
 
-right:22px;
+    position:absolute;
 
-bottom:28px;
+    inset:0;
 
-width:170px;
-
-padding:15px;
-
-background:#151515;
-
-border:2px solid #aaa;
-
-border-radius:8px;
-
-color:#fff;
-
-font-weight:bold;
-
-display:none;
+    background:#151515;
 
 }
 
-#enterButton{
+#roomBackground{
 
-position:absolute;
+    position:absolute;
 
-z-index:60;
+    inset:0;
 
-right:22px;
+    background:
 
-bottom:88px;
+        linear-gradient(
 
-width:170px;
+            90deg,
 
-padding:15px;
+            #16100d 0 18%,
 
-background:#151515;
+            #49372d 18% 82%,
 
-border:2px solid #aaa;
+            #16100d 82%
 
-border-radius:8px;
-
-color:#fff;
-
-font-weight:bold;
-
-display:none;
+        );
 
 }
+
+#floor{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:35%;
+
+    background:
+
+        repeating-linear-gradient(
+
+            90deg,
+
+            #4a3023 0 45px,
+
+            #38241b 45px 50px
+
+        );
+
+}
+
+#wallPicture{
+
+    position:absolute;
+
+    top:20%;
+
+    left:15%;
+
+    width:80px;
+
+    height:105px;
+
+    background:#30251f;
+
+    border:7px solid #15110e;
+
+}
+
+#couch{
+
+    position:absolute;
+
+    bottom:35%;
+
+    left:15%;
+
+    width:180px;
+
+    height:70px;
+
+    background:#3b2722;
+
+    border-radius:15px 15px 5px 5px;
+
+}
+
+#table{
+
+    position:absolute;
+
+    bottom:32%;
+
+    left:55%;
+
+    width:120px;
+
+    height:20px;
+
+    background:#3a251b;
+
+}
+
+#doorInterior{
+
+    position:absolute;
+
+    right:10%;
+
+    bottom:35%;
+
+    width:70px;
+
+    height:180px;
+
+    background:#201512;
+
+    border:5px solid #100c0a;
+
+}
+
+#roomLabel{
+
+    position:absolute;
+
+    top:100px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    text-shadow:0 2px 5px black;
+
+}
+
+/* ================= SURVIVORS ================= */
+
+.survivor{
+
+    position:absolute;
+
+    width:34px;
+
+    height:58px;
+
+    z-index:15;
+
+}
+
+.sHead{
+
+    position:absolute;
+
+    left:7px;
+
+    top:0;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    background:#d8b18d;
+
+}
+
+.sBody{
+
+    position:absolute;
+
+    left:3px;
+
+    bottom:0;
+
+    width:28px;
+
+    height:38px;
+
+    border-radius:8px;
+
+}
+
+.s1 .sBody{background:#41658a}
+
+.s2 .sBody{background:#806341}
+
+.s3 .sBody{background:#596e49}
+
+.s4 .sBody{background:#704f70}
+
+.s5 .sBody{background:#9a7b42}
+
+.s6 .sBody{background:#555}
+
+.survivor.captured{
+
+    opacity:.35;
+
+}
+
+.survivor.dead{
+
+    display:none;
+
+}
+
+/* ================= CONTROLS ================= */
 
 #joystick{
 
-position:absolute;
+    position:absolute;
 
-z-index:60;
+    z-index:70;
 
-left:20px;
+    left:20px;
 
-bottom:25px;
+    bottom:25px;
 
-width:125px;
+    width:125px;
 
-height:125px;
+    height:125px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:#ffffff16;
+    background:#ffffff18;
 
-border:2px solid #ffffff55;
+    border:2px solid #ffffff55;
 
 }
 
 #stick{
 
-position:absolute;
+    position:absolute;
 
-width:54px;
+    width:54px;
 
-height:54px;
+    height:54px;
 
-left:33px;
+    left:33px;
 
-top:33px;
+    top:33px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:#ffffff55;
+    background:#ffffff66;
 
 }
 
+#actionButton{
+
+    position:absolute;
+
+    z-index:70;
+
+    right:20px;
+
+    bottom:40px;
+
+    width:145px;
+
+    padding:17px;
+
+    border-radius:10px;
+
+    border:2px solid white;
+
+    background:#111d;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    display:none;
+
+}
+
+/* ================= MESSAGE ================= */
+
+#message{
+
+    position:absolute;
+
+    z-index:80;
+
+    left:50%;
+
+    bottom:125px;
+
+    transform:translateX(-50%);
+
+    width:min(450px,90vw);
+
+    text-align:center;
+
+    background:#000d;
+
+    border:1px solid #666;
+
+    border-radius:8px;
+
+    padding:11px;
+
+    display:none;
+
+}
+
+/* ================= OVERLAYS ================= */
+
 .overlay{
 
-position:absolute;
+    display:none;
 
-inset:0;
+    position:absolute;
 
-z-index:100;
+    z-index:100;
 
-display:none;
+    inset:0;
 
-align-items:center;
+    background:#000d;
 
-justify-content:center;
+    align-items:center;
 
-text-align:center;
+    justify-content:center;
 
-background:#000d;
+    text-align:center;
 
 }
 
 .overlayBox{
 
-width:min(440px,90vw);
+    width:min(460px,90vw);
 
-padding:28px 20px;
+    background:#111;
 
-background:#101010;
+    border:1px solid #777;
 
-border:1px solid #666;
+    border-radius:12px;
 
-border-radius:12px;
+    padding:25px;
 
 }
 
 .overlayBox h2{
 
-font-size:30px;
-
-margin-top:0;
+    font-size:30px;
 
 }
 
-.actionButton{
+.actionBtn{
 
-width:220px;
+    width:220px;
 
-padding:14px;
+    padding:14px;
 
-margin:7px;
+    margin-top:12px;
 
-background:#222;
+    background:#222;
 
-color:#fff;
+    color:white;
 
-border:1px solid #777;
+    border:1px solid #888;
 
-border-radius:7px;
+    border-radius:8px;
 
-font-weight:bold;
+    font-weight:bold;
 
 }
+
+/* ================= SKILL CHECK ================= */
 
 #skillCheck{
 
-display:none;
+    display:none;
 
-position:absolute;
+    position:absolute;
 
-inset:0;
+    z-index:150;
 
-z-index:150;
+    inset:0;
 
-background:#000c;
+    background:#000b;
 
-align-items:center;
+    align-items:center;
 
-justify-content:center;
+    justify-content:center;
 
-flex-direction:column;
+    flex-direction:column;
 
-text-align:center;
-
-}
-
-.skillBox{
-
-width:min(430px,90vw);
-
-padding:25px;
-
-background:#111;
-
-border:2px solid #555;
-
-border-radius:12px;
+    text-align:center;
 
 }
 
-.skillBar{
+#skillCircle{
 
-position:relative;
+    position:relative;
 
-width:100%;
+    width:250px;
 
-height:30px;
+    height:250px;
 
-margin:25px 0;
+    border-radius:50%;
 
-background:#333;
+    border:8px solid #444;
 
-border-radius:5px;
-
-overflow:hidden;
+    margin:20px;
 
 }
 
-.skillSuccess{
+#skillTarget{
 
-position:absolute;
+    position:absolute;
 
-left:42%;
+    inset:35px;
 
-width:16%;
+    border-radius:50%;
 
-height:100%;
-
-background:#777;
+    border:12px solid #777;
 
 }
 
-.skillCursor{
+#skillNeedle{
 
-position:absolute;
+    position:absolute;
 
-left:0;
+    width:5px;
 
-top:0;
+    height:110px;
 
-width:5px;
+    left:50%;
 
-height:100%;
+    top:15px;
 
-background:#fff;
+    transform-origin:50% 110px;
+
+    background:white;
 
 }
 
 #skillButton{
 
-width:200px;
+    width:190px;
 
-padding:15px;
+    padding:15px;
 
-background:#222;
+    border:2px solid white;
 
-color:white;
+    border-radius:8px;
 
-border:2px solid #aaa;
+    background:#222;
 
-border-radius:7px;
+    color:white;
 
-font-weight:bold;
-
-}
-
-#basement{
-
-display:none;
-
-position:absolute;
-
-inset:0;
-
-z-index:120;
-
-background:
-
-radial-gradient(circle at center,#292929 0%,#080808 60%,#000 100%);
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
+    font-weight:bold;
 
 }
 
-.basementBox{
-
-width:min(430px,90vw);
-
-padding:25px;
-
-background:#090909dd;
-
-border:1px solid #555;
-
-border-radius:12px;
-
-}
-
-.basementBox h2{
-
-font-size:32px;
-
-}
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:600px){
 
-#world{
+    .houseOutside{
 
-width:700px;
+        width:120px;
 
-height:620px;
+        height:105px;
 
-}
+    }
 
-.house{
+    .houseOutside:before{
 
-width:165px;
+        width:140px;
 
-height:195px;
+    }
 
-}
+    .houseName{
 
-.houseRoof{
+        top:108px;
 
-width:181px;
+        font-size:12px;
 
-}
+    }
 
-#house1{
+    #objective{
 
-left:10px;
+        font-size:11px;
 
-top:165px;
-
-}
-
-#house2{
-
-right:10px;
-
-top:165px;
-
-}
+    }
 
 }
 
@@ -1152,49 +1112,87 @@ top:165px;
 
 <div id="game">
 
+<!-- MENU -->
+
 <div id="menu" class="screen">
 
-<div class="title">HOUSES<br>OF HORROR</div>
+<div class="title">
 
-<div class="mission">OVERHAUL: MISSION QUALITY</div>
-
-<div class="version">VERSION 1.2 — PART 1</div>
-
-<button class="menuButton" onclick="openKillers()">START HUNT</button>
-
-<button class="menuButton" onclick="showHow()">HOW TO PLAY</button>
-
-<div id="how" style="display:none;width:min(500px,85vw);color:#aaa;line-height:1.5;">
-
-Two houses. Six survivors. One killer.<br><br>
-
-Survive for five minutes and the survivors win.
-
-Catch a survivor once and they are sent to the basement.
-
-Another survivor must rescue them using a skill check.
-
-A second capture eliminates them.
+HOUSES<br>OF HORROR
 
 </div>
 
+<div class="version">
+
+VERSION 1.2<br>
+
+OVERHAUL MISSION QUALITY
+
 </div>
+
+<button class="menuBtn" onclick="openKillerSelect()">
+
+PLAY
+
+</button>
+
+<button class="menuBtn" onclick="showInstructions()">
+
+HOW TO PLAY
+
+</button>
+
+<p id="instructions"
+
+style="display:none;width:min(500px,85vw);color:#aaa;line-height:1.5">
+
+You are the killer.
+
+Six survivors are hiding inside two houses.
+
+Find them and capture them.
+
+A captured survivor is taken to the basement.
+
+Another survivor can rescue them with a skill check.
+
+Catch a survivor twice to eliminate them.
+
+Survivors win if they survive for five minutes.
+
+</p>
+
+</div>
+
+<!-- KILLER SELECT -->
 
 <div id="killerSelect" class="screen">
 
-<h2>CHOOSE YOUR KILLER</h2>
+<h1>CHOOSE YOUR KILLER</h1>
 
-<p style="color:#888;">Abilities will be expanded in future updates.</p>
+<p style="color:#888">
+
+You are the killer.
+
+</p>
 
 <div class="killerCards">
 
-<div id="killerCard1" class="killerCard selected" onclick="chooseKiller(1)">
+<div id="killer1"
 
-<div class="killerFace">🔪</div>
+class="killerCard selected"
 
-<div class="killerName">THE HUNTER</div>
+onclick="selectKiller(1)">
 
-<div class="killerDescription">
+<div class="killerVisual">🔪</div>
+
+<div class="killerName">
+
+THE HUNTER
+
+</div>
+
+<div class="killerDesc">
 
 Fast and silent.
 
@@ -1202,15 +1200,23 @@ Fast and silent.
 
 </div>
 
-<div id="killerCard2" class="killerCard" onclick="chooseKiller(2)">
+<div id="killer2"
 
-<div class="killerFace">🪓</div>
+class="killerCard"
 
-<div class="killerName">THE BUTCHER</div>
+onclick="selectKiller(2)">
 
-<div class="killerDescription">
+<div class="killerVisual">🪓</div>
 
-Slow but intimidating.
+<div class="killerName">
+
+THE BUTCHER
+
+</div>
+
+<div class="killerDesc">
+
+Brutal and intimidating.
 
 </div>
 
@@ -1218,97 +1224,147 @@ Slow but intimidating.
 
 </div>
 
-<button class="menuButton" onclick="startHunt()">START</button>
+<button class="menuBtn" onclick="startMatch()">
 
-<button class="menuButton" onclick="backMenu()">BACK</button>
+START HUNT
+
+</button>
+
+<button class="menuBtn" onclick="backMenu()">
+
+BACK
+
+</button>
 
 </div>
+
+<!-- GAME -->
 
 <div id="gameScreen" class="screen">
 
-<div id="world">
+<!-- OUTSIDE -->
 
-<div id="sky"></div>
+<div id="outside">
 
-<div id="road"></div>
+<div id="sun"></div>
 
-<div id="roadLine"></div>
+<div id="street"></div>
 
-<div id="sidewalkLeft" class="sidewalk"></div>
+<div id="streetLine"></div>
 
-<div id="sidewalkRight" class="sidewalk"></div>
+<div id="walkL" class="sidewalk"></div>
 
-<div id="streetSign">HORROR STREET</div>
+<div id="walkR" class="sidewalk"></div>
 
-<div id="house1" class="house">
+<div id="houseA"
 
-<div class="houseRoof"></div>
+class="houseOutside"
 
-<div class="houseWindow w1"></div>
+style="left:5%;top:28%;"
 
-<div class="houseWindow w2"></div>
+onclick="enterHouse(1)">
 
-<div class="houseWindow w3"></div>
+<div class="windowOutside left"></div>
 
-<div class="houseDoor"></div>
+<div class="windowOutside right"></div>
 
-<div class="houseLabel">HOUSE 1</div>
+<div class="doorOutside"></div>
+
+<div class="houseName">
+
+HOUSE 1
 
 </div>
 
-<div id="house2" class="house">
+</div>
 
-<div class="houseRoof"></div>
+<div id="houseB"
 
-<div class="houseWindow w1"></div>
+class="houseOutside"
 
-<div class="houseWindow w2"></div>
+style="right:5%;top:28%;"
 
-<div class="houseWindow w3"></div>
+onclick="enterHouse(2)">
 
-<div class="houseDoor"></div>
+<div class="windowOutside left"></div>
 
-<div class="houseLabel">HOUSE 2</div>
+<div class="windowOutside right"></div>
+
+<div class="doorOutside"></div>
+
+<div class="houseName">
+
+HOUSE 2
+
+</div>
+
+</div>
+
+</div>
+
+<!-- INTERIOR -->
+
+<div id="interior">
+
+<div id="roomBackground"></div>
+
+<div id="floor"></div>
+
+<div id="wallPicture"></div>
+
+<div id="couch"></div>
+
+<div id="table"></div>
+
+<div id="doorInterior"></div>
+
+<div id="roomLabel">
+
+HOUSE
 
 </div>
 
 <div id="survivors"></div>
 
-<div id="player" class="killer1">
+</div>
 
-<div class="playerHead"></div>
+<!-- KILLER -->
 
-<div class="playerBody"></div>
+<div id="killer" class="hunter">
 
-<div class="playerWeapon"></div>
+<div class="kHead"></div>
+
+<div class="kBody"></div>
+
+<div class="kWeapon"></div>
 
 </div>
 
-</div>
+<!-- HUD -->
 
 <div id="hud">
 
 <div class="hudBox">
 
-TIME<br>
+TIME:
 
-<span id="timer">05:00</span>
-
-</div>
-
-<div class="hudBox">
-
-SURVIVORS<br>
-
-<span id="survivorCount">6</span>
+<span id="timer">5:00</span>
 
 </div>
 
 <div class="hudBox">
 
-CAPTURES<br>
+ALIVE:
 
-<span id="captureCount">0</span>
+<span id="alive">6</span>
+
+</div>
+
+<div class="hudBox">
+
+ELIMINATED:
+
+<span id="eliminated">0</span>
 
 </div>
 
@@ -1326,79 +1382,65 @@ Find the survivors.
 
 </div>
 
-<button id="enterButton" onclick="enterHouse()">
+<button id="actionButton"
 
-ENTER HOUSE
+onclick="action()">
 
-</button>
-
-<button id="searchButton" onclick="captureNearby()">
-
-CATCH SURVIVOR
+INTERACT
 
 </button>
 
 <div id="message"></div>
 
-<div id="roundEnd" class="overlay">
-
-<div class="overlayBox">
-
-<h2 id="roundEndTitle">SURVIVORS WIN</h2>
-
-<p id="roundEndText"></p>
-
-<button class="actionButton" onclick="location.reload()">
-
-PLAY AGAIN
-
-</button>
-
-</div>
-
-</div>
-
-<div id="basement">
-
-<div class="basementBox">
-
-<h2>BASEMENT</h2>
-
-<p id="basementText">
-
-A survivor has been captured.
-
-</p>
-
-<button class="actionButton" onclick="startRescue()">
-
-ATTEMPT RESCUE
-
-</button>
-
-</div>
-
-</div>
+<!-- SKILL CHECK -->
 
 <div id="skillCheck">
 
-<div class="skillBox">
+<h2>SURVIVOR RESCUE</h2>
 
-<h2>RESCUE SKILL CHECK</h2>
+<p>
 
-<p>Tap the button when the cursor is inside the white zone.</p>
+Another survivor is attempting a rescue.
 
-<div class="skillBar">
+</p>
 
-<div class="skillSuccess"></div>
+<div id="skillCircle">
 
-<div id="skillCursor" class="skillCursor"></div>
+<div id="skillTarget"></div>
+
+<div id="skillNeedle"></div>
 
 </div>
 
-<button id="skillButton" onclick="skillCheckPress()">
+<button id="skillButton"
 
-SKILL CHECK
+onclick="skillCheck()">
+
+HIT SKILL CHECK
+
+</button>
+
+</div>
+
+<!-- RESULT -->
+
+<div id="result" class="overlay">
+
+<div class="overlayBox">
+
+<h2 id="resultTitle">
+
+YOU WIN
+
+</h2>
+
+<p id="resultText"></p>
+
+<button class="actionBtn"
+
+onclick="location.reload()">
+
+PLAY AGAIN
 
 </button>
 
@@ -1412,33 +1454,33 @@ SKILL CHECK
 
 <script>
 
-let killer=1;
+/* ================= GAME STATE ================= */
 
-let gameRunning=false;
+let killerType=1;
 
-let timeLeft=300;
-
-let timerInterval=null;
-
-let captures=0;
-
-let eliminated=0;
-
-let rescued=0;
+let gameStarted=false;
 
 let currentHouse=0;
 
-let inHouse=false;
+let timer=300;
+
+let timerInterval=null;
+
+let survivors=[];
+
+let aliveCount=6;
+
+let eliminatedCount=0;
+
+let actionTarget=null;
 
 let player={
 
-x:450,
+    x:50,
 
-y:330
+    y:70
 
 };
-
-let survivors=[];
 
 let joystickActive=false;
 
@@ -1446,271 +1488,305 @@ let joyX=0;
 
 let joyY=0;
 
-let skillRunning=false;
+let skillAngle=0;
 
-let skillPosition=0;
+let skillTimer=null;
 
-let skillDirection=1;
+/* ================= MENU ================= */
 
-let skillInterval=null;
+function showInstructions(){
 
-function showHow(){
+    const box=document.getElementById("instructions");
 
-const h=document.getElementById("how");
+    box.style.display=
 
-h.style.display=
+    box.style.display==="none"
 
-h.style.display==="none"?"block":"none";
+    ?"block"
+
+    :"none";
 
 }
 
-function openKillers(){
+function openKillerSelect(){
 
-document.getElementById("menu").style.display="none";
+    document.getElementById("menu").style.display="none";
 
-document.getElementById("killerSelect").style.display="flex";
+    document.getElementById("killerSelect").style.display="flex";
 
 }
 
 function backMenu(){
 
-document.getElementById("killerSelect").style.display="none";
+    document.getElementById("killerSelect").style.display="none";
 
-document.getElementById("menu").style.display="flex";
-
-}
-
-function chooseKiller(number){
-
-killer=number;
-
-document.getElementById("killerCard1")
-
-.classList.remove("selected");
-
-document.getElementById("killerCard2")
-
-.classList.remove("selected");
-
-document.getElementById("killerCard"+number)
-
-.classList.add("selected");
+    document.getElementById("menu").style.display="flex";
 
 }
 
-function startHunt(){
+function selectKiller(number){
 
-document.getElementById("killerSelect").style.display="none";
+    killerType=number;
 
-document.getElementById("gameScreen").style.display="block";
+    document.getElementById("killer1")
 
-document.getElementById("player").className=
+    .classList.remove("selected");
 
-killer===1?"killer1":"killer2";
+    document.getElementById("killer2")
 
-gameRunning=true;
+    .classList.remove("selected");
 
-timeLeft=300;
+    document.getElementById("killer"+number)
 
-captures=0;
-
-eliminated=0;
-
-rescued=0;
-
-inHouse=false;
-
-player.x=450;
-
-player.y=330;
-
-createSurvivors();
-
-renderPlayer();
-
-updateHUD();
-
-startTimer();
-
-showMessage(
-
-"Six survivors are hiding in the two houses."
-
-);
+    .classList.add("selected");
 
 }
 
-function createSurvivors(){
+/* ================= START ================= */
 
-const container=
+function startMatch(){
 
-document.getElementById("survivors");
+    document.getElementById("killerSelect")
 
-container.innerHTML="";
+    .style.display="none";
 
-survivors=[];
+    document.getElementById("gameScreen")
 
-for(let i=1;i<=6;i++){
+    .style.display="block";
 
-const house=i<=3?1:2;
+    gameStarted=true;
 
-const survivor={
+    timer=300;
 
-id:i,
+    aliveCount=6;
 
-house:house,
+    eliminatedCount=0;
 
-x:house===1?
+    currentHouse=0;
 
-180+Math.random()*100:
+    player.x=50;
 
-620+Math.random()*100,
+    player.y=70;
 
-y:190+Math.random()*230,
+    createSurvivors();
 
-state:"alive",
+    setKiller();
 
-captures:0,
+    updateHUD();
 
-visible:true,
+    showMessage(
 
-targetX:0,
+        "Six survivors are hiding. Find them."
 
-targetY:0,
+    );
 
-moveTimer:0
-
-};
-
-survivors.push(survivor);
-
-const el=document.createElement("div");
-
-el.className="survivor s"+i;
-
-el.id="survivor"+i;
-
-el.innerHTML=
-
-'<div class="survivorHead"></div>'+
-
-'<div class="survivorBody"></div>';
-
-container.appendChild(el);
+    startTimer();
 
 }
 
-renderSurvivors();
-
-}
+/* ================= TIMER ================= */
 
 function startTimer(){
 
-clearInterval(timerInterval);
+    clearInterval(timerInterval);
 
-timerInterval=setInterval(function(){
+    timerInterval=setInterval(function(){
 
-if(!gameRunning)return;
+        if(!gameStarted)return;
 
-timeLeft--;
+        timer--;
 
-if(timeLeft<=0){
+        updateHUD();
 
-timeLeft=0;
+        if(timer<=0){
 
-survivorsWin();
+            timer=0;
 
-}
+            survivorsWin();
 
-updateHUD();
+        }
 
-},1000);
+    },1000);
 
 }
 
 function updateHUD(){
 
-const minutes=
+    const minutes=
 
-Math.floor(timeLeft/60)
+    Math.floor(timer/60);
 
-.toString()
+    const seconds=
 
-.padStart(2,"0");
+    timer%60;
 
-const seconds=
+    document.getElementById("timer")
 
-(timeLeft%60)
+    .textContent=
 
-.toString()
+    minutes+":"+
 
-.padStart(2,"0");
+    String(seconds).padStart(2,"0");
 
-document.getElementById("timer")
+    document.getElementById("alive")
 
-.textContent=minutes+":"+seconds;
+    .textContent=aliveCount;
 
-document.getElementById("survivorCount")
+    document.getElementById("eliminated")
 
-.textContent=
+    .textContent=eliminatedCount;
 
-survivors.filter(s=>s.state!=="dead").length;
+}
 
-document.getElementById("captureCount")
+/* ================= SURVIVORS ================= */
 
-.textContent=captures;
+function createSurvivors(){
+
+    const container=
+
+    document.getElementById("survivors");
+
+    container.innerHTML="";
+
+    survivors=[];
+
+    for(let i=1;i<=6;i++){
+
+        const survivor={
+
+            id:i,
+
+            house:i<=3?1:2,
+
+            x:80+Math.random()*400,
+
+            y:150+Math.random()*250,
+
+            state:"alive",
+
+            captures:0,
+
+            element:null
+
+        };
+
+        const el=
+
+        document.createElement("div");
+
+        el.className=
+
+        "survivor s"+i;
+
+        el.innerHTML=
+
+        '<div class="sHead"></div>'+
+
+        '<div class="sBody"></div>';
+
+        el.style.left=
+
+        survivor.x+"px";
+
+        el.style.top=
+
+        survivor.y+"px";
+
+        container.appendChild(el);
+
+        survivor.element=el;
+
+        survivors.push(survivor);
+
+    }
+
+}
+
+/* ================= KILLER ================= */
+
+function setKiller(){
+
+    const killer=
+
+    document.getElementById("killer");
+
+    killer.className=
+
+    killerType===1
+
+    ?"hunter"
+
+    :"butcher";
+
+    renderPlayer();
 
 }
 
 function renderPlayer(){
 
-const p=document.getElementById("player");
+    const killer=
 
-p.style.left=player.x+"px";
+    document.getElementById("killer");
 
-p.style.top=player.y+"px";
+    killer.style.left=
 
-}
+    player.x+"%";
 
-function movePlayer(dx,dy){
+    killer.style.top=
 
-if(!gameRunning)return;
-
-let speed=killer===1?4:3;
-
-if(inHouse)speed*=.85;
-
-player.x+=dx*speed;
-
-player.y+=dy*speed;
-
-player.x=Math.max(30,Math.min(870,player.x));
-
-player.y=Math.max(35,Math.min(615,player.y));
-
-renderPlayer();
-
-updateNearby();
+    player.y+"%";
 
 }
 
-document.addEventListener("keydown",function(e){
+/* ================= MOVEMENT ================= */
 
-let dx=0;
+document.addEventListener(
 
-let dy=0;
+"keydown",
 
-if(e.key==="ArrowUp"||e.key.toLowerCase()==="w")dy=-1;
+function(e){
 
-if(e.key==="ArrowDown"||e.key.toLowerCase()==="s")dy=1;
+    let dx=0;
 
-if(e.key==="ArrowLeft"||e.key.toLowerCase()==="a")dx=-1;
+    let dy=0;
 
-if(e.key==="ArrowRight"||e.key.toLowerCase()==="d")dx=1;
+    if(
 
-if(dx||dy)movePlayer(dx,dy);
+        e.key==="ArrowUp"||
+
+        e.key.toLowerCase()==="w"
+
+    )dy=-1;
+
+    if(
+
+        e.key==="ArrowDown"||
+
+        e.key.toLowerCase()==="s"
+
+    )dy=1;
+
+    if(
+
+        e.key==="ArrowLeft"||
+
+        e.key.toLowerCase()==="a"
+
+    )dx=-1;
+
+    if(
+
+        e.key==="ArrowRight"||
+
+        e.key.toLowerCase()==="d"
+
+    )dx=1;
+
+    movePlayer(dx,dy);
 
 });
+
+/* ================= JOYSTICK ================= */
 
 const joystick=
 
@@ -1720,667 +1796,679 @@ const stick=
 
 document.getElementById("stick");
 
-function joyStart(e){
-
-joystickActive=true;
-
-joyMove(e);
-
-}
-
-function joyMove(e){
-
-if(!joystickActive)return;
-
-e.preventDefault();
-
-const t=e.touches[0];
-
-const r=joystick.getBoundingClientRect();
-
-const cx=r.left+r.width/2;
-
-const cy=r.top+r.height/2;
-
-let dx=t.clientX-cx;
-
-let dy=t.clientY-cy;
-
-const distance=Math.sqrt(dx*dx+dy*dy);
-
-const max=r.width/2-27;
-
-if(distance>max){
-
-dx=dx/distance*max;
-
-dy=dy/distance*max;
-
-}
-
-stick.style.left=
-
-(r.width/2-27+dx)+"px";
-
-stick.style.top=
-
-(r.height/2-27+dy)+"px";
-
-joyX=dx/max;
-
-joyY=dy/max;
-
-}
-
-function joyEnd(){
-
-joystickActive=false;
-
-joyX=0;
-
-joyY=0;
-
-stick.style.left="33px";
-
-stick.style.top="33px";
-
-}
-
 joystick.addEventListener(
 
-"touchstart",joyStart,{passive:false}
+"touchstart",
+
+function(e){
+
+    joystickActive=true;
+
+    moveJoystick(e);
+
+},
+
+{passive:false}
 
 );
 
 joystick.addEventListener(
 
-"touchmove",joyMove,{passive:false}
+"touchmove",
+
+function(e){
+
+    moveJoystick(e);
+
+},
+
+{passive:false}
 
 );
 
 joystick.addEventListener(
 
-"touchend",joyEnd
+"touchend",
 
-);
+function(){
 
-setInterval(function(){
+    joystickActive=false;
 
-if(joystickActive&&gameRunning){
+    joyX=0;
 
-movePlayer(joyX,joyY);
+    joyY=0;
 
-}
+    stick.style.left="33px";
 
-},30);
+    stick.style.top="33px";
 
-function renderSurvivors(){
+});
 
-for(const s of survivors){
+function moveJoystick(e){
 
-const el=document.getElementById(
+    if(!joystickActive)return;
 
-"survivor"+s.id
+    e.preventDefault();
 
-);
+    const touch=e.touches[0];
 
-if(!el)continue;
+    const rect=
 
-el.style.left=s.x+"px";
+    joystick.getBoundingClientRect();
 
-el.style.top=s.y+"px";
+    const cx=
 
-el.style.display=
+    rect.left+rect.width/2;
 
-s.state==="dead"?"none":"block";
+    const cy=
 
-el.classList.toggle(
+    rect.top+rect.height/2;
 
-"captured",
+    let dx=
 
-s.state==="captured"
+    touch.clientX-cx;
 
-);
+    let dy=
 
-}
+    touch.clientY-cy;
+
+    const max=
+
+    rect.width/2-27;
+
+    const distance=
+
+    Math.sqrt(dx*dx+dy*dy);
+
+    if(distance>max){
+
+        dx=dx/distance*max;
+
+        dy=dy/distance*max;
+
+    }
+
+    stick.style.left=
+
+    (33+dx)+"px";
+
+    stick.style.top=
+
+    (33+dy)+"px";
+
+    joyX=dx/max;
+
+    joyY=dy/max;
 
 }
 
 setInterval(function(){
 
-if(!gameRunning)return;
+    if(joystickActive&&gameStarted){
 
-for(const s of survivors){
+        movePlayer(joyX,joyY);
 
-if(s.state!=="alive")continue;
-
-s.moveTimer--;
-
-if(s.moveTimer<=0){
-
-s.moveTimer=
-
-40+Math.random()*100;
-
-s.targetX=
-
-s.house===1?
-
-100+Math.random()*190:
-
-610+Math.random()*190;
-
-s.targetY=
-
-120+Math.random()*400;
-
-}
-
-const dx=s.targetX-s.x;
-
-const dy=s.targetY-s.y;
-
-const distance=
-
-Math.sqrt(dx*dx+dy*dy);
-
-if(distance>5){
-
-s.x+=dx/distance*.65;
-
-s.y+=dy/distance*.65;
-
-}
-
-}
-
-renderSurvivors();
-
-updateNearby();
-
-},100);
-
-function updateNearby(){
-
-let closest=null;
-
-let closestDistance=Infinity;
-
-for(const s of survivors){
-
-if(s.state!=="alive")continue;
-
-const dx=player.x-s.x;
-
-const dy=player.y-s.y;
-
-const distance=
-
-Math.sqrt(dx*dx+dy*dy);
-
-if(distance<closestDistance){
-
-closestDistance=distance;
-
-closest=s;
-
-}
-
-}
-
-const captureButton=
-
-document.getElementById("searchButton");
-
-if(closest&&closestDistance<55){
-
-captureButton.style.display="block";
-
-captureButton.dataset.id=closest.id;
-
-document.getElementById("objective")
-
-.textContent=
-
-"SurvivOR "+closest.id+" — CATCH";
-
-}else{
-
-captureButton.style.display="none";
-
-document.getElementById("objective")
-
-.textContent=
-
-inHouse?
-
-"Search the house."
-
-:"Hunt the survivors.";
-
-}
-
-const house1Distance=
-
-Math.sqrt(
-
-Math.pow(player.x-125,2)+
-
-Math.pow(player.y-280,2)
-
-);
-
-const house2Distance=
-
-Math.sqrt(
-
-Math.pow(player.x-775,2)+
-
-Math.pow(player.y-280,2)
-
-);
-
-const enter=
-
-document.getElementById("enterButton");
-
-if(!inHouse&&(house1Distance<120||house2Distance<120)){
-
-enter.style.display="block";
-
-enter.dataset.house=
-
-house1Distance<house2Distance?1:2;
-
-}else{
-
-enter.style.display="none";
-
-}
-
-}
-
-function enterHouse(){
-
-const house=
-
-Number(
-
-document.getElementById("enterButton")
-
-.dataset.house
-
-);
-
-currentHouse=house;
-
-inHouse=true;
-
-document.getElementById("world").style.background=
-
-"linear-gradient(135deg,#303030,#111)";
-
-document.getElementById("road").style.display="none";
-
-document.getElementById("roadLine").style.display="none";
-
-document.getElementById("sidewalkLeft").style.display="none";
-
-document.getElementById("sidewalkRight").style.display="none";
-
-document.getElementById("house1").style.display="none";
-
-document.getElementById("house2").style.display="none";
-
-document.getElementById("streetSign").textContent=
-
-"HOUSE "+house;
-
-document.getElementById("objective")
-
-.textContent="SEARCH THE HOUSE";
-
-document.getElementById("enterButton").style.display="none";
-
-showMessage(
-
-"You entered House "+house+". Find whoever is hiding inside."
-
-);
-
-}
-
-function captureNearby(){
-
-const id=
-
-Number(
-
-document.getElementById("searchButton")
-
-.dataset.id
-
-);
-
-const survivor=
-
-survivors.find(s=>s.id===id);
-
-if(!survivor||survivor.state!=="alive")return;
-
-survivor.captures++;
-
-captures++;
-
-survivor.state="captured";
-
-showMessage(
-
-"SURVIVOR "+id+
-
-" HAS BEEN CAPTURED AND TAKEN TO THE BASEMENT."
-
-);
-
-updateHUD();
-
-document.getElementById("basementText")
-
-.textContent=
-
-"SURVIVOR "+id+
-
-" is trapped in the basement. Another survivor can attempt a rescue.";
-
-document.getElementById("basement")
-
-.style.display="flex";
-
-document.getElementById("searchButton")
-
-.style.display="none";
-
-checkKillerWin();
-
-}
-
-function startRescue(){
-
-const captives=
-
-survivors.filter(
-
-s=>s.state==="captured"
-
-);
-
-if(captives.length===0)return;
-
-document.getElementById("basement")
-
-.style.display="none";
-
-startSkillCheck();
-
-}
-
-function startSkillCheck(){
-
-skillRunning=true;
-
-skillPosition=0;
-
-skillDirection=1;
-
-document.getElementById("skillCheck")
-
-.style.display="flex";
-
-clearInterval(skillInterval);
-
-skillInterval=setInterval(function(){
-
-if(!skillRunning)return;
-
-skillPosition+=skillDirection*2.4;
-
-if(skillPosition>=100){
-
-skillPosition=100;
-
-skillDirection=-1;
-
-}
-
-if(skillPosition<=0){
-
-skillPosition=0;
-
-skillDirection=1;
-
-}
-
-document.getElementById("skillCursor")
-
-.style.left=skillPosition+"%";
+    }
 
 },30);
 
-}
+/* ================= PLAYER ================= */
 
-function skillCheckPress(){
+function movePlayer(dx,dy){
 
-if(!skillRunning)return;
+    if(!gameStarted)return;
 
-skillRunning=false;
+    const speed=.8;
 
-clearInterval(skillInterval);
+    player.x+=dx*speed;
 
-const success=
+    player.y+=dy*speed;
 
-skillPosition>=42&&skillPosition<=58;
+    player.x=
 
-if(success){
+    Math.max(3,Math.min(97,player.x));
 
-rescueSurvivor();
+    player.y=
 
-}else{
+    Math.max(12,Math.min(90,player.y));
 
-showMessage(
+    renderPlayer();
 
-"SKILL CHECK FAILED. THE SURVIVOR REMAINS IN THE BASEMENT."
-
-);
-
-document.getElementById("skillCheck")
-
-.style.display="none";
-
-setTimeout(function(){
-
-if(gameRunning){
-
-const captive=
-
-survivors.find(
-
-s=>s.state==="captured"
-
-);
-
-if(captive){
-
-document.getElementById("basementText")
-
-.textContent=
-
-"SURVIVOR "+captive.id+
-
-" IS STILL TRAPPED.";
-
-document.getElementById("basement")
-
-.style.display="flex";
+    checkNearbySurvivor();
 
 }
 
-}
+/* ================= ENTER HOUSE ================= */
 
-},800);
+function enterHouse(number){
 
-}
+    if(!gameStarted)return;
 
-}
+    currentHouse=number;
 
-function rescueSurvivor(){
+    document.getElementById("outside")
 
-const captive=
+    .style.display="none";
 
-survivors.find(
+    document.getElementById("interior")
 
-s=>s.state==="captured"
+    .style.display="block";
 
-);
+    document.getElementById("roomLabel")
 
-if(!captive)return;
+    .textContent=
 
-captive.state="alive";
+    "HOUSE "+number+" — INTERIOR";
 
-captive.x=
+    player.x=50;
 
-captive.house===1?
+    player.y=65;
 
-130+Math.random()*190:
+    renderPlayer();
 
-580+Math.random()*190;
+    updateSurvivors();
 
-captive.y=
+    showMessage(
 
-130+Math.random()*400;
+        "You're inside House "+number+". Find the survivors."
 
-rescued++;
-
-document.getElementById("skillCheck")
-
-.style.display="none";
-
-showMessage(
-
-"SURVIVOR "+captive.id+
-
-" HAS BEEN RESCUED!"
-
-);
-
-updateHUD();
-
-renderSurvivors();
+    );
 
 }
 
-function checkKillerWin(){
+/* ================= EXIT HOUSE ================= */
 
-const alive=
+function exitHouse(){
 
-survivors.filter(
+    document.getElementById("interior")
 
-s=>s.state!=="dead"
+    .style.display="none";
 
-);
+    document.getElementById("outside")
 
-if(alive.length===0){
+    .style.display="block";
 
-killerWins();
+    player.x=
 
-}
+    currentHouse===1?25:75;
 
-}
+    player.y=65;
 
-function survivorSecondCapture(survivor){
+    renderPlayer();
 
-survivor.state="dead";
+    currentHouse=0;
 
-eliminated++;
+    document.getElementById("actionButton")
 
-showMessage(
-
-"SURVIVOR "+survivor.id+
-
-" HAS BEEN ELIMINATED."
-
-);
-
-updateHUD();
-
-checkKillerWin();
+    .style.display="none";
 
 }
 
-function survivorsWin(){
+/* ================= SURVIVOR POSITIONS ================= */
 
-if(!gameRunning)return;
+function updateSurvivors(){
 
-gameRunning=false;
+    survivors.forEach(function(s){
 
-clearInterval(timerInterval);
+        if(s.house!==currentHouse){
 
-document.getElementById("roundEndTitle")
+            s.element.style.display="none";
 
-.textContent="SURVIVORS WIN";
+        }else{
 
-document.getElementById("roundEndText")
+            if(s.state==="eliminated"){
 
-.textContent=
+                s.element.style.display="none";
 
-"Five minutes have passed. The survivors escaped the killer.";
+            }else{
 
-document.getElementById("roundEnd")
+                s.element.style.display="block";
 
-.style.display="flex";
+            }
+
+        }
+
+    });
+
+}
+
+/* ================= FIND SURVIVOR ================= */
+
+function checkNearbySurvivor(){
+
+    if(!currentHouse){
+
+        document.getElementById("actionButton")
+
+        .style.display="none";
+
+        return;
+
+    }
+
+    let nearby=null;
+
+    survivors.forEach(function(s){
+
+        if(
+
+            s.house===currentHouse&&
+
+            s.state!=="eliminated"
+
+        ){
+
+            const sx=
+
+            (s.x/5);
+
+            const sy=
+
+            (s.y/5);
+
+            const dx=
+
+            player.x-sx;
+
+            const dy=
+
+            player.y-sy;
+
+            const distance=
+
+            Math.sqrt(dx*dx+dy*dy);
+
+            if(distance<8){
+
+                nearby=s;
+
+            }
+
+        }
+
+    });
+
+    actionTarget=nearby;
+
+    const button=
+
+    document.getElementById("actionButton");
+
+    if(nearby){
+
+        button.style.display="block";
+
+        if(nearby.state==="captured"){
+
+            button.textContent="FINISH";
+
+        }else{
+
+            button.textContent="CATCH";
+
+        }
+
+    }else{
+
+        button.style.display="none";
+
+    }
+
+}
+
+/* ================= ACTION ================= */
+
+function action(){
+
+    if(!actionTarget)return;
+
+    const survivor=actionTarget;
+
+    if(survivor.state==="alive"){
+
+        survivor.captures++;
+
+        survivor.state="captured";
+
+        survivor.element.classList.add("captured");
+
+        showMessage(
+
+            "SURVIVOR "+survivor.id+
+
+            " CAPTURED. THEY ARE TAKEN TO THE BASEMENT."
+
+        );
+
+        updateObjective();
+
+    }else if(survivor.state==="captured"){
+
+        eliminateSurvivor(survivor);
+
+    }
+
+    actionTarget=null;
+
+    document.getElementById("actionButton")
+
+    .style.display="none";
+
+    updateSurvivors();
+
+    updateHUD();
+
+    checkWin();
+
+}
+
+/* ================= ELIMINATE ================= */
+
+function eliminateSurvivor(s){
+
+    s.state="eliminated";
+
+    s.element.classList.remove("captured");
+
+    s.element.classList.add("dead");
+
+    aliveCount--;
+
+    eliminatedCount++;
+
+    showMessage(
+
+        "SURVIVOR "+s.id+" HAS BEEN ELIMINATED."
+
+    );
+
+    updateHUD();
+
+    checkWin();
+
+}
+
+/* ================= RESCUE ================= */
+
+function attemptRescue(){
+
+    const captured=
+
+    survivors.filter(
+
+        s=>
+
+        s.state==="captured"&&
+
+        s.house===currentHouse
+
+    );
+
+    if(captured.length===0)return;
+
+    if(Math.random()<.45){
+
+        startSkillCheck(captured[0]);
+
+    }
+
+}
+
+/* Random survivor rescue attempts */
+
+setInterval(function(){
+
+    if(
+
+        gameStarted&&
+
+        currentHouse!==0
+
+    ){
+
+        if(Math.random()<.03){
+
+            attemptRescue();
+
+        }
+
+    }
+
+},1000);
+
+/* ================= SKILL CHECK ================= */
+
+function startSkillCheck(target){
+
+    if(
+
+        document.getElementById("skillCheck")
+
+        .style.display==="flex"
+
+    )return;
+
+    document.getElementById("skillCheck")
+
+    .style.display="flex";
+
+    skillAngle=0;
+
+    clearInterval(skillTimer);
+
+    skillTimer=setInterval(function(){
+
+        skillAngle+=6;
+
+        if(skillAngle>=360){
+
+            skillAngle=0;
+
+        }
+
+        document.getElementById("skillNeedle")
+
+        .style.transform=
+
+        "rotate("+skillAngle+"deg)";
+
+    },30);
+
+    document.getElementById("skillCheck")
+
+    .dataset.target=
+
+    target.id;
+
+}
+
+function skillCheck(){
+
+    const angle=skillAngle;
+
+    clearInterval(skillTimer);
+
+    document.getElementById("skillCheck")
+
+    .style.display="none";
+
+    /*
+
+    Target zone is roughly 35 degrees
+
+    around the top.
+
+    */
+
+    const success=
+
+    angle<35||angle>325;
+
+    const id=
+
+    Number(
+
+        document.getElementById("skillCheck")
+
+        .dataset.target
+
+    );
+
+    const target=
+
+    survivors.find(s=>s.id===id);
+
+    if(!target)return;
+
+    if(success){
+
+        target.state="alive";
+
+        target.element.classList.remove("captured");
+
+        showMessage(
+
+            "RESCUE SUCCESSFUL! SURVIVOR "+id+
+
+            " ESCAPED THE BASEMENT."
+
+        );
+
+    }else{
+
+        showMessage(
+
+            "FAILED RESCUE! THE SURVIVOR REMAINS CAPTURED."
+
+        );
+
+    }
+
+    updateSurvivors();
+
+}
+
+/* ================= OBJECTIVE ================= */
+
+function updateObjective(){
+
+    const alive=
+
+    survivors.filter(
+
+        s=>s.state!=="eliminated"
+
+    ).length;
+
+    const captured=
+
+    survivors.filter(
+
+        s=>s.state==="captured"
+
+    ).length;
+
+    document.getElementById("objective")
+
+    .textContent=
+
+    alive+" survivors remain • "+
+
+    captured+" captured";
+
+}
+
+/* ================= WIN ================= */
+
+function checkWin(){
+
+    const remaining=
+
+    survivors.filter(
+
+        s=>s.state!=="eliminated"
+
+    );
+
+    if(remaining.length===0){
+
+        killerWins();
+
+    }
 
 }
 
 function killerWins(){
 
-gameRunning=false;
+    gameStarted=false;
 
-clearInterval(timerInterval);
+    clearInterval(timerInterval);
 
-document.getElementById("roundEndTitle")
+    document.getElementById("resultTitle")
 
-.textContent="KILLER WINS";
+    .textContent="KILLER WINS";
 
-document.getElementById("roundEndText")
+    document.getElementById("resultText")
 
-.textContent=
+    .textContent=
 
-"Every survivor has been eliminated.";
+    "Every survivor has been eliminated.";
 
-document.getElementById("roundEnd")
+    document.getElementById("result")
 
-.style.display="flex";
+    .style.display="flex";
 
 }
+
+/* ================= SURVIVOR WIN ================= */
+
+function survivorsWin(){
+
+    gameStarted=false;
+
+    clearInterval(timerInterval);
+
+    document.getElementById("resultTitle")
+
+    .textContent="SURVIVORS WIN";
+
+    document.getElementById("resultText")
+
+    .textContent=
+
+    "Five minutes are over. The survivors escaped your hunt.";
+
+    document.getElementById("result")
+
+    .style.display="flex";
+
+}
+
+/* ================= MESSAGE ================= */
+
+let messageTimer;
 
 function showMessage(text){
 
-const m=
+    const message=
 
-document.getElementById("message");
+    document.getElementById("message");
 
-m.textContent=text;
+    message.textContent=text;
 
-m.style.display="block";
+    message.style.display="block";
 
-clearTimeout(window.msgTimer);
+    clearTimeout(messageTimer);
 
-window.msgTimer=setTimeout(function(){
+    messageTimer=setTimeout(function(){
 
-m.style.display="none";
+        message.style.display="none";
 
-},3000);
+    },3000);
 
 }
+
+/* ================= START ================= */
 
 document.getElementById("menu")
 

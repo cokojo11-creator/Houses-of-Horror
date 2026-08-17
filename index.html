@@ -8,761 +8,663 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 
-<title>Houses of Horror 1.4 — Redemption</title>
+<title>Houses of Horror 1.5 — Fix That House</title>
 
 <style>
 
 *{
 
- box-sizing:border-box;
+  box-sizing:border-box;
 
- -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent;
 
 }
 
 html,body{
 
- margin:0;
+  margin:0;
 
- width:100%;
+  width:100%;
 
- height:100%;
+  height:100%;
 
- overflow:hidden;
+  overflow:hidden;
 
- background:#050505;
+  background:#050505;
 
- color:white;
+  color:#fff;
 
- font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 
- touch-action:none;
+  touch-action:none;
 
 }
 
 button{
 
- font:inherit;
+  font:inherit;
 
- cursor:pointer;
+  cursor:pointer;
 
 }
 
 #game{
 
- position:relative;
+  position:relative;
 
- width:100%;
+  width:100%;
 
- height:100%;
+  height:100%;
 
- overflow:hidden;
+  overflow:hidden;
+
+  background:#050505;
 
 }
 
-/* =========================================================
+/* =====================================================
 
    MENU
 
-========================================================= */
+===================================================== */
 
 #menu{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- overflow:hidden;
+  overflow:hidden;
 
- background:
+  background:
 
- radial-gradient(circle at 50% 35%,rgba(180,35,35,.18),transparent 28%),
+    radial-gradient(circle at 70% 18%,rgba(170,190,165,.18),transparent 22%),
 
- linear-gradient(#101315,#030404 78%);
-
-}
-
-.menuGlow{
-
- position:absolute;
-
- width:500px;
-
- height:500px;
-
- left:50%;
-
- top:28%;
-
- transform:translate(-50%,-50%);
-
- background:radial-gradient(circle,rgba(170,30,30,.13),transparent 65%);
+    linear-gradient(#101510,#050705 55%,#020302);
 
 }
 
-.moon{
+.menuMoon{
 
- position:absolute;
+  position:absolute;
 
- width:130px;
+  width:110px;
 
- height:130px;
+  height:110px;
 
- right:9%;
+  right:10%;
 
- top:8%;
+  top:8%;
 
- border-radius:50%;
+  border-radius:50%;
 
- background:
+  background:radial-gradient(circle at 35% 35%,#eee,#777);
 
- radial-gradient(circle at 35% 35%,#eee,#777);
-
- box-shadow:0 0 70px rgba(255,255,255,.14);
+  box-shadow:0 0 70px rgba(210,220,210,.2);
 
 }
 
-.fog{
+.menuGround{
 
- position:absolute;
+  position:absolute;
 
- width:180%;
+  left:-10%;
 
- height:150px;
+  bottom:-5%;
 
- left:-40%;
+  width:120%;
 
- border-radius:50%;
+  height:43%;
 
- background:rgba(200,205,200,.07);
+  background:
 
- filter:blur(25px);
+    repeating-linear-gradient(
 
- z-index:4;
+      90deg,
 
-}
+      #172018 0 55px,
 
-.fog1{
+      #121912 56px 90px
 
- bottom:20%;
+    );
 
- animation:fogA 12s linear infinite;
+  transform:perspective(400px) rotateX(55deg);
 
-}
-
-.fog2{
-
- bottom:5%;
-
- animation:fogB 17s linear infinite;
+  transform-origin:bottom;
 
 }
 
-@keyframes fogA{
+.buildingHouse{
 
- 0%{transform:translateX(-8%)}
+  position:absolute;
 
- 50%{transform:translateX(8%)}
+  z-index:3;
 
- 100%{transform:translateX(-8%)}
+  left:7%;
 
-}
+  bottom:9%;
 
-@keyframes fogB{
+  width:55%;
 
- 0%{transform:translateX(8%)}
-
- 50%{transform:translateX(-8%)}
-
- 100%{transform:translateX(8%)}
+  height:48%;
 
 }
 
-/* MENU HOUSE */
+.buildRoof{
 
-.menuHouse{
+  position:absolute;
 
- position:absolute;
+  top:0;
 
- bottom:-2%;
+  left:-7%;
 
- left:4%;
+  width:114%;
 
- width:92%;
+  height:37%;
 
- height:58%;
+  background:#20241f;
 
- z-index:2;
+  border:4px solid #080908;
 
-}
-
-.menuRoof{
-
- position:absolute;
-
- top:0;
-
- left:0;
-
- width:100%;
-
- height:40%;
-
- background:#070808;
-
- clip-path:polygon(50% 0,100% 100%,0 100%);
+  clip-path:polygon(50% 0,100% 100%,0 100%);
 
 }
 
-.menuBody{
+.buildWall{
 
- position:absolute;
+  position:absolute;
 
- bottom:0;
+  left:8%;
 
- left:7%;
+  bottom:0;
 
- width:86%;
+  width:84%;
 
- height:67%;
+  height:68%;
 
- background:#090a09;
+  background:
 
- border:3px solid #191d19;
+    repeating-linear-gradient(
 
- box-shadow:0 0 50px #000;
+      90deg,
 
-}
+      #36362f 0 25px,
 
-.menuWindow{
+      #292a25 26px 50px
 
- position:absolute;
+    );
 
- width:55px;
-
- height:72px;
-
- background:#241719;
-
- border:5px solid #030403;
-
- box-shadow:0 0 25px rgba(150,20,20,.16);
+  border:5px solid #090a09;
 
 }
 
-.menuWindow:before{
+.buildWindow{
 
- content:"";
+  position:absolute;
 
- position:absolute;
+  width:25%;
 
- left:50%;
+  height:30%;
 
- top:0;
+  top:17%;
 
- width:4px;
+  background:#172019;
 
- height:100%;
-
- background:#050605;
+  border:4px solid #080908;
 
 }
 
-.menuWindow:after{
+.buildWindow.a{left:12%}
 
- content:"";
+.buildWindow.b{right:12%}
 
- position:absolute;
+.buildDoor{
 
- top:50%;
+  position:absolute;
 
- left:0;
+  bottom:0;
 
- width:100%;
+  left:40%;
 
- height:4px;
+  width:22%;
 
- background:#050605;
+  height:47%;
 
-}
+  background:#161714;
 
-.menuWindow.a{
-
- left:13%;
-
- top:19%;
+  border:4px solid #080908;
 
 }
 
-.menuWindow.b{
+.construction{
 
- right:13%;
+  position:absolute;
 
- top:19%;
+  z-index:7;
 
-}
+  right:5%;
 
-.menuDoor{
+  bottom:11%;
 
- position:absolute;
+  width:40%;
 
- left:42%;
-
- bottom:0;
-
- width:17%;
-
- height:47%;
-
- background:#040504;
-
- border:4px solid #171a17;
+  height:50%;
 
 }
 
-/* MENU ZOMBIE */
+.creatorZombie{
 
-.menuZombie{
+  position:absolute;
 
- position:absolute;
+  left:40%;
 
- z-index:6;
+  bottom:0;
 
- left:50%;
+  width:90px;
 
- bottom:13%;
+  height:190px;
 
- width:105px;
+  filter:drop-shadow(0 5px 8px #000);
 
- height:220px;
-
- transform:translateX(-50%);
-
- filter:drop-shadow(0 0 15px #000);
-
- animation:zIdle 3s ease-in-out infinite;
+  transform:rotate(-4deg);
 
 }
 
-@keyframes zIdle{
+.creatorHead{
 
- 0%,100%{
+  position:absolute;
 
-  transform:translateX(-50%) translateY(0) rotate(-1deg)
+  left:22px;
 
- }
+  top:0;
 
- 50%{
+  width:54px;
 
-  transform:translateX(-50%) translateY(-7px) rotate(1deg)
+  height:58px;
 
- }
+  border-radius:48%;
 
-}
+  background:#526354;
 
-.menuZombie .zHead{
-
- position:absolute;
-
- left:25px;
-
- top:0;
-
- width:60px;
-
- height:65px;
-
- border-radius:48% 45% 45% 50%;
-
- background:#a90000;
-
- border:4px solid #230000;
+  border:4px solid #111811;
 
 }
 
-.menuZombie .zHead:before,
+.creatorEye{
 
-.menuZombie .zHead:after{
+  position:absolute;
 
- content:"";
+  top:20px;
 
- position:absolute;
+  width:9px;
 
- top:22px;
+  height:7px;
 
- width:8px;
+  background:#f5f5df;
 
- height:8px;
+  border-radius:50%;
 
- border-radius:50%;
-
- background:#fff;
-
- box-shadow:0 0 8px #fff;
+  box-shadow:0 0 7px #fff;
 
 }
 
-.menuZombie .zHead:before{
+.creatorEye.a{left:12px}
 
- left:13px;
+.creatorEye.b{right:12px}
 
-}
+.creatorMouth{
 
-.menuZombie .zHead:after{
+  position:absolute;
 
- right:13px;
+  left:12px;
 
-}
+  bottom:8px;
 
-.zMouth{
+  width:30px;
 
- position:absolute;
+  height:9px;
 
- left:14px;
+  background:#10130f;
 
- bottom:9px;
-
- width:31px;
-
- height:10px;
-
- background:#0b0d0b;
-
- border-radius:50%;
+  border-radius:50%;
 
 }
 
-.zBody{
+.creatorBody{
 
- position:absolute;
+  position:absolute;
 
- left:20px;
+  top:53px;
 
- top:59px;
+  left:17px;
 
- width:67px;
+  width:61px;
 
- height:105px;
+  height:91px;
 
- background:#8d0000;
+  background:linear-gradient(#252c27,#596458,#242b25);
 
- border:4px solid #230000;
+  border:4px solid #111611;
 
- border-radius:17px 17px 7px 7px;
-
-}
-
-.zArm{
-
- position:absolute;
-
- top:67px;
-
- width:21px;
-
- height:100px;
-
- background:#9e0000;
-
- border:4px solid #230000;
-
- border-radius:15px;
+  border-radius:12px;
 
 }
 
-.zArm.a{
+.creatorArm{
 
- left:3px;
+  position:absolute;
 
- transform:rotate(22deg);
+  top:62px;
 
-}
+  width:20px;
 
-.zArm.b{
+  height:88px;
 
- right:2px;
+  background:#526354;
 
- transform:rotate(-25deg);
+  border:4px solid #111611;
 
-}
-
-.zLeg{
-
- position:absolute;
-
- top:153px;
-
- width:26px;
-
- height:63px;
-
- background:#650000;
-
- border:4px solid #230000;
+  border-radius:15px;
 
 }
 
-.zLeg.a{left:28px}
+.creatorArm.a{
 
-.zLeg.b{right:21px}
+  left:0;
 
-.zWeapon{
-
- position:absolute;
-
- right:-30px;
-
- top:120px;
-
- width:8px;
-
- height:82px;
-
- background:#aaa;
-
- transform:rotate(-35deg);
+  transform:rotate(25deg);
 
 }
 
-/* MENU CONTENT */
+.creatorArm.b{
+
+  right:-1px;
+
+  transform:rotate(-55deg);
+
+}
+
+.hammer{
+
+  position:absolute;
+
+  right:-30px;
+
+  top:52px;
+
+  width:8px;
+
+  height:75px;
+
+  background:#777;
+
+  transform:rotate(-42deg);
+
+}
+
+.hammer:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:28px;
+
+  height:14px;
+
+  left:-10px;
+
+  top:-5px;
+
+  background:#333;
+
+  border:2px solid #111;
+
+}
+
+.creatorBadge{
+
+  position:absolute;
+
+  z-index:15;
+
+  bottom:3%;
+
+  left:4%;
+
+  padding:4px 7px;
+
+  font-size:8px;
+
+  letter-spacing:1px;
+
+  background:#111;
+
+  border:1px solid #aaa;
+
+}
 
 .menuContent{
 
- position:absolute;
+  position:absolute;
 
- z-index:20;
+  z-index:30;
 
- top:7%;
+  top:6%;
 
- left:50%;
+  left:50%;
 
- transform:translateX(-50%);
+  transform:translateX(-50%);
 
- width:min(90%,500px);
+  width:min(91%,500px);
 
- text-align:center;
+  text-align:center;
 
 }
 
 .logo{
 
- font-size:clamp(44px,13vw,78px);
+  font-size:clamp(40px,12vw,72px);
 
- font-weight:1000;
+  font-weight:1000;
 
- letter-spacing:5px;
+  letter-spacing:5px;
 
- text-shadow:0 5px 0 #000,0 0 30px #000;
+  text-shadow:0 5px 0 #000,0 0 25px #000;
 
 }
 
 .logoSmall{
 
- display:block;
+  display:block;
 
- margin-top:-5px;
+  margin-top:-5px;
 
- font-size:.36em;
+  font-size:.36em;
 
- letter-spacing:9px;
+  letter-spacing:9px;
 
- color:#aaa;
+  color:#a7aea7;
 
 }
 
 .version{
 
- display:inline-block;
+  display:inline-block;
 
- margin:12px 0 18px;
+  margin:12px 0 18px;
 
- padding:7px 14px;
+  padding:7px 12px;
 
- border:1px solid #733737;
+  border:1px solid #566356;
 
- background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.8);
 
- color:#d9a2a2;
+  color:#c5cec4;
 
- font-size:12px;
+  font-size:11px;
 
- letter-spacing:2px;
+  letter-spacing:2px;
 
 }
 
 .menuBtn{
 
- display:block;
+  display:block;
 
- width:100%;
+  width:100%;
 
- padding:16px;
+  padding:15px;
 
- margin:9px 0;
+  margin:8px 0;
 
- border:2px solid #303630;
+  border:2px solid #3d453e;
 
- background:linear-gradient(#252a26,#0e110f);
+  border-radius:5px;
 
- color:#fff;
+  background:linear-gradient(#303630,#111411);
 
- font-weight:bold;
+  color:#fff;
 
- font-size:17px;
+  font-weight:bold;
 
- letter-spacing:2px;
+  letter-spacing:2px;
 
- border-radius:5px;
-
- box-shadow:0 5px 0 #000;
-
-}
-
-.menuBtn.red{
-
- border-color:#7a3333;
-
- background:linear-gradient(#432020,#150909);
+  box-shadow:0 4px 0 #000;
 
 }
 
 .menuBtn:active{
 
- transform:translateY(4px);
+  transform:translateY(3px);
 
- box-shadow:0 1px 0 #000;
-
-}
-
-.menuFooter{
-
- margin-top:12px;
-
- color:#777;
-
- font-size:10px;
-
- letter-spacing:2px;
+  box-shadow:0 1px 0 #000;
 
 }
 
-/* =========================================================
+.menuBtn.red{
+
+  border-color:#704040;
+
+}
+
+/* =====================================================
 
    PANELS
 
-========================================================= */
+===================================================== */
 
 .panel{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- z-index:200;
+  z-index:300;
 
- display:none;
+  display:none;
 
- overflow:auto;
+  overflow:auto;
 
- padding:25px 15px;
+  padding:25px 15px;
 
- background:
+  background:
 
- radial-gradient(circle at center,#242725,#040504 75%);
+    radial-gradient(circle at center,#242a25,#040504 75%);
 
 }
 
 .panelTitle{
 
- text-align:center;
+  text-align:center;
 
- font-size:34px;
+  font-size:32px;
 
- font-weight:1000;
+  font-weight:1000;
 
- letter-spacing:3px;
+  letter-spacing:3px;
 
- margin:8px 0;
+  margin:8px 0;
 
 }
 
 .panelSub{
 
- text-align:center;
+  text-align:center;
 
- color:#888;
+  color:#777;
 
- font-size:12px;
+  font-size:11px;
 
- margin-bottom:24px;
+  margin-bottom:20px;
 
 }
 
 .cards{
 
- width:min(95%,700px);
+  width:min(95%,700px);
 
- margin:auto;
+  margin:auto;
 
- display:grid;
+  display:grid;
 
- grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
- gap:10px;
+  gap:10px;
 
 }
 
 .card{
 
- min-height:245px;
+  min-height:220px;
 
- padding:13px 9px;
+  padding:13px 9px;
 
- background:linear-gradient(#242824,#0e110f);
+  background:linear-gradient(#252a25,#101210);
 
- border:1px solid #444c45;
+  border:1px solid #454c45;
 
- border-radius:7px;
+  border-radius:7px;
 
- text-align:center;
+  text-align:center;
 
 }
 
 .cardIcon{
 
- height:90px;
+  height:75px;
 
- display:flex;
+  display:flex;
 
- align-items:center;
+  align-items:center;
 
- justify-content:center;
+  justify-content:center;
 
- font-size:62px;
+  font-size:54px;
 
 }
 
 .cardTitle{
 
- font-size:14px;
+  font-size:13px;
 
- font-weight:bold;
+  font-weight:bold;
 
- letter-spacing:1px;
+  letter-spacing:1px;
 
 }
 
 .cardDesc{
 
- color:#888;
+  color:#888;
 
- font-size:10px;
+  font-size:10px;
 
- line-height:1.4;
+  line-height:1.4;
 
- margin:8px 0;
+  margin:7px 0;
 
- min-height:42px;
+  min-height:38px;
 
 }
 
@@ -770,1431 +672,1149 @@ button{
 
 .buyBtn{
 
- width:100%;
+  width:100%;
 
- padding:10px;
+  padding:10px;
 
- border:0;
+  border:0;
 
- background:#343a35;
+  background:#353b36;
 
- color:white;
+  color:#fff;
 
- border-radius:4px;
+  border-radius:4px;
 
- font-weight:bold;
+  font-weight:bold;
 
 }
 
 .selectBtn.active{
 
- background:#703333;
+  background:#704040;
 
 }
 
 .backBtn{
 
- display:block;
+  display:block;
 
- margin:25px auto;
+  margin:22px auto;
 
- padding:12px 35px;
+  padding:12px 35px;
 
- background:#151715;
+  background:#151715;
 
- color:white;
+  color:#fff;
 
- border:1px solid #555;
-
-}
-
-/* =========================================================
-
-   LEVEL PANEL
-
-========================================================= */
-
-.levelBox{
-
- width:min(92%,500px);
-
- margin:15px auto;
-
- padding:18px;
-
- background:rgba(0,0,0,.55);
-
- border:1px solid #444;
-
- border-radius:8px;
+  border:1px solid #555;
 
 }
-
-.levelTitle{
-
- text-align:center;
-
- font-size:25px;
-
- font-weight:bold;
-
-}
-
-.levelSub{
-
- text-align:center;
-
- color:#aaa;
-
- margin-top:5px;
-
- font-size:12px;
-
-}
-
-.xpBar{
-
- height:16px;
-
- background:#181818;
-
- border:1px solid #444;
-
- border-radius:10px;
-
- overflow:hidden;
-
- margin-top:15px;
-
-}
-
-.xpFill{
-
- height:100%;
-
- width:0%;
-
- background:linear-gradient(90deg,#762626,#d14545);
-
- transition:.3s;
-
-}
-
-.levelText{
-
- text-align:center;
-
- margin-top:8px;
-
- font-size:12px;
-
- color:#aaa;
-
-}
-
-/* =========================================================
-
-   SKINS
-
-========================================================= */
-
-.skinGrid{
-
- width:min(95%,650px);
-
- margin:auto;
-
- display:grid;
-
- grid-template-columns:repeat(2,1fr);
-
- gap:10px;
-
-}
-
-.skinCard{
-
- padding:15px;
-
- background:linear-gradient(#242624,#101110);
-
- border:1px solid #444;
-
- border-radius:7px;
-
- text-align:center;
-
-}
-
-.skinPreview{
-
- width:60px;
-
- height:90px;
-
- margin:0 auto 10px;
-
- position:relative;
-
-}
-
-.skinHead{
-
- position:absolute;
-
- width:35px;
-
- height:35px;
-
- left:12px;
-
- top:0;
-
- border-radius:50%;
-
- background:#8b6652;
-
- border:3px solid #111;
-
-}
-
-.skinBody{
-
- position:absolute;
-
- width:48px;
-
- height:55px;
-
- left:6px;
-
- bottom:0;
-
- background:#222;
-
- border:3px solid #111;
-
- border-radius:9px;
-
-}
-
-.skinName{
-
- font-weight:bold;
-
-}
-
-.skinRequirement{
-
- color:#888;
-
- font-size:10px;
-
- margin:6px 0;
-
-}
-
-.locked{
-
- opacity:.45;
-
-}
-
-.skinSelect{
-
- width:100%;
-
- padding:9px;
-
- border:0;
-
- background:#343a35;
-
- color:#fff;
-
- border-radius:4px;
-
-}
-
-/* =========================================================
-
-   SHOP
-
-========================================================= */
 
 .shopCoins{
 
- text-align:center;
+  text-align:center;
 
- color:#d5b55e;
+  color:#d7b85d;
 
- margin-bottom:20px;
+  margin-bottom:17px;
 
 }
 
 .shopGrid{
 
- width:min(95%,600px);
+  width:min(95%,600px);
 
- margin:auto;
+  margin:auto;
 
- display:grid;
+  display:grid;
 
- grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
- gap:12px;
+  gap:11px;
 
 }
 
 .shopItem{
 
- padding:18px 12px;
+  padding:15px 10px;
 
- background:linear-gradient(#222622,#101210);
+  background:linear-gradient(#242824,#101210);
 
- border:1px solid #444;
+  border:1px solid #444;
 
- border-radius:7px;
+  border-radius:7px;
 
- text-align:center;
+  text-align:center;
 
 }
 
 .shopIcon{
 
- font-size:40px;
+  font-size:40px;
 
 }
 
 .shopName{
 
- font-weight:bold;
+  font-weight:bold;
 
- margin-top:7px;
+  margin-top:6px;
 
 }
 
 .shopDesc{
 
- min-height:30px;
+  min-height:30px;
 
- color:#777;
+  color:#777;
 
- font-size:10px;
+  font-size:10px;
 
- margin:7px 0;
+  margin:6px 0;
 
 }
 
-/* =========================================================
+.locked{
 
-   WORLD
+  opacity:.55;
 
-========================================================= */
+}
+
+.creatorBox{
+
+  width:min(92%,400px);
+
+  margin:15px auto;
+
+  padding:20px;
+
+  background:#101310;
+
+  border:1px solid #555;
+
+  text-align:center;
+
+}
+
+.creatorBox input{
+
+  width:100%;
+
+  padding:12px;
+
+  margin:10px 0;
+
+  background:#050605;
+
+  color:#fff;
+
+  border:1px solid #555;
+
+  text-align:center;
+
+  letter-spacing:3px;
+
+}
+
+.creatorButton{
+
+  width:100%;
+
+  padding:12px;
+
+  background:#343a35;
+
+  color:#fff;
+
+  border:1px solid #666;
+
+}
+
+/* =====================================================
+
+   GAME
+
+===================================================== */
 
 #gameScreen{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- display:none;
+  display:none;
 
- background:#111;
+  background:#10130f;
 
 }
 
 #world{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- overflow:hidden;
+  overflow:hidden;
 
 }
 
-/* OUTDOOR MAP */
+/* outdoor */
 
 .outdoor{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- background:
+  background:
 
- radial-gradient(circle at 50% 40%,rgba(130,150,90,.2),transparent 35%),
-
- linear-gradient(#29392c 0 35%,#465b36 35% 100%);
+    radial-gradient(circle at 50% 35%,#53614d,#283329 60%,#182219);
 
 }
 
-.sky{
+.outdoorPath{
 
- position:absolute;
+  position:absolute;
 
- top:0;
+  left:35%;
 
- left:0;
+  top:0;
 
- right:0;
+  width:30%;
 
- height:35%;
+  height:100%;
 
- background:
+  background:#625947;
 
- linear-gradient(#263844,#4a6068);
-
-}
-
-.cloud{
-
- position:absolute;
-
- width:150px;
-
- height:40px;
-
- background:rgba(220,220,210,.1);
-
- border-radius:50%;
-
- filter:blur(7px);
+  transform:rotate(8deg);
 
 }
 
-.cloud.a{
+.grass{
 
- top:13%;
+  position:absolute;
 
- left:10%;
+  width:45px;
 
-}
+  height:45px;
 
-.cloud.b{
+  border-radius:50%;
 
- top:22%;
+  background:#18251a;
 
- right:12%;
-
-}
-
-.ground{
-
- position:absolute;
-
- left:0;
-
- right:0;
-
- top:30%;
-
- bottom:0;
-
- background:
-
- radial-gradient(circle at 20% 20%,rgba(90,110,55,.5),transparent 20%),
-
- radial-gradient(circle at 70% 50%,rgba(80,100,45,.5),transparent 25%),
-
- repeating-linear-gradient(
-
-  45deg,
-
-  #455d35 0 25px,
-
-  #3d5330 26px 50px
-
- );
+  border:4px solid #101810;
 
 }
 
-.path{
+.fence{
 
- position:absolute;
+  position:absolute;
 
- left:40%;
+  height:9px;
 
- top:30%;
+  background:#5b4b38;
 
- width:22%;
+  border-top:3px solid #30271d;
 
- height:70%;
-
- background:#74624d;
-
- transform:skewX(-8deg);
-
- opacity:.8;
+  border-bottom:3px solid #30271d;
 
 }
 
-.tree{
+.outdoorHouse{
 
- position:absolute;
+  position:absolute;
 
- width:50px;
+  background:#3d4039;
 
- height:90px;
-
- z-index:3;
+  border:5px solid #171a17;
 
 }
 
-.tree:before{
+.outdoorRoof{
 
- content:"";
+  position:absolute;
 
- position:absolute;
+  left:-5%;
 
- bottom:0;
+  top:-25%;
 
- left:20px;
+  width:110%;
 
- width:12px;
+  height:40%;
 
- height:42px;
+  background:#252823;
 
- background:#4a3020;
-
-}
-
-.tree:after{
-
- content:"";
-
- position:absolute;
-
- top:0;
-
- left:0;
-
- width:50px;
-
- height:55px;
-
- background:#1f3520;
-
- border-radius:50%;
-
- box-shadow:
-
- 18px -15px 0 #294426,
-
- 28px 10px 0 #203821;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
 
 }
 
-.tree.a{left:7%;top:37%}
+/* room */
 
-.tree.b{right:8%;top:42%}
+.roomView{
 
-.tree.c{left:17%;bottom:10%}
+  position:absolute;
 
-.tree.d{right:20%;bottom:8%}
+  inset:0;
 
-/* HOUSE BUILDINGS */
+  display:none;
 
-.outHouse{
-
- position:absolute;
-
- z-index:8;
-
- background:#373633;
-
- border:5px solid #171817;
-
- box-shadow:0 12px 25px rgba(0,0,0,.45);
+  background:#39362f;
 
 }
 
-.outRoof{
+.roomView.active{
 
- position:absolute;
-
- top:-25px;
-
- left:-8px;
-
- width:calc(100% + 16px);
-
- height:35px;
-
- background:#201d1a;
-
- clip-path:polygon(50% 0,100% 100%,0 100%);
+  display:block;
 
 }
 
-.outWindow{
+.roomCeiling{
 
- position:absolute;
+  position:absolute;
 
- width:28px;
+  top:0;
 
- height:35px;
+  left:0;
 
- background:#202d2b;
+  width:100%;
 
- border:4px solid #111;
+  height:12%;
 
-}
+  background:repeating-linear-gradient(
 
-.outDoor{
+    90deg,#24231f 0 45px,#1d1c19 46px 48px
 
- position:absolute;
+  );
 
- bottom:0;
-
- left:42%;
-
- width:20%;
-
- height:48%;
-
- background:#251b15;
-
- border:4px solid #111;
-
- cursor:pointer;
+  border-bottom:5px solid #111;
 
 }
 
-.outDoor.open{
+.roomFloor{
 
- background:#111;
+  position:absolute;
 
- box-shadow:inset 0 0 15px #000;
+  left:0;
 
-}
+  right:0;
 
-.outHouse.one{
+  top:12%;
 
- left:7%;
+  bottom:0;
 
- top:42%;
+  background:
 
- width:35%;
+    repeating-linear-gradient(
 
- height:32%;
+      90deg,#5b5144 0 42px,#4d453a 43px 84px
 
-}
-
-.outHouse.two{
-
- right:7%;
-
- top:43%;
-
- width:35%;
-
- height:32%;
+    );
 
 }
 
-.outHouse .w1{
+.roomWall{
 
- left:12%;
+  position:absolute;
 
- top:22%;
+  left:4%;
 
-}
+  right:4%;
 
-.outHouse .w2{
+  top:18%;
 
- right:12%;
+  bottom:4%;
 
- top:22%;
+  border:6px solid #201d19;
 
-}
+  background:#73695b;
 
-/* =========================================================
-
-   INTERIOR
-
-========================================================= */
-
-.houseInterior{
-
- position:absolute;
-
- inset:0;
-
- background:#403a33;
+  overflow:hidden;
 
 }
 
-.floor{
+/* room furniture */
 
- position:absolute;
+.furniture{
 
- top:13%;
+  position:absolute;
 
- left:3%;
+  border:5px solid #17130f;
 
- right:3%;
+  background:#382b21;
 
- bottom:0;
-
- background:
-
- repeating-linear-gradient(
-
-  90deg,
-
-  #594c3d 0 38px,
-
-  #4d4237 39px 78px
-
- );
-
-}
-
-.ceiling{
-
- position:absolute;
-
- top:0;
-
- left:0;
-
- width:100%;
-
- height:13%;
-
- background:
-
- repeating-linear-gradient(
-
-  90deg,
-
-  #24211e 0 45px,
-
-  #201d1a 46px 48px
-
- );
-
- border-bottom:6px solid #111;
-
-}
-
-.room{
-
- position:absolute;
-
- border:5px solid #211e1a;
-
- background:rgba(108,96,79,.8);
-
- box-shadow:inset 0 0 35px rgba(0,0,0,.4);
-
- overflow:hidden;
-
-}
-
-.roomName{
-
- position:absolute;
-
- top:5px;
-
- left:8px;
-
- color:rgba(255,255,255,.25);
-
- font-size:9px;
-
- letter-spacing:2px;
+  border-radius:4px;
 
 }
 
 .bed{
 
- position:absolute;
+  width:55%;
 
- background:#211d1a;
+  height:36%;
 
- border:5px solid #11100e;
+  left:8%;
 
- border-radius:5px;
+  top:25%;
 
-}
-
-.blanket{
-
- position:absolute;
-
- inset:17px 7px 7px;
-
- background:linear-gradient(90deg,#45403a,#302d29);
+  background:#282420;
 
 }
 
-.pillow{
+.bedBlanket{
 
- position:absolute;
+  position:absolute;
 
- left:8px;
+  left:8%;
 
- top:6px;
+  right:5%;
 
- width:40%;
+  top:20%;
 
- height:22%;
+  bottom:6%;
 
- background:#898177;
-
- border-radius:4px;
+  background:linear-gradient(90deg,#49443e,#302d29);
 
 }
 
-.closet{
+.bedPillow{
 
- position:absolute;
+  position:absolute;
 
- background:#30251e;
+  left:7%;
 
- border:5px solid #14100d;
+  top:7%;
 
-}
+  width:35%;
 
-.closetDoor{
+  height:22%;
 
- position:absolute;
+  background:#aaa296;
 
- top:7%;
-
- bottom:7%;
-
- width:43%;
-
- border:2px solid #17120f;
-
- background:#3b2d23;
+  border-radius:5px;
 
 }
 
-.closetDoor.left{left:4%}
+.couch{
 
-.closetDoor.right{right:4%}
+  width:58%;
 
-.cabinet{
+  height:28%;
 
- position:absolute;
+  left:9%;
 
- background:#392a20;
+  top:38%;
 
- border:5px solid #15100d;
+  background:#42433e;
 
-}
-
-.cabinet:before,
-
-.cabinet:after{
-
- content:"";
-
- position:absolute;
-
- left:10%;
-
- right:10%;
-
- height:37%;
-
- border:2px solid #18120e;
+  border-radius:10px;
 
 }
 
-.cabinet:before{top:8%}
+.couch:before{
 
-.cabinet:after{bottom:8%}
+  content:"";
+
+  position:absolute;
+
+  inset:15% 5% 10%;
+
+  background:#53544e;
+
+  border-radius:5px;
+
+}
 
 .table{
 
- position:absolute;
+  width:48%;
 
- background:#29231e;
+  height:23%;
 
- border:5px solid #14100d;
+  left:25%;
 
- border-radius:4px;
+  top:40%;
+
+  background:#403126;
 
 }
 
-.bath{
+.counter{
 
- position:absolute;
+  position:absolute;
 
- background:#b8b3a9;
+  left:5%;
 
- border:5px solid #39352f;
+  right:5%;
 
- border-radius:50%;
+  bottom:10%;
+
+  height:23%;
+
+  background:#3b3026;
+
+  border:5px solid #17130f;
+
+}
+
+.sink{
+
+  position:absolute;
+
+  width:22%;
+
+  height:16%;
+
+  border-radius:50%;
+
+  background:#aaa79e;
+
+  border:4px solid #403c35;
+
+  right:12%;
+
+  top:30%;
 
 }
 
 .toilet{
 
- position:absolute;
+  position:absolute;
 
- background:#aaa69f;
+  width:20%;
 
- border:4px solid #39352f;
+  height:25%;
 
- border-radius:35%;
+  right:14%;
 
-}
+  top:32%;
 
-.doorInside{
+  border-radius:35%;
 
- position:absolute;
+  background:#b4b0a8;
 
- z-index:20;
-
- width:30px;
-
- height:65px;
-
- background:#281c15;
-
- border:4px solid #111;
-
- cursor:pointer;
+  border:5px solid #403d37;
 
 }
 
-.doorInside.open{
+.tub{
 
- background:#080808;
+  position:absolute;
 
-}
+  width:55%;
 
-/* =========================================================
+  height:29%;
 
-   KILLER
+  left:8%;
 
-========================================================= */
+  top:30%;
 
-#killer{
+  border-radius:12px;
 
- position:absolute;
+  background:#b5b2a9;
 
- width:58px;
-
- height:78px;
-
- z-index:50;
+  border:5px solid #3e3a34;
 
 }
 
-.killerHead{
+.cabinet{
 
- position:absolute;
+  width:22%;
 
- top:0;
+  height:50%;
 
- left:12px;
+  right:8%;
 
- width:34px;
-
- height:34px;
-
- border-radius:50%;
-
- background:#8b6652;
-
- border:3px solid #19120f;
+  top:25%;
 
 }
 
-.killerBody{
+.tv{
 
- position:absolute;
+  width:42%;
 
- bottom:0;
+  height:25%;
 
- left:7px;
+  left:29%;
 
- width:44px;
+  top:25%;
 
- height:48px;
+  background:#080908;
 
- background:#222;
-
- border:3px solid #111;
-
- border-radius:9px 9px 3px 3px;
+  border:6px solid #171717;
 
 }
 
-.killerWeapon{
+.fridge{
 
- position:absolute;
+  width:21%;
 
- right:-22px;
+  height:58%;
 
- bottom:6px;
+  right:8%;
 
- width:8px;
+  top:20%;
 
- height:47px;
+  background:#aaa9a1;
 
- background:#aaa;
-
- transform:rotate(-35deg);
+  border:5px solid #3a3935;
 
 }
 
-#killer.zombie .killerHead{
+.stove{
 
- background:#d40000;
+  width:32%;
 
- border-color:#250000;
+  height:25%;
 
-}
+  left:10%;
 
-#killer.zombie .killerHead:before,
+  top:28%;
 
-#killer.zombie .killerHead:after{
+  background:#272724;
 
- content:"";
-
- position:absolute;
-
- top:11px;
-
- width:7px;
-
- height:7px;
-
- background:#fff;
-
- border-radius:50%;
-
- box-shadow:0 0 8px #fff;
+  border:5px solid #111;
 
 }
 
-#killer.zombie .killerHead:before{
+/* doors */
 
- left:6px;
+.roomDoor{
 
-}
+  position:absolute;
 
-#killer.zombie .killerHead:after{
+  z-index:15;
 
- right:6px;
+  width:17%;
 
-}
+  height:36%;
 
-#killer.zombie .killerBody{
+  bottom:0;
 
- background:#a80000;
+  background:#2c2119;
 
- border-color:#250000;
-
-}
-
-#killer.zombie .killerWeapon{
-
- background:#aaa;
+  border:5px solid #111;
 
 }
 
-/* =========================================================
+.roomDoor.left{left:4%}
 
-   SURVIVORS
+.roomDoor.right{right:4%}
 
-========================================================= */
+.roomDoor.top{
+
+  top:12%;
+
+  bottom:auto;
+
+  width:20%;
+
+  height:15%;
+
+}
+
+.doorLabel{
+
+  position:absolute;
+
+  width:100%;
+
+  text-align:center;
+
+  bottom:7px;
+
+  font-size:8px;
+
+  color:#aaa;
+
+}
+
+/* player */
+
+#player{
+
+  position:absolute;
+
+  z-index:100;
+
+  width:52px;
+
+  height:72px;
+
+  pointer-events:none;
+
+}
+
+.playerHead{
+
+  position:absolute;
+
+  left:10px;
+
+  top:0;
+
+  width:32px;
+
+  height:32px;
+
+  border-radius:50%;
+
+  background:#59665a;
+
+  border:3px solid #121812;
+
+}
+
+.playerEye{
+
+  position:absolute;
+
+  width:6px;
+
+  height:6px;
+
+  background:#f5f5e8;
+
+  border-radius:50%;
+
+  top:11px;
+
+  box-shadow:0 0 5px #fff;
+
+}
+
+.playerEye.a{left:7px}
+
+.playerEye.b{right:7px}
+
+.playerBody{
+
+  position:absolute;
+
+  left:7px;
+
+  bottom:0;
+
+  width:38px;
+
+  height:45px;
+
+  background:linear-gradient(90deg,#263027,#596555,#202820);
+
+  border:3px solid #111611;
+
+  border-radius:8px;
+
+}
+
+.playerArm{
+
+  position:absolute;
+
+  top:36px;
+
+  width:12px;
+
+  height:38px;
+
+  background:#59665a;
+
+  border:3px solid #111611;
+
+  border-radius:10px;
+
+}
+
+.playerArm.a{
+
+  left:1px;
+
+  transform:rotate(18deg);
+
+}
+
+.playerArm.b{
+
+  right:0;
+
+  transform:rotate(-18deg);
+
+}
+
+.playerWeapon{
+
+  position:absolute;
+
+  right:-18px;
+
+  bottom:5px;
+
+  width:7px;
+
+  height:45px;
+
+  background:#aaa;
+
+  transform:rotate(-35deg);
+
+}
+
+/* survivors */
 
 .survivor{
 
- position:absolute;
+  position:absolute;
 
- width:38px;
+  z-index:80;
 
- height:51px;
+  width:38px;
 
- z-index:30;
+  height:52px;
 
-}
-
-.survivorHead{
-
- position:absolute;
-
- top:0;
-
- left:10px;
-
- width:19px;
-
- height:19px;
-
- border-radius:50%;
-
- background:#b98768;
-
- border:2px solid #2c1c15;
+  display:none;
 
 }
 
-.survivorBody{
+.sHead{
 
- position:absolute;
+  position:absolute;
 
- left:6px;
+  top:0;
 
- bottom:0;
+  left:10px;
 
- width:26px;
+  width:19px;
 
- height:34px;
+  height:19px;
 
- background:#4e626b;
+  border-radius:50%;
 
- border:2px solid #1c2528;
+  background:#bd896c;
 
- border-radius:7px;
+  border:2px solid #291b14;
+
+}
+
+.sBody{
+
+  position:absolute;
+
+  bottom:0;
+
+  left:6px;
+
+  width:26px;
+
+  height:34px;
+
+  background:#526a73;
+
+  border:2px solid #182329;
+
+  border-radius:7px;
 
 }
 
 .survivor.running{
 
- animation:runBob .25s infinite alternate;
+  animation:run .2s infinite alternate;
 
 }
 
-@keyframes runBob{
+@keyframes run{
 
- from{transform:translateY(0)}
+  from{transform:translateY(0)}
 
- to{transform:translateY(-3px)}
-
-}
-
-/* =========================================================
-
-   TIMER
-
-========================================================= */
-
-#survivorTimer{
-
- position:absolute;
-
- z-index:105;
-
- top:94px;
-
- left:50%;
-
- transform:translateX(-50%);
-
- width:90%;
-
- max-width:430px;
-
- display:none;
-
- padding:8px;
-
- text-align:center;
-
- background:rgba(70,10,10,.9);
-
- border:1px solid #8b3b3b;
-
- font-size:11px;
-
- font-weight:bold;
+  to{transform:translateY(-4px)}
 
 }
 
-/* =========================================================
-
-   HUD
-
-========================================================= */
+/* HUD */
 
 #hud{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- z-index:100;
+  z-index:150;
 
- pointer-events:none;
+  pointer-events:none;
 
 }
 
 .hudTop{
 
- display:flex;
+  display:flex;
 
- justify-content:space-between;
+  justify-content:space-between;
 
- padding:10px;
+  padding:9px;
 
 }
 
 .hudBox{
 
- background:rgba(0,0,0,.78);
+  padding:7px 9px;
 
- border:1px solid #444;
+  background:rgba(0,0,0,.8);
 
- padding:7px 10px;
+  border:1px solid #444;
 
- border-radius:4px;
+  border-radius:4px;
 
- font-size:11px;
+  font-size:10px;
 
 }
 
 #objective{
 
- position:absolute;
+  position:absolute;
 
- top:58px;
+  top:54px;
 
- left:50%;
+  left:50%;
 
- transform:translateX(-50%);
+  transform:translateX(-50%);
 
- width:90%;
+  width:92%;
 
- max-width:430px;
+  max-width:430px;
 
- padding:9px;
+  padding:8px;
 
- text-align:center;
+  text-align:center;
 
- background:rgba(0,0,0,.78);
+  background:rgba(0,0,0,.8);
 
- border:1px solid #3e3e3e;
+  border:1px solid #444;
 
- font-size:11px;
+  font-size:10px;
 
 }
 
-/* =========================================================
+#roomName{
 
-   CONTROLS
+  position:absolute;
 
-========================================================= */
+  top:85px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  padding:5px 10px;
+
+  background:rgba(0,0,0,.55);
+
+  color:#aaa;
+
+  font-size:9px;
+
+  letter-spacing:2px;
+
+}
+
+/* controls */
 
 #controls{
 
- position:absolute;
+  position:absolute;
 
- z-index:120;
+  z-index:180;
 
- bottom:12px;
+  bottom:10px;
 
- left:0;
+  left:0;
 
- width:100%;
+  width:100%;
 
- display:flex;
+  display:flex;
 
- justify-content:space-between;
+  justify-content:space-between;
 
- padding:0 12px;
+  padding:0 10px;
 
 }
 
 .controlCluster{
 
- display:flex;
+  display:flex;
 
- gap:7px;
+  gap:6px;
 
- align-items:center;
+  align-items:center;
 
- flex-wrap:wrap;
+  flex-wrap:wrap;
 
- max-width:250px;
+  max-width:240px;
 
 }
 
 .ctrl{
 
- width:55px;
+  width:53px;
 
- height:55px;
+  height:53px;
 
- border-radius:50%;
+  border-radius:50%;
 
- border:2px solid #555;
+  border:2px solid #555;
 
- background:rgba(12,12,12,.88);
+  background:rgba(10,10,10,.88);
 
- color:#fff;
+  color:#fff;
 
- font-size:18px;
+  font-size:18px;
 
- font-weight:bold;
+  font-weight:bold;
 
 }
 
 .ctrl:active{
 
- background:#444;
+  background:#444;
 
 }
 
 .attack{
 
- width:72px;
+  width:70px;
 
- height:72px;
+  height:70px;
 
- border-color:#743c3c;
+  border-color:#754040;
 
 }
 
 .action{
 
- width:62px;
+  width:60px;
 
- height:62px;
+  height:60px;
 
 }
 
-/* =========================================================
-
-   POPUPS
-
-========================================================= */
+/* message */
 
 #message{
 
- position:absolute;
+  position:absolute;
 
- z-index:500;
+  z-index:500;
 
- left:50%;
+  left:50%;
 
- bottom:100px;
+  bottom:100px;
 
- transform:translateX(-50%);
+  transform:translateX(-50%);
 
- background:rgba(0,0,0,.93);
+  padding:10px 15px;
 
- border:1px solid #555;
+  background:rgba(0,0,0,.93);
 
- padding:10px 15px;
+  border:1px solid #555;
 
- border-radius:5px;
+  border-radius:5px;
 
- opacity:0;
+  opacity:0;
 
- pointer-events:none;
+  pointer-events:none;
 
- transition:.2s;
+  transition:.2s;
 
- white-space:nowrap;
+  white-space:nowrap;
 
 }
 
 #message.show{
 
- opacity:1;
+  opacity:1;
 
 }
 
+/* popups */
+
 .popupScreen{
 
- position:absolute;
+  position:absolute;
 
- inset:0;
+  inset:0;
 
- z-index:600;
+  z-index:600;
 
- display:none;
+  display:none;
 
- align-items:center;
+  align-items:center;
 
- justify-content:center;
+  justify-content:center;
 
- background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,.9);
 
 }
 
 .popup{
 
- width:min(90%,420px);
+  width:min(90%,420px);
 
- background:#111;
+  padding:27px;
 
- border:2px solid #444;
+  background:#111;
 
- padding:28px;
+  border:2px solid #444;
 
- text-align:center;
+  text-align:center;
 
 }
 
 .popup h1{
 
- margin:0 0 10px;
+  margin:0 0 10px;
 
- font-size:38px;
+  font-size:34px;
 
 }
 
 .popup button{
 
- display:block;
+  display:block;
 
- width:100%;
+  width:100%;
 
- margin-top:10px;
+  margin-top:10px;
 
- padding:13px;
+  padding:13px;
 
- background:#252525;
+  background:#252525;
 
- color:#fff;
+  color:#fff;
 
- border:1px solid #555;
+  border:1px solid #555;
 
 }
 
 @media(max-width:520px){
 
- .cards{
+  .cards{
 
-  grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
-  max-width:330px;
+    max-width:330px;
 
- }
+  }
 
- .card{
+  .card{
 
-  min-height:185px;
+    min-height:175px;
 
- }
+  }
 
- .cardIcon{
+  .cardIcon{
 
-  height:60px;
+    height:55px;
 
-  font-size:45px;
+    font-size:44px;
 
- }
-
- .skinGrid{
-
-  grid-template-columns:1fr 1fr;
-
- }
+  }
 
 }
 
@@ -2206,867 +1826,821 @@ button{
 
 <div id="game">
 
-<!-- =========================================================
+<!-- =====================================================
 
- MENU
+     MENU
 
-========================================================= -->
+===================================================== -->
 
 <div id="menu">
 
- <div class="menuGlow"></div>
+  <div class="menuMoon"></div>
 
- <div class="moon"></div>
+  <div class="menuGround"></div>
 
- <div class="fog fog1"></div>
+  <div class="buildingHouse">
 
- <div class="fog fog2"></div>
+    <div class="buildRoof"></div>
 
- <div class="menuHouse">
+    <div class="buildWall">
 
-  <div class="menuRoof"></div>
+      <div class="buildWindow a"></div>
 
-  <div class="menuBody">
+      <div class="buildWindow b"></div>
 
-   <div class="menuWindow a"></div>
+      <div class="buildDoor"></div>
 
-   <div class="menuWindow b"></div>
-
-   <div class="menuDoor"></div>
+    </div>
 
   </div>
 
- </div>
+  <div class="construction">
 
- <div class="menuZombie">
+    <div class="creatorZombie">
 
-  <div class="zHead">
+      <div class="creatorHead">
 
-   <div class="zMouth"></div>
+        <div class="creatorEye a"></div>
 
-  </div>
+        <div class="creatorEye b"></div>
 
-  <div class="zBody"></div>
+        <div class="creatorMouth"></div>
 
-  <div class="zArm a"></div>
+      </div>
 
-  <div class="zArm b"></div>
+      <div class="creatorBody"></div>
 
-  <div class="zLeg a"></div>
+      <div class="creatorArm a"></div>
 
-  <div class="zLeg b"></div>
+      <div class="creatorArm b"></div>
 
-  <div class="zWeapon"></div>
+      <div class="hammer"></div>
 
- </div>
+    </div>
 
- <div class="menuContent">
-
-  <div class="logo">
-
-   HOUSES
-
-   <span class="logoSmall">OF HORROR</span>
+    <div class="creatorBadge">FIX THAT HOUSE</div>
 
   </div>
 
-  <div class="version">
+  <div class="menuContent">
 
-   VERSION 1.4 — REDEMPTION
+    <div class="logo">
+
+      HOUSES
+
+      <span class="logoSmall">OF HORROR</span>
+
+    </div>
+
+    <div class="version">
+
+      VERSION 1.5 — FIX THAT HOUSE
+
+    </div>
+
+    <button class="menuBtn red" onclick="openKillers()">
+
+      🔪 PLAY
+
+    </button>
+
+    <button class="menuBtn" onclick="openKillers()">
+
+      KILLERS
+
+    </button>
+
+    <button class="menuBtn" onclick="openShop()">
+
+      🛒 ITEM SHOP
+
+    </button>
+
+    <button class="menuBtn" onclick="openCreator()">
+
+      👑 CREATOR
+
+    </button>
 
   </div>
-
-  <button class="menuBtn red" onclick="openKillers()">
-
-   🔪 PLAY
-
-  </button>
-
-  <button class="menuBtn" onclick="openKillers()">
-
-   KILLERS
-
-  </button>
-
-  <button class="menuBtn" onclick="openShop()">
-
-   ITEM SHOP
-
-  </button>
-
-  <button class="menuBtn" onclick="openLevels()">
-
-   ⭐ LEVELS & SKINS
-
-  </button>
-
-  <div class="menuFooter">
-
-   REDEMPTION • PART 1
-
-  </div>
-
- </div>
 
 </div>
 
-<!-- =========================================================
+<!-- =====================================================
 
- KILLERS
+     KILLERS
 
-========================================================= -->
+===================================================== -->
 
 <div id="killerPanel" class="panel">
 
- <div class="panelTitle">
+  <div class="panelTitle">CHOOSE YOUR KILLER</div>
 
-  CHOOSE YOUR KILLER
+  <div class="panelSub">
 
- </div>
-
- <div class="panelSub">
-
-  YOU ARE THE HUNTER.
-
- </div>
-
- <div class="cards">
-
-  <div class="card">
-
-   <div class="cardIcon">🔪</div>
-
-   <div class="cardTitle">THE BUTCHER</div>
-
-   <div class="cardDesc">
-
-    Balanced killer.
-
-    Reliable damage and speed.
-
-   </div>
-
-   <button class="selectBtn"
-
-    onclick="selectKiller(1,this)">
-
-    SELECT
-
-   </button>
+    YOU ARE THE HUNTER.
 
   </div>
 
-  <div class="card">
+  <div class="cards">
 
-   <div class="cardIcon">👤</div>
+    <div class="card">
 
-   <div class="cardTitle">THE STALKER</div>
+      <div class="cardIcon">🔪</div>
 
-   <div class="cardDesc">
+      <div class="cardTitle">THE BUTCHER</div>
 
-    Faster movement.
+      <div class="cardDesc">
 
-    Built for chasing.
+        Balanced killer with reliable damage.
 
-   </div>
+      </div>
 
-   <button class="selectBtn"
+      <button class="selectBtn" onclick="selectKiller(1,this)">
 
-    onclick="selectKiller(2,this)">
+        SELECT
 
-    SELECT
+      </button>
 
-   </button>
+    </div>
+
+    <div class="card">
+
+      <div class="cardIcon">👤</div>
+
+      <div class="cardTitle">THE STALKER</div>
+
+      <div class="cardDesc">
+
+        Faster killer built for chasing.
+
+      </div>
+
+      <button class="selectBtn" onclick="selectKiller(2,this)">
+
+        SELECT
+
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div class="cardIcon">🧟</div>
+
+      <div class="cardTitle">THE ZOMBIE</div>
+
+      <div class="cardDesc">
+
+        Tough, brutal and relentless.
+
+      </div>
+
+      <button class="selectBtn" onclick="selectKiller(3,this)">
+
+        SELECT
+
+      </button>
+
+    </div>
 
   </div>
 
-  <div class="card">
-
-   <div class="cardIcon">🧟</div>
-
-   <div class="cardTitle">THE ZOMBIE</div>
-
-   <div class="cardDesc">
-
-    Brutal and relentless.
-
-    Fully red skin with glowing eyes.
-
-   </div>
-
-   <button class="selectBtn"
-
-    onclick="selectKiller(3,this)">
-
-    SELECT
-
-   </button>
-
-  </div>
-
- </div>
-
- <button class="backBtn"
-
-  onclick="closePanels()">
-
-  BACK
-
- </button>
+  <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =========================================================
+<!-- =====================================================
 
- HOUSE SELECT
+     SHOP
 
-========================================================= -->
-
-<div id="housePanel" class="panel">
-
- <div class="panelTitle">
-
-  CHOOSE MAP
-
- </div>
-
- <div class="panelSub">
-
-  HUNT INSIDE OR OUTSIDE.
-
- </div>
-
- <div class="cards">
-
-  <div class="card">
-
-   <div class="cardIcon">🏚️</div>
-
-   <div class="cardTitle">
-
-    ABANDONED HOME
-
-   </div>
-
-   <div class="cardDesc">
-
-    Search rooms, open doors,
-
-    and find hidden survivors.
-
-   </div>
-
-   <button class="selectBtn"
-
-    onclick="startHouse(1)">
-
-    ENTER
-
-   </button>
-
-  </div>
-
-  <div class="card">
-
-   <div class="cardIcon">🌲</div>
-
-   <div class="cardTitle">
-
-    OUTSKIRTS
-
-   </div>
-
-   <div class="cardDesc">
-
-    New outdoor hunting ground.
-
-    Two houses and open terrain.
-
-   </div>
-
-   <button class="selectBtn"
-
-    onclick="startHouse(3)">
-
-    ENTER
-
-   </button>
-
-  </div>
-
- </div>
-
- <button class="backBtn"
-
-  onclick="openKillers()">
-
-  BACK
-
- </button>
-
-</div>
-
-<!-- =========================================================
-
- SHOP
-
-========================================================= -->
+===================================================== -->
 
 <div id="shopPanel" class="panel">
 
- <div class="panelTitle">
+  <div class="panelTitle">ITEM SHOP</div>
 
-  ITEM SHOP
+  <div class="shopCoins">
 
- </div>
-
- <div class="shopCoins">
-
-  🪙 <span id="shopCoins">300</span>
-
- </div>
-
- <div class="shopGrid">
-
-  <div class="shopItem">
-
-   <div class="shopIcon">⚡</div>
-
-   <div class="shopName">SPEED</div>
-
-   <div class="shopDesc">
-
-    Increase killer movement speed.
-
-   </div>
-
-   <button class="buyBtn"
-
-    onclick="buyUpgrade('speed')">
-
-    100 COINS
-
-   </button>
+    🪙 <span id="shopCoins">300</span>
 
   </div>
 
-  <div class="shopItem">
+  <div class="shopGrid">
 
-   <div class="shopIcon">💀</div>
+    <div class="shopItem">
 
-   <div class="shopName">DAMAGE</div>
+      <div class="shopIcon">⚡</div>
 
-   <div class="shopDesc">
+      <div class="shopName">SPEED</div>
 
-    Increase attack damage.
+      <div class="shopDesc">Increase killer movement speed.</div>
 
-   </div>
+      <button class="buyBtn" onclick="buyUpgrade('speed')">
 
-   <button class="buyBtn"
+        100 COINS
 
-    onclick="buyUpgrade('damage')">
+      </button>
 
-    125 COINS
+    </div>
 
-   </button>
+    <div class="shopItem">
+
+      <div class="shopIcon">💀</div>
+
+      <div class="shopName">DAMAGE</div>
+
+      <div class="shopDesc">Increase attack damage.</div>
+
+      <button class="buyBtn" onclick="buyUpgrade('damage')">
+
+        125 COINS
+
+      </button>
+
+    </div>
+
+    <div class="shopItem">
+
+      <div class="shopIcon">👁️</div>
+
+      <div class="shopName">TRACKER</div>
+
+      <div class="shopDesc">Increase search range.</div>
+
+      <button class="buyBtn" onclick="buyUpgrade('tracker')">
+
+        150 COINS
+
+      </button>
+
+    </div>
+
+    <div class="shopItem">
+
+      <div class="shopIcon">❤️</div>
+
+      <div class="shopName">TOUGHNESS</div>
+
+      <div class="shopDesc">Increase killer health.</div>
+
+      <button class="buyBtn" onclick="buyUpgrade('health')">
+
+        175 COINS
+
+      </button>
+
+    </div>
+
+    <!-- LIMITED GREEN ZOMBIE -->
+
+    <div class="shopItem" id="greenSkinItem">
+
+      <div class="shopIcon">🟢🧟</div>
+
+      <div class="shopName">
+
+        GREEN ZOMBIE
+
+      </div>
+
+      <div class="shopDesc">
+
+        LIMITED EVENT SKIN
+
+        <br>
+
+        3,000 COINS
+
+      </div>
+
+      <div id="greenTimer"
+
+           style="color:#8fb98d;font-size:11px;margin:6px 0;">
+
+      </div>
+
+      <button class="buyBtn"
+
+              id="greenSkinButton"
+
+              onclick="buyGreenSkin()">
+
+        3,000 COINS
+
+      </button>
+
+    </div>
 
   </div>
 
-  <div class="shopItem">
-
-   <div class="shopIcon">👁️</div>
-
-   <div class="shopName">TRACKER</div>
-
-   <div class="shopDesc">
-
-    Increase search range.
-
-   </div>
-
-   <button class="buyBtn"
-
-    onclick="buyUpgrade('tracker')">
-
-    150 COINS
-
-   </button>
-
-  </div>
-
-  <div class="shopItem">
-
-   <div class="shopIcon">❤️</div>
-
-   <div class="shopName">TOUGHNESS</div>
-
-   <div class="shopDesc">
-
-    Gives the killer more health.
-
-   </div>
-
-   <button class="buyBtn"
-
-    onclick="buyUpgrade('health')">
-
-    175 COINS
-
-   </button>
-
-  </div>
-
- </div>
-
- <button class="backBtn"
-
-  onclick="closePanels()">
-
-  BACK
-
- </button>
+  <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =========================================================
+<!-- =====================================================
 
- LEVELS / SKINS
+     CREATOR PANEL
 
-========================================================= -->
+===================================================== -->
 
-<div id="levelPanel" class="panel">
+<div id="creatorPanel" class="panel">
 
- <div class="panelTitle">
+  <div class="panelTitle">
 
-  LEVELS & SKINS
-
- </div>
-
- <div class="levelBox">
-
-  <div class="levelTitle">
-
-   LEVEL <span id="playerLevel">1</span>
+    👑 CREATOR
 
   </div>
 
-  <div class="levelSub">
+  <div class="panelSub">
 
-   Earn XP by eliminating survivors and clearing maps.
-
-  </div>
-
-  <div class="xpBar">
-
-   <div id="xpFill" class="xpFill"></div>
+    THIS SKIN IS FOR THE PERSON WHO BUILT THE GAME.
 
   </div>
 
-  <div class="levelText">
+  <div class="creatorBox">
 
-   <span id="xpText">0 / 100 XP</span>
+    <div style="font-size:65px">🧟‍♂️</div>
+
+    <h2>THE CREATOR</h2>
+
+    <p style="color:#888;font-size:11px;line-height:1.5">
+
+      A creator-exclusive Zombie skin.
+
+      <br>
+
+      Not sold in the shop.
+
+      <br>
+
+      Not obtainable through levels.
+
+    </p>
+
+    <input
+
+      id="creatorCode"
+
+      type="password"
+
+      placeholder="ENTER CREATOR CODE"
+
+      autocomplete="off"
+
+    >
+
+    <button class="creatorButton"
+
+            onclick="redeemCreatorCode()">
+
+      UNLOCK CREATOR SKIN
+
+    </button>
+
+    <p id="creatorStatus"
+
+       style="font-size:10px;color:#777">
+
+    </p>
 
   </div>
 
- </div>
-
- <div class="skinGrid" id="skinGrid"></div>
-
- <button class="backBtn"
-
-  onclick="closePanels()">
-
-  BACK
-
- </button>
+  <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =========================================================
+<!-- =====================================================
 
- GAME
+     GAME WORLD
 
-========================================================= -->
+===================================================== -->
 
 <div id="gameScreen">
 
- <div id="world">
+  <div id="world">
 
-  <!-- OUTDOOR -->
+    <!-- OUTDOOR AREA -->
 
-  <div id="outdoorMap"
+    <div id="outdoor" class="outdoor">
 
-   class="outdoor"
+      <div class="outdoorPath"></div>
 
-   style="display:none;">
+      <div class="outdoorHouse"
 
-   <div class="sky"></div>
+           style="left:9%;top:18%;width:28%;height:25%;">
 
-   <div class="cloud a"></div>
+        <div class="outdoorRoof"></div>
 
-   <div class="cloud b"></div>
+      </div>
 
-   <div class="ground"></div>
+      <div class="outdoorHouse"
 
-   <div class="path"></div>
+           style="right:8%;top:58%;width:30%;height:24%;">
 
-   <div class="tree a"></div>
+        <div class="outdoorRoof"></div>
 
-   <div class="tree b"></div>
+      </div>
 
-   <div class="tree c"></div>
+      <div class="fence"
 
-   <div class="tree d"></div>
+           style="left:3%;top:48%;width:30%;transform:rotate(4deg)">
 
-   <div class="outHouse one">
+      </div>
 
-    <div class="outRoof"></div>
+      <div class="fence"
 
-    <div class="outWindow w1"></div>
+           style="right:3%;top:36%;width:28%;transform:rotate(-5deg)">
 
-    <div class="outWindow w2"></div>
+      </div>
 
-    <div class="outDoor"
+      <div class="grass" style="left:7%;top:65%"></div>
 
-     onclick="openOutdoorDoor(this,1)">
+      <div class="grass" style="left:75%;top:15%"></div>
 
-    </div>
+      <div class="grass" style="left:60%;top:76%"></div>
 
-   </div>
+      <div class="grass" style="left:44%;top:24%"></div>
 
-   <div class="outHouse two">
-
-    <div class="outRoof"></div>
-
-    <div class="outWindow w1"></div>
-
-    <div class="outWindow w2"></div>
-
-    <div class="outDoor"
-
-     onclick="openOutdoorDoor(this,2)">
+      <div class="grass" style="left:87%;top:48%"></div>
 
     </div>
 
-   </div>
+    <!-- BEDROOM -->
+
+    <div id="roomBedroom"
+
+         class="roomView">
+
+      <div class="roomCeiling"></div>
+
+      <div class="roomFloor"></div>
+
+      <div class="roomWall">
+
+        <div class="bed">
+
+          <div class="bedPillow"></div>
+
+          <div class="bedBlanket"></div>
+
+        </div>
+
+        <div class="furniture cabinet"
+
+             style="right:8%;top:22%">
+
+        </div>
+
+        <div class="furniture"
+
+             style="left:8%;bottom:9%;width:25%;height:15%">
+
+        </div>
+
+      </div>
+
+      <div class="roomDoor right"
+
+           onclick="enterRoom('hall')">
+
+        <div class="doorLabel">HALL</div>
+
+      </div>
+
+    </div>
+
+    <!-- HALL -->
+
+    <div id="roomHall"
+
+         class="roomView">
+
+      <div class="roomCeiling"></div>
+
+      <div class="roomFloor"></div>
+
+      <div class="roomWall">
+
+        <div class="furniture"
+
+             style="left:8%;top:20%;width:25%;height:22%">
+
+        </div>
+
+        <div class="furniture"
+
+             style="right:8%;top:48%;width:25%;height:22%">
+
+        </div>
+
+      </div>
+
+      <div class="roomDoor left"
+
+           onclick="enterRoom('bedroom')">
+
+        <div class="doorLabel">BEDROOM</div>
+
+      </div>
+
+      <div class="roomDoor right"
+
+           onclick="enterRoom('kitchen')">
+
+        <div class="doorLabel">KITCHEN</div>
+
+      </div>
+
+      <div class="roomDoor top"
+
+           onclick="enterRoom('living')">
+
+        <div class="doorLabel">LIVING ROOM</div>
+
+      </div>
+
+      <div class="roomDoor"
+
+           style="left:41%;"
+
+           onclick="enterRoom('bathroom')">
+
+        <div class="doorLabel">BATH</div>
+
+      </div>
+
+      <div class="roomDoor"
+
+           style="left:62%;"
+
+           onclick="enterOutdoor()">
+
+        <div class="doorLabel">OUTSIDE</div>
+
+      </div>
+
+    </div>
+
+    <!-- KITCHEN -->
+
+    <div id="roomKitchen"
+
+         class="roomView">
+
+      <div class="roomCeiling"></div>
+
+      <div class="roomFloor"></div>
+
+      <div class="roomWall">
+
+        <div class="counter"></div>
+
+        <div class="stove"></div>
+
+        <div class="fridge"></div>
+
+        <div class="furniture"
+
+             style="left:32%;top:50%;width:38%;height:25%">
+
+        </div>
+
+      </div>
+
+      <div class="roomDoor left"
+
+           onclick="enterRoom('hall')">
+
+        <div class="doorLabel">HALL</div>
+
+      </div>
+
+    </div>
+
+    <!-- LIVING -->
+
+    <div id="roomLiving"
+
+         class="roomView">
+
+      <div class="roomCeiling"></div>
+
+      <div class="roomFloor"></div>
+
+      <div class="roomWall">
+
+        <div class="tv"></div>
+
+        <div class="couch"></div>
+
+        <div class="table"></div>
+
+      </div>
+
+      <div class="roomDoor"
+
+           style="left:42%;"
+
+           onclick="enterRoom('hall')">
+
+        <div class="doorLabel">HALL</div>
+
+      </div>
+
+    </div>
+
+    <!-- BATHROOM -->
+
+    <div id="roomBathroom"
+
+         class="roomView">
+
+      <div class="roomCeiling"></div>
+
+      <div class="roomFloor"></div>
+
+      <div class="roomWall">
+
+        <div class="tub"></div>
+
+        <div class="sink"></div>
+
+        <div class="toilet"></div>
+
+      </div>
+
+      <div class="roomDoor"
+
+           style="left:42%;"
+
+           onclick="enterRoom('hall')">
+
+        <div class="doorLabel">HALL</div>
+
+      </div>
+
+    </div>
+
+    <!-- PLAYER -->
+
+    <div id="player">
+
+      <div class="playerHead">
+
+        <div class="playerEye a"></div>
+
+        <div class="playerEye b"></div>
+
+      </div>
+
+      <div class="playerBody"></div>
+
+      <div class="playerArm a"></div>
+
+      <div class="playerArm b"></div>
+
+      <div class="playerWeapon"></div>
+
+    </div>
+
+    <!-- SURVIVORS -->
+
+    <div id="survivor1" class="survivor">
+
+      <div class="sHead"></div>
+
+      <div class="sBody"></div>
+
+    </div>
+
+    <div id="survivor2" class="survivor">
+
+      <div class="sHead"></div>
+
+      <div class="sBody"></div>
+
+    </div>
+
+    <div id="survivor3" class="survivor">
+
+      <div class="sHead"></div>
+
+      <div class="sBody"></div>
+
+    </div>
+
+    <div id="survivor4" class="survivor">
+
+      <div class="sHead"></div>
+
+      <div class="sBody"></div>
+
+    </div>
 
   </div>
 
-  <!-- HOUSE INTERIOR -->
+  <!-- HUD -->
 
-  <div id="houseInterior"
+  <div id="hud">
 
-   class="houseInterior"
+    <div class="hudTop">
 
-   style="display:none;">
+      <div class="hudBox">
 
-   <div class="ceiling"></div>
+        ❤️ <span id="health">100</span>
 
-   <div class="floor"></div>
+      </div>
 
-   <div class="room"
+      <div class="hudBox">
 
-    style="left:5%;top:19%;width:42%;height:32%;">
+        🪙 <span id="coins">300</span>
 
-    <div class="roomName">
+      </div>
 
-     BEDROOM
+      <div class="hudBox">
 
-    </div>
+        LVL <span id="level">1</span>
 
-    <div class="bed"
-
-     style="left:9%;top:25%;width:62%;height:55%;">
-
-     <div class="pillow"></div>
-
-     <div class="blanket"></div>
+      </div>
 
     </div>
 
-    <div class="closet"
+    <div id="objective">
 
-     style="right:5%;top:19%;width:25%;height:64%;">
-
-     <div class="closetDoor left"></div>
-
-     <div class="closetDoor right"></div>
+      FIND AND ELIMINATE SURVIVORS — 0 / 3
 
     </div>
 
-    <div class="doorInside"
+    <div id="roomName">
 
-     style="right:-12px;top:40%;"
-
-     onclick="toggleDoor(this)">
+      BEDROOM
 
     </div>
-
-   </div>
-
-   <div class="room"
-
-    style="left:52%;top:19%;width:43%;height:32%;">
-
-    <div class="roomName">
-
-     LIVING ROOM
-
-    </div>
-
-    <div class="table"
-
-     style="left:18%;top:30%;width:55%;height:31%;">
-
-    </div>
-
-    <div class="cabinet"
-
-     style="right:5%;bottom:8%;width:25%;height:45%;">
-
-    </div>
-
-    <div class="doorInside"
-
-     style="left:-12px;top:40%;"
-
-     onclick="toggleDoor(this)">
-
-    </div>
-
-   </div>
-
-   <div class="room"
-
-    style="left:5%;top:55%;width:42%;height:38%;">
-
-    <div class="roomName">
-
-     KITCHEN
-
-    </div>
-
-    <div class="cabinet"
-
-     style="left:7%;top:25%;width:31%;height:60%;">
-
-    </div>
-
-    <div class="cabinet"
-
-     style="right:7%;top:25%;width:31%;height:60%;">
-
-    </div>
-
-    <div class="doorInside"
-
-     style="right:-12px;top:40%;"
-
-     onclick="toggleDoor(this)">
-
-    </div>
-
-   </div>
-
-   <div class="room"
-
-    style="left:52%;top:55%;width:43%;height:38%;">
-
-    <div class="roomName">
-
-     BATHROOM
-
-    </div>
-
-    <div class="bath"
-
-     style="left:12%;top:28%;width:31%;height:32%;">
-
-    </div>
-
-    <div class="toilet"
-
-     style="right:13%;top:27%;width:25%;height:38%;">
-
-    </div>
-
-    <div class="doorInside"
-
-     style="left:-12px;top:40%;"
-
-     onclick="toggleDoor(this)">
-
-    </div>
-
-   </div>
 
   </div>
 
-  <!-- KILLER -->
+  <!-- CONTROLS -->
 
-  <div id="killer">
+  <div id="controls">
 
-   <div class="killerHead"></div>
+    <div class="controlCluster">
 
-   <div class="killerBody"></div>
+      <button class="ctrl"
 
-   <div class="killerWeapon"></div>
+        onpointerdown="startMove('up')"
 
-  </div>
+        onpointerup="stopMove()"
 
-  <!-- SURVIVORS -->
+        onpointercancel="stopMove()">▲</button>
 
-  <div id="survivor1" class="survivor">
+      <button class="ctrl"
 
-   <div class="survivorHead"></div>
+        onpointerdown="startMove('left')"
 
-   <div class="survivorBody"></div>
+        onpointerup="stopMove()"
 
-  </div>
+        onpointercancel="stopMove()">◀</button>
 
-  <div id="survivor2" class="survivor">
+      <button class="ctrl"
 
-   <div class="survivorHead"></div>
+        onpointerdown="startMove('down')"
 
-   <div class="survivorBody"></div>
+        onpointerup="stopMove()"
 
-  </div>
+        onpointercancel="stopMove()">▼</button>
 
-  <div id="survivor3" class="survivor">
+      <button class="ctrl"
 
-   <div class="survivorHead"></div>
+        onpointerdown="startMove('right')"
 
-   <div class="survivorBody"></div>
+        onpointerup="stopMove()"
 
-  </div>
+        onpointercancel="stopMove()">▶</button>
 
-  <div id="survivor4" class="survivor">
+    </div>
 
-   <div class="survivorHead"></div>
+    <div class="controlCluster">
 
-   <div class="survivorBody"></div>
+      <button class="ctrl action"
 
-  </div>
+              onclick="search()">
 
- </div>
+        🔍
 
- <!-- HUD -->
+      </button>
 
- <div id="hud">
+      <button class="ctrl attack"
 
-  <div class="hudTop">
+              onclick="attack()">
 
-   <div class="hudBox">
+        🔪
 
-    ❤️ <span id="health">100</span>
+      </button>
 
-   </div>
-
-   <div class="hudBox">
-
-    🪙 <span id="coins">300</span>
-
-   </div>
-
-   <div class="hudBox">
-
-    ⭐ LV <span id="hudLevel">1</span>
-
-   </div>
+    </div>
 
   </div>
-
-  <div id="objective">
-
-   FIND AND ELIMINATE SURVIVORS — 0 / 3
-
-  </div>
-
-  <div id="survivorTimer">
-
-   SURVIVORS ESCAPE IN: <span id="timerValue">60</span>
-
-  </div>
-
- </div>
-
- <!-- CONTROLS -->
-
- <div id="controls">
-
-  <div class="controlCluster">
-
-   <button class="ctrl"
-
-    onpointerdown="startMove('up')"
-
-    onpointerup="stopMove()"
-
-    onpointercancel="stopMove()">
-
-    ▲
-
-   </button>
-
-   <button class="ctrl"
-
-    onpointerdown="startMove('left')"
-
-    onpointerup="stopMove()"
-
-    onpointercancel="stopMove()">
-
-    ◀
-
-   </button>
-
-   <button class="ctrl"
-
-    onpointerdown="startMove('down')"
-
-    onpointerup="stopMove()"
-
-    onpointercancel="stopMove()">
-
-    ▼
-
-   </button>
-
-   <button class="ctrl"
-
-    onpointerdown="startMove('right')"
-
-    onpointerup="stopMove()"
-
-    onpointercancel="stopMove()">
-
-    ▶
-
-   </button>
-
-  </div>
-
-  <div class="controlCluster">
-
-   <button class="ctrl action"
-
-    onclick="search()">
-
-    🔍
-
-   </button>
-
-   <button class="ctrl attack"
-
-    onclick="attack()">
-
-    🔪
-
-   </button>
-
-  </div>
-
- </div>
 
 </div>
 
@@ -3078,89 +2652,31 @@ button{
 
 <div id="completeScreen"
 
- class="popupScreen">
+     class="popupScreen">
 
- <div class="popup">
+  <div class="popup">
 
-  <h1>HOUSE CLEARED</h1>
+    <h1>HOUSE CLEARED</h1>
 
-  <p id="completeText">
+    <p id="completeText">
 
-   Every survivor has been eliminated.
+      Every survivor was eliminated.
 
-  </p>
+    </p>
 
-  <button onclick="nextHouse()">
+    <button onclick="nextHouse()">
 
-   CONTINUE
+      NEXT HOUSE
 
-  </button>
+    </button>
 
-  <button onclick="returnMenu()">
+    <button onclick="returnMenu()">
 
-   MAIN MENU
+      MAIN MENU
 
-  </button>
+    </button>
 
- </div>
-
-</div>
-
-<!-- WIN -->
-
-<div id="winScreen"
-
- class="popupScreen">
-
- <div class="popup">
-
-  <h1>YOU WIN</h1>
-
-  <p>
-
-   The survivors couldn't escape.
-
-  </p>
-
-  <button onclick="returnMenu()">
-
-   MAIN MENU
-
-  </button>
-
- </div>
-
-</div>
-
-<!-- LOSS -->
-
-<div id="lossScreen"
-
- class="popupScreen">
-
- <div class="popup">
-
-  <h1>SURVIVORS ESCAPED</h1>
-
-  <p>
-
-   Time ran out. The survivors got away.
-
-  </p>
-
-  <button onclick="restartHouse()">
-
-   TRY AGAIN
-
-  </button>
-
-  <button onclick="returnMenu()">
-
-   MAIN MENU
-
-  </button>
-
- </div>
+  </div>
 
 </div>
 
@@ -3168,107 +2684,83 @@ button{
 
 <div id="deathScreen"
 
- class="popupScreen">
+     class="popupScreen">
 
- <div class="popup">
+  <div class="popup">
 
-  <h1>YOU DIED</h1>
+    <h1>YOU DIED</h1>
 
-  <p>
+    <p>
 
-   The survivors fought back.
+      The survivors fought back.
 
-  </p>
+    </p>
 
-  <button onclick="restartHouse()">
+    <button onclick="restartHouse()">
 
-   TRY AGAIN
+      TRY AGAIN
 
-  </button>
+    </button>
 
-  <button onclick="returnMenu()">
+    <button onclick="returnMenu()">
 
-   MAIN MENU
+      MAIN MENU
 
-  </button>
+    </button>
 
- </div>
+  </div>
 
 </div>
 
 <script>
 
-/* =========================================================
-
-   HOUSES OF HORROR 1.4 — REDEMPTION
-
-========================================================= */
-
-/*
-
-   IMPORTANT:
-
-   The same localStorage keys are intentionally kept
-
-   compatible with the 1.3 economy.
-
-   Coins/points therefore remain on the device when
-
-   replacing the HTML with this update.
-
-*/
-
-/* =========================================================
+/* =====================================================
 
    SAVE DATA
 
-========================================================= */
+===================================================== */
 
 let coins =
 
- Number(localStorage.getItem("h13coins") || 300);
+  Number(localStorage.getItem("h15coins") || 300);
+
+let xp =
+
+  Number(localStorage.getItem("h15xp") || 0);
 
 let upgrades = {
 
- speed:Number(localStorage.getItem("h13speed") || 0),
+  speed:Number(localStorage.getItem("h15speed") || 0),
 
- damage:Number(localStorage.getItem("h13damage") || 0),
+  damage:Number(localStorage.getItem("h15damage") || 0),
 
- tracker:Number(localStorage.getItem("h13tracker") || 0),
+  tracker:Number(localStorage.getItem("h15tracker") || 0),
 
- health:Number(localStorage.getItem("h13health") || 0)
+  health:Number(localStorage.getItem("h15health") || 0)
 
 };
 
-/* =========================================================
+let ownedGreen =
 
-   LEVEL SYSTEM
+  localStorage.getItem("h15green") === "true";
 
-========================================================= */
+let ownedCreator =
 
-let playerLevel =
+  localStorage.getItem("h15creator") === "true";
 
- Number(localStorage.getItem("h14level") || 1);
+let equippedSkin =
 
-let playerXP =
+  localStorage.getItem("h15skin") || "default";
 
- Number(localStorage.getItem("h14xp") || 0);
-
-let selectedSkin =
-
- Number(localStorage.getItem("h14skin") || 0);
-
-const XP_PER_LEVEL = 100;
-
-/* =========================================================
+/* =====================================================
 
    GAME STATE
 
-========================================================= */
+===================================================== */
 
 let selectedKiller = 3;
 
-let currentHouse = 1;
+let currentRoom = "bedroom";
 
 let gameRunning = false;
 
@@ -3276,2135 +2768,1655 @@ let movement = null;
 
 let killed = 0;
 
-let messageTimer = null;
+let survivors = [];
 
-let survivorTime = 60;
+let player = {
 
-let survivorTimer = null;
+  x:50,
 
-const killer = {
+  y:65,
 
- x:50,
+  speed:.42,
 
- y:72,
+  health:100,
 
- speed:.7,
+  maxHealth:100,
 
- health:100,
-
- maxHealth:100,
-
- damage:40
+  damage:40
 
 };
 
-let survivors = [];
-
-/* =========================================================
+/* =====================================================
 
    ELEMENTS
 
-========================================================= */
+===================================================== */
 
 const menu =
 
- document.getElementById("menu");
+  document.getElementById("menu");
 
 const killerPanel =
 
- document.getElementById("killerPanel");
-
-const housePanel =
-
- document.getElementById("housePanel");
+  document.getElementById("killerPanel");
 
 const shopPanel =
 
- document.getElementById("shopPanel");
+  document.getElementById("shopPanel");
 
-const levelPanel =
+const creatorPanel =
 
- document.getElementById("levelPanel");
+  document.getElementById("creatorPanel");
 
 const gameScreen =
 
- document.getElementById("gameScreen");
+  document.getElementById("gameScreen");
 
-const killerEl =
+const playerEl =
 
- document.getElementById("killer");
+  document.getElementById("player");
 
 const messageEl =
 
- document.getElementById("message");
+  document.getElementById("message");
 
-/* =========================================================
+/* =====================================================
 
    PANELS
 
-========================================================= */
+===================================================== */
 
 function openKillers(){
 
- menu.style.display="none";
+  menu.style.display="none";
 
- killerPanel.style.display="block";
+  shopPanel.style.display="none";
 
- housePanel.style.display="none";
+  creatorPanel.style.display="none";
 
- shopPanel.style.display="none";
-
- levelPanel.style.display="none";
+  killerPanel.style.display="block";
 
 }
 
 function openShop(){
 
- menu.style.display="none";
+  menu.style.display="none";
 
- killerPanel.style.display="none";
+  killerPanel.style.display="none";
 
- housePanel.style.display="none";
+  creatorPanel.style.display="none";
 
- shopPanel.style.display="block";
+  shopPanel.style.display="block";
 
- levelPanel.style.display="none";
-
- updateShop();
+  updateShop();
 
 }
 
-function openLevels(){
+function openCreator(){
 
- menu.style.display="none";
+  menu.style.display="none";
 
- killerPanel.style.display="none";
+  killerPanel.style.display="none";
 
- housePanel.style.display="none";
+  shopPanel.style.display="none";
 
- shopPanel.style.display="none";
+  creatorPanel.style.display="block";
 
- levelPanel.style.display="block";
-
- updateLevelScreen();
+  updateCreatorPanel();
 
 }
 
 function closePanels(){
 
- killerPanel.style.display="none";
+  killerPanel.style.display="none";
 
- housePanel.style.display="none";
+  shopPanel.style.display="none";
 
- shopPanel.style.display="none";
+  creatorPanel.style.display="none";
 
- levelPanel.style.display="none";
-
- menu.style.display="block";
+  menu.style.display="block";
 
 }
 
-/* =========================================================
+/* =====================================================
 
-   KILLER SELECT
+   KILLER
 
-========================================================= */
+===================================================== */
 
 function selectKiller(number,button){
 
- selectedKiller=number;
+  selectedKiller=number;
 
- document
+  document
 
- .querySelectorAll("#killerPanel .selectBtn")
+    .querySelectorAll("#killerPanel .selectBtn")
 
- .forEach(b=>b.classList.remove("active"));
-
- if(button)
+    .forEach(b=>b.classList.remove("active"));
 
   button.classList.add("active");
 
- const names={
+  let name =
 
- 1:"THE BUTCHER",
+    number===1 ? "THE BUTCHER" :
 
- 2:"THE STALKER",
+    number===2 ? "THE STALKER" :
 
- 3:"THE ZOMBIE"
+    "THE ZOMBIE";
 
- };
+  showMessage(name+" SELECTED");
 
- showMessage(
+  setTimeout(()=>{
 
-  names[number]+" SELECTED"
+    killerPanel.style.display="none";
 
- );
+    if(number===3){
 
- setTimeout(()=>{
-
-  killerPanel.style.display="none";
-
-  housePanel.style.display="block";
-
- },350);
-
-}
-
-/* =========================================================
-
-   LEVEL / XP
-
-========================================================= */
-
-function addXP(amount){
-
- if(playerLevel>=50){
-
-  playerLevel=50;
-
-  playerXP=0;
-
-  saveProgress();
-
-  return;
-
- }
-
- playerXP+=amount;
-
- while(
-
-  playerXP>=XP_PER_LEVEL &&
-
-  playerLevel<50
-
- ){
-
-  playerXP-=XP_PER_LEVEL;
-
-  playerLevel++;
-
-  showMessage(
-
-   "LEVEL UP! LEVEL "+playerLevel
-
-  );
-
- }
-
- if(playerLevel>=50){
-
-  playerLevel=50;
-
-  playerXP=0;
-
- }
-
- saveProgress();
-
- updateLevelScreen();
-
-}
-
-function saveProgress(){
-
- localStorage.setItem(
-
-  "h14level",
-
-  playerLevel
-
- );
-
- localStorage.setItem(
-
-  "h14xp",
-
-  playerXP
-
- );
-
- localStorage.setItem(
-
-  "h14skin",
-
-  selectedSkin
-
- );
-
- /* Keep points across updates */
-
- localStorage.setItem(
-
-  "h13coins",
-
-  coins
-
- );
-
-}
-
-function updateLevelScreen(){
-
- const level =
-
-  document.getElementById("playerLevel");
-
- const xpFill =
-
-  document.getElementById("xpFill");
-
- const xpText =
-
-  document.getElementById("xpText");
-
- const hudLevel =
-
-  document.getElementById("hudLevel");
-
- if(level)
-
-  level.innerText=playerLevel;
-
- if(hudLevel)
-
-  hudLevel.innerText=playerLevel;
-
- if(xpFill){
-
-  let percent =
-
-   playerLevel>=50
-
-   ? 100
-
-   : (playerXP/XP_PER_LEVEL)*100;
-
-  xpFill.style.width=percent+"%";
-
- }
-
- if(xpText){
-
-  xpText.innerText=
-
-   playerLevel>=50
-
-   ? "MAX LEVEL — 50"
-
-   : playerXP+" / "+XP_PER_LEVEL+" XP";
-
- }
-
- renderSkins();
-
-}
-
-/* =========================================================
-
-   SKINS
-
-========================================================= */
-
-const skinData=[
-
- {
-
-  id:0,
-
-  killer:1,
-
-  name:"DEFAULT BUTCHER",
-
-  level:1,
-
-  head:"#8b6652",
-
-  body:"#222"
-
- },
-
- {
-
-  id:1,
-
-  killer:1,
-
-  name:"BLOOD BUTCHER",
-
-  level:5,
-
-  head:"#8b2525",
-
-  body:"#450909"
-
- },
-
- {
-
-  id:2,
-
-  killer:1,
-
-  name:"NIGHT BUTCHER",
-
-  level:15,
-
-  head:"#555",
-
-  body:"#090909"
-
- },
-
- {
-
-  id:3,
-
-  killer:2,
-
-  name:"DEFAULT STALKER",
-
-  level:1,
-
-  head:"#b98b70",
-
-  body:"#151515"
-
- },
-
- {
-
-  id:4,
-
-  killer:2,
-
-  name:"SHADOW STALKER",
-
-  level:10,
-
-  head:"#333",
-
-  body:"#050505"
-
- },
-
- {
-
-  id:5,
-
-  killer:2,
-
-  name:"RED STALKER",
-
-  level:25,
-
-  head:"#c00000",
-
-  body:"#500000"
-
- },
-
- {
-
-  id:6,
-
-  killer:3,
-
-  name:"DEFAULT ZOMBIE",
-
-  level:1,
-
-  head:"#d40000",
-
-  body:"#a80000"
-
- },
-
- {
-
-  id:7,
-
-  killer:3,
-
-  name:"DARK ZOMBIE",
-
-  level:20,
-
-  head:"#8b0000",
-
-  body:"#450000"
-
- },
-
- {
-
-  id:8,
-
-  killer:3,
-
-  name:"APOCALYPSE ZOMBIE",
-
-  level:35,
-
-  head:"#ff0000",
-
-  body:"#750000"
-
- },
-
- {
-
-  id:9,
-
-  killer:3,
-
-  name:"ROYAL ZOMBIE",
-
-  level:50,
-
-  head:"#ff2222",
-
-  body:"#9b0000"
-
- }
-
-];
-
-function renderSkins(){
-
- const grid =
-
-  document.getElementById("skinGrid");
-
- if(!grid)return;
-
- grid.innerHTML="";
-
- skinData.forEach(skin=>{
-
-  const unlocked =
-
-   playerLevel>=skin.level;
-
-  const div =
-
-   document.createElement("div");
-
-  div.className=
-
-   "skinCard "+
-
-   (unlocked ? "" : "locked");
-
-  div.innerHTML=`
-
-   <div class="skinPreview">
-
-    <div class="skinHead"
-
-     style="background:${skin.head}">
-
-    </div>
-
-    <div class="skinBody"
-
-     style="background:${skin.body}">
-
-    </div>
-
-   </div>
-
-   <div class="skinName">
-
-    ${skin.name}
-
-   </div>
-
-   <div class="skinRequirement">
-
-    ${
-
-     unlocked
-
-     ? "UNLOCKED"
-
-     : "LEVEL "+skin.level+" REQUIRED"
+      showMessage("ZOMBIE READY");
 
     }
 
-   </div>
+    startGame();
 
-   <button
-
-    class="skinSelect"
-
-    ${unlocked ? "" : "disabled"}
-
-    onclick="useSkin(${skin.id})">
-
-    ${
-
-     selectedSkin===skin.id
-
-     ? "EQUIPPED"
-
-     : unlocked
-
-     ? "EQUIP"
-
-     : "LOCKED"
-
-    }
-
-   </button>
-
-  `;
-
-  grid.appendChild(div);
-
- });
+  },350);
 
 }
 
-function useSkin(id){
+/* =====================================================
 
- const skin =
+   START GAME
 
-  skinData.find(s=>s.id===id);
+===================================================== */
 
- if(!skin)return;
+function startGame(){
 
- if(playerLevel<skin.level){
+  menu.style.display="none";
 
-  showMessage(
+  gameScreen.style.display="block";
 
-   "LEVEL "+skin.level+" REQUIRED"
+  setupPlayer();
 
-  );
+  setupSurvivors();
 
-  return;
+  gameRunning=true;
 
- }
-
- selectedSkin=id;
-
- saveProgress();
-
- renderSkins();
-
- showMessage(
-
-  skin.name+" EQUIPPED"
-
- );
+  requestAnimationFrame(gameLoop);
 
 }
 
-/* =========================================================
+/* =====================================================
 
-   APPLY SKIN
+   PLAYER SETUP
 
-========================================================= */
+===================================================== */
 
-function applySkin(){
+function setupPlayer(){
 
- const skin =
+  player.x=50;
 
-  skinData.find(s=>s.id===selectedSkin);
+  player.y=65;
 
- if(!skin){
+  player.maxHealth =
 
-  selectedSkin=0;
+    100 + upgrades.health*15;
 
-  return;
+  player.health =
 
- }
+    player.maxHealth;
 
- const head =
+  player.damage =
 
-  killerEl.querySelector(".killerHead");
+    40 + upgrades.damage*10;
 
- const body =
+  player.speed =
 
-  killerEl.querySelector(".killerBody");
+    .42 + upgrades.speed*.055;
 
- head.style.background=
+  if(selectedKiller===2)
 
-  skin.head;
+    player.speed+=.10;
 
- body.style.background=
+  if(selectedKiller===3){
 
-  skin.body;
+    player.maxHealth+=30;
 
- if(selectedKiller===3){
+    player.health=player.maxHealth;
 
-  killerEl.classList.add("zombie");
-
- }else{
-
-  killerEl.classList.remove("zombie");
-
- }
-
-}
-
-/* =========================================================
-
-   START HOUSE
-
-========================================================= */
-
-function startHouse(number){
-
- currentHouse=number;
-
- housePanel.style.display="none";
-
- gameScreen.style.display="block";
-
- setupKiller();
-
- setupHouse();
-
- gameRunning=true;
-
- startSurvivorTimer();
-
- requestAnimationFrame(gameLoop);
-
-}
-
-/* =========================================================
-
-   KILLER SETUP
-
-========================================================= */
-
-function setupKiller(){
-
- killer.x=50;
-
- killer.y=72;
-
- killer.maxHealth=
-
- 100+(upgrades.health*15);
-
- killer.health=
-
- killer.maxHealth;
-
- killer.damage=
-
- 40+(upgrades.damage*10);
-
- killer.speed=
-
- .7+(upgrades.speed*.08);
-
- killerEl.classList.remove("zombie");
-
- const head =
-
-  killerEl.querySelector(".killerHead");
-
- const body =
-
-  killerEl.querySelector(".killerBody");
-
- const weapon =
-
-  killerEl.querySelector(".killerWeapon");
-
- if(selectedKiller===1){
-
-  head.style.background="#8b6652";
-
-  body.style.background="#222";
-
-  weapon.style.background="#aaa";
-
- }
-
- if(selectedKiller===2){
-
-  killer.speed+=.18;
-
-  head.style.background="#b98b70";
-
-  body.style.background="#151515";
-
-  weapon.style.background="#bbb";
-
- }
-
- if(selectedKiller===3){
-
-  killer.maxHealth+=30;
-
-  killer.health=killer.maxHealth;
-
-  killer.damage+=5;
-
-  killer.speed-=.08;
-
-  killerEl.classList.add("zombie");
-
-  head.style.background="#d40000";
-
-  body.style.background="#a80000";
-
- }
-
- /* Apply equipped skin if appropriate */
-
- const skin =
-
-  skinData.find(s=>s.id===selectedSkin);
-
- if(
-
-  skin &&
-
-  skin.killer===selectedKiller &&
-
-  playerLevel>=skin.level
-
- ){
-
-  head.style.background=skin.head;
-
-  body.style.background=skin.body;
-
- }
-
- render();
-
-}
-
-/* =========================================================
-
-   HOUSE SETUP
-
-========================================================= */
-
-function setupHouse(){
-
- document.getElementById(
-
-  "houseInterior"
-
- ).style.display=
-
-  currentHouse===1
-
-  ? "block"
-
-  : "none";
-
- document.getElementById(
-
-  "outdoorMap"
-
- ).style.display=
-
-  currentHouse===3
-
-  ? "block"
-
-  : "none";
-
- killed=0;
-
- survivors=[];
-
- let positions;
-
- if(currentHouse===1){
-
-  positions=[
-
-   {x:25,y:38},
-
-   {x:76,y:37},
-
-   {x:24,y:78}
-
-  ];
-
- }
-
- else{
-
-  positions=[
-
-   {x:20,y:48},
-
-   {x:72,y:48},
-
-   {x:25,y:70},
-
-   {x:76,y:70}
-
-  ];
-
- }
-
- positions.forEach((p,i)=>{
-
-  survivors.push({
-
-   x:p.x,
-
-   y:p.y,
-
-   alive:true,
-
-   hidden:true,
-
-   moving:false,
-
-   discovered:false
-
-  });
-
-  const el =
-
-   document.getElementById(
-
-    "survivor"+(i+1)
-
-   );
-
-  if(el)
-
-   el.style.display="none";
-
- });
-
- updateObjective();
-
- render();
-
-}
-
-/* =========================================================
-
-   OUTDOOR DOORS
-
-========================================================= */
-
-function openOutdoorDoor(door,house){
-
- door.classList.toggle("open");
-
- if(door.classList.contains("open")){
-
-  showMessage(
-
-   "HOUSE "+house+" DOOR OPEN"
-
-  );
-
- }else{
-
-  showMessage(
-
-   "HOUSE "+house+" DOOR CLOSED"
-
-  );
-
- }
-
-}
-
-/* =========================================================
-
-   INTERIOR DOORS
-
-========================================================= */
-
-function toggleDoor(door){
-
- door.classList.toggle("open");
-
- showMessage(
-
-  door.classList.contains("open")
-
-  ? "DOOR OPEN"
-
-  : "DOOR CLOSED"
-
- );
-
-}
-
-/* =========================================================
-
-   RENDER
-
-========================================================= */
-
-function render(){
-
- killerEl.style.left=
-
-  `calc(${killer.x}% - 22px)`;
-
- killerEl.style.top=
-
-  `calc(${killer.y}% - 30px)`;
-
- survivors.forEach((s,i)=>{
-
-  const el =
-
-   document.getElementById(
-
-    "survivor"+(i+1)
-
-   );
-
-  if(!el)return;
-
-  if(!s.alive || s.hidden){
-
-   el.style.display="none";
-
-   return;
+    player.damage+=5;
 
   }
 
-  el.style.display="block";
+  applySkin();
 
-  el.style.left=
-
-   `calc(${s.x}% - 17px)`;
-
-  el.style.top=
-
-   `calc(${s.y}% - 24px)`;
-
-  if(s.moving)
-
-   el.classList.add("running");
-
-  else
-
-   el.classList.remove("running");
-
- });
-
- document.getElementById(
-
-  "health"
-
- ).innerText=
-
-  Math.max(
-
-   0,
-
-   Math.round(killer.health)
-
-  );
-
- document.getElementById(
-
-  "coins"
-
- ).innerText=coins;
-
- document.getElementById(
-
-  "hudLevel"
-
- ).innerText=playerLevel;
+  render();
 
 }
 
-/* =========================================================
+/* =====================================================
+
+   SKINS
+
+===================================================== */
+
+function applySkin(){
+
+  const head =
+
+    document.querySelector(".playerHead");
+
+  const body =
+
+    document.querySelector(".playerBody");
+
+  const eyes =
+
+    document.querySelectorAll(".playerEye");
+
+  if(equippedSkin==="green"){
+
+    head.style.background="#4f8f4f";
+
+    body.style.background =
+
+      "linear-gradient(90deg,#245326,#5eaa5b,#214c23)";
+
+    eyes.forEach(e=>{
+
+      e.style.background="#eaffea";
+
+      e.style.boxShadow="0 0 8px #9fff9f";
+
+    });
+
+  }else if(equippedSkin==="creator"){
+
+    head.style.background="#536a58";
+
+    body.style.background =
+
+      "linear-gradient(90deg,#18271d,#566b59,#1c2c20)";
+
+    eyes.forEach(e=>{
+
+      e.style.background="#fff";
+
+      e.style.boxShadow="0 0 9px #fff";
+
+    });
+
+  }else{
+
+    head.style.background="#59665a";
+
+    body.style.background =
+
+      "linear-gradient(90deg,#263027,#596555,#202820)";
+
+    eyes.forEach(e=>{
+
+      e.style.background="#f5f5e8";
+
+      e.style.boxShadow="0 0 5px #fff";
+
+    });
+
+  }
+
+}
+
+/* =====================================================
+
+   SURVIVORS
+
+===================================================== */
+
+function setupSurvivors(){
+
+  killed=0;
+
+  survivors=[];
+
+  const positions=[
+
+    {x:24,y:42,room:"bedroom"},
+
+    {x:74,y:43,room:"kitchen"},
+
+    {x:28,y:65,room:"living"},
+
+    {x:75,y:65,room:"bathroom"}
+
+  ];
+
+  positions.forEach((p,i)=>{
+
+    survivors.push({
+
+      x:p.x,
+
+      y:p.y,
+
+      room:p.room,
+
+      alive:true,
+
+      hidden:true,
+
+      moving:false
+
+    });
+
+    const el =
+
+      document.getElementById("survivor"+(i+1));
+
+    if(el)
+
+      el.style.display="none";
+
+  });
+
+  updateObjective();
+
+}
+
+/* =====================================================
+
+   ROOMS
+
+===================================================== */
+
+const roomNames={
+
+  bedroom:"BEDROOM",
+
+  hall:"HALLWAY",
+
+  kitchen:"KITCHEN",
+
+  living:"LIVING ROOM",
+
+  bathroom:"BATHROOM",
+
+  outdoor:"OUTDOOR"
+
+};
+
+function enterRoom(room){
+
+  if(!gameRunning)return;
+
+  currentRoom=room;
+
+  document
+
+    .querySelectorAll(".roomView")
+
+    .forEach(r=>r.classList.remove("active"));
+
+  document
+
+    .getElementById("room"+capitalize(room))
+
+    .classList.add("active");
+
+  document.getElementById("outdoor")
+
+    .style.display="none";
+
+  player.x=50;
+
+  player.y=68;
+
+  document.getElementById("roomName")
+
+    .innerText=roomNames[room];
+
+  render();
+
+  showMessage(
+
+    "ENTERED "+roomNames[room]
+
+  );
+
+}
+
+function enterOutdoor(){
+
+  if(!gameRunning)return;
+
+  currentRoom="outdoor";
+
+  document
+
+    .querySelectorAll(".roomView")
+
+    .forEach(r=>r.classList.remove("active"));
+
+  document.getElementById("outdoor")
+
+    .style.display="block";
+
+  player.x=50;
+
+  player.y=68;
+
+  document.getElementById("roomName")
+
+    .innerText="OUTDOOR";
+
+  render();
+
+  showMessage("OUTSIDE");
+
+}
+
+function capitalize(str){
+
+  return str.charAt(0).toUpperCase()+str.slice(1);
+
+}
+
+/* =====================================================
+
+   RENDER
+
+===================================================== */
+
+function render(){
+
+  playerEl.style.left=
+
+    `calc(${player.x}% - 26px)`;
+
+  playerEl.style.top=
+
+    `calc(${player.y}% - 36px)`;
+
+  survivors.forEach((s,i)=>{
+
+    const el =
+
+      document.getElementById("survivor"+(i+1));
+
+    if(!el)return;
+
+    if(
+
+      !s.alive ||
+
+      s.hidden ||
+
+      s.room!==currentRoom
+
+    ){
+
+      el.style.display="none";
+
+      return;
+
+    }
+
+    el.style.display="block";
+
+    el.style.left=
+
+      `calc(${s.x}% - 19px)`;
+
+    el.style.top=
+
+      `calc(${s.y}% - 25px)`;
+
+    if(s.moving)
+
+      el.classList.add("running");
+
+    else
+
+      el.classList.remove("running");
+
+  });
+
+  document.getElementById("health")
+
+    .innerText=Math.max(
+
+      0,
+
+      Math.round(player.health)
+
+    );
+
+  document.getElementById("coins")
+
+    .innerText=coins;
+
+  document.getElementById("level")
+
+    .innerText=getLevel();
+
+}
+
+/* =====================================================
 
    MOVEMENT
 
-========================================================= */
+===================================================== */
 
 function startMove(direction){
 
- if(!gameRunning)return;
+  if(!gameRunning)return;
 
- movement=direction;
+  movement=direction;
 
 }
 
 function stopMove(){
 
- movement=null;
+  movement=null;
 
 }
 
-function moveKiller(){
+function movePlayer(){
 
- if(!movement)return;
+  if(!movement || !gameRunning)return;
 
- const amount=
+  const amount=player.speed;
 
-  killer.speed;
+  if(movement==="up")
 
- if(movement==="up")
+    player.y-=amount;
 
-  killer.y-=amount;
+  if(movement==="down")
 
- if(movement==="down")
+    player.y+=amount;
 
-  killer.y+=amount;
+  if(movement==="left")
 
- if(movement==="left")
+    player.x-=amount;
 
-  killer.x-=amount;
+  if(movement==="right")
 
- if(movement==="right")
+    player.x+=amount;
 
-  killer.x+=amount;
+  player.x=Math.max(8,Math.min(92,player.x));
 
- killer.x=
-
-  Math.max(
-
-   5,
-
-   Math.min(95,killer.x)
-
-  );
-
- killer.y=
-
-  Math.max(
-
-   18,
-
-   Math.min(94,killer.y)
-
-  );
+  player.y=Math.max(18,Math.min(91,player.y));
 
 }
 
-/* =========================================================
+/* =====================================================
 
    SEARCH
 
-========================================================= */
+===================================================== */
 
 function search(){
 
- if(!gameRunning)return;
+  if(!gameRunning)return;
 
- let closest=null;
+  let target=null;
 
- let distance=Infinity;
+  let distance=Infinity;
 
- survivors.forEach(s=>{
+  survivors.forEach(s=>{
 
-  if(!s.alive)return;
+    if(
 
-  const dx=
+      !s.alive ||
 
-   killer.x-s.x;
+      s.room!==currentRoom
 
-  const dy=
+    )return;
 
-   killer.y-s.y;
+    const dx=player.x-s.x;
 
-  const d=
+    const dy=player.y-s.y;
 
-   Math.sqrt(
+    const d=Math.sqrt(dx*dx+dy*dy);
 
-    dx*dx+dy*dy
+    if(d<distance){
 
-   );
+      distance=d;
 
-  if(d<distance){
+      target=s;
 
-   distance=d;
+    }
 
-   closest=s;
+  });
+
+  const range=
+
+    18+upgrades.tracker*3;
+
+  if(target && distance<=range){
+
+    target.hidden=false;
+
+    target.moving=true;
+
+    showMessage("SURVIVOR FOUND!");
+
+    survivorEscape(target);
+
+    render();
+
+  }else{
+
+    showMessage("NOTHING HERE...");
 
   }
 
- });
-
- const range=
-
-  17+(upgrades.tracker*3);
-
- if(
-
-  closest &&
-
-  distance<=range
-
- ){
-
-  closest.hidden=false;
-
-  closest.discovered=true;
-
-  closest.moving=true;
-
-  showMessage(
-
-   "SURVIVOR FOUND!"
-
-  );
-
-  survivorEscape(closest);
-
-  render();
-
- }else{
-
-  showMessage(
-
-   "NOTHING HERE..."
-
-  );
-
- }
-
 }
 
-/* =========================================================
+/* =====================================================
 
    SURVIVOR ESCAPE
 
-========================================================= */
+===================================================== */
 
 function survivorEscape(s){
 
- if(!s.alive)return;
+  setTimeout(()=>{
 
- setTimeout(()=>{
+    if(!s.alive)return;
 
-  if(!s.alive)return;
+    const dx=s.x-player.x;
 
-  const dx=
+    const dy=s.y-player.y;
 
-   s.x-killer.x;
+    const d=
 
-  const dy=
+      Math.sqrt(dx*dx+dy*dy)||1;
 
-   s.y-killer.y;
+    s.x+=(dx/d)*7;
 
-  const d=
+    s.y+=(dy/d)*7;
 
-   Math.sqrt(dx*dx+dy*dy)||1;
+    s.x=Math.max(10,Math.min(90,s.x));
 
-  s.x+=
+    s.y=Math.max(20,Math.min(88,s.y));
 
-   (dx/d)*6;
+    render();
 
-  s.y+=
-
-   (dy/d)*6;
-
-  s.x=
-
-   Math.max(
-
-    8,
-
-    Math.min(92,s.x)
-
-   );
-
-  s.y=
-
-   Math.max(
-
-    20,
-
-    Math.min(92,s.y)
-
-   );
-
-  render();
-
- },350);
+  },350);
 
 }
 
-/* =========================================================
+/* =====================================================
 
    ATTACK
 
-========================================================= */
+===================================================== */
 
 function attack(){
 
- if(!gameRunning)return;
+  if(!gameRunning)return;
 
- let target=null;
+  let target=null;
 
- let distance=Infinity;
+  let distance=Infinity;
 
- survivors.forEach(s=>{
+  survivors.forEach(s=>{
 
-  if(!s.alive)return;
+    if(
 
-  if(s.hidden)return;
+      !s.alive ||
 
-  const dx=
+      s.hidden ||
 
-   killer.x-s.x;
+      s.room!==currentRoom
 
-  const dy=
+    )return;
 
-   killer.y-s.y;
+    const dx=player.x-s.x;
 
-  const d=
+    const dy=player.y-s.y;
 
-   Math.sqrt(
+    const d=Math.sqrt(dx*dx+dy*dy);
 
-    dx*dx+dy*dy
+    if(d<distance){
 
-   );
+      distance=d;
 
-  if(d<distance){
+      target=s;
 
-   distance=d;
+    }
 
-   target=s;
+  });
+
+  if(!target || distance>14){
+
+    showMessage(
+
+      "NO SURVIVOR IN RANGE"
+
+    );
+
+    return;
 
   }
 
- });
+  target.alive=false;
 
- if(
+  target.hidden=true;
 
-  !target ||
+  killed++;
 
-  distance>14
+  coins+=35;
 
- ){
+  addXP(25);
+
+  saveData();
 
   showMessage(
 
-   "NO SURVIVOR IN RANGE"
+    "SURVIVOR ELIMINATED  +35"
 
   );
 
-  return;
+  updateObjective();
 
- }
+  render();
 
- target.alive=false;
+  if(killed>=survivors.length){
 
- target.moving=false;
+    setTimeout(
 
- killed++;
+      completeHouse,
 
- coins+=35;
+      600
 
- addXP(25);
+    );
 
- saveAll();
-
- showMessage(
-
-  "SURVIVOR ELIMINATED +35"
-
- );
-
- updateObjective();
-
- render();
-
- if(
-
-  killed>=survivors.length
-
- ){
-
-  setTimeout(
-
-   completeHouse,
-
-   500
-
-  );
-
- }
+  }
 
 }
 
-/* =========================================================
+/* =====================================================
 
    SURVIVORS FIGHT BACK
 
-========================================================= */
+===================================================== */
 
 let lastSurvivorAttack=0;
 
 function survivorAttackLoop(time){
 
- if(!gameRunning)return;
+  if(
 
- survivors.forEach(s=>{
+    !gameRunning ||
 
-  if(!s.alive)return;
+    time-lastSurvivorAttack<800
 
-  if(s.hidden)return;
-
-  const dx=
-
-   killer.x-s.x;
-
-  const dy=
-
-   killer.y-s.y;
-
-  const distance=
-
-   Math.sqrt(
-
-    dx*dx+dy*dy
-
-   );
-
-  if(distance<9){
-
-   damageKiller(5);
-
-  }
-
- });
-
-}
-
-/* =========================================================
-
-   SURVIVOR TIMER
-
-========================================================= */
-
-function startSurvivorTimer(){
-
- clearInterval(survivorTimer);
-
- survivorTime=
-
-  currentHouse===3
-
-  ? 75
-
-  : 60;
-
- const timerBox =
-
-  document.getElementById(
-
-   "survivorTimer"
-
-  );
-
- timerBox.style.display="block";
-
- document.getElementById(
-
-  "timerValue"
-
- ).innerText=
-
-  survivorTime;
-
- survivorTimer=
-
-  setInterval(()=>{
-
-   if(!gameRunning)return;
-
-   survivorTime--;
-
-   document.getElementById(
-
-    "timerValue"
-
-   ).innerText=
-
-    survivorTime;
-
-   if(survivorTime<=10){
-
-    timerBox.style.borderColor="#c22";
-
-   }
-
-   if(survivorTime<=0){
-
-    clearInterval(survivorTimer);
-
-    survivorsEscapeWin();
-
-   }
-
-  },1000);
-
-}
-
-/* =========================================================
-
-   SURVIVORS ESCAPE
-
-========================================================= */
-
-function survivorsEscapeWin(){
-
- if(!gameRunning)return;
-
- gameRunning=false;
-
- clearInterval(survivorTimer);
-
- document.getElementById(
-
-  "survivorTimer"
-
- ).style.display="none";
-
- document.getElementById(
-
-  "lossScreen"
-
- ).style.display="flex";
-
-}
-
-/* =========================================================
-
-   OBJECTIVE
-
-========================================================= */
-
-function updateObjective(){
-
- document.getElementById(
-
-  "objective"
-
- ).innerText=
-
- `FIND AND ELIMINATE SURVIVORS — ${killed} / ${survivors.length}`;
-
-}
-
-/* =========================================================
-
-   DAMAGE
-
-========================================================= */
-
-function damageKiller(amount){
-
- if(!gameRunning)return;
-
- killer.health-=amount;
-
- if(killer.health<=0){
-
-  killer.health=0;
-
-  gameRunning=false;
-
-  clearInterval(
-
-   survivorTimer
-
-  );
-
-  document.getElementById(
-
-   "deathScreen"
-
-  ).style.display="flex";
-
- }
-
- render();
-
-}
-
-/* =========================================================
-
-   COMPLETE HOUSE
-
-========================================================= */
-
-function completeHouse(){
-
- if(!gameRunning)return;
-
- gameRunning=false;
-
- clearInterval(
-
-  survivorTimer
-
- );
-
- document.getElementById(
-
-  "survivorTimer"
-
- ).style.display="none";
-
- const reward=
-
-  currentHouse===1
-
-  ? 100
-
-  : 175;
-
- coins+=reward;
-
- addXP(
-
-  currentHouse===1
-
-  ? 50
-
-  : 75
-
- );
-
- saveAll();
-
- document.getElementById(
-
-  "completeText"
-
- ).innerHTML=
-
- `
-
- Every survivor was eliminated!
-
- <br><br>
-
- 🪙 +${reward} BONUS
-
- <br>
-
- ⭐ XP EARNED
-
- `;
-
- document.getElementById(
-
-  "completeScreen"
-
- ).style.display="flex";
-
-}
-
-/* =========================================================
-
-   NEXT HOUSE
-
-========================================================= */
-
-function nextHouse(){
-
- document.getElementById(
-
-  "completeScreen"
-
- ).style.display="none";
-
- if(currentHouse===1){
-
-  currentHouse=3;
-
-  setupKiller();
-
-  setupHouse();
-
-  gameRunning=true;
-
-  startSurvivorTimer();
-
-  showMessage(
-
-   "OUTSKIRTS — NEW MAP"
-
-  );
-
-  requestAnimationFrame(
-
-   gameLoop
-
-  );
-
- }else{
-
-  addXP(100);
-
-  document.getElementById(
-
-   "winScreen"
-
-  ).style.display="flex";
-
- }
-
-}
-
-/* =========================================================
-
-   RESTART
-
-========================================================= */
-
-function restartHouse(){
-
- document.getElementById(
-
-  "deathScreen"
-
- ).style.display="none";
-
- document.getElementById(
-
-  "lossScreen"
-
- ).style.display="none";
-
- setupKiller();
-
- setupHouse();
-
- gameRunning=true;
-
- startSurvivorTimer();
-
- requestAnimationFrame(
-
-  gameLoop
-
- );
-
-}
-
-/* =========================================================
-
-   SHOP
-
-========================================================= */
-
-function buyUpgrade(type){
-
- const prices={
-
-  speed:100,
-
-  damage:125,
-
-  tracker:150,
-
-  health:175
-
- };
-
- const cost=
-
-  prices[type];
-
- if(coins<cost){
-
-  showMessage(
-
-   "NOT ENOUGH COINS"
-
-  );
-
-  return;
-
- }
-
- coins-=cost;
-
- upgrades[type]++;
-
- localStorage.setItem(
-
-  "h13"+type,
-
-  upgrades[type]
-
- );
-
- saveAll();
-
- updateShop();
-
- showMessage(
-
-  "UPGRADE PURCHASED!"
-
- );
-
-}
-
-function updateShop(){
-
- const shopCoins =
-
-  document.getElementById(
-
-   "shopCoins"
-
-  );
-
- if(shopCoins)
-
-  shopCoins.innerText=coins;
-
-}
-
-/* =========================================================
-
-   SAVE EVERYTHING
-
-========================================================= */
-
-function saveAll(){
-
- /* OLD ECONOMY KEY */
-
- localStorage.setItem(
-
-  "h13coins",
-
-  coins
-
- );
-
- /* ALSO NEW VERSION KEY */
-
- localStorage.setItem(
-
-  "h14coins",
-
-  coins
-
- );
-
- localStorage.setItem(
-
-  "h13speed",
-
-  upgrades.speed
-
- );
-
- localStorage.setItem(
-
-  "h13damage",
-
-  upgrades.damage
-
- );
-
- localStorage.setItem(
-
-  "h13tracker",
-
-  upgrades.tracker
-
- );
-
- localStorage.setItem(
-
-  "h13health",
-
-  upgrades.health
-
- );
-
- saveProgress();
-
-}
-
-/* =========================================================
-
-   GAME LOOP
-
-========================================================= */
-
-function gameLoop(time){
-
- if(!gameRunning)return;
-
- moveKiller();
-
- if(
-
-  time-lastSurvivorAttack>700
-
- ){
-
-  survivorAttackLoop(time);
+  )return;
 
   lastSurvivorAttack=time;
 
- }
+  survivors.forEach(s=>{
 
- render();
+    if(
 
- requestAnimationFrame(
+      !s.alive ||
 
-  gameLoop
+      s.hidden ||
 
- );
+      s.room!==currentRoom
+
+    )return;
+
+    const dx=player.x-s.x;
+
+    const dy=player.y-s.y;
+
+    const d=Math.sqrt(dx*dx+dy*dy);
+
+    if(d<10){
+
+      player.health-=5;
+
+      showMessage("SURVIVOR ATTACKED YOU!");
+
+      if(player.health<=0){
+
+        player.health=0;
+
+        gameRunning=false;
+
+        document.getElementById(
+
+          "deathScreen"
+
+        ).style.display="flex";
+
+      }
+
+    }
+
+  });
 
 }
 
-/* =========================================================
+/* =====================================================
+
+   OBJECTIVE
+
+===================================================== */
+
+function updateObjective(){
+
+  document.getElementById("objective")
+
+    .innerText=
+
+      `FIND AND ELIMINATE SURVIVORS — ${killed} / ${survivors.length}`;
+
+}
+
+/* =====================================================
+
+   LEVEL SYSTEM
+
+===================================================== */
+
+function getLevel(){
+
+  return Math.min(
+
+    50,
+
+    Math.floor(xp/100)+1
+
+  );
+
+}
+
+function addXP(amount){
+
+  const before=getLevel();
+
+  xp+=amount;
+
+  if(xp>4900)
+
+    xp=4900;
+
+  const after=getLevel();
+
+  saveData();
+
+  if(after>before){
+
+    showMessage(
+
+      "LEVEL UP! LEVEL "+after
+
+    );
+
+  }
+
+}
+
+/* =====================================================
+
+   COMPLETE
+
+===================================================== */
+
+function completeHouse(){
+
+  if(!gameRunning)return;
+
+  gameRunning=false;
+
+  const reward=150;
+
+  coins+=reward;
+
+  addXP(50);
+
+  saveData();
+
+  document.getElementById(
+
+    "completeText"
+
+  ).innerHTML=
+
+    `House cleared.<br><br>
+
+     🪙 +${reward} BONUS<br>
+
+     ⭐ +50 XP`;
+
+  document.getElementById(
+
+    "completeScreen"
+
+  ).style.display="flex";
+
+}
+
+/* =====================================================
+
+   NEXT HOUSE
+
+===================================================== */
+
+function nextHouse(){
+
+  document.getElementById(
+
+    "completeScreen"
+
+  ).style.display="none";
+
+  if(currentRoom==="outdoor"){
+
+    enterRoom("bedroom");
+
+  }else{
+
+    enterOutdoor();
+
+  }
+
+  setupPlayer();
+
+  setupSurvivors();
+
+  gameRunning=true;
+
+  requestAnimationFrame(gameLoop);
+
+}
+
+/* =====================================================
+
+   DEATH
+
+===================================================== */
+
+function restartHouse(){
+
+  document.getElementById(
+
+    "deathScreen"
+
+  ).style.display="none";
+
+  setupPlayer();
+
+  setupSurvivors();
+
+  gameRunning=true;
+
+  requestAnimationFrame(gameLoop);
+
+}
+
+/* =====================================================
+
+   SHOP
+
+===================================================== */
+
+function buyUpgrade(type){
+
+  const prices={
+
+    speed:100,
+
+    damage:125,
+
+    tracker:150,
+
+    health:175
+
+  };
+
+  const cost=prices[type];
+
+  if(coins<cost){
+
+    showMessage("NOT ENOUGH COINS");
+
+    return;
+
+  }
+
+  coins-=cost;
+
+  upgrades[type]++;
+
+  saveData();
+
+  updateShop();
+
+  showMessage("UPGRADE PURCHASED!");
+
+}
+
+/* =====================================================
+
+   GREEN ZOMBIE LIMITED EVENT
+
+===================================================== */
+
+/*
+
+  The shop timer is based on the current date.
+
+  The purchase remains permanent after buying.
+
+  Change EVENT_START to the actual date/time
+
+  when the event goes live.
+
+*/
+
+const EVENT_START =
+
+  new Date("2026-08-17T00:00:00");
+
+const EVENT_END =
+
+  new Date("2026-08-20T00:00:00");
+
+function greenEventActive(){
+
+  const now=new Date();
+
+  return (
+
+    now>=EVENT_START &&
+
+    now<EVENT_END
+
+  );
+
+}
+
+function updateGreenTimer(){
+
+  const timer=
+
+    document.getElementById("greenTimer");
+
+  const button=
+
+    document.getElementById(
+
+      "greenSkinButton"
+
+    );
+
+  if(ownedGreen){
+
+    timer.innerText="OWNED PERMANENTLY";
+
+    button.innerText=
+
+      equippedSkin==="green"
+
+      ? "EQUIPPED"
+
+      : "EQUIP";
+
+    return;
+
+  }
+
+  if(!greenEventActive()){
+
+    timer.innerText="EVENT ENDED";
+
+    button.innerText="UNAVAILABLE";
+
+    button.disabled=true;
+
+    return;
+
+  }
+
+  const now=new Date();
+
+  const diff=EVENT_END-now;
+
+  const days=Math.floor(
+
+    diff/86400000
+
+  );
+
+  const hours=Math.floor(
+
+    (diff%86400000)/3600000
+
+  );
+
+  const minutes=Math.floor(
+
+    (diff%3600000)/60000
+
+  );
+
+  timer.innerText=
+
+    `${days}d ${hours}h ${minutes}m LEFT`;
+
+  button.disabled=false;
+
+}
+
+function buyGreenSkin(){
+
+  if(ownedGreen){
+
+    equippedSkin="green";
+
+    saveData();
+
+    applySkin();
+
+    showMessage(
+
+      "GREEN ZOMBIE EQUIPPED"
+
+    );
+
+    updateShop();
+
+    return;
+
+  }
+
+  if(!greenEventActive()){
+
+    showMessage("EVENT ENDED");
+
+    return;
+
+  }
+
+  if(coins<3000){
+
+    showMessage(
+
+      "YOU NEED 3,000 COINS"
+
+    );
+
+    return;
+
+  }
+
+  coins-=3000;
+
+  ownedGreen=true;
+
+  equippedSkin="green";
+
+  saveData();
+
+  applySkin();
+
+  updateShop();
+
+  showMessage(
+
+    "GREEN ZOMBIE UNLOCKED!"
+
+  );
+
+}
+
+/* =====================================================
+
+   CREATOR CODE
+
+===================================================== */
+
+/*
+
+  CREATOR CODE:
+
+  HOFH-FOUNDER-15
+
+  This is intentionally a client-side prototype system.
+
+  It is NOT secure against someone inspecting the HTML.
+
+*/
+
+const CREATOR_CODE =
+
+  "HOFH-FOUNDER-15";
+
+function redeemCreatorCode(){
+
+  const input=
+
+    document.getElementById(
+
+      "creatorCode"
+
+    );
+
+  const status=
+
+    document.getElementById(
+
+      "creatorStatus"
+
+    );
+
+  const code=
+
+    input.value.trim().toUpperCase();
+
+  if(code===CREATOR_CODE){
+
+    ownedCreator=true;
+
+    equippedSkin="creator";
+
+    saveData();
+
+    applySkin();
+
+    status.innerText=
+
+      "👑 CREATOR SKIN UNLOCKED";
+
+    status.style.color="#d5b55e";
+
+    showMessage(
+
+      "CREATOR SKIN UNLOCKED!"
+
+    );
+
+  }else{
+
+    status.innerText=
+
+      "INVALID CREATOR CODE";
+
+    status.style.color="#a66";
+
+  }
+
+}
+
+function updateCreatorPanel(){
+
+  const status=
+
+    document.getElementById(
+
+      "creatorStatus"
+
+    );
+
+  if(ownedCreator){
+
+    status.innerText=
+
+      equippedSkin==="creator"
+
+      ? "👑 CREATOR SKIN EQUIPPED"
+
+      : "👑 CREATOR SKIN OWNED";
+
+  }
+
+}
+
+/* =====================================================
+
+   SKIN EQUIP
+
+===================================================== */
+
+function equipSkin(skin){
+
+  if(
+
+    skin==="green" &&
+
+    !ownedGreen
+
+  )return;
+
+  if(
+
+    skin==="creator" &&
+
+    !ownedCreator
+
+  )return;
+
+  equippedSkin=skin;
+
+  saveData();
+
+  applySkin();
+
+}
+
+/* =====================================================
+
+   SAVE
+
+===================================================== */
+
+function saveData(){
+
+  localStorage.setItem(
+
+    "h15coins",
+
+    coins
+
+  );
+
+  localStorage.setItem(
+
+    "h15xp",
+
+    xp
+
+  );
+
+  Object.keys(upgrades).forEach(type=>{
+
+    localStorage.setItem(
+
+      "h15"+type,
+
+      upgrades[type]
+
+    );
+
+  });
+
+  localStorage.setItem(
+
+    "h15green",
+
+    ownedGreen
+
+  );
+
+  localStorage.setItem(
+
+    "h15creator",
+
+    ownedCreator
+
+  );
+
+  localStorage.setItem(
+
+    "h15skin",
+
+    equippedSkin
+
+  );
+
+}
+
+/* =====================================================
+
+   SHOP UPDATE
+
+===================================================== */
+
+function updateShop(){
+
+  document.getElementById(
+
+    "shopCoins"
+
+  ).innerText=coins;
+
+  updateGreenTimer();
+
+}
+
+/* =====================================================
+
+   GAME LOOP
+
+===================================================== */
+
+function gameLoop(time){
+
+  if(!gameRunning)return;
+
+  movePlayer();
+
+  survivorAttackLoop(time);
+
+  render();
+
+  requestAnimationFrame(
+
+    gameLoop
+
+  );
+
+}
+
+/* =====================================================
 
    MESSAGE
 
-========================================================= */
+===================================================== */
+
+let messageTimer;
 
 function showMessage(text){
 
- messageEl.innerText=text;
+  messageEl.innerText=text;
 
- messageEl.classList.add("show");
+  messageEl.classList.add("show");
 
- clearTimeout(messageTimer);
+  clearTimeout(messageTimer);
 
- messageTimer=
+  messageTimer=setTimeout(()=>{
 
-  setTimeout(()=>{
-
-   messageEl.classList.remove(
-
-    "show"
-
-   );
+    messageEl.classList.remove("show");
 
   },1700);
 
 }
 
-/* =========================================================
+/* =====================================================
 
-   RETURN MENU
+   MENU
 
-========================================================= */
+===================================================== */
 
 function returnMenu(){
 
- gameRunning=false;
+  gameRunning=false;
 
- movement=null;
+  movement=null;
 
- clearInterval(
+  document.getElementById(
 
-  survivorTimer
+    "completeScreen"
 
- );
+  ).style.display="none";
 
- document.getElementById(
+  document.getElementById(
 
-  "completeScreen"
+    "deathScreen"
 
- ).style.display="none";
+  ).style.display="none";
 
- document.getElementById(
+  gameScreen.style.display="none";
 
-  "deathScreen"
+  killerPanel.style.display="none";
 
- ).style.display="none";
+  shopPanel.style.display="none";
 
- document.getElementById(
+  creatorPanel.style.display="none";
 
-  "lossScreen"
-
- ).style.display="none";
-
- document.getElementById(
-
-  "winScreen"
-
- ).style.display="none";
-
- document.getElementById(
-
-  "survivorTimer"
-
- ).style.display="none";
-
- gameScreen.style.display="none";
-
- killerPanel.style.display="none";
-
- housePanel.style.display="none";
-
- shopPanel.style.display="none";
-
- levelPanel.style.display="none";
-
- menu.style.display="block";
+  menu.style.display="block";
 
 }
 
-/* =========================================================
+/* =====================================================
 
    KEYBOARD
 
-========================================================= */
+===================================================== */
 
 document.addEventListener(
 
- "keydown",
+  "keydown",
 
- e=>{
+  e=>{
 
-  const key=
+    const key=e.key.toLowerCase();
 
-   e.key.toLowerCase();
+    if(
 
-  if(
+      e.key==="ArrowUp" ||
 
-   e.key==="ArrowUp" ||
+      key==="w"
 
-   key==="w"
+    )
 
-  )
+      startMove("up");
 
-   startMove("up");
+    if(
 
-  if(
+      e.key==="ArrowDown" ||
 
-   e.key==="ArrowDown" ||
+      key==="s"
 
-   key==="s"
+    )
 
-  )
+      startMove("down");
 
-   startMove("down");
+    if(
 
-  if(
+      e.key==="ArrowLeft" ||
 
-   e.key==="ArrowLeft" ||
+      key==="a"
 
-   key==="a"
+    )
 
-  )
+      startMove("left");
 
-   startMove("left");
+    if(
 
-  if(
+      e.key==="ArrowRight" ||
 
-   e.key==="ArrowRight" ||
+      key==="d"
 
-   key==="d"
+    )
 
-  )
+      startMove("right");
 
-   startMove("right");
+    if(
 
-  if(
+      e.key===" " ||
 
-   e.key===" " ||
+      key==="f"
 
-   key==="f"
+    )
 
-  )
+      attack();
 
-   attack();
+    if(key==="e")
 
-  if(key==="e")
-
-   search();
-
- }
-
-);
-
-document.addEventListener(
-
- "keyup",
-
- e=>{
-
-  const key=
-
-   e.key.toLowerCase();
-
-  if(
-
-   e.key==="ArrowUp" ||
-
-   e.key==="ArrowDown" ||
-
-   e.key==="ArrowLeft" ||
-
-   e.key==="ArrowRight" ||
-
-   ["w","a","s","d"].includes(key)
-
-  ){
-
-   stopMove();
+      search();
 
   }
 
- }
+);
+
+document.addEventListener(
+
+  "keyup",
+
+  e=>{
+
+    const key=e.key.toLowerCase();
+
+    if(
+
+      e.key==="ArrowUp" ||
+
+      e.key==="ArrowDown" ||
+
+      e.key==="ArrowLeft" ||
+
+      e.key==="ArrowRight" ||
+
+      ["w","a","s","d"].includes(key)
+
+    ){
+
+      stopMove();
+
+    }
+
+  }
 
 );
 
-/* =========================================================
+/* =====================================================
 
-   MOBILE CONTROL SAFETY
+   MOBILE SAFETY
 
-========================================================= */
+===================================================== */
 
 document.querySelectorAll(
 
- ".ctrl"
+  ".ctrl"
 
 ).forEach(button=>{
 
- button.addEventListener(
+  button.addEventListener(
 
-  "pointercancel",
+    "pointercancel",
 
-  stopMove
+    stopMove
 
- );
+  );
 
- button.addEventListener(
+  button.addEventListener(
 
-  "pointerleave",
+    "pointerleave",
 
-  stopMove
+    stopMove
 
- );
+  );
 
 });
 
-/* =========================================================
+/* =====================================================
 
    INITIALIZE
 
-========================================================= */
+===================================================== */
+
+document.getElementById("outdoor")
+
+  .style.display="none";
+
+document.getElementById("roomBedroom")
+
+  .classList.add("active");
 
 updateShop();
-
-updateLevelScreen();
 
 render();
 
@@ -5413,2482 +4425,3 @@ render();
 </body>
 
 </html>
-<!-- =========================================================
-
-     HOUSES OF HORROR 1.4 — PART 2
-
-     REDEMPTION ADD-ON
-
-========================================================= -->
-
-<style>
-
-/* ================= PART 2 MENU BACKGROUND ================= */
-
-#menu{
-
-    background:
-
-        radial-gradient(circle at 50% 35%,rgba(80,120,85,.22),transparent 28%),
-
-        linear-gradient(#07100a,#020403 82%);
-
-}
-
-#menu:after{
-
-    content:"1.4 — REDEMPTION • PART 2";
-
-    position:absolute;
-
-    top:3%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:#829783;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    opacity:.75;
-
-    z-index:25;
-
-}
-
-/* ================= ROOM SYSTEM ================= */
-
-#roomTransition{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:800;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#020302;
-
-    color:white;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-
-    font-size:18px;
-
-}
-
-#roomView{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:70;
-
-    display:none;
-
-    overflow:hidden;
-
-    background:#25241f;
-
-}
-
-/* ROOM BACKGROUNDS */
-
-.roomInterior{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-}
-
-.roomWall{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:0;
-
-    height:55%;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            rgba(0,0,0,.2),
-
-            transparent 25%,
-
-            rgba(0,0,0,.18)
-
-        ),
-
-        #5a5549;
-
-    border-bottom:12px solid #292721;
-
-}
-
-.roomFloor{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:55%;
-
-    bottom:0;
-
-    background:
-
-        repeating-linear-gradient(
-
-            90deg,
-
-            #51473b 0 55px,
-
-            #443a31 56px 110px
-
-        );
-
-}
-
-.roomCeiling{
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    right:0;
-
-    height:12%;
-
-    background:#24231f;
-
-    border-bottom:4px solid #111;
-
-}
-
-/* ROOM TYPES */
-
-.roomBedroom .roomWall{
-
-    background:
-
-        linear-gradient(#565b50,#484d44);
-
-}
-
-.roomKitchen .roomWall{
-
-    background:
-
-        linear-gradient(#777268,#625e55);
-
-}
-
-.roomBathroom .roomWall{
-
-    background:
-
-        repeating-linear-gradient(
-
-            90deg,
-
-            #777a75 0 38px,
-
-            #686b66 39px 40px
-
-        );
-
-}
-
-.roomLiving .roomWall{
-
-    background:
-
-        linear-gradient(#5a544b,#454139);
-
-}
-
-.roomStorage .roomWall{
-
-    background:#454039;
-
-}
-
-/* ROOM TITLE */
-
-.roomTitle{
-
-    position:absolute;
-
-    top:17%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:10;
-
-    padding:7px 13px;
-
-    background:rgba(0,0,0,.55);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-}
-
-/* BED */
-
-.roomBed{
-
-    position:absolute;
-
-    left:9%;
-
-    bottom:16%;
-
-    width:48%;
-
-    height:30%;
-
-    background:#28251f;
-
-    border:6px solid #15130f;
-
-    border-radius:5px;
-
-}
-
-.roomBed .blanket{
-
-    position:absolute;
-
-    inset:18px 8px 8px;
-
-    background:linear-gradient(90deg,#45433e,#302e2a);
-
-}
-
-.roomBed .pillow{
-
-    position:absolute;
-
-    top:7px;
-
-    left:8px;
-
-    width:35%;
-
-    height:25%;
-
-    background:#aaa49a;
-
-    border-radius:5px;
-
-}
-
-/* KITCHEN COUNTER */
-
-.kitchenCounter{
-
-    position:absolute;
-
-    left:7%;
-
-    right:7%;
-
-    bottom:17%;
-
-    height:24%;
-
-    background:#302b24;
-
-    border:6px solid #171510;
-
-}
-
-.kitchenCabinet{
-
-    position:absolute;
-
-    bottom:5%;
-
-    width:21%;
-
-    height:70%;
-
-    background:#49382a;
-
-    border:4px solid #19140f;
-
-}
-
-.kitchenCabinet.a{left:8%}
-
-.kitchenCabinet.b{left:31%}
-
-.kitchenCabinet.c{right:8%}
-
-/* SINK */
-
-.sink{
-
-    position:absolute;
-
-    left:42%;
-
-    bottom:29%;
-
-    width:18%;
-
-    height:9%;
-
-    border:4px solid #222;
-
-    background:#9c9b95;
-
-    border-radius:4px;
-
-}
-
-/* BATHROOM */
-
-.bathTub{
-
-    position:absolute;
-
-    left:9%;
-
-    bottom:17%;
-
-    width:48%;
-
-    height:25%;
-
-    background:#aaa9a3;
-
-    border:6px solid #37352f;
-
-    border-radius:20px;
-
-}
-
-.bathToilet{
-
-    position:absolute;
-
-    right:12%;
-
-    bottom:20%;
-
-    width:22%;
-
-    height:26%;
-
-    background:#b8b6af;
-
-    border:5px solid #37352f;
-
-    border-radius:35%;
-
-}
-
-.bathMirror{
-
-    position:absolute;
-
-    right:15%;
-
-    top:22%;
-
-    width:22%;
-
-    height:20%;
-
-    background:#8e9996;
-
-    border:5px solid #292a27;
-
-}
-
-/* LIVING ROOM */
-
-.sofa{
-
-    position:absolute;
-
-    left:10%;
-
-    bottom:17%;
-
-    width:58%;
-
-    height:25%;
-
-    background:#37332d;
-
-    border:6px solid #181612;
-
-    border-radius:12px 12px 5px 5px;
-
-}
-
-.coffeeTable{
-
-    position:absolute;
-
-    right:12%;
-
-    bottom:18%;
-
-    width:23%;
-
-    height:12%;
-
-    background:#30261d;
-
-    border:5px solid #17110d;
-
-}
-
-/* STORAGE */
-
-.storageShelf{
-
-    position:absolute;
-
-    left:12%;
-
-    right:12%;
-
-    bottom:15%;
-
-    height:55%;
-
-    border:7px solid #171410;
-
-    background:#302920;
-
-}
-
-.storageShelf:before,
-
-.storageShelf:after{
-
-    content:"";
-
-    position:absolute;
-
-    left:5%;
-
-    right:5%;
-
-    height:5px;
-
-    background:#111;
-
-}
-
-.storageShelf:before{top:33%}
-
-.storageShelf:after{top:66%}
-
-/* ================= DOORS ================= */
-
-.roomDoor{
-
-    position:absolute;
-
-    z-index:30;
-
-    bottom:0;
-
-    width:90px;
-
-    height:43%;
-
-    background:#302219;
-
-    border:7px solid #12100d;
-
-    box-shadow:0 0 20px rgba(0,0,0,.5);
-
-}
-
-.roomDoor.left{
-
-    left:6%;
-
-}
-
-.roomDoor.right{
-
-    right:6%;
-
-}
-
-.roomDoor:after{
-
-    content:"";
-
-    position:absolute;
-
-    right:13%;
-
-    top:51%;
-
-    width:7px;
-
-    height:7px;
-
-    border-radius:50%;
-
-    background:#b39a5c;
-
-}
-
-.roomDoor span{
-
-    position:absolute;
-
-    top:-28px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    white-space:nowrap;
-
-    color:#bbb;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-}
-
-/* ================= OUTDOOR MAP ================= */
-
-#outdoorMap{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:40;
-
-    display:none;
-
-    overflow:hidden;
-
-    background:
-
-        linear-gradient(
-
-            #18271c 0 38%,
-
-            #33472d 38% 100%
-
-        );
-
-}
-
-.outdoorSky{
-
-    position:absolute;
-
-    inset:0 0 62%;
-
-    background:
-
-        radial-gradient(circle at 72% 28%,#a3aaa0 0 6%,transparent 7%),
-
-        linear-gradient(#101b14,#263b2b);
-
-}
-
-.grass{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:38%;
-
-    bottom:0;
-
-    background:
-
-        repeating-linear-gradient(
-
-            110deg,
-
-            rgba(30,55,31,.5) 0 3px,
-
-            transparent 4px 14px
-
-        ),
-
-        #334a2d;
-
-}
-
-.outdoorPath{
-
-    position:absolute;
-
-    left:42%;
-
-    top:38%;
-
-    width:25%;
-
-    height:62%;
-
-    background:#71614c;
-
-    transform:skewX(-9deg);
-
-}
-
-.outdoorTree{
-
-    position:absolute;
-
-    width:70px;
-
-    height:130px;
-
-}
-
-.outdoorTree:before{
-
-    content:"";
-
-    position:absolute;
-
-    bottom:0;
-
-    left:30px;
-
-    width:14px;
-
-    height:65%;
-
-    background:#382b20;
-
-}
-
-.outdoorTree:after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:5px;
-
-    width:65px;
-
-    height:65px;
-
-    border-radius:50%;
-
-    background:#1d321f;
-
-    box-shadow:
-
-        25px 18px 0 #243b25,
-
-        -15px 25px 0 #263e27;
-
-}
-
-.tree1{left:5%;top:40%}
-
-.tree2{right:5%;top:47%}
-
-.tree3{left:22%;top:70%}
-
-.outdoorHouse{
-
-    position:absolute;
-
-    right:14%;
-
-    top:20%;
-
-    width:30%;
-
-    height:23%;
-
-    background:#35342e;
-
-    border:5px solid #171814;
-
-}
-
-.outdoorHouse:before{
-
-    content:"";
-
-    position:absolute;
-
-    left:-8%;
-
-    top:-55%;
-
-    width:116%;
-
-    height:70%;
-
-    background:#1d211d;
-
-    clip-path:polygon(50% 0,100% 100%,0 100%);
-
-}
-
-.outdoorHouse:after{
-
-    content:"";
-
-    position:absolute;
-
-    left:40%;
-
-    bottom:0;
-
-    width:20%;
-
-    height:55%;
-
-    background:#181714;
-
-}
-
-/* ================= MOVEMENT REVAMP ================= */
-
-#movePad{
-
-    position:absolute;
-
-    z-index:160;
-
-    bottom:20px;
-
-    left:18px;
-
-    width:145px;
-
-    height:145px;
-
-    border-radius:50%;
-
-    background:rgba(0,0,0,.45);
-
-    border:2px solid rgba(255,255,255,.22);
-
-    touch-action:none;
-
-}
-
-#moveKnob{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    width:60px;
-
-    height:60px;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.18);
-
-    border:2px solid rgba(255,255,255,.35);
-
-}
-
-#movePadLabel{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    font-size:8px;
-
-    color:#aaa;
-
-    pointer-events:none;
-
-}
-
-/* Hide old directional buttons */
-
-#controls .controlCluster:first-child{
-
-    display:none;
-
-}
-
-/* ================= GREEN ZOMBIE SHOP ================= */
-
-.greenZombieShop{
-
-    grid-column:1 / -1;
-
-    border:2px solid #405943;
-
-    background:
-
-        radial-gradient(circle at center,rgba(75,120,70,.2),transparent 60%),
-
-        linear-gradient(#222a22,#101410);
-
-}
-
-.greenZombieVisual{
-
-    margin:auto;
-
-    width:65px;
-
-    height:85px;
-
-    position:relative;
-
-}
-
-.greenZombieHead{
-
-    position:absolute;
-
-    left:15px;
-
-    top:0;
-
-    width:35px;
-
-    height:38px;
-
-    border-radius:50%;
-
-    background:#4c8a48;
-
-    border:3px solid #182218;
-
-}
-
-.greenZombieEye{
-
-    position:absolute;
-
-    top:14px;
-
-    width:6px;
-
-    height:6px;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    box-shadow:0 0 7px rgba(255,255,255,.7);
-
-}
-
-.greenZombieEye.a{left:8px}
-
-.greenZombieEye.b{right:8px}
-
-.greenZombieBody{
-
-    position:absolute;
-
-    left:10px;
-
-    top:34px;
-
-    width:45px;
-
-    height:50px;
-
-    border-radius:9px;
-
-    background:#41753e;
-
-    border:3px solid #182218;
-
-}
-
-.greenZombieShop .shopName{
-
-    color:#91bd8c;
-
-}
-
-/* ================= SKIN ACTIVE ================= */
-
-.greenZombieActive #killer .killerHead{
-
-    background:#4c8a48 !important;
-
-}
-
-.greenZombieActive #killer .killerBody{
-
-    background:linear-gradient(
-
-        90deg,
-
-        #315d30,
-
-        #579651,
-
-        #315d30
-
-    ) !important;
-
-}
-
-.greenZombieActive #killer .killerHead:before{
-
-    content:"";
-
-    position:absolute;
-
-    left:7px;
-
-    top:10px;
-
-    width:6px;
-
-    height:6px;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    box-shadow:
-
-        15px 0 0 #fff,
-
-        0 0 7px rgba(255,255,255,.8),
-
-        15px 0 7px rgba(255,255,255,.8);
-
-}
-
-/* ================= SHOP TIMER ================= */
-
-.skinTimer{
-
-    color:#d8b96b;
-
-    font-size:11px;
-
-    margin:6px 0;
-
-    letter-spacing:1px;
-
-}
-
-</style>
-
-<!-- ================= ROOM TRANSITION ================= -->
-
-<div id="roomTransition">
-
-    ENTERING...
-
-</div>
-
-<!-- ================= ROOM VIEW ================= -->
-
-<div id="roomView">
-
-    <!-- BEDROOM -->
-
-    <div class="roomInterior roomBedroom" id="interiorBedroom">
-
-        <div class="roomCeiling"></div>
-
-        <div class="roomWall"></div>
-
-        <div class="roomFloor"></div>
-
-        <div class="roomTitle">
-
-            BEDROOM
-
-        </div>
-
-        <div class="roomBed">
-
-            <div class="pillow"></div>
-
-            <div class="blanket"></div>
-
-        </div>
-
-        <div
-
-            class="roomDoor left"
-
-            onclick="enterRoom('living')"
-
-        >
-
-            <span>ENTER LIVING ROOM</span>
-
-        </div>
-
-        <div
-
-            class="roomDoor right"
-
-            onclick="enterRoom('hall')"
-
-        >
-
-            <span>ENTER HALL</span>
-
-        </div>
-
-    </div>
-
-    <!-- LIVING ROOM -->
-
-    <div
-
-        class="roomInterior roomLiving"
-
-        id="interiorLiving"
-
-        style="display:none;"
-
-    >
-
-        <div class="roomCeiling"></div>
-
-        <div class="roomWall"></div>
-
-        <div class="roomFloor"></div>
-
-        <div class="roomTitle">
-
-            LIVING ROOM
-
-        </div>
-
-        <div class="sofa"></div>
-
-        <div class="coffeeTable"></div>
-
-        <div
-
-            class="roomDoor left"
-
-            onclick="enterRoom('bedroom')"
-
-        >
-
-            <span>BEDROOM</span>
-
-        </div>
-
-        <div
-
-            class="roomDoor right"
-
-            onclick="enterRoom('kitchen')"
-
-        >
-
-            <span>KITCHEN</span>
-
-        </div>
-
-    </div>
-
-    <!-- KITCHEN -->
-
-    <div
-
-        class="roomInterior roomKitchen"
-
-        id="interiorKitchen"
-
-        style="display:none;"
-
-    >
-
-        <div class="roomCeiling"></div>
-
-        <div class="roomWall"></div>
-
-        <div class="roomFloor"></div>
-
-        <div class="roomTitle">
-
-            KITCHEN
-
-        </div>
-
-        <div class="kitchenCounter"></div>
-
-        <div class="kitchenCabinet a"></div>
-
-        <div class="kitchenCabinet b"></div>
-
-        <div class="kitchenCabinet c"></div>
-
-        <div class="sink"></div>
-
-        <div
-
-            class="roomDoor left"
-
-            onclick="enterRoom('living')"
-
-        >
-
-            <span>LIVING ROOM</span>
-
-        </div>
-
-        <div
-
-            class="roomDoor right"
-
-            onclick="enterRoom('bathroom')"
-
-        >
-
-            <span>BATHROOM</span>
-
-        </div>
-
-    </div>
-
-    <!-- BATHROOM -->
-
-    <div
-
-        class="roomInterior roomBathroom"
-
-        id="interiorBathroom"
-
-        style="display:none;"
-
-    >
-
-        <div class="roomCeiling"></div>
-
-        <div class="roomWall"></div>
-
-        <div class="roomFloor"></div>
-
-        <div class="roomTitle">
-
-            BATHROOM
-
-        </div>
-
-        <div class="bathTub"></div>
-
-        <div class="bathToilet"></div>
-
-        <div class="bathMirror"></div>
-
-        <div
-
-            class="roomDoor left"
-
-            onclick="enterRoom('kitchen')"
-
-        >
-
-            <span>KITCHEN</span>
-
-        </div>
-
-        <div
-
-            class="roomDoor right"
-
-            onclick="enterRoom('hall')"
-
-        >
-
-            <span>HALL</span>
-
-        </div>
-
-    </div>
-
-    <!-- HALL -->
-
-    <div
-
-        class="roomInterior roomStorage"
-
-        id="interiorHall"
-
-        style="display:none;"
-
-    >
-
-        <div class="roomCeiling"></div>
-
-        <div class="roomWall"></div>
-
-        <div class="roomFloor"></div>
-
-        <div class="roomTitle">
-
-            HALL / STORAGE
-
-        </div>
-
-        <div class="storageShelf"></div>
-
-        <div
-
-            class="roomDoor left"
-
-            onclick="enterRoom('bedroom')"
-
-        >
-
-            <span>BEDROOM</span>
-
-        </div>
-
-        <div
-
-            class="roomDoor right"
-
-            onclick="enterRoom('bathroom')"
-
-        >
-
-            <span>BATHROOM</span>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ================= OUTDOOR MAP ================= -->
-
-<div id="outdoorMap">
-
-    <div class="outdoorSky"></div>
-
-    <div class="grass"></div>
-
-    <div class="outdoorPath"></div>
-
-    <div class="outdoorTree tree1"></div>
-
-    <div class="outdoorTree tree2"></div>
-
-    <div class="outdoorTree tree3"></div>
-
-    <div class="outdoorHouse"></div>
-
-</div>
-
-<!-- ================= NEW MOVEMENT PAD ================= -->
-
-<div id="movePad">
-
-    <div id="moveKnob"></div>
-
-    <div id="movePadLabel">
-
-        MOVE
-
-    </div>
-
-</div>
-
-<script>
-
-/* =========================================================
-
-   1.4 PART 2 STATE
-
-========================================================= */
-
-let greenZombieOwned =
-
-    localStorage.getItem("h14greenZombie") === "1";
-
-let greenZombieExpiry =
-
-    Number(
-
-        localStorage.getItem(
-
-            "h14greenZombieExpiry"
-
-        ) || 0
-
-    );
-
-let currentRoom =
-
-    localStorage.getItem(
-
-        "h14currentRoom"
-
-    ) || "bedroom";
-
-let joystickActive = false;
-
-let joystickPointer = null;
-
-let joystickX = 0;
-
-let joystickY = 0;
-
-/* =========================================================
-
-   GREEN ZOMBIE 3-DAY SHOP EVENT
-
-========================================================= */
-
-function checkGreenZombie(){
-
-    const now = Date.now();
-
-    if(
-
-        greenZombieOwned &&
-
-        greenZombieExpiry > 0 &&
-
-        now > greenZombieExpiry
-
-    ){
-
-        greenZombieOwned = false;
-
-        localStorage.removeItem(
-
-            "h14greenZombie"
-
-        );
-
-        localStorage.removeItem(
-
-            "h14greenZombieExpiry"
-
-        );
-
-        showMessage(
-
-            "GREEN ZOMBIE LEFT THE SHOP"
-
-        );
-
-    }
-
-}
-
-/* =========================================================
-
-   BUY GREEN ZOMBIE
-
-========================================================= */
-
-function buyGreenZombie(){
-
-    checkGreenZombie();
-
-    if(greenZombieOwned){
-
-        showMessage(
-
-            "GREEN ZOMBIE ALREADY OWNED"
-
-        );
-
-        return;
-
-    }
-
-    if(coins < 3000){
-
-        showMessage(
-
-            "YOU NEED 3,000 COINS"
-
-        );
-
-        return;
-
-    }
-
-    coins -= 3000;
-
-    greenZombieOwned = true;
-
-    greenZombieExpiry =
-
-        Date.now() +
-
-        (3 * 24 * 60 * 60 * 1000);
-
-    localStorage.setItem(
-
-        "h14greenZombie",
-
-        "1"
-
-    );
-
-    localStorage.setItem(
-
-        "h14greenZombieExpiry",
-
-        greenZombieExpiry
-
-    );
-
-    if(
-
-        typeof saveData === "function"
-
-    ){
-
-        saveData();
-
-    }
-
-    updatePart2Shop();
-
-    showMessage(
-
-        "GREEN ZOMBIE UNLOCKED!"
-
-    );
-
-}
-
-/* =========================================================
-
-   GREEN ZOMBIE TIMER
-
-========================================================= */
-
-function greenZombieTimeLeft(){
-
-    checkGreenZombie();
-
-    if(greenZombieOwned){
-
-        let remaining =
-
-            greenZombieExpiry -
-
-            Date.now();
-
-        if(remaining <= 0){
-
-            return "EXPIRED";
-
-        }
-
-        let days =
-
-            Math.floor(
-
-                remaining /
-
-                (24*60*60*1000)
-
-            );
-
-        let hours =
-
-            Math.floor(
-
-                (remaining %
-
-                (24*60*60*1000)) /
-
-                (60*60*1000)
-
-            );
-
-        return (
-
-            days +
-
-            "D " +
-
-            hours +
-
-            "H LEFT"
-
-        );
-
-    }
-
-    return "3 DAYS ONLY";
-
-}
-
-/* =========================================================
-
-   ADD SHOP CARD
-
-========================================================= */
-
-function addGreenZombieShopCard(){
-
-    const shopGrid =
-
-        document.querySelector(
-
-            "#shopPanel .shopGrid"
-
-        );
-
-    if(!shopGrid)return;
-
-    if(
-
-        document.getElementById(
-
-            "greenZombieShopItem"
-
-        )
-
-    )return;
-
-    const item =
-
-        document.createElement("div");
-
-    item.id =
-
-        "greenZombieShopItem";
-
-    item.className =
-
-        "shopItem greenZombieShop";
-
-    item.innerHTML = `
-
-        <div class="greenZombieVisual">
-
-            <div class="greenZombieHead">
-
-                <div class="greenZombieEye a"></div>
-
-                <div class="greenZombieEye b"></div>
-
-            </div>
-
-            <div class="greenZombieBody"></div>
-
-        </div>
-
-        <div class="shopName">
-
-            GREEN ZOMBIE
-
-        </div>
-
-        <div class="shopDesc">
-
-            Classic green Zombie.
-
-            Eyes included.
-
-        </div>
-
-        <div class="skinTimer"
-
-             id="greenZombieTimer">
-
-            3 DAYS ONLY
-
-        </div>
-
-        <button
-
-            class="buyBtn"
-
-            id="greenZombieBuy"
-
-            onclick="buyGreenZombie()"
-
-        >
-
-            3,000 COINS
-
-        </button>
-
-    `;
-
-    shopGrid.appendChild(item);
-
-    updatePart2Shop();
-
-}
-
-/* =========================================================
-
-   UPDATE SHOP
-
-========================================================= */
-
-function updatePart2Shop(){
-
-    checkGreenZombie();
-
-    const timer =
-
-        document.getElementById(
-
-            "greenZombieTimer"
-
-        );
-
-    const button =
-
-        document.getElementById(
-
-            "greenZombieBuy"
-
-        );
-
-    if(timer){
-
-        timer.innerText =
-
-            greenZombieTimeLeft();
-
-    }
-
-    if(button){
-
-        if(greenZombieOwned){
-
-            button.innerText =
-
-                "OWNED";
-
-            button.disabled = true;
-
-        }else{
-
-            button.innerText =
-
-                "3,000 COINS";
-
-            button.disabled = false;
-
-        }
-
-    }
-
-}
-
-/* =========================================================
-
-   OVERRIDE SHOP OPEN
-
-========================================================= */
-
-const originalOpenShop =
-
-    window.openShop;
-
-window.openShop = function(){
-
-    if(originalOpenShop){
-
-        originalOpenShop();
-
-    }
-
-    setTimeout(()=>{
-
-        addGreenZombieShopCard();
-
-        updatePart2Shop();
-
-    },50);
-
-};
-
-/* =========================================================
-
-   ACTIVATE GREEN ZOMBIE
-
-========================================================= */
-
-function activateGreenZombie(){
-
-    checkGreenZombie();
-
-    if(
-
-        typeof selectedKiller !== "undefined" &&
-
-        selectedKiller === 3 &&
-
-        greenZombieOwned
-
-    ){
-
-        document.body.classList.add(
-
-            "greenZombieActive"
-
-        );
-
-    }else{
-
-        document.body.classList.remove(
-
-            "greenZombieActive"
-
-        );
-
-    }
-
-}
-
-/* =========================================================
-
-   ROOM TRANSITION
-
-========================================================= */
-
-function enterRoom(room){
-
-    const transition =
-
-        document.getElementById(
-
-            "roomTransition"
-
-        );
-
-    const roomView =
-
-        document.getElementById(
-
-            "roomView"
-
-        );
-
-    const rooms = {
-
-        bedroom:
-
-            "interiorBedroom",
-
-        living:
-
-            "interiorLiving",
-
-        kitchen:
-
-            "interiorKitchen",
-
-        bathroom:
-
-            "interiorBathroom",
-
-        hall:
-
-            "interiorHall"
-
-    };
-
-    if(!rooms[room])return;
-
-    transition.style.display =
-
-        "flex";
-
-    transition.innerText =
-
-        "ENTERING " +
-
-        room.toUpperCase() +
-
-        "...";
-
-    setTimeout(()=>{
-
-        document.querySelectorAll(
-
-            ".roomInterior"
-
-        ).forEach(el=>{
-
-            el.style.display =
-
-                "none";
-
-        });
-
-        document.getElementById(
-
-            rooms[room]
-
-        ).style.display =
-
-            "block";
-
-        currentRoom = room;
-
-        localStorage.setItem(
-
-            "h14currentRoom",
-
-            room
-
-        );
-
-        transition.style.display =
-
-            "none";
-
-        roomView.style.display =
-
-            "block";
-
-        showMessage(
-
-            room.toUpperCase()
-
-        );
-
-    },350);
-
-}
-
-/* =========================================================
-
-   OPEN INTERIOR
-
-========================================================= */
-
-function openInterior(){
-
-    const roomView =
-
-        document.getElementById(
-
-            "roomView"
-
-        );
-
-    roomView.style.display =
-
-        "block";
-
-    enterRoom(
-
-        currentRoom
-
-    );
-
-}
-
-/* =========================================================
-
-   CLOSE INTERIOR
-
-========================================================= */
-
-function closeInterior(){
-
-    document.getElementById(
-
-        "roomView"
-
-    ).style.display =
-
-        "none";
-
-}
-
-/* =========================================================
-
-   OUTDOOR MAP
-
-========================================================= */
-
-function openOutdoorMap(){
-
-    closeInterior();
-
-    document.getElementById(
-
-        "outdoorMap"
-
-    ).style.display =
-
-        "block";
-
-    showMessage(
-
-        "OUTDOOR AREA"
-
-    );
-
-}
-
-function closeOutdoorMap(){
-
-    document.getElementById(
-
-        "outdoorMap"
-
-    ).style.display =
-
-        "none";
-
-}
-
-/* =========================================================
-
-   JOYSTICK
-
-========================================================= */
-
-const movePad =
-
-    document.getElementById(
-
-        "movePad"
-
-    );
-
-const moveKnob =
-
-    document.getElementById(
-
-        "moveKnob"
-
-    );
-
-function updateJoystick(event){
-
-    const rect =
-
-        movePad.getBoundingClientRect();
-
-    const centerX =
-
-        rect.left +
-
-        rect.width / 2;
-
-    const centerY =
-
-        rect.top +
-
-        rect.height / 2;
-
-    let dx =
-
-        event.clientX -
-
-        centerX;
-
-    let dy =
-
-        event.clientY -
-
-        centerY;
-
-    const max =
-
-        rect.width / 2 -
-
-        30;
-
-    const distance =
-
-        Math.sqrt(
-
-            dx*dx +
-
-            dy*dy
-
-        );
-
-    if(distance > max){
-
-        dx =
-
-            dx / distance *
-
-            max;
-
-        dy =
-
-            dy / distance *
-
-            max;
-
-    }
-
-    joystickX =
-
-        dx / max;
-
-    joystickY =
-
-        dy / max;
-
-    moveKnob.style.left =
-
-        `calc(50% + ${dx}px)`;
-
-    moveKnob.style.top =
-
-        `calc(50% + ${dy}px)`;
-
-}
-
-movePad.addEventListener(
-
-    "pointerdown",
-
-    event=>{
-
-        joystickActive = true;
-
-        joystickPointer =
-
-            event.pointerId;
-
-        movePad.setPointerCapture(
-
-            event.pointerId
-
-        );
-
-        updateJoystick(event);
-
-    }
-
-);
-
-movePad.addEventListener(
-
-    "pointermove",
-
-    event=>{
-
-        if(
-
-            !joystickActive ||
-
-            event.pointerId !==
-
-            joystickPointer
-
-        )return;
-
-        updateJoystick(event);
-
-    }
-
-);
-
-function releaseJoystick(){
-
-    joystickActive = false;
-
-    joystickX = 0;
-
-    joystickY = 0;
-
-    moveKnob.style.left =
-
-        "50%";
-
-    moveKnob.style.top =
-
-        "50%";
-
-}
-
-movePad.addEventListener(
-
-    "pointerup",
-
-    releaseJoystick
-
-);
-
-movePad.addEventListener(
-
-    "pointercancel",
-
-    releaseJoystick
-
-);
-
-/* =========================================================
-
-   JOYSTICK MOVEMENT
-
-========================================================= */
-
-function moveWithJoystick(){
-
-    if(
-
-        !joystickActive ||
-
-        typeof gameRunning ===
-
-        "undefined" ||
-
-        !gameRunning
-
-    )return;
-
-    if(
-
-        typeof killer ===
-
-        "undefined"
-
-    )return;
-
-    const joystickSpeed =
-
-        killer.speed * 1.45;
-
-    killer.x +=
-
-        joystickX *
-
-        joystickSpeed;
-
-    killer.y +=
-
-        joystickY *
-
-        joystickSpeed;
-
-    killer.x =
-
-        Math.max(
-
-            5,
-
-            Math.min(
-
-                95,
-
-                killer.x
-
-            )
-
-        );
-
-    killer.y =
-
-        Math.max(
-
-            17,
-
-            Math.min(
-
-                95,
-
-                killer.y
-
-            )
-
-        );
-
-}
-
-/* =========================================================
-
-   PART 2 GAME LOOP PATCH
-
-========================================================= */
-
-const originalGameLoop =
-
-    window.gameLoop;
-
-window.gameLoop = function(time){
-
-    moveWithJoystick();
-
-    if(originalGameLoop){
-
-        originalGameLoop(time);
-
-    }
-
-};
-
-/* =========================================================
-
-   PATCH KILLER SETUP
-
-========================================================= */
-
-const originalSetupKiller =
-
-    window.setupKiller;
-
-window.setupKiller = function(){
-
-    if(originalSetupKiller){
-
-        originalSetupKiller();
-
-    }
-
-    activateGreenZombie();
-
-};
-
-/* =========================================================
-
-   PATCH KILLER SELECTION
-
-========================================================= */
-
-const originalSelectKiller =
-
-    window.selectKiller;
-
-window.selectKiller = function(number){
-
-    selectedKiller =
-
-        number;
-
-    activateGreenZombie();
-
-    if(
-
-        originalSelectKiller
-
-    ){
-
-        try{
-
-            originalSelectKiller(
-
-                number
-
-            );
-
-        }catch(e){
-
-            showMessage(
-
-                number === 3
-
-                ? "THE ZOMBIE SELECTED"
-
-                : "KILLER SELECTED"
-
-            );
-
-        }
-
-    }
-
-    setTimeout(
-
-        activateGreenZombie,
-
-        450
-
-    );
-
-};
-
-/* =========================================================
-
-   ADD ROOM BUTTON TO GAME
-
-========================================================= */
-
-function addPart2Buttons(){
-
-    if(
-
-        document.getElementById(
-
-            "part2RoomButtons"
-
-        )
-
-    )return;
-
-    const controls =
-
-        document.getElementById(
-
-            "controls"
-
-        );
-
-    if(!controls)return;
-
-    const box =
-
-        document.createElement("div");
-
-    box.id =
-
-        "part2RoomButtons";
-
-    box.style.position =
-
-        "absolute";
-
-    box.style.right =
-
-        "12px";
-
-    box.style.bottom =
-
-        "100px";
-
-    box.style.zIndex =
-
-        "180";
-
-    box.innerHTML = `
-
-        <button
-
-            class="ctrl action"
-
-            onclick="openInterior()"
-
-        >
-
-            🚪
-
-        </button>
-
-        <button
-
-            class="ctrl action"
-
-            onclick="openOutdoorMap()"
-
-        >
-
-            🌲
-
-        </button>
-
-    `;
-
-    document
-
-        .getElementById(
-
-            "gameScreen"
-
-        )
-
-        .appendChild(box);
-
-}
-
-/* =========================================================
-
-   INITIALIZE PART 2
-
-========================================================= */
-
-setTimeout(()=>{
-
-    addGreenZombieShopCard();
-
-    addPart2Buttons();
-
-    checkGreenZombie();
-
-    updatePart2Shop();
-
-    activateGreenZombie();
-
-},250);
-
-/* =========================================================
-
-   TIMER REFRESH
-
-========================================================= */
-
-setInterval(()=>{
-
-    checkGreenZombie();
-
-    updatePart2Shop();
-
-},60000);
-
-</script>

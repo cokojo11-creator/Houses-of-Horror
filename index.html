@@ -5413,3 +5413,2482 @@ render();
 </body>
 
 </html>
+<!-- =========================================================
+
+     HOUSES OF HORROR 1.4 — PART 2
+
+     REDEMPTION ADD-ON
+
+========================================================= -->
+
+<style>
+
+/* ================= PART 2 MENU BACKGROUND ================= */
+
+#menu{
+
+    background:
+
+        radial-gradient(circle at 50% 35%,rgba(80,120,85,.22),transparent 28%),
+
+        linear-gradient(#07100a,#020403 82%);
+
+}
+
+#menu:after{
+
+    content:"1.4 — REDEMPTION • PART 2";
+
+    position:absolute;
+
+    top:3%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#829783;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    opacity:.75;
+
+    z-index:25;
+
+}
+
+/* ================= ROOM SYSTEM ================= */
+
+#roomTransition{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:800;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#020302;
+
+    color:white;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    font-size:18px;
+
+}
+
+#roomView{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:70;
+
+    display:none;
+
+    overflow:hidden;
+
+    background:#25241f;
+
+}
+
+/* ROOM BACKGROUNDS */
+
+.roomInterior{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+.roomWall{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    height:55%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(0,0,0,.2),
+
+            transparent 25%,
+
+            rgba(0,0,0,.18)
+
+        ),
+
+        #5a5549;
+
+    border-bottom:12px solid #292721;
+
+}
+
+.roomFloor{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:55%;
+
+    bottom:0;
+
+    background:
+
+        repeating-linear-gradient(
+
+            90deg,
+
+            #51473b 0 55px,
+
+            #443a31 56px 110px
+
+        );
+
+}
+
+.roomCeiling{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:12%;
+
+    background:#24231f;
+
+    border-bottom:4px solid #111;
+
+}
+
+/* ROOM TYPES */
+
+.roomBedroom .roomWall{
+
+    background:
+
+        linear-gradient(#565b50,#484d44);
+
+}
+
+.roomKitchen .roomWall{
+
+    background:
+
+        linear-gradient(#777268,#625e55);
+
+}
+
+.roomBathroom .roomWall{
+
+    background:
+
+        repeating-linear-gradient(
+
+            90deg,
+
+            #777a75 0 38px,
+
+            #686b66 39px 40px
+
+        );
+
+}
+
+.roomLiving .roomWall{
+
+    background:
+
+        linear-gradient(#5a544b,#454139);
+
+}
+
+.roomStorage .roomWall{
+
+    background:#454039;
+
+}
+
+/* ROOM TITLE */
+
+.roomTitle{
+
+    position:absolute;
+
+    top:17%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:10;
+
+    padding:7px 13px;
+
+    background:rgba(0,0,0,.55);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+}
+
+/* BED */
+
+.roomBed{
+
+    position:absolute;
+
+    left:9%;
+
+    bottom:16%;
+
+    width:48%;
+
+    height:30%;
+
+    background:#28251f;
+
+    border:6px solid #15130f;
+
+    border-radius:5px;
+
+}
+
+.roomBed .blanket{
+
+    position:absolute;
+
+    inset:18px 8px 8px;
+
+    background:linear-gradient(90deg,#45433e,#302e2a);
+
+}
+
+.roomBed .pillow{
+
+    position:absolute;
+
+    top:7px;
+
+    left:8px;
+
+    width:35%;
+
+    height:25%;
+
+    background:#aaa49a;
+
+    border-radius:5px;
+
+}
+
+/* KITCHEN COUNTER */
+
+.kitchenCounter{
+
+    position:absolute;
+
+    left:7%;
+
+    right:7%;
+
+    bottom:17%;
+
+    height:24%;
+
+    background:#302b24;
+
+    border:6px solid #171510;
+
+}
+
+.kitchenCabinet{
+
+    position:absolute;
+
+    bottom:5%;
+
+    width:21%;
+
+    height:70%;
+
+    background:#49382a;
+
+    border:4px solid #19140f;
+
+}
+
+.kitchenCabinet.a{left:8%}
+
+.kitchenCabinet.b{left:31%}
+
+.kitchenCabinet.c{right:8%}
+
+/* SINK */
+
+.sink{
+
+    position:absolute;
+
+    left:42%;
+
+    bottom:29%;
+
+    width:18%;
+
+    height:9%;
+
+    border:4px solid #222;
+
+    background:#9c9b95;
+
+    border-radius:4px;
+
+}
+
+/* BATHROOM */
+
+.bathTub{
+
+    position:absolute;
+
+    left:9%;
+
+    bottom:17%;
+
+    width:48%;
+
+    height:25%;
+
+    background:#aaa9a3;
+
+    border:6px solid #37352f;
+
+    border-radius:20px;
+
+}
+
+.bathToilet{
+
+    position:absolute;
+
+    right:12%;
+
+    bottom:20%;
+
+    width:22%;
+
+    height:26%;
+
+    background:#b8b6af;
+
+    border:5px solid #37352f;
+
+    border-radius:35%;
+
+}
+
+.bathMirror{
+
+    position:absolute;
+
+    right:15%;
+
+    top:22%;
+
+    width:22%;
+
+    height:20%;
+
+    background:#8e9996;
+
+    border:5px solid #292a27;
+
+}
+
+/* LIVING ROOM */
+
+.sofa{
+
+    position:absolute;
+
+    left:10%;
+
+    bottom:17%;
+
+    width:58%;
+
+    height:25%;
+
+    background:#37332d;
+
+    border:6px solid #181612;
+
+    border-radius:12px 12px 5px 5px;
+
+}
+
+.coffeeTable{
+
+    position:absolute;
+
+    right:12%;
+
+    bottom:18%;
+
+    width:23%;
+
+    height:12%;
+
+    background:#30261d;
+
+    border:5px solid #17110d;
+
+}
+
+/* STORAGE */
+
+.storageShelf{
+
+    position:absolute;
+
+    left:12%;
+
+    right:12%;
+
+    bottom:15%;
+
+    height:55%;
+
+    border:7px solid #171410;
+
+    background:#302920;
+
+}
+
+.storageShelf:before,
+
+.storageShelf:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:5%;
+
+    right:5%;
+
+    height:5px;
+
+    background:#111;
+
+}
+
+.storageShelf:before{top:33%}
+
+.storageShelf:after{top:66%}
+
+/* ================= DOORS ================= */
+
+.roomDoor{
+
+    position:absolute;
+
+    z-index:30;
+
+    bottom:0;
+
+    width:90px;
+
+    height:43%;
+
+    background:#302219;
+
+    border:7px solid #12100d;
+
+    box-shadow:0 0 20px rgba(0,0,0,.5);
+
+}
+
+.roomDoor.left{
+
+    left:6%;
+
+}
+
+.roomDoor.right{
+
+    right:6%;
+
+}
+
+.roomDoor:after{
+
+    content:"";
+
+    position:absolute;
+
+    right:13%;
+
+    top:51%;
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:#b39a5c;
+
+}
+
+.roomDoor span{
+
+    position:absolute;
+
+    top:-28px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    white-space:nowrap;
+
+    color:#bbb;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+}
+
+/* ================= OUTDOOR MAP ================= */
+
+#outdoorMap{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:40;
+
+    display:none;
+
+    overflow:hidden;
+
+    background:
+
+        linear-gradient(
+
+            #18271c 0 38%,
+
+            #33472d 38% 100%
+
+        );
+
+}
+
+.outdoorSky{
+
+    position:absolute;
+
+    inset:0 0 62%;
+
+    background:
+
+        radial-gradient(circle at 72% 28%,#a3aaa0 0 6%,transparent 7%),
+
+        linear-gradient(#101b14,#263b2b);
+
+}
+
+.grass{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:38%;
+
+    bottom:0;
+
+    background:
+
+        repeating-linear-gradient(
+
+            110deg,
+
+            rgba(30,55,31,.5) 0 3px,
+
+            transparent 4px 14px
+
+        ),
+
+        #334a2d;
+
+}
+
+.outdoorPath{
+
+    position:absolute;
+
+    left:42%;
+
+    top:38%;
+
+    width:25%;
+
+    height:62%;
+
+    background:#71614c;
+
+    transform:skewX(-9deg);
+
+}
+
+.outdoorTree{
+
+    position:absolute;
+
+    width:70px;
+
+    height:130px;
+
+}
+
+.outdoorTree:before{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+
+    left:30px;
+
+    width:14px;
+
+    height:65%;
+
+    background:#382b20;
+
+}
+
+.outdoorTree:after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:5px;
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:#1d321f;
+
+    box-shadow:
+
+        25px 18px 0 #243b25,
+
+        -15px 25px 0 #263e27;
+
+}
+
+.tree1{left:5%;top:40%}
+
+.tree2{right:5%;top:47%}
+
+.tree3{left:22%;top:70%}
+
+.outdoorHouse{
+
+    position:absolute;
+
+    right:14%;
+
+    top:20%;
+
+    width:30%;
+
+    height:23%;
+
+    background:#35342e;
+
+    border:5px solid #171814;
+
+}
+
+.outdoorHouse:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-8%;
+
+    top:-55%;
+
+    width:116%;
+
+    height:70%;
+
+    background:#1d211d;
+
+    clip-path:polygon(50% 0,100% 100%,0 100%);
+
+}
+
+.outdoorHouse:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:40%;
+
+    bottom:0;
+
+    width:20%;
+
+    height:55%;
+
+    background:#181714;
+
+}
+
+/* ================= MOVEMENT REVAMP ================= */
+
+#movePad{
+
+    position:absolute;
+
+    z-index:160;
+
+    bottom:20px;
+
+    left:18px;
+
+    width:145px;
+
+    height:145px;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.45);
+
+    border:2px solid rgba(255,255,255,.22);
+
+    touch-action:none;
+
+}
+
+#moveKnob{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:60px;
+
+    height:60px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    border:2px solid rgba(255,255,255,.35);
+
+}
+
+#movePadLabel{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:8px;
+
+    color:#aaa;
+
+    pointer-events:none;
+
+}
+
+/* Hide old directional buttons */
+
+#controls .controlCluster:first-child{
+
+    display:none;
+
+}
+
+/* ================= GREEN ZOMBIE SHOP ================= */
+
+.greenZombieShop{
+
+    grid-column:1 / -1;
+
+    border:2px solid #405943;
+
+    background:
+
+        radial-gradient(circle at center,rgba(75,120,70,.2),transparent 60%),
+
+        linear-gradient(#222a22,#101410);
+
+}
+
+.greenZombieVisual{
+
+    margin:auto;
+
+    width:65px;
+
+    height:85px;
+
+    position:relative;
+
+}
+
+.greenZombieHead{
+
+    position:absolute;
+
+    left:15px;
+
+    top:0;
+
+    width:35px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:#4c8a48;
+
+    border:3px solid #182218;
+
+}
+
+.greenZombieEye{
+
+    position:absolute;
+
+    top:14px;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    box-shadow:0 0 7px rgba(255,255,255,.7);
+
+}
+
+.greenZombieEye.a{left:8px}
+
+.greenZombieEye.b{right:8px}
+
+.greenZombieBody{
+
+    position:absolute;
+
+    left:10px;
+
+    top:34px;
+
+    width:45px;
+
+    height:50px;
+
+    border-radius:9px;
+
+    background:#41753e;
+
+    border:3px solid #182218;
+
+}
+
+.greenZombieShop .shopName{
+
+    color:#91bd8c;
+
+}
+
+/* ================= SKIN ACTIVE ================= */
+
+.greenZombieActive #killer .killerHead{
+
+    background:#4c8a48 !important;
+
+}
+
+.greenZombieActive #killer .killerBody{
+
+    background:linear-gradient(
+
+        90deg,
+
+        #315d30,
+
+        #579651,
+
+        #315d30
+
+    ) !important;
+
+}
+
+.greenZombieActive #killer .killerHead:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:7px;
+
+    top:10px;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    box-shadow:
+
+        15px 0 0 #fff,
+
+        0 0 7px rgba(255,255,255,.8),
+
+        15px 0 7px rgba(255,255,255,.8);
+
+}
+
+/* ================= SHOP TIMER ================= */
+
+.skinTimer{
+
+    color:#d8b96b;
+
+    font-size:11px;
+
+    margin:6px 0;
+
+    letter-spacing:1px;
+
+}
+
+</style>
+
+<!-- ================= ROOM TRANSITION ================= -->
+
+<div id="roomTransition">
+
+    ENTERING...
+
+</div>
+
+<!-- ================= ROOM VIEW ================= -->
+
+<div id="roomView">
+
+    <!-- BEDROOM -->
+
+    <div class="roomInterior roomBedroom" id="interiorBedroom">
+
+        <div class="roomCeiling"></div>
+
+        <div class="roomWall"></div>
+
+        <div class="roomFloor"></div>
+
+        <div class="roomTitle">
+
+            BEDROOM
+
+        </div>
+
+        <div class="roomBed">
+
+            <div class="pillow"></div>
+
+            <div class="blanket"></div>
+
+        </div>
+
+        <div
+
+            class="roomDoor left"
+
+            onclick="enterRoom('living')"
+
+        >
+
+            <span>ENTER LIVING ROOM</span>
+
+        </div>
+
+        <div
+
+            class="roomDoor right"
+
+            onclick="enterRoom('hall')"
+
+        >
+
+            <span>ENTER HALL</span>
+
+        </div>
+
+    </div>
+
+    <!-- LIVING ROOM -->
+
+    <div
+
+        class="roomInterior roomLiving"
+
+        id="interiorLiving"
+
+        style="display:none;"
+
+    >
+
+        <div class="roomCeiling"></div>
+
+        <div class="roomWall"></div>
+
+        <div class="roomFloor"></div>
+
+        <div class="roomTitle">
+
+            LIVING ROOM
+
+        </div>
+
+        <div class="sofa"></div>
+
+        <div class="coffeeTable"></div>
+
+        <div
+
+            class="roomDoor left"
+
+            onclick="enterRoom('bedroom')"
+
+        >
+
+            <span>BEDROOM</span>
+
+        </div>
+
+        <div
+
+            class="roomDoor right"
+
+            onclick="enterRoom('kitchen')"
+
+        >
+
+            <span>KITCHEN</span>
+
+        </div>
+
+    </div>
+
+    <!-- KITCHEN -->
+
+    <div
+
+        class="roomInterior roomKitchen"
+
+        id="interiorKitchen"
+
+        style="display:none;"
+
+    >
+
+        <div class="roomCeiling"></div>
+
+        <div class="roomWall"></div>
+
+        <div class="roomFloor"></div>
+
+        <div class="roomTitle">
+
+            KITCHEN
+
+        </div>
+
+        <div class="kitchenCounter"></div>
+
+        <div class="kitchenCabinet a"></div>
+
+        <div class="kitchenCabinet b"></div>
+
+        <div class="kitchenCabinet c"></div>
+
+        <div class="sink"></div>
+
+        <div
+
+            class="roomDoor left"
+
+            onclick="enterRoom('living')"
+
+        >
+
+            <span>LIVING ROOM</span>
+
+        </div>
+
+        <div
+
+            class="roomDoor right"
+
+            onclick="enterRoom('bathroom')"
+
+        >
+
+            <span>BATHROOM</span>
+
+        </div>
+
+    </div>
+
+    <!-- BATHROOM -->
+
+    <div
+
+        class="roomInterior roomBathroom"
+
+        id="interiorBathroom"
+
+        style="display:none;"
+
+    >
+
+        <div class="roomCeiling"></div>
+
+        <div class="roomWall"></div>
+
+        <div class="roomFloor"></div>
+
+        <div class="roomTitle">
+
+            BATHROOM
+
+        </div>
+
+        <div class="bathTub"></div>
+
+        <div class="bathToilet"></div>
+
+        <div class="bathMirror"></div>
+
+        <div
+
+            class="roomDoor left"
+
+            onclick="enterRoom('kitchen')"
+
+        >
+
+            <span>KITCHEN</span>
+
+        </div>
+
+        <div
+
+            class="roomDoor right"
+
+            onclick="enterRoom('hall')"
+
+        >
+
+            <span>HALL</span>
+
+        </div>
+
+    </div>
+
+    <!-- HALL -->
+
+    <div
+
+        class="roomInterior roomStorage"
+
+        id="interiorHall"
+
+        style="display:none;"
+
+    >
+
+        <div class="roomCeiling"></div>
+
+        <div class="roomWall"></div>
+
+        <div class="roomFloor"></div>
+
+        <div class="roomTitle">
+
+            HALL / STORAGE
+
+        </div>
+
+        <div class="storageShelf"></div>
+
+        <div
+
+            class="roomDoor left"
+
+            onclick="enterRoom('bedroom')"
+
+        >
+
+            <span>BEDROOM</span>
+
+        </div>
+
+        <div
+
+            class="roomDoor right"
+
+            onclick="enterRoom('bathroom')"
+
+        >
+
+            <span>BATHROOM</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= OUTDOOR MAP ================= -->
+
+<div id="outdoorMap">
+
+    <div class="outdoorSky"></div>
+
+    <div class="grass"></div>
+
+    <div class="outdoorPath"></div>
+
+    <div class="outdoorTree tree1"></div>
+
+    <div class="outdoorTree tree2"></div>
+
+    <div class="outdoorTree tree3"></div>
+
+    <div class="outdoorHouse"></div>
+
+</div>
+
+<!-- ================= NEW MOVEMENT PAD ================= -->
+
+<div id="movePad">
+
+    <div id="moveKnob"></div>
+
+    <div id="movePadLabel">
+
+        MOVE
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================================================
+
+   1.4 PART 2 STATE
+
+========================================================= */
+
+let greenZombieOwned =
+
+    localStorage.getItem("h14greenZombie") === "1";
+
+let greenZombieExpiry =
+
+    Number(
+
+        localStorage.getItem(
+
+            "h14greenZombieExpiry"
+
+        ) || 0
+
+    );
+
+let currentRoom =
+
+    localStorage.getItem(
+
+        "h14currentRoom"
+
+    ) || "bedroom";
+
+let joystickActive = false;
+
+let joystickPointer = null;
+
+let joystickX = 0;
+
+let joystickY = 0;
+
+/* =========================================================
+
+   GREEN ZOMBIE 3-DAY SHOP EVENT
+
+========================================================= */
+
+function checkGreenZombie(){
+
+    const now = Date.now();
+
+    if(
+
+        greenZombieOwned &&
+
+        greenZombieExpiry > 0 &&
+
+        now > greenZombieExpiry
+
+    ){
+
+        greenZombieOwned = false;
+
+        localStorage.removeItem(
+
+            "h14greenZombie"
+
+        );
+
+        localStorage.removeItem(
+
+            "h14greenZombieExpiry"
+
+        );
+
+        showMessage(
+
+            "GREEN ZOMBIE LEFT THE SHOP"
+
+        );
+
+    }
+
+}
+
+/* =========================================================
+
+   BUY GREEN ZOMBIE
+
+========================================================= */
+
+function buyGreenZombie(){
+
+    checkGreenZombie();
+
+    if(greenZombieOwned){
+
+        showMessage(
+
+            "GREEN ZOMBIE ALREADY OWNED"
+
+        );
+
+        return;
+
+    }
+
+    if(coins < 3000){
+
+        showMessage(
+
+            "YOU NEED 3,000 COINS"
+
+        );
+
+        return;
+
+    }
+
+    coins -= 3000;
+
+    greenZombieOwned = true;
+
+    greenZombieExpiry =
+
+        Date.now() +
+
+        (3 * 24 * 60 * 60 * 1000);
+
+    localStorage.setItem(
+
+        "h14greenZombie",
+
+        "1"
+
+    );
+
+    localStorage.setItem(
+
+        "h14greenZombieExpiry",
+
+        greenZombieExpiry
+
+    );
+
+    if(
+
+        typeof saveData === "function"
+
+    ){
+
+        saveData();
+
+    }
+
+    updatePart2Shop();
+
+    showMessage(
+
+        "GREEN ZOMBIE UNLOCKED!"
+
+    );
+
+}
+
+/* =========================================================
+
+   GREEN ZOMBIE TIMER
+
+========================================================= */
+
+function greenZombieTimeLeft(){
+
+    checkGreenZombie();
+
+    if(greenZombieOwned){
+
+        let remaining =
+
+            greenZombieExpiry -
+
+            Date.now();
+
+        if(remaining <= 0){
+
+            return "EXPIRED";
+
+        }
+
+        let days =
+
+            Math.floor(
+
+                remaining /
+
+                (24*60*60*1000)
+
+            );
+
+        let hours =
+
+            Math.floor(
+
+                (remaining %
+
+                (24*60*60*1000)) /
+
+                (60*60*1000)
+
+            );
+
+        return (
+
+            days +
+
+            "D " +
+
+            hours +
+
+            "H LEFT"
+
+        );
+
+    }
+
+    return "3 DAYS ONLY";
+
+}
+
+/* =========================================================
+
+   ADD SHOP CARD
+
+========================================================= */
+
+function addGreenZombieShopCard(){
+
+    const shopGrid =
+
+        document.querySelector(
+
+            "#shopPanel .shopGrid"
+
+        );
+
+    if(!shopGrid)return;
+
+    if(
+
+        document.getElementById(
+
+            "greenZombieShopItem"
+
+        )
+
+    )return;
+
+    const item =
+
+        document.createElement("div");
+
+    item.id =
+
+        "greenZombieShopItem";
+
+    item.className =
+
+        "shopItem greenZombieShop";
+
+    item.innerHTML = `
+
+        <div class="greenZombieVisual">
+
+            <div class="greenZombieHead">
+
+                <div class="greenZombieEye a"></div>
+
+                <div class="greenZombieEye b"></div>
+
+            </div>
+
+            <div class="greenZombieBody"></div>
+
+        </div>
+
+        <div class="shopName">
+
+            GREEN ZOMBIE
+
+        </div>
+
+        <div class="shopDesc">
+
+            Classic green Zombie.
+
+            Eyes included.
+
+        </div>
+
+        <div class="skinTimer"
+
+             id="greenZombieTimer">
+
+            3 DAYS ONLY
+
+        </div>
+
+        <button
+
+            class="buyBtn"
+
+            id="greenZombieBuy"
+
+            onclick="buyGreenZombie()"
+
+        >
+
+            3,000 COINS
+
+        </button>
+
+    `;
+
+    shopGrid.appendChild(item);
+
+    updatePart2Shop();
+
+}
+
+/* =========================================================
+
+   UPDATE SHOP
+
+========================================================= */
+
+function updatePart2Shop(){
+
+    checkGreenZombie();
+
+    const timer =
+
+        document.getElementById(
+
+            "greenZombieTimer"
+
+        );
+
+    const button =
+
+        document.getElementById(
+
+            "greenZombieBuy"
+
+        );
+
+    if(timer){
+
+        timer.innerText =
+
+            greenZombieTimeLeft();
+
+    }
+
+    if(button){
+
+        if(greenZombieOwned){
+
+            button.innerText =
+
+                "OWNED";
+
+            button.disabled = true;
+
+        }else{
+
+            button.innerText =
+
+                "3,000 COINS";
+
+            button.disabled = false;
+
+        }
+
+    }
+
+}
+
+/* =========================================================
+
+   OVERRIDE SHOP OPEN
+
+========================================================= */
+
+const originalOpenShop =
+
+    window.openShop;
+
+window.openShop = function(){
+
+    if(originalOpenShop){
+
+        originalOpenShop();
+
+    }
+
+    setTimeout(()=>{
+
+        addGreenZombieShopCard();
+
+        updatePart2Shop();
+
+    },50);
+
+};
+
+/* =========================================================
+
+   ACTIVATE GREEN ZOMBIE
+
+========================================================= */
+
+function activateGreenZombie(){
+
+    checkGreenZombie();
+
+    if(
+
+        typeof selectedKiller !== "undefined" &&
+
+        selectedKiller === 3 &&
+
+        greenZombieOwned
+
+    ){
+
+        document.body.classList.add(
+
+            "greenZombieActive"
+
+        );
+
+    }else{
+
+        document.body.classList.remove(
+
+            "greenZombieActive"
+
+        );
+
+    }
+
+}
+
+/* =========================================================
+
+   ROOM TRANSITION
+
+========================================================= */
+
+function enterRoom(room){
+
+    const transition =
+
+        document.getElementById(
+
+            "roomTransition"
+
+        );
+
+    const roomView =
+
+        document.getElementById(
+
+            "roomView"
+
+        );
+
+    const rooms = {
+
+        bedroom:
+
+            "interiorBedroom",
+
+        living:
+
+            "interiorLiving",
+
+        kitchen:
+
+            "interiorKitchen",
+
+        bathroom:
+
+            "interiorBathroom",
+
+        hall:
+
+            "interiorHall"
+
+    };
+
+    if(!rooms[room])return;
+
+    transition.style.display =
+
+        "flex";
+
+    transition.innerText =
+
+        "ENTERING " +
+
+        room.toUpperCase() +
+
+        "...";
+
+    setTimeout(()=>{
+
+        document.querySelectorAll(
+
+            ".roomInterior"
+
+        ).forEach(el=>{
+
+            el.style.display =
+
+                "none";
+
+        });
+
+        document.getElementById(
+
+            rooms[room]
+
+        ).style.display =
+
+            "block";
+
+        currentRoom = room;
+
+        localStorage.setItem(
+
+            "h14currentRoom",
+
+            room
+
+        );
+
+        transition.style.display =
+
+            "none";
+
+        roomView.style.display =
+
+            "block";
+
+        showMessage(
+
+            room.toUpperCase()
+
+        );
+
+    },350);
+
+}
+
+/* =========================================================
+
+   OPEN INTERIOR
+
+========================================================= */
+
+function openInterior(){
+
+    const roomView =
+
+        document.getElementById(
+
+            "roomView"
+
+        );
+
+    roomView.style.display =
+
+        "block";
+
+    enterRoom(
+
+        currentRoom
+
+    );
+
+}
+
+/* =========================================================
+
+   CLOSE INTERIOR
+
+========================================================= */
+
+function closeInterior(){
+
+    document.getElementById(
+
+        "roomView"
+
+    ).style.display =
+
+        "none";
+
+}
+
+/* =========================================================
+
+   OUTDOOR MAP
+
+========================================================= */
+
+function openOutdoorMap(){
+
+    closeInterior();
+
+    document.getElementById(
+
+        "outdoorMap"
+
+    ).style.display =
+
+        "block";
+
+    showMessage(
+
+        "OUTDOOR AREA"
+
+    );
+
+}
+
+function closeOutdoorMap(){
+
+    document.getElementById(
+
+        "outdoorMap"
+
+    ).style.display =
+
+        "none";
+
+}
+
+/* =========================================================
+
+   JOYSTICK
+
+========================================================= */
+
+const movePad =
+
+    document.getElementById(
+
+        "movePad"
+
+    );
+
+const moveKnob =
+
+    document.getElementById(
+
+        "moveKnob"
+
+    );
+
+function updateJoystick(event){
+
+    const rect =
+
+        movePad.getBoundingClientRect();
+
+    const centerX =
+
+        rect.left +
+
+        rect.width / 2;
+
+    const centerY =
+
+        rect.top +
+
+        rect.height / 2;
+
+    let dx =
+
+        event.clientX -
+
+        centerX;
+
+    let dy =
+
+        event.clientY -
+
+        centerY;
+
+    const max =
+
+        rect.width / 2 -
+
+        30;
+
+    const distance =
+
+        Math.sqrt(
+
+            dx*dx +
+
+            dy*dy
+
+        );
+
+    if(distance > max){
+
+        dx =
+
+            dx / distance *
+
+            max;
+
+        dy =
+
+            dy / distance *
+
+            max;
+
+    }
+
+    joystickX =
+
+        dx / max;
+
+    joystickY =
+
+        dy / max;
+
+    moveKnob.style.left =
+
+        `calc(50% + ${dx}px)`;
+
+    moveKnob.style.top =
+
+        `calc(50% + ${dy}px)`;
+
+}
+
+movePad.addEventListener(
+
+    "pointerdown",
+
+    event=>{
+
+        joystickActive = true;
+
+        joystickPointer =
+
+            event.pointerId;
+
+        movePad.setPointerCapture(
+
+            event.pointerId
+
+        );
+
+        updateJoystick(event);
+
+    }
+
+);
+
+movePad.addEventListener(
+
+    "pointermove",
+
+    event=>{
+
+        if(
+
+            !joystickActive ||
+
+            event.pointerId !==
+
+            joystickPointer
+
+        )return;
+
+        updateJoystick(event);
+
+    }
+
+);
+
+function releaseJoystick(){
+
+    joystickActive = false;
+
+    joystickX = 0;
+
+    joystickY = 0;
+
+    moveKnob.style.left =
+
+        "50%";
+
+    moveKnob.style.top =
+
+        "50%";
+
+}
+
+movePad.addEventListener(
+
+    "pointerup",
+
+    releaseJoystick
+
+);
+
+movePad.addEventListener(
+
+    "pointercancel",
+
+    releaseJoystick
+
+);
+
+/* =========================================================
+
+   JOYSTICK MOVEMENT
+
+========================================================= */
+
+function moveWithJoystick(){
+
+    if(
+
+        !joystickActive ||
+
+        typeof gameRunning ===
+
+        "undefined" ||
+
+        !gameRunning
+
+    )return;
+
+    if(
+
+        typeof killer ===
+
+        "undefined"
+
+    )return;
+
+    const joystickSpeed =
+
+        killer.speed * 1.45;
+
+    killer.x +=
+
+        joystickX *
+
+        joystickSpeed;
+
+    killer.y +=
+
+        joystickY *
+
+        joystickSpeed;
+
+    killer.x =
+
+        Math.max(
+
+            5,
+
+            Math.min(
+
+                95,
+
+                killer.x
+
+            )
+
+        );
+
+    killer.y =
+
+        Math.max(
+
+            17,
+
+            Math.min(
+
+                95,
+
+                killer.y
+
+            )
+
+        );
+
+}
+
+/* =========================================================
+
+   PART 2 GAME LOOP PATCH
+
+========================================================= */
+
+const originalGameLoop =
+
+    window.gameLoop;
+
+window.gameLoop = function(time){
+
+    moveWithJoystick();
+
+    if(originalGameLoop){
+
+        originalGameLoop(time);
+
+    }
+
+};
+
+/* =========================================================
+
+   PATCH KILLER SETUP
+
+========================================================= */
+
+const originalSetupKiller =
+
+    window.setupKiller;
+
+window.setupKiller = function(){
+
+    if(originalSetupKiller){
+
+        originalSetupKiller();
+
+    }
+
+    activateGreenZombie();
+
+};
+
+/* =========================================================
+
+   PATCH KILLER SELECTION
+
+========================================================= */
+
+const originalSelectKiller =
+
+    window.selectKiller;
+
+window.selectKiller = function(number){
+
+    selectedKiller =
+
+        number;
+
+    activateGreenZombie();
+
+    if(
+
+        originalSelectKiller
+
+    ){
+
+        try{
+
+            originalSelectKiller(
+
+                number
+
+            );
+
+        }catch(e){
+
+            showMessage(
+
+                number === 3
+
+                ? "THE ZOMBIE SELECTED"
+
+                : "KILLER SELECTED"
+
+            );
+
+        }
+
+    }
+
+    setTimeout(
+
+        activateGreenZombie,
+
+        450
+
+    );
+
+};
+
+/* =========================================================
+
+   ADD ROOM BUTTON TO GAME
+
+========================================================= */
+
+function addPart2Buttons(){
+
+    if(
+
+        document.getElementById(
+
+            "part2RoomButtons"
+
+        )
+
+    )return;
+
+    const controls =
+
+        document.getElementById(
+
+            "controls"
+
+        );
+
+    if(!controls)return;
+
+    const box =
+
+        document.createElement("div");
+
+    box.id =
+
+        "part2RoomButtons";
+
+    box.style.position =
+
+        "absolute";
+
+    box.style.right =
+
+        "12px";
+
+    box.style.bottom =
+
+        "100px";
+
+    box.style.zIndex =
+
+        "180";
+
+    box.innerHTML = `
+
+        <button
+
+            class="ctrl action"
+
+            onclick="openInterior()"
+
+        >
+
+            🚪
+
+        </button>
+
+        <button
+
+            class="ctrl action"
+
+            onclick="openOutdoorMap()"
+
+        >
+
+            🌲
+
+        </button>
+
+    `;
+
+    document
+
+        .getElementById(
+
+            "gameScreen"
+
+        )
+
+        .appendChild(box);
+
+}
+
+/* =========================================================
+
+   INITIALIZE PART 2
+
+========================================================= */
+
+setTimeout(()=>{
+
+    addGreenZombieShopCard();
+
+    addPart2Buttons();
+
+    checkGreenZombie();
+
+    updatePart2Shop();
+
+    activateGreenZombie();
+
+},250);
+
+/* =========================================================
+
+   TIMER REFRESH
+
+========================================================= */
+
+setInterval(()=>{
+
+    checkGreenZombie();
+
+    updatePart2Shop();
+
+},60000);
+
+</script>

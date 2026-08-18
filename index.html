@@ -6,463 +6,399 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 
-      content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#050505">
 
-<title>Houses of Horror 1.5 — The Real House</title>
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="apple-mobile-web-app-title" content="Houses of Horror">
+
+<link rel="manifest" href="manifest.json">
+
+<title>Houses of Horror 1.5 — Mini Celebration</title>
 
 <style>
 
-*{
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
-  box-sizing:border-box;
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505;color:white;font-family:Arial,Helvetica,sans-serif;touch-action:none}
 
-  -webkit-tap-highlight-color:transparent;
+button,input{font:inherit}button{cursor:pointer}
 
-}
-
-html,body{
-
-  margin:0;
-
-  width:100%;
-
-  height:100%;
-
-  overflow:hidden;
-
-  background:#050505;
-
-  color:white;
-
-  font-family:Arial,Helvetica,sans-serif;
-
-  touch-action:none;
-
-}
-
-button,input{
-
-  font:inherit;
-
-}
-
-button{
-
-  cursor:pointer;
-
-}
-
-#game{
-
-  position:relative;
-
-  width:100%;
-
-  height:100%;
-
-  overflow:hidden;
-
-  background:#050505;
-
-}
+#game{position:relative;width:100%;height:100%;overflow:hidden;background:#050505}
 
 /* =========================================================
 
-   MENU
+   1.5 MINI CELEBRATION MENU
 
 ========================================================= */
 
 #menu{
 
-  position:absolute;
+ position:absolute;inset:0;overflow:hidden;
 
-  inset:0;
+ background:
 
-  overflow:hidden;
+ radial-gradient(circle at 50% 20%,rgba(255,255,255,.06),transparent 20%),
 
-  background:
+ radial-gradient(circle at 20% 25%,rgba(150,20,20,.16),transparent 25%),
 
-    radial-gradient(circle at 50% 35%,rgba(120,20,20,.18),transparent 28%),
+ radial-gradient(circle at 80% 30%,rgba(100,20,20,.12),transparent 25%),
 
-    linear-gradient(#0c0808,#020202 80%);
-
-}
-
-.stars{
-
-  position:absolute;
-
-  inset:0;
-
-  opacity:.25;
-
-  background-image:
-
-    radial-gradient(circle,#aaa 1px,transparent 2px),
-
-    radial-gradient(circle,#666 1px,transparent 2px);
-
-  background-size:120px 120px,180px 180px;
+ linear-gradient(#090909,#020202 82%);
 
 }
 
-.menuMoon{
+#menu:before{
 
-  position:absolute;
+ content:"";
 
-  width:145px;
+ position:absolute;
 
-  height:145px;
+ inset:0;
 
-  right:8%;
+ background:
 
-  top:7%;
+ radial-gradient(circle at 15% 18%,#fff 0 2px,transparent 3px),
 
-  border-radius:50%;
+ radial-gradient(circle at 28% 32%,#aaa 0 2px,transparent 3px),
 
-  background:
+ radial-gradient(circle at 44% 12%,#fff 0 2px,transparent 3px),
 
-    radial-gradient(circle at 35% 35%,#ddd,#777);
+ radial-gradient(circle at 58% 27%,#aaa 0 2px,transparent 3px),
 
-  box-shadow:0 0 80px rgba(255,255,255,.12);
+ radial-gradient(circle at 73% 15%,#fff 0 2px,transparent 3px),
+
+ radial-gradient(circle at 88% 29%,#aaa 0 2px,transparent 3px);
+
+ opacity:.65;
+
+ animation:skyTwinkle 2s infinite alternate;
 
 }
+
+@keyframes skyTwinkle{
+
+ from{opacity:.35}
+
+ to{opacity:.8}
+
+}
+
+/* FIREWORKS */
+
+.firework{
+
+ position:absolute;
+
+ width:8px;
+
+ height:8px;
+
+ border-radius:50%;
+
+ animation:fireworkPulse 1.8s infinite alternate;
+
+}
+
+.firework:before{
+
+ content:"✦";
+
+ position:absolute;
+
+ left:50%;
+
+ top:50%;
+
+ transform:translate(-50%,-50%);
+
+ font-size:100px;
+
+ color:white;
+
+ text-shadow:
+
+ 0 -40px 0 #aaa,
+
+ 0 40px 0 #777,
+
+ -40px 0 0 #aaa,
+
+ 40px 0 0 #777,
+
+ -29px -29px 0 #fff,
+
+ 29px -29px 0 #888,
+
+ -29px 29px 0 #888,
+
+ 29px 29px 0 #fff;
+
+}
+
+.fw1{left:13%;top:19%;animation-delay:.1s}
+
+.fw2{left:77%;top:17%;transform:scale(.7);animation-delay:.7s}
+
+.fw3{left:53%;top:10%;transform:scale(.5);animation-delay:1.1s}
+
+.fw4{left:88%;top:40%;transform:scale(.45);animation-delay:1.5s}
+
+@keyframes fireworkPulse{
+
+ from{opacity:.3;transform:scale(.7)}
+
+ to{opacity:1;transform:scale(1)}
+
+}
+
+/* HOUSE */
 
 .menuHouse{
 
-  position:absolute;
+ position:absolute;left:5%;right:5%;bottom:-2%;height:48%;
 
-  left:5%;
-
-  right:5%;
-
-  bottom:-2%;
-
-  height:55%;
+ filter:drop-shadow(0 -5px 25px rgba(0,0,0,.8));
 
 }
 
 .menuRoof{
 
-  position:absolute;
+ position:absolute;left:0;top:0;width:100%;height:42%;
 
-  left:0;
+ background:#090909;
 
-  top:0;
-
-  width:100%;
-
-  height:42%;
-
-  background:#090909;
-
-  clip-path:polygon(50% 0,100% 100%,0 100%);
+ clip-path:polygon(50% 0,100% 100%,0 100%);
 
 }
 
 .menuBody{
 
-  position:absolute;
+ position:absolute;left:7%;right:7%;bottom:0;height:70%;
 
-  left:7%;
+ background:#0a0a0a;border:3px solid #1b1b1b;
 
-  right:7%;
-
-  bottom:0;
-
-  height:70%;
-
-  background:#0a0a0a;
-
-  border:3px solid #1b1b1b;
-
-  box-shadow:0 0 50px #000;
+ box-shadow:0 0 50px #000;
 
 }
 
 .menuWindow{
 
-  position:absolute;
+ position:absolute;width:55px;height:72px;
 
-  width:55px;
+ background:#281717;border:5px solid #030303;
 
-  height:72px;
-
-  background:#281717;
-
-  border:5px solid #030303;
-
-  box-shadow:0 0 22px rgba(180,20,20,.18);
+ box-shadow:0 0 22px rgba(180,20,20,.18);
 
 }
 
-.menuWindow:before{
+.menuWindow:before{content:"";position:absolute;left:50%;top:0;width:4px;height:100%;background:#050505}
 
-  content:"";
+.menuWindow:after{content:"";position:absolute;left:0;top:50%;width:100%;height:4px;background:#050505}
 
-  position:absolute;
+.menuWindow.a{left:13%;top:18%}
 
-  left:50%;
-
-  top:0;
-
-  width:4px;
-
-  height:100%;
-
-  background:#050505;
-
-}
-
-.menuWindow:after{
-
-  content:"";
-
-  position:absolute;
-
-  left:0;
-
-  top:50%;
-
-  width:100%;
-
-  height:4px;
-
-  background:#050505;
-
-}
-
-.menuWindow.a{
-
-  left:13%;
-
-  top:18%;
-
-}
-
-.menuWindow.b{
-
-  right:13%;
-
-  top:18%;
-
-}
+.menuWindow.b{right:13%;top:18%}
 
 .menuDoor{
 
-  position:absolute;
+ position:absolute;left:42%;bottom:0;width:17%;height:47%;
 
-  left:42%;
-
-  bottom:0;
-
-  width:17%;
-
-  height:47%;
-
-  background:#030303;
-
-  border:4px solid #181818;
+ background:#030303;border:4px solid #181818;
 
 }
 
-/* MENU CREATOR ZOMBIE */
+/* CELEBRATION BUTCHER */
 
-.menuZombie{
+.celebrationButcher{
 
-  position:absolute;
+ position:absolute;
 
-  z-index:6;
+ z-index:7;
 
-  left:50%;
+ left:50%;
 
-  bottom:10%;
+ bottom:4%;
 
-  width:110px;
+ width:145px;
 
-  height:225px;
+ height:265px;
 
-  transform:translateX(-50%);
+ transform:translateX(-50%);
 
-  animation:zIdle 3s ease-in-out infinite;
+ filter:drop-shadow(0 0 18px #000);
 
-  filter:drop-shadow(0 0 16px #000);
-
-}
-
-@keyframes zIdle{
-
-  0%,100%{
-
-    transform:translateX(-50%) translateY(0) rotate(-1deg);
-
-  }
-
-  50%{
-
-    transform:translateX(-50%) translateY(-7px) rotate(1deg);
-
-  }
+ animation:butcherIdle 3s ease-in-out infinite;
 
 }
 
-.menuZombieHead{
+@keyframes butcherIdle{
 
-  position:absolute;
+ 0%,100%{transform:translateX(-50%) translateY(0)}
 
-  left:24px;
-
-  top:0;
-
-  width:62px;
-
-  height:65px;
-
-  border-radius:48%;
-
-  background:
-
-    radial-gradient(circle at 32% 35%,#050505 0 5px,transparent 6px),
-
-    radial-gradient(circle at 68% 35%,#050505 0 5px,transparent 6px),
-
-    #b52d2d;
-
-  border:4px solid #300909;
+ 50%{transform:translateX(-50%) translateY(-6px)}
 
 }
 
-.menuZombieEye{
+.cbHead{
 
-  position:absolute;
+ position:absolute;
 
-  width:7px;
+ left:40px;top:0;
 
-  height:7px;
+ width:65px;height:70px;
 
-  border-radius:50%;
+ border-radius:48%;
 
-  background:#fff;
+ background:#a87559;
 
-  box-shadow:0 0 7px #fff;
-
-  top:29px;
+ border:5px solid #20120d;
 
 }
 
-.menuZombieEye.a{left:14px}
+.cbMask{
 
-.menuZombieEye.b{right:14px}
+ position:absolute;
 
-.menuZombieMouth{
+ left:6px;top:27px;
 
-  position:absolute;
+ width:53px;height:31px;
 
-  left:13px;
+ background:#aaa;
 
-  bottom:8px;
+ border:4px solid #111;
 
-  width:34px;
-
-  height:11px;
-
-  background:#080202;
-
-  border-radius:50%;
+ border-radius:35%;
 
 }
 
-.menuZombieBody{
+.cbMask:before{
 
-  position:absolute;
+ content:"••";
 
-  left:19px;
+ position:absolute;
 
-  top:60px;
+ left:12px;top:3px;
 
-  width:70px;
-
-  height:106px;
-
-  background:linear-gradient(90deg,#500d0d,#c32f2f,#4a0b0b);
-
-  border:4px solid #300707;
-
-  border-radius:17px 17px 7px 7px;
+ color:#111;font-size:22px;letter-spacing:13px;
 
 }
 
-.menuZombieArm{
+.cbBody{
 
-  position:absolute;
+ position:absolute;
 
-  top:67px;
+ left:24px;top:63px;
 
-  width:21px;
+ width:96px;height:180px;
 
-  height:101px;
+ background:linear-gradient(#343434,#101010);
 
-  background:#a82b2b;
+ border:5px solid #111;
 
-  border:4px solid #300707;
-
-  border-radius:15px;
+ border-radius:20px 20px 8px 8px;
 
 }
 
-.menuZombieArm.a{
+.cbApron{
 
-  left:2px;
+ position:absolute;
 
-  transform:rotate(22deg);
+ left:22px;top:15px;
 
-}
+ width:47px;height:145px;
 
-.menuZombieArm.b{
+ background:#ddd;
 
-  right:1px;
+ border:3px solid #222;
 
-  transform:rotate(-25deg);
-
-}
-
-.menuZombieLeg{
-
-  position:absolute;
-
-  top:154px;
-
-  width:27px;
-
-  height:64px;
-
-  background:#360b0b;
-
-  border:4px solid #1c0505;
+ clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);
 
 }
 
-.menuZombieLeg.a{left:27px}
+.cbArm{
 
-.menuZombieLeg.b{right:20px}
+ position:absolute;
 
-.menuZombieWeapon{
+ top:83px;width:24px;height:115px;
 
-  position:absolute;
+ background:#292929;border:4px solid #111;
 
-  right:-30px;
+ border-radius:15px;
 
-  top:120px;
+}
 
-  width:8px;
+.cbArm.a{left:7px;transform:rotate(18deg)}
 
-  height:82px;
+.cbArm.b{right:4px;transform:rotate(-18deg)}
 
-  background:#aaa;
+.cbWeapon{
 
-  transform:rotate(-35deg);
+ position:absolute;
+
+ right:-22px;top:138px;
+
+ width:9px;height:88px;
+
+ background:#aaa;
+
+ transform:rotate(-35deg);
+
+ border:2px solid #555;
+
+}
+
+.cbFireworks{
+
+ position:absolute;
+
+ inset:-90px;
+
+ pointer-events:none;
+
+}
+
+.cbFireworks:before,
+
+.cbFireworks:after{
+
+ content:"✦";
+
+ position:absolute;
+
+ font-size:75px;
+
+ color:white;
+
+ text-shadow:
+
+ 30px -20px 0 #aaa,
+
+ -30px 25px 0 #777,
+
+ 40px 45px 0 #fff,
+
+ -40px -45px 0 #888;
+
+ animation:burst 1.2s infinite alternate;
+
+}
+
+.cbFireworks:before{left:0;top:15px}
+
+.cbFireworks:after{right:0;top:50px;animation-delay:.6s}
+
+@keyframes burst{
+
+ from{opacity:.3;transform:scale(.6)}
+
+ to{opacity:1;transform:scale(1.15)}
 
 }
 
@@ -470,1971 +406,997 @@ button{
 
 .menuContent{
 
-  position:absolute;
+ position:absolute;z-index:30;top:5%;left:50%;
 
-  z-index:30;
+ transform:translateX(-50%);
 
-  top:7%;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  width:min(90%,500px);
-
-  text-align:center;
+ width:min(90%,500px);text-align:center;
 
 }
 
 .logo{
 
-  font-size:clamp(42px,13vw,76px);
+ font-size:clamp(42px,13vw,76px);
 
-  font-weight:1000;
+ font-weight:1000;
 
-  letter-spacing:5px;
+ letter-spacing:5px;
 
-  text-shadow:0 5px 0 #000,0 0 30px #000;
+ text-shadow:0 5px 0 #000,0 0 30px #000;
 
 }
 
 .logoSmall{
 
-  display:block;
+ display:block;margin-top:-5px;
 
-  margin-top:-5px;
+ font-size:.36em;letter-spacing:9px;
 
-  font-size:.36em;
+ color:#8d0000;
 
-  letter-spacing:9px;
+ text-shadow:2px 2px #000,0 0 10px #300;
 
-  color:#aaa;
+}
+
+.celebrationLogoBlood{
+
+ display:block;
+
+ font-size:11px;
+
+ letter-spacing:4px;
+
+ color:#8d0000;
+
+ margin-top:-3px;
+
+ text-shadow:0 0 8px #300;
 
 }
 
 .version{
 
-  display:inline-block;
+ display:inline-block;
 
-  margin:13px 0 20px;
+ margin:10px 0 13px;
 
-  padding:7px 14px;
+ padding:7px 14px;
 
-  border:1px solid #704040;
+ border:1px solid #704040;
 
-  background:rgba(0,0,0,.75);
+ background:rgba(0,0,0,.78);
 
-  color:#c9a4a4;
+ color:#d5b0b0;
 
-  font-size:11px;
+ font-size:11px;
 
-  letter-spacing:2px;
+ letter-spacing:2px;
 
 }
 
 .menuBtn{
 
-  display:block;
+ display:block;width:100%;padding:15px;margin:8px 0;
 
-  width:100%;
+ border:2px solid #393939;
 
-  padding:15px;
+ background:linear-gradient(#292929,#101010);
 
-  margin:8px 0;
+ color:#fff;font-weight:bold;font-size:16px;
 
-  border:2px solid #393939;
+ letter-spacing:2px;border-radius:5px;
 
-  background:linear-gradient(#292929,#101010);
-
-  color:#fff;
-
-  font-weight:bold;
-
-  font-size:16px;
-
-  letter-spacing:2px;
-
-  border-radius:5px;
-
-  box-shadow:0 5px 0 #000;
+ box-shadow:0 5px 0 #000;
 
 }
 
-.menuBtn:active{
+.menuBtn:active{transform:translateY(4px);box-shadow:0 1px 0 #000}
 
-  transform:translateY(4px);
-
-  box-shadow:0 1px 0 #000;
-
-}
-
-.menuBtn.red{
-
-  border-color:#713636;
-
-  background:linear-gradient(#552525,#160909);
-
-}
+.menuBtn.red{border-color:#713636;background:linear-gradient(#552525,#160909)}
 
 .menuFooter{
 
-  margin-top:12px;
+ margin-top:10px;color:#666;font-size:9px;letter-spacing:2px;
 
-  color:#555;
+}
 
-  font-size:9px;
+.celebrationBadge{
 
-  letter-spacing:2px;
+ display:inline-block;
+
+ margin-top:3px;
+
+ padding:5px 10px;
+
+ color:#fff;
+
+ background:#520d0d;
+
+ border:1px solid #8d3030;
+
+ border-radius:4px;
+
+ font-size:9px;
+
+ letter-spacing:2px;
 
 }
 
 /* =========================================================
 
-   PANELS
+ PANELS
 
 ========================================================= */
 
 .panel{
 
-  position:absolute;
+ position:absolute;inset:0;z-index:300;display:none;
 
-  inset:0;
+ overflow:auto;padding:22px 14px 35px;
 
-  z-index:300;
-
-  display:none;
-
-  overflow:auto;
-
-  padding:22px 14px 35px;
-
-  background:
-
-    radial-gradient(circle at center,#252525,#040404 75%);
+ background:radial-gradient(circle at center,#252525,#040404 75%);
 
 }
 
-.panelTitle{
+.panelTitle{text-align:center;font-size:31px;font-weight:1000;letter-spacing:3px;margin:8px 0}
 
-  text-align:center;
-
-  font-size:31px;
-
-  font-weight:1000;
-
-  letter-spacing:3px;
-
-  margin:8px 0;
-
-}
-
-.panelSub{
-
-  text-align:center;
-
-  color:#777;
-
-  font-size:11px;
-
-  margin-bottom:20px;
-
-}
+.panelSub{text-align:center;color:#777;font-size:11px;margin-bottom:20px}
 
 .cards{
 
-  width:min(95%,700px);
+ width:min(95%,700px);margin:auto;
 
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:repeat(3,1fr);
-
-  gap:10px;
+ display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
 
 }
 
 .card{
 
-  min-height:230px;
+ min-height:230px;padding:13px 9px;
 
-  padding:13px 9px;
+ background:linear-gradient(#252525,#101010);
 
-  background:linear-gradient(#252525,#101010);
-
-  border:1px solid #444;
-
-  border-radius:7px;
-
-  text-align:center;
+ border:1px solid #444;border-radius:7px;text-align:center;
 
 }
 
-.cardIcon{
+.cardIcon{height:75px;display:flex;align-items:center;justify-content:center;font-size:55px}
 
-  height:75px;
+.cardTitle{font-size:13px;font-weight:bold;letter-spacing:1px}
 
-  display:flex;
+.cardDesc{color:#888;font-size:10px;line-height:1.4;margin:8px 0;min-height:40px}
 
-  align-items:center;
+.selectBtn,.buyBtn{
 
-  justify-content:center;
+ width:100%;padding:10px;border:0;background:#343434;
 
-  font-size:55px;
-
-}
-
-.cardTitle{
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  letter-spacing:1px;
+ color:white;border-radius:4px;font-weight:bold;
 
 }
 
-.cardDesc{
-
-  color:#888;
-
-  font-size:10px;
-
-  line-height:1.4;
-
-  margin:8px 0;
-
-  min-height:40px;
-
-}
-
-.selectBtn,
-
-.buyBtn{
-
-  width:100%;
-
-  padding:10px;
-
-  border:0;
-
-  background:#343434;
-
-  color:white;
-
-  border-radius:4px;
-
-  font-weight:bold;
-
-}
-
-.selectBtn.active{
-
-  background:#7b3434;
-
-}
+.selectBtn.active{background:#7b3434}
 
 .backBtn{
 
-  display:block;
+ display:block;margin:22px auto;padding:11px 35px;
 
-  margin:22px auto;
-
-  padding:11px 35px;
-
-  background:#151515;
-
-  color:white;
-
-  border:1px solid #555;
+ background:#151515;color:white;border:1px solid #555;
 
 }
 
-/* =========================================================
-
-   LOCKER
-
-========================================================= */
+/* LOCKER */
 
 .lockerGrid{
 
-  width:min(96%,700px);
+ width:min(96%,700px);margin:auto;
 
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:repeat(2,1fr);
-
-  gap:12px;
+ display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
 
 }
 
 .skinCard{
 
-  position:relative;
+ position:relative;min-height:190px;padding:14px;text-align:center;
 
-  min-height:190px;
+ border:1px solid #444;border-radius:8px;
 
-  padding:14px;
-
-  text-align:center;
-
-  border:1px solid #444;
-
-  border-radius:8px;
-
-  background:linear-gradient(#242424,#0e0e0e);
+ background:linear-gradient(#242424,#0e0e0e);
 
 }
 
-.skinVisual{
+.skinVisual{height:82px;display:flex;align-items:center;justify-content:center;font-size:55px}
 
-  height:82px;
+.skinName{font-weight:bold;font-size:13px;letter-spacing:1px}
 
-  display:flex;
+.skinStatus{margin:7px 0;font-size:10px;color:#999}
 
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:55px;
-
-}
-
-.skinName{
-
-  font-weight:bold;
-
-  font-size:13px;
-
-  letter-spacing:1px;
-
-}
-
-.skinStatus{
-
-  margin:7px 0;
-
-  font-size:10px;
-
-  color:#999;
-
-}
-
-.lock{
-
-  font-size:28px;
-
-  opacity:.7;
-
-}
+.lock{font-size:28px;opacity:.7}
 
 .equipBtn{
 
-  width:100%;
+ width:100%;padding:9px;border:1px solid #555;
 
-  padding:9px;
-
-  border:1px solid #555;
-
-  background:#252525;
-
-  color:#fff;
-
-  border-radius:4px;
+ background:#252525;color:#fff;border-radius:4px;
 
 }
 
-.equipped{
+.equipped{border-color:#9a4a4a;box-shadow:0 0 15px rgba(150,30,30,.15)}
 
-  border-color:#9a4a4a;
+.equipped .equipBtn{background:#713434}
 
-  box-shadow:0 0 15px rgba(150,30,30,.15);
+/* SHOP */
 
-}
-
-.equipped .equipBtn{
-
-  background:#713434;
-
-}
-
-/* =========================================================
-
-   CREATOR
-
-========================================================= */
-
-.creatorBox{
-
-  width:min(92%,480px);
-
-  margin:25px auto;
-
-  padding:22px;
-
-  border:1px solid #654;
-
-  background:linear-gradient(#241313,#0e0808);
-
-  text-align:center;
-
-  border-radius:8px;
-
-}
-
-.creatorBox h2{
-
-  margin-top:0;
-
-}
-
-.creatorBox p{
-
-  color:#999;
-
-  font-size:11px;
-
-}
-
-.creatorInput{
-
-  width:100%;
-
-  padding:13px;
-
-  background:#080808;
-
-  border:1px solid #555;
-
-  color:white;
-
-  text-align:center;
-
-  border-radius:5px;
-
-  text-transform:uppercase;
-
-  letter-spacing:2px;
-
-  margin:10px 0;
-
-}
-
-.creatorRedeem{
-
-  width:100%;
-
-  padding:12px;
-
-  background:#743535;
-
-  border:1px solid #955;
-
-  color:#fff;
-
-  font-weight:bold;
-
-  border-radius:5px;
-
-}
-
-/* =========================================================
-
-   SHOP
-
-========================================================= */
-
-.shopCoins{
-
-  text-align:center;
-
-  color:#d5b55e;
-
-  margin-bottom:18px;
-
-}
+.shopCoins{text-align:center;color:#d5b55e;margin-bottom:18px}
 
 .shopGrid{
 
-  width:min(95%,600px);
+ width:min(95%,600px);margin:auto;
 
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:12px;
+ display:grid;grid-template-columns:1fr 1fr;gap:12px;
 
 }
 
 .shopItem{
 
-  padding:17px 12px;
+ padding:17px 12px;background:linear-gradient(#222,#101010);
 
-  background:linear-gradient(#222,#101010);
-
-  border:1px solid #444;
-
-  border-radius:7px;
-
-  text-align:center;
+ border:1px solid #444;border-radius:7px;text-align:center;
 
 }
 
-.shopIcon{
+.shopIcon{font-size:40px}
 
-  font-size:40px;
+.shopName{font-weight:bold;margin-top:7px}
+
+.shopDesc{min-height:30px;color:#777;font-size:10px;margin:7px 0}
+
+/* CREATOR */
+
+.creatorBox{
+
+ width:min(92%,480px);margin:25px auto;padding:22px;
+
+ border:1px solid #654;background:linear-gradient(#241313,#0e0808);
+
+ text-align:center;border-radius:8px;
+
+}
+
+.creatorBox h2{margin-top:0}
+
+.creatorBox p{color:#999;font-size:11px}
+
+.creatorInput{
+
+ width:100%;padding:13px;background:#080808;border:1px solid #555;
+
+ color:white;text-align:center;border-radius:5px;
+
+ text-transform:uppercase;letter-spacing:2px;margin:10px 0;
 
 }
 
-.shopName{
+.creatorRedeem{
 
-  font-weight:bold;
+ width:100%;padding:12px;background:#743535;border:1px solid #955;
 
-  margin-top:7px;
+ color:#fff;font-weight:bold;border-radius:5px;
+
+}
+
+/* LEVEL */
+
+.levelBox{
+
+ width:min(92%,500px);margin:20px auto;padding:20px;
+
+ background:#141414;border:1px solid #444;border-radius:8px;text-align:center;
 
 }
 
-.shopDesc{
+.levelNumber{font-size:42px;font-weight:1000}
 
-  min-height:30px;
+.xpBar{
 
-  color:#777;
+ width:100%;height:18px;background:#050505;border:1px solid #555;
 
-  font-size:10px;
-
-  margin:7px 0;
+ border-radius:10px;overflow:hidden;margin:12px 0;
 
 }
+
+#xpFill{height:100%;width:0%;background:linear-gradient(90deg,#8c3434,#d66)}
 
 /* =========================================================
 
-   GAME WORLD
+ GAME WORLD
 
 ========================================================= */
 
-#gameScreen{
+#gameScreen{position:absolute;inset:0;display:none;background:#101010}
 
-  position:absolute;
-
-  inset:0;
-
-  display:none;
-
-  background:#101010;
-
-}
-
-#world{
-
-  position:absolute;
-
-  inset:0;
-
-  overflow:hidden;
-
-  background:#172117;
-
-}
+#world{position:absolute;inset:0;overflow:hidden;background:#172117}
 
 #map{
 
-  position:absolute;
+ position:absolute;left:0;top:0;width:1400px;height:900px;
 
-  left:0;
-
-  top:0;
-
-  width:1400px;
-
-  height:900px;
-
-  background:#203120;
+ background:#203120;
 
 }
 
-/* OUTDOOR */
-
 .outdoor{
 
-  position:absolute;
+ position:absolute;inset:0;
 
-  inset:0;
+ background:
 
-  background:
+ radial-gradient(circle at 20% 25%,rgba(90,120,60,.4),transparent 20%),
 
-    radial-gradient(circle at 20% 25%,rgba(90,120,60,.4),transparent 20%),
-
-    linear-gradient(#263c25,#172719);
+ linear-gradient(#263c25,#172719);
 
 }
 
 .grassPatch{
 
-  position:absolute;
+ position:absolute;width:90px;height:55px;border-radius:50%;
 
-  width:90px;
-
-  height:55px;
-
-  border-radius:50%;
-
-  background:#31502e;
-
-  opacity:.7;
+ background:#31502e;opacity:.7;
 
 }
 
-.tree{
-
-  position:absolute;
-
-  width:58px;
-
-  height:75px;
-
-}
+.tree{position:absolute;width:58px;height:75px}
 
 .tree:before{
 
-  content:"";
+ content:"";position:absolute;left:19px;bottom:0;
 
-  position:absolute;
-
-  left:19px;
-
-  bottom:0;
-
-  width:20px;
-
-  height:45px;
-
-  background:#4b3020;
+ width:20px;height:45px;background:#4b3020;
 
 }
 
 .tree:after{
 
-  content:"";
+ content:"";position:absolute;left:0;top:0;
 
-  position:absolute;
+ width:58px;height:55px;border-radius:50%;
 
-  left:0;
+ background:#142c16;
 
-  top:0;
-
-  width:58px;
-
-  height:55px;
-
-  border-radius:50%;
-
-  background:#142c16;
-
-  box-shadow:
-
-    20px -10px 0 #19361a,
-
-    38px 5px 0 #1a381b;
+ box-shadow:20px -10px 0 #19361a,38px 5px 0 #1a381b;
 
 }
 
-.fence{
+.fence{position:absolute;background:#68482e;border:3px solid #382719}
 
-  position:absolute;
+.fence.horizontal{height:13px}.fence.vertical{width:13px}
 
-  background:#68482e;
-
-  border:3px solid #382719;
-
-}
-
-.fence.horizontal{
-
-  height:13px;
-
-}
-
-.fence.vertical{
-
-  width:13px;
-
-}
-
-/* HOUSE STRUCTURE */
+/* HOUSE */
 
 .house{
 
-  position:absolute;
+ position:absolute;left:300px;top:120px;width:720px;height:610px;
 
-  left:300px;
+ background:#5b4b3b;border:12px solid #171310;
 
-  top:120px;
-
-  width:720px;
-
-  height:610px;
-
-  background:#5b4b3b;
-
-  border:12px solid #171310;
-
-  box-shadow:0 20px 40px rgba(0,0,0,.55);
+ box-shadow:0 20px 40px rgba(0,0,0,.55);
 
 }
 
 .houseLabel{
 
-  position:absolute;
+ position:absolute;left:15px;top:-35px;color:#aaa;
 
-  left:15px;
-
-  top:-35px;
-
-  color:#aaa;
-
-  font-size:10px;
-
-  letter-spacing:2px;
+ font-size:10px;letter-spacing:2px;
 
 }
-
-/* ROOMS */
 
 .room{
 
-  position:absolute;
-
-  background:#665746;
-
-  border:7px solid #28201a;
-
-  overflow:hidden;
+ position:absolute;background:#665746;border:7px solid #28201a;overflow:hidden;
 
 }
 
-.room::after{
+.room:after{
 
-  content:"";
+ content:"";position:absolute;inset:0;pointer-events:none;
 
-  position:absolute;
-
-  inset:0;
-
-  pointer-events:none;
-
-  box-shadow:inset 0 0 35px rgba(0,0,0,.3);
+ box-shadow:inset 0 0 35px rgba(0,0,0,.3);
 
 }
 
 .roomName{
 
-  position:absolute;
+ position:absolute;left:9px;top:7px;z-index:2;
 
-  left:9px;
-
-  top:7px;
-
-  z-index:2;
-
-  color:rgba(255,255,255,.22);
-
-  font-size:9px;
-
-  letter-spacing:2px;
+ color:rgba(255,255,255,.22);font-size:9px;letter-spacing:2px;
 
 }
 
-/* BEDROOM */
-
-.bedroom{
-
-  left:0;
-
-  top:0;
-
-  width:300px;
-
-  height:260px;
-
-  background:#594c43;
-
-}
+.bedroom{left:0;top:0;width:300px;height:260px;background:#594c43}
 
 .bed{
 
-  position:absolute;
+ position:absolute;left:40px;top:65px;width:180px;height:115px;
 
-  left:40px;
-
-  top:65px;
-
-  width:180px;
-
-  height:115px;
-
-  background:#29221e;
-
-  border:7px solid #15110f;
+ background:#29221e;border:7px solid #15110f;
 
 }
 
-.bedHead{
+.bedHead{position:absolute;left:0;top:0;width:100%;height:27px;background:#30251f}
 
-  position:absolute;
+.blanket{position:absolute;left:12px;right:12px;bottom:10px;top:38px;background:#454d54}
 
-  left:0;
-
-  top:0;
-
-  width:100%;
-
-  height:27px;
-
-  background:#30251f;
-
-}
-
-.blanket{
-
-  position:absolute;
-
-  left:12px;
-
-  right:12px;
-
-  bottom:10px;
-
-  top:38px;
-
-  background:#454d54;
-
-}
-
-.pillow{
-
-  position:absolute;
-
-  left:15px;
-
-  top:42px;
-
-  width:55px;
-
-  height:30px;
-
-  background:#aaa49b;
-
-  border-radius:5px;
-
-}
+.pillow{position:absolute;left:15px;top:42px;width:55px;height:30px;background:#aaa49b;border-radius:5px}
 
 .dresser{
 
-  position:absolute;
+ position:absolute;right:18px;bottom:15px;width:62px;height:72px;
 
-  right:18px;
-
-  bottom:15px;
-
-  width:62px;
-
-  height:72px;
-
-  background:#39271d;
-
-  border:5px solid #18110d;
+ background:#39271d;border:5px solid #18110d;
 
 }
 
-.dresser:before,
+.dresser:before,.dresser:after{
 
-.dresser:after{
+ content:"";position:absolute;left:9px;right:9px;height:25px;
 
-  content:"";
-
-  position:absolute;
-
-  left:9px;
-
-  right:9px;
-
-  height:25px;
-
-  border:2px solid #15100d;
+ border:2px solid #15100d;
 
 }
 
-.dresser:before{top:8px}
+.dresser:before{top:8px}.dresser:after{bottom:8px}
 
-.dresser:after{bottom:8px}
-
-/* HALL */
-
-.hall{
-
-  left:300px;
-
-  top:0;
-
-  width:180px;
-
-  height:610px;
-
-  background:#55483c;
-
-}
+.hall{left:300px;top:0;width:180px;height:610px;background:#55483c}
 
 .hallRunner{
 
-  position:absolute;
+ position:absolute;left:48px;top:35px;width:70px;height:520px;
 
-  left:48px;
-
-  top:35px;
-
-  width:70px;
-
-  height:520px;
-
-  background:#4b3030;
-
-  border-left:3px solid #352020;
-
-  border-right:3px solid #352020;
+ background:#4b3030;border-left:3px solid #352020;border-right:3px solid #352020;
 
 }
 
-/* KITCHEN */
-
-.kitchen{
-
-  left:480px;
-
-  top:0;
-
-  width:240px;
-
-  height:290px;
-
-  background:#6c6255;
-
-}
+.kitchen{left:480px;top:0;width:240px;height:290px;background:#6c6255}
 
 .counter{
 
-  position:absolute;
+ position:absolute;left:15px;right:15px;height:65px;
 
-  left:15px;
-
-  right:15px;
-
-  height:65px;
-
-  background:#432c20;
-
-  border:6px solid #21140e;
+ background:#432c20;border:6px solid #21140e;
 
 }
 
-.counter.top{top:50px}
-
-.counter.bottom{bottom:20px}
+.counter.top{top:50px}.counter.bottom{bottom:20px}
 
 .stove{
 
-  position:absolute;
+ position:absolute;left:70px;top:64px;width:85px;height:48px;
 
-  left:70px;
-
-  top:64px;
-
-  width:85px;
-
-  height:48px;
-
-  background:#252525;
-
-  border:5px solid #111;
+ background:#252525;border:5px solid #111;
 
 }
 
 .stove:before{
 
-  content:"";
+ content:"";position:absolute;left:12px;top:8px;width:14px;height:14px;
 
-  position:absolute;
+ border-radius:50%;background:#111;
 
-  left:12px;
-
-  top:8px;
-
-  width:14px;
-
-  height:14px;
-
-  border-radius:50%;
-
-  background:#111;
-
-  box-shadow:
-
-    30px 0 #111,
-
-    15px 22px #111,
-
-    45px 22px #111;
+ box-shadow:30px 0 #111,15px 22px #111,45px 22px #111;
 
 }
 
 .fridge{
 
-  position:absolute;
+ position:absolute;right:15px;top:125px;width:60px;height:125px;
 
-  right:15px;
-
-  top:125px;
-
-  width:60px;
-
-  height:125px;
-
-  background:#858585;
-
-  border:5px solid #272727;
+ background:#858585;border:5px solid #272727;
 
 }
 
-/* LIVING ROOM */
-
-.living{
-
-  left:0;
-
-  top:260px;
-
-  width:300px;
-
-  height:350px;
-
-  background:#5b5147;
-
-}
+.living{left:0;top:260px;width:300px;height:350px;background:#5b5147}
 
 .couch{
 
-  position:absolute;
+ position:absolute;left:30px;bottom:55px;width:230px;height:70px;
 
-  left:30px;
-
-  bottom:55px;
-
-  width:230px;
-
-  height:70px;
-
-  background:#4d4140;
-
-  border:7px solid #241b1b;
-
-  border-radius:8px;
+ background:#4d4140;border:7px solid #241b1b;border-radius:8px;
 
 }
 
 .couch:before{
 
-  content:"";
+ content:"";position:absolute;left:8px;top:-28px;width:205px;height:35px;
 
-  position:absolute;
-
-  left:8px;
-
-  top:-28px;
-
-  width:205px;
-
-  height:35px;
-
-  background:#57494a;
-
-  border:6px solid #241b1b;
-
-  border-radius:8px;
+ background:#57494a;border:6px solid #241b1b;border-radius:8px;
 
 }
 
 .tv{
 
-  position:absolute;
+ position:absolute;left:88px;top:40px;width:125px;height:70px;
 
-  left:88px;
-
-  top:40px;
-
-  width:125px;
-
-  height:70px;
-
-  background:#080808;
-
-  border:7px solid #222;
+ background:#080808;border:7px solid #222;
 
 }
 
 .tvStand{
 
-  position:absolute;
-
-  left:115px;
-
-  top:110px;
-
-  width:70px;
-
-  height:18px;
-
-  background:#35261c;
+ position:absolute;left:115px;top:110px;width:70px;height:18px;background:#35261c;
 
 }
 
-/* BATHROOM */
-
-.bathroom{
-
-  left:480px;
-
-  top:290px;
-
-  width:240px;
-
-  height:320px;
-
-  background:#7b817c;
-
-}
+.bathroom{left:480px;top:290px;width:240px;height:320px;background:#7b817c}
 
 .bath{
 
-  position:absolute;
+ position:absolute;left:20px;top:45px;width:130px;height:65px;
 
-  left:20px;
-
-  top:45px;
-
-  width:130px;
-
-  height:65px;
-
-  background:#bbbdb8;
-
-  border:6px solid #454844;
-
-  border-radius:35px;
+ background:#bbbdb8;border:6px solid #454844;border-radius:35px;
 
 }
 
 .toilet{
 
-  position:absolute;
+ position:absolute;right:20px;top:52px;width:60px;height:75px;
 
-  right:20px;
-
-  top:52px;
-
-  width:60px;
-
-  height:75px;
-
-  background:#d0d0cc;
-
-  border:5px solid #555;
-
-  border-radius:25px;
+ background:#d0d0cc;border:5px solid #555;border-radius:25px;
 
 }
 
 .sink{
 
-  position:absolute;
+ position:absolute;left:25px;bottom:55px;width:100px;height:55px;
 
-  left:25px;
-
-  bottom:55px;
-
-  width:100px;
-
-  height:55px;
-
-  background:#bbbdb8;
-
-  border:5px solid #555;
+ background:#bbbdb8;border:5px solid #555;
 
 }
 
-/* STORAGE */
-
 .storage{
 
-  position:absolute;
+ position:absolute;left:15px;top:270px;width:270px;height:120px;
 
-  left:15px;
-
-  top:270px;
-
-  width:270px;
-
-  height:120px;
-
-  background:#392d25;
-
-  border:6px solid #1c130e;
+ background:#392d25;border:6px solid #1c130e;
 
 }
 
 .storageBox{
 
-  position:absolute;
+ position:absolute;width:55px;height:42px;background:#715035;
 
-  width:55px;
-
-  height:42px;
-
-  background:#715035;
-
-  border:3px solid #382719;
+ border:3px solid #382719;
 
 }
-
-/* DOORS */
 
 .door{
 
-  position:absolute;
+ position:absolute;z-index:15;width:48px;height:15px;
 
-  z-index:15;
+ background:#9a754e;border:3px solid #25180f;cursor:pointer;
 
-  width:48px;
-
-  height:15px;
-
-  background:#9a754e;
-
-  border:3px solid #25180f;
-
-  cursor:pointer;
-
-  box-shadow:0 0 10px rgba(0,0,0,.5);
+ box-shadow:0 0 10px rgba(0,0,0,.5);
 
 }
 
-.door.vertical{
-
-  width:15px;
-
-  height:48px;
-
-}
-
-.door:hover{
-
-  background:#c49a68;
-
-}
+.door:hover{background:#c49a68}
 
 .doorLabel{
 
-  position:absolute;
+ position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
 
-  left:50%;
-
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  color:#fff;
-
-  font-size:7px;
-
-  white-space:nowrap;
-
-  pointer-events:none;
+ color:#fff;font-size:7px;white-space:nowrap;pointer-events:none;
 
 }
 
 /* =========================================================
 
-   PLAYER
+ KILLER
 
 ========================================================= */
 
 #killer{
 
-  position:absolute;
-
-  z-index:100;
-
-  width:58px;
-
-  height:82px;
-
-  pointer-events:none;
+ position:absolute;z-index:100;width:58px;height:82px;pointer-events:none;
 
 }
 
 .killerHead{
 
-  position:absolute;
+ position:absolute;left:13px;top:0;width:32px;height:34px;border-radius:50%;
 
-  left:13px;
-
-  top:0;
-
-  width:32px;
-
-  height:34px;
-
-  border-radius:50%;
-
-  background:#b52d2d;
-
-  border:3px solid #320808;
+ background:#b52d2d;border:3px solid #320808;
 
 }
 
 .killerEye{
 
-  position:absolute;
+ position:absolute;top:14px;width:6px;height:6px;border-radius:50%;
 
-  top:14px;
-
-  width:6px;
-
-  height:6px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  box-shadow:0 0 7px #fff;
+ background:#fff;box-shadow:0 0 7px #fff;
 
 }
 
-.killerEye.a{left:6px}
-
-.killerEye.b{right:6px}
+.killerEye.a{left:6px}.killerEye.b{right:6px}
 
 .killerBody{
 
-  position:absolute;
+ position:absolute;left:8px;bottom:0;width:42px;height:52px;
 
-  left:8px;
-
-  bottom:0;
-
-  width:42px;
-
-  height:52px;
-
-  background:#3a1010;
-
-  border:3px solid #180505;
-
-  border-radius:9px 9px 4px 4px;
+ background:#3a1010;border:3px solid #180505;border-radius:9px 9px 4px 4px;
 
 }
 
 .killerWeapon{
 
-  position:absolute;
+ position:absolute;right:-20px;bottom:8px;width:8px;height:50px;
 
-  right:-20px;
-
-  bottom:8px;
-
-  width:8px;
-
-  height:50px;
-
-  background:#aaa;
-
-  transform:rotate(-35deg);
+ background:#aaa;transform:rotate(-35deg);
 
 }
 
-/* ZOMBIE RED BASE */
+/* RED BASE ZOMBIE */
 
 #killer.zombie .killerHead{
 
-  background:
+ background:
 
-    radial-gradient(circle at 35% 30%,#240606 0 4px,transparent 5px),
+ radial-gradient(circle at 35% 30%,#240606 0 4px,transparent 5px),
 
-    radial-gradient(circle at 68% 34%,#240606 0 4px,transparent 5px),
+ radial-gradient(circle at 68% 34%,#240606 0 4px,transparent 5px),
 
-    #b52d2d;
+ #b52d2d;
 
 }
 
 #killer.zombie .killerBody{
 
-  background:linear-gradient(90deg,#4b0b0b,#bd3030,#480909);
+ background:linear-gradient(90deg,#4b0b0b,#bd3030,#480909);
 
 }
 
-#killer.zombie .killerEye{
+#killer.zombie .killerEye{display:block}
 
-  display:block;
-
-}
-
-/* GREEN SKIN */
+/* GREEN */
 
 #killer.greenSkin .killerHead{
 
-  background:
+ background:
 
-    radial-gradient(circle at 35% 30%,#081208 0 4px,transparent 5px),
+ radial-gradient(circle at 35% 30%,#081208 0 4px,transparent 5px),
 
-    radial-gradient(circle at 68% 34%,#081208 0 4px,transparent 5px),
+ radial-gradient(circle at 68% 34%,#081208 0 4px,transparent 5px),
 
-    #4f9b54;
+ #4f9b54;
 
-  border-color:#122a14;
+ border-color:#122a14;
 
 }
 
 #killer.greenSkin .killerBody{
 
-  background:linear-gradient(90deg,#193c1d,#579b5a,#193c1d);
+ background:linear-gradient(90deg,#193c1d,#579b5a,#193c1d);
 
-  border-color:#122a14;
-
-}
-
-#killer.greenSkin .killerEye{
-
-  display:block;
+ border-color:#122a14;
 
 }
 
 /* BUTCHER */
 
-#killer.butcher .killerHead{
+#killer.butcher .killerHead{background:#a87559;border-color:#291810}
 
-  background:#a87559;
+#killer.butcher .killerBody{background:linear-gradient(#343434,#101010);border-color:#111}
 
-  border-color:#291810;
-
-}
-
-#killer.butcher .killerBody{
-
-  background:linear-gradient(#343434,#101010);
-
-  border-color:#111;
-
-}
-
-#killer.butcher .killerEye{
-
-  display:none;
-
-}
+#killer.butcher .killerEye{display:none}
 
 /* STALKER */
 
-#killer.stalker .killerHead{
+#killer.stalker .killerHead{background:#bd8b6e;border-color:#291810}
 
-  background:#bd8b6e;
+#killer.stalker .killerBody{background:linear-gradient(#171717,#050505);border-color:#050505}
 
-  border-color:#291810;
-
-}
-
-#killer.stalker .killerBody{
-
-  background:linear-gradient(#171717,#050505);
-
-  border-color:#050505;
-
-}
-
-#killer.stalker .killerEye{
-
-  display:none;
-
-}
+#killer.stalker .killerEye{display:none}
 
 /* CREATOR */
 
 #killer.creatorSkin .killerHead{
 
-  background:
+ background:
 
-    radial-gradient(circle at 35% 30%,#050505 0 4px,transparent 5px),
+ radial-gradient(circle at 35% 30%,#050505 0 4px,transparent 5px),
 
-    radial-gradient(circle at 68% 34%,#050505 0 4px,transparent 5px),
+ radial-gradient(circle at 68% 34%,#050505 0 4px,transparent 5px),
 
-    linear-gradient(135deg,#6b22a8,#35104f);
+ linear-gradient(135deg,#6b22a8,#35104f);
 
-  border-color:#170722;
+ border-color:#170722;
 
 }
 
 #killer.creatorSkin .killerBody{
 
-  background:linear-gradient(90deg,#170b22,#6e29a7,#170b22);
+ background:linear-gradient(90deg,#170b22,#6e29a7,#170b22);
 
-  border-color:#170722;
+ border-color:#170722;
+
+}
+
+/* FIREWORK BUTCHER */
+
+#killer.fireworkButcher .killerHead{
+
+ background:#a87559;
+
+ border-color:#291810;
 
 }
 
-/* =========================================================
+#killer.fireworkButcher .killerBody{
 
-   SURVIVORS
+ background:
 
-========================================================= */
+ linear-gradient(90deg,#151515,#383838,#151515);
 
-.survivor{
-
-  position:absolute;
-
-  width:38px;
-
-  height:52px;
-
-  z-index:80;
+ border-color:#111;
 
 }
+
+#killer.fireworkButcher .killerEye{display:none}
+
+#killer.fireworkButcher:before{
+
+ content:"✦";
+
+ position:absolute;
+
+ z-index:-1;
+
+ left:-30px;
+
+ top:-25px;
+
+ font-size:75px;
+
+ color:white;
+
+ text-shadow:
+
+ 22px 0 #aaa,
+
+ -22px 0 #777,
+
+ 0 22px #aaa,
+
+ 0 -22px #777;
+
+ animation:burst 1s infinite alternate;
+
+}
+
+#killer.fireworkButcher:after{
+
+ content:"🎆";
+
+ position:absolute;
+
+ z-index:2;
+
+ right:-30px;
+
+ top:-25px;
+
+ font-size:25px;
+
+}
+
+/* SURVIVORS */
+
+.survivor{position:absolute;width:38px;height:52px;z-index:80}
 
 .survivorHead{
 
-  position:absolute;
+ position:absolute;left:10px;top:0;width:19px;height:19px;
 
-  left:10px;
-
-  top:0;
-
-  width:19px;
-
-  height:19px;
-
-  border-radius:50%;
-
-  background:#b98768;
-
-  border:2px solid #2c1c15;
+ border-radius:50%;background:#b98768;border:2px solid #2c1c15;
 
 }
 
 .survivorBody{
 
-  position:absolute;
+ position:absolute;left:6px;bottom:0;width:26px;height:34px;
 
-  left:6px;
-
-  bottom:0;
-
-  width:26px;
-
-  height:34px;
-
-  background:#4d6872;
-
-  border:2px solid #1c2528;
-
-  border-radius:7px;
+ background:#4d6872;border:2px solid #1c2528;border-radius:7px;
 
 }
 
-/* =========================================================
+/* HUD */
 
-   HUD
+#hud{position:absolute;inset:0;z-index:200;pointer-events:none}
 
-========================================================= */
-
-#hud{
-
-  position:absolute;
-
-  inset:0;
-
-  z-index:200;
-
-  pointer-events:none;
-
-}
-
-.hudTop{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:5px;
-
-  padding:9px;
-
-}
+.hudTop{display:flex;justify-content:space-between;gap:5px;padding:9px}
 
 .hudBox{
 
-  background:rgba(0,0,0,.82);
+ background:rgba(0,0,0,.82);border:1px solid #444;
 
-  border:1px solid #444;
-
-  padding:7px 9px;
-
-  border-radius:4px;
-
-  font-size:10px;
+ padding:7px 9px;border-radius:4px;font-size:10px;
 
 }
 
 #objective{
 
-  position:absolute;
+ position:absolute;top:53px;left:50%;transform:translateX(-50%);
 
-  top:53px;
+ width:90%;max-width:450px;padding:8px;text-align:center;
 
-  left:50%;
-
-  transform:translateX(-50%);
-
-  width:90%;
-
-  max-width:450px;
-
-  padding:8px;
-
-  text-align:center;
-
-  background:rgba(0,0,0,.82);
-
-  border:1px solid #444;
-
-  font-size:10px;
+ background:rgba(0,0,0,.82);border:1px solid #444;font-size:10px;
 
 }
 
 #matchTimer{
 
-  position:absolute;
+ position:absolute;top:91px;left:50%;transform:translateX(-50%);
 
-  top:91px;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  color:#d88;
-
-  font-weight:bold;
-
-  font-size:12px;
+ color:#d88;font-weight:bold;font-size:12px;
 
 }
 
-/* =========================================================
-
-   JOYSTICK
-
-========================================================= */
+/* JOYSTICK */
 
 #joystick{
 
-  position:absolute;
+ position:absolute;z-index:250;left:20px;bottom:20px;
 
-  z-index:250;
+ width:130px;height:130px;border-radius:50%;
 
-  left:20px;
+ background:rgba(0,0,0,.42);
 
-  bottom:20px;
-
-  width:130px;
-
-  height:130px;
-
-  border-radius:50%;
-
-  background:rgba(0,0,0,.42);
-
-  border:2px solid rgba(255,255,255,.18);
+ border:2px solid rgba(255,255,255,.18);
 
 }
 
 #joystickKnob{
 
-  position:absolute;
+ position:absolute;left:40px;top:40px;width:50px;height:50px;
 
-  left:40px;
+ border-radius:50%;background:rgba(160,160,160,.45);
 
-  top:40px;
-
-  width:50px;
-
-  height:50px;
-
-  border-radius:50%;
-
-  background:rgba(160,160,160,.45);
-
-  border:2px solid rgba(255,255,255,.35);
+ border:2px solid rgba(255,255,255,.35);
 
 }
 
 .actionControls{
 
-  position:absolute;
+ position:absolute;right:16px;bottom:18px;z-index:250;
 
-  right:16px;
-
-  bottom:18px;
-
-  z-index:250;
-
-  display:flex;
-
-  gap:8px;
+ display:flex;gap:8px;
 
 }
 
 .ctrl{
 
-  width:62px;
+ width:62px;height:62px;border-radius:50%;border:2px solid #555;
 
-  height:62px;
-
-  border-radius:50%;
-
-  border:2px solid #555;
-
-  background:rgba(10,10,10,.88);
-
-  color:#fff;
-
-  font-size:22px;
+ background:rgba(10,10,10,.88);color:#fff;font-size:22px;
 
 }
 
-.ctrl:active{
+.ctrl:active{background:#444}
 
-  background:#444;
+.attack{width:74px;height:74px;border-color:#813737}
 
-}
-
-.attack{
-
-  width:74px;
-
-  height:74px;
-
-  border-color:#813737;
-
-}
-
-/* =========================================================
-
-   POPUPS
-
-========================================================= */
+/* POPUPS */
 
 #message{
 
-  position:absolute;
+ position:absolute;z-index:500;left:50%;bottom:105px;
 
-  z-index:500;
+ transform:translateX(-50%);background:rgba(0,0,0,.93);
 
-  left:50%;
+ border:1px solid #555;padding:10px 15px;border-radius:5px;
 
-  bottom:105px;
-
-  transform:translateX(-50%);
-
-  background:rgba(0,0,0,.93);
-
-  border:1px solid #555;
-
-  padding:10px 15px;
-
-  border-radius:5px;
-
-  opacity:0;
-
-  pointer-events:none;
-
-  transition:.2s;
-
-  white-space:nowrap;
+ opacity:0;pointer-events:none;transition:.2s;white-space:nowrap;
 
 }
 
-#message.show{
-
-  opacity:1;
-
-}
+#message.show{opacity:1}
 
 .popupScreen{
 
-  position:absolute;
+ position:absolute;inset:0;z-index:700;display:none;
 
-  inset:0;
-
-  z-index:700;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:rgba(0,0,0,.9);
+ align-items:center;justify-content:center;background:rgba(0,0,0,.9);
 
 }
 
 .popup{
 
-  width:min(90%,420px);
+ width:min(90%,420px);background:#111;border:2px solid #444;
 
-  background:#111;
-
-  border:2px solid #444;
-
-  padding:28px;
-
-  text-align:center;
+ padding:28px;text-align:center;
 
 }
 
-.popup h1{
-
-  margin:0 0 10px;
-
-  font-size:34px;
-
-}
+.popup h1{margin:0 0 10px;font-size:34px}
 
 .popup button{
 
-  display:block;
+ display:block;width:100%;margin-top:10px;padding:13px;
 
-  width:100%;
-
-  margin-top:10px;
-
-  padding:13px;
-
-  background:#252525;
-
-  color:#fff;
-
-  border:1px solid #555;
+ background:#252525;color:#fff;border:1px solid #555;
 
 }
 
-/* =========================================================
+/* APP INSTALL */
 
-   LEVEL PANEL
+#installPrompt{
 
-========================================================= */
+ display:none;
 
-.levelBox{
+ position:absolute;
 
-  width:min(92%,500px);
+ z-index:800;
 
-  margin:20px auto;
+ left:50%;bottom:20px;
 
-  padding:20px;
+ transform:translateX(-50%);
 
-  background:#141414;
+ width:min(92%,420px);
 
-  border:1px solid #444;
+ padding:15px;
 
-  border-radius:8px;
+ background:rgba(10,10,10,.96);
 
-  text-align:center;
+ border:1px solid #704040;
 
-}
+ border-radius:8px;
 
-.levelNumber{
+ text-align:center;
 
-  font-size:42px;
-
-  font-weight:1000;
+ box-shadow:0 10px 40px #000;
 
 }
 
-.xpBar{
+#installPrompt strong{display:block;margin-bottom:5px}
 
-  width:100%;
+#installPrompt span{display:block;color:#999;font-size:10px;margin-bottom:10px}
 
-  height:18px;
+.installBtn{
 
-  background:#050505;
+ padding:10px 18px;background:#713434;color:white;
 
-  border:1px solid #555;
-
-  border-radius:10px;
-
-  overflow:hidden;
-
-  margin:12px 0;
+ border:1px solid #955;border-radius:4px;font-weight:bold;
 
 }
 
-#xpFill{
-
-  height:100%;
-
-  width:0%;
-
-  background:linear-gradient(90deg,#8c3434,#d66);
-
-}
-
-/* =========================================================
-
-   RESPONSIVE
-
-========================================================= */
+/* RESPONSIVE */
 
 @media(max-width:520px){
 
-  .cards{
+ .cards{grid-template-columns:1fr;max-width:330px}
 
-    grid-template-columns:1fr;
+ .card{min-height:185px}
 
-    max-width:330px;
+ .lockerGrid{grid-template-columns:1fr 1fr}
 
-  }
+ .skinCard{min-height:175px}
 
-  .card{
+ .menuContent{top:4%}
 
-    min-height:185px;
+ .celebrationButcher{bottom:2%;transform:translateX(-50%) scale(.85)}
 
-  }
+ .menuHouse{height:42%}
 
-  .lockerGrid{
+}
 
-    grid-template-columns:1fr 1fr;
+@media(max-height:700px){
 
-  }
+ .menuContent{top:2%}
 
-  .skinCard{
+ .logo{font-size:42px}
 
-    min-height:175px;
+ .menuBtn{padding:10px;margin:5px 0}
 
-  }
-
-  .menuContent{
-
-    top:5%;
-
-  }
+ .celebrationButcher{transform:translateX(-50%) scale(.65);bottom:-7%}
 
 }
 
@@ -2448,121 +1410,103 @@ button{
 
 <!-- =======================================================
 
-     MENU
+     MENU — 1.5 MINI CELEBRATION
 
 ======================================================= -->
 
 <div id="menu">
 
-  <div class="stars"></div>
+ <div class="firework fw1"></div>
 
-  <div class="menuMoon"></div>
+ <div class="firework fw2"></div>
 
-  <div class="menuHouse">
+ <div class="firework fw3"></div>
 
-    <div class="menuRoof"></div>
+ <div class="firework fw4"></div>
 
-    <div class="menuBody">
+ <div class="menuHouse">
 
-      <div class="menuWindow a"></div>
+  <div class="menuRoof"></div>
 
-      <div class="menuWindow b"></div>
+  <div class="menuBody">
 
-      <div class="menuDoor"></div>
+   <div class="menuWindow a"></div>
 
-    </div>
+   <div class="menuWindow b"></div>
 
-  </div>
-
-  <div class="menuZombie">
-
-    <div class="menuZombieHead">
-
-      <div class="menuZombieEye a"></div>
-
-      <div class="menuZombieEye b"></div>
-
-      <div class="menuZombieMouth"></div>
-
-    </div>
-
-    <div class="menuZombieBody"></div>
-
-    <div class="menuZombieArm a"></div>
-
-    <div class="menuZombieArm b"></div>
-
-    <div class="menuZombieLeg a"></div>
-
-    <div class="menuZombieLeg b"></div>
-
-    <div class="menuZombieWeapon"></div>
+   <div class="menuDoor"></div>
 
   </div>
 
-  <div class="menuContent">
+ </div>
 
-    <div class="logo">
+ <!-- BUTCHER WATCHING FIREWORKS -->
 
-      HOUSES
+ <div class="celebrationButcher">
 
-      <span class="logoSmall">OF HORROR</span>
+  <div class="cbFireworks"></div>
 
-    </div>
+  <div class="cbHead">
 
-    <div class="version">
-
-      VERSION 1.5 — THE REAL HOUSE
-
-    </div>
-
-    <button class="menuBtn red"
-
-            onclick="openKillers()">
-
-      🔪 PLAY
-
-    </button>
-
-    <button class="menuBtn"
-
-            onclick="openLocker()">
-
-      🔒 LOCKER ROOM
-
-    </button>
-
-    <button class="menuBtn"
-
-            onclick="openShop()">
-
-      🛒 ITEM SHOP
-
-    </button>
-
-    <button class="menuBtn"
-
-            onclick="openLevels()">
-
-      ⭐ LEVELS
-
-    </button>
-
-    <button class="menuBtn"
-
-            onclick="openCreator()">
-
-      👑 CREATOR CODE
-
-    </button>
-
-    <div class="menuFooter">
-
-      1.5 PART 2 • THE REAL HOUSE
-
-    </div>
+   <div class="cbMask"></div>
 
   </div>
+
+  <div class="cbBody">
+
+   <div class="cbApron"></div>
+
+  </div>
+
+  <div class="cbArm a"></div>
+
+  <div class="cbArm b"></div>
+
+  <div class="cbWeapon"></div>
+
+ </div>
+
+ <div class="menuContent">
+
+  <div class="logo">
+
+   HOUSES
+
+   <span class="logoSmall">OF HORROR</span>
+
+   <span class="celebrationLogoBlood">🩸 BLOOD • FIREWORKS • HORROR 🩸</span>
+
+  </div>
+
+  <div class="version">
+
+   VERSION 1.5 — MINI CELEBRATION
+
+  </div>
+
+  <div class="celebrationBadge">
+
+   🎆 1.5 MINI CELEBRATION 🎆
+
+  </div>
+
+  <button class="menuBtn red" onclick="openKillers()">🔪 PLAY</button>
+
+  <button class="menuBtn" onclick="openLocker()">🔒 LOCKER ROOM</button>
+
+  <button class="menuBtn" onclick="openShop()">🛒 ITEM SHOP</button>
+
+  <button class="menuBtn" onclick="openLevels()">⭐ LEVELS</button>
+
+  <button class="menuBtn" onclick="openCreator()">👑 CREATOR CODE</button>
+
+  <div class="menuFooter">
+
+   1.5 MINI CELEBRATION • THE REAL HOUSE
+
+  </div>
+
+ </div>
 
 </div>
 
@@ -2574,491 +1518,253 @@ button{
 
 <div id="killerPanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">CHOOSE YOUR KILLER</div>
 
-    CHOOSE YOUR KILLER
+ <div class="panelSub">EVERY KILLER HAS A DIFFERENT PLAYSTYLE.</div>
 
-  </div>
+ <div class="cards">
 
-  <div class="panelSub">
+  <div class="card">
 
-    EVERY KILLER HAS A DIFFERENT PLAYSTYLE.
+   <div class="cardIcon">🔪</div>
 
-  </div>
+   <div class="cardTitle">THE BUTCHER</div>
 
-  <div class="cards">
+   <div class="cardDesc">Balanced killer with reliable speed and damage.</div>
 
-    <div class="card">
-
-      <div class="cardIcon">🔪</div>
-
-      <div class="cardTitle">THE BUTCHER</div>
-
-      <div class="cardDesc">
-
-        Balanced killer with reliable speed and damage.
-
-      </div>
-
-      <button class="selectBtn"
-
-              onclick="selectKiller(1,this)">
-
-        SELECT
-
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="cardIcon">👤</div>
-
-      <div class="cardTitle">THE STALKER</div>
-
-      <div class="cardDesc">
-
-        Faster killer designed for aggressive chases.
-
-      </div>
-
-      <button class="selectBtn"
-
-              onclick="selectKiller(2,this)">
-
-        SELECT
-
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="cardIcon">🧟</div>
-
-      <div class="cardTitle">THE ZOMBIE</div>
-
-      <div class="cardDesc">
-
-        The original RED base Zombie. Tough and brutal.
-
-      </div>
-
-      <button class="selectBtn"
-
-              onclick="selectKiller(3,this)">
-
-        SELECT
-
-      </button>
-
-    </div>
+   <button class="selectBtn" onclick="selectKiller(1,this)">SELECT</button>
 
   </div>
 
-  <button class="backBtn"
+  <div class="card">
 
-          onclick="closePanels()">
+   <div class="cardIcon">👤</div>
 
-    BACK
+   <div class="cardTitle">THE STALKER</div>
 
-  </button>
+   <div class="cardDesc">Faster killer designed for aggressive chases.</div>
+
+   <button class="selectBtn" onclick="selectKiller(2,this)">SELECT</button>
+
+  </div>
+
+  <div class="card">
+
+   <div class="cardIcon">🧟</div>
+
+   <div class="cardTitle">THE ZOMBIE</div>
+
+   <div class="cardDesc">The original RED base Zombie. Tough and brutal.</div>
+
+   <button class="selectBtn" onclick="selectKiller(3,this)">SELECT</button>
+
+  </div>
+
+ </div>
+
+ <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =======================================================
-
-     HOUSE PANEL
-
-======================================================= -->
+<!-- HOUSE PANEL -->
 
 <div id="housePanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">CHOOSE HOUSE</div>
 
-    CHOOSE HOUSE
+ <div class="panelSub">ENTER THE HOUSE AND FIND EVERY SURVIVOR.</div>
 
-  </div>
+ <div class="cards">
 
-  <div class="panelSub">
+  <div class="card">
 
-    ENTER THE HOUSE AND FIND EVERY SURVIVOR.
+   <div class="cardIcon">🏚️</div>
 
-  </div>
+   <div class="cardTitle">ABANDONED HOME</div>
 
-  <div class="cards">
+   <div class="cardDesc">A connected house with bedrooms, kitchen, bathroom and living room.</div>
 
-    <div class="card">
-
-      <div class="cardIcon">🏚️</div>
-
-      <div class="cardTitle">ABANDONED HOME</div>
-
-      <div class="cardDesc">
-
-        A connected house with bedrooms,
-
-        kitchen, bathroom and living room.
-
-      </div>
-
-      <button class="selectBtn"
-
-              onclick="startHouse(1)">
-
-        ENTER
-
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="cardIcon">🌾</div>
-
-      <div class="cardTitle">FARMHOUSE</div>
-
-      <div class="cardDesc">
-
-        A larger environment surrounded
-
-        by an outdoor area.
-
-      </div>
-
-      <button class="selectBtn"
-
-              onclick="startHouse(2)">
-
-        ENTER
-
-      </button>
-
-    </div>
+   <button class="selectBtn" onclick="startHouse(1)">ENTER</button>
 
   </div>
 
-  <button class="backBtn"
+  <div class="card">
 
-          onclick="openKillers()">
+   <div class="cardIcon">🌾</div>
 
-    BACK
+   <div class="cardTitle">FARMHOUSE</div>
 
-  </button>
+   <div class="cardDesc">A larger environment surrounded by an outdoor area.</div>
+
+   <button class="selectBtn" onclick="startHouse(2)">ENTER</button>
+
+  </div>
+
+ </div>
+
+ <button class="backBtn" onclick="openKillers()">BACK</button>
 
 </div>
 
-<!-- =======================================================
-
-     LOCKER ROOM
-
-======================================================= -->
+<!-- LOCKER -->
 
 <div id="lockerPanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">LOCKER ROOM</div>
 
-    LOCKER ROOM
+ <div class="panelSub">EVERY SKIN YOU OWN LIVES HERE.</div>
 
-  </div>
+ <div id="lockerGrid" class="lockerGrid"></div>
 
-  <div class="panelSub">
-
-    EVERY SKIN YOU OWN LIVES HERE.
-
-  </div>
-
-  <div id="lockerGrid"
-
-       class="lockerGrid">
-
-  </div>
-
-  <button class="backBtn"
-
-          onclick="closePanels()">
-
-    BACK
-
-  </button>
+ <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =======================================================
-
-     SHOP
-
-======================================================= -->
+<!-- SHOP -->
 
 <div id="shopPanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">ITEM SHOP</div>
 
-    ITEM SHOP
+ <div class="shopCoins">
+
+  🪙 <span id="shopCoins">300</span>
+
+ </div>
+
+ <div class="shopGrid">
+
+  <div class="shopItem">
+
+   <div class="shopIcon">⚡</div>
+
+   <div class="shopName">SPEED</div>
+
+   <div class="shopDesc">Increase killer movement speed.</div>
+
+   <button class="buyBtn" onclick="buyUpgrade('speed')">100 COINS</button>
 
   </div>
 
-  <div class="shopCoins">
+  <div class="shopItem">
 
-    🪙 <span id="shopCoins">300</span>
+   <div class="shopIcon">💀</div>
+
+   <div class="shopName">DAMAGE</div>
+
+   <div class="shopDesc">Increase attack damage.</div>
+
+   <button class="buyBtn" onclick="buyUpgrade('damage')">125 COINS</button>
 
   </div>
 
-  <div class="shopGrid">
+  <div class="shopItem">
 
-    <div class="shopItem">
+   <div class="shopIcon">👁️</div>
 
-      <div class="shopIcon">⚡</div>
+   <div class="shopName">TRACKER</div>
 
-      <div class="shopName">SPEED</div>
+   <div class="shopDesc">Increase survivor search range.</div>
 
-      <div class="shopDesc">
-
-        Increase killer movement speed.
-
-      </div>
-
-      <button class="buyBtn"
-
-              onclick="buyUpgrade('speed')">
-
-        100 COINS
-
-      </button>
-
-    </div>
-
-    <div class="shopItem">
-
-      <div class="shopIcon">💀</div>
-
-      <div class="shopName">DAMAGE</div>
-
-      <div class="shopDesc">
-
-        Increase attack damage.
-
-      </div>
-
-      <button class="buyBtn"
-
-              onclick="buyUpgrade('damage')">
-
-        125 COINS
-
-      </button>
-
-    </div>
-
-    <div class="shopItem">
-
-      <div class="shopIcon">👁️</div>
-
-      <div class="shopName">TRACKER</div>
-
-      <div class="shopDesc">
-
-        Increase survivor search range.
-
-      </div>
-
-      <button class="buyBtn"
-
-              onclick="buyUpgrade('tracker')">
-
-        150 COINS
-
-      </button>
-
-    </div>
-
-    <div class="shopItem">
-
-      <div class="shopIcon">❤️</div>
-
-      <div class="shopName">TOUGHNESS</div>
-
-      <div class="shopDesc">
-
-        Increase maximum health.
-
-      </div>
-
-      <button class="buyBtn"
-
-              onclick="buyUpgrade('health')">
-
-        175 COINS
-
-      </button>
-
-    </div>
-
-    <!-- GREEN ZOMBIE -->
-
-    <div class="shopItem"
-
-         style="grid-column:1/-1;border-color:#397044;">
-
-      <div class="shopIcon">🟢</div>
-
-      <div class="shopName">
-
-        GREEN ZOMBIE
-
-      </div>
-
-      <div class="shopDesc"
-
-           id="greenSkinTimer">
-
-        LIMITED-TIME SKIN
-
-      </div>
-
-      <button class="buyBtn"
-
-              id="greenSkinBuy"
-
-              onclick="buyGreenSkin()">
-
-        3,000 COINS
-
-      </button>
-
-    </div>
+   <button class="buyBtn" onclick="buyUpgrade('tracker')">150 COINS</button>
 
   </div>
 
-  <button class="backBtn"
+  <div class="shopItem">
 
-          onclick="closePanels()">
+   <div class="shopIcon">❤️</div>
 
-    BACK
+   <div class="shopName">TOUGHNESS</div>
 
-  </button>
+   <div class="shopDesc">Increase maximum health.</div>
+
+   <button class="buyBtn" onclick="buyUpgrade('health')">175 COINS</button>
+
+  </div>
+
+  <div class="shopItem" style="grid-column:1/-1;border-color:#397044">
+
+   <div class="shopIcon">🟢</div>
+
+   <div class="shopName">GREEN ZOMBIE</div>
+
+   <div class="shopDesc" id="greenSkinTimer">LIMITED-TIME SKIN</div>
+
+   <button class="buyBtn" id="greenSkinBuy" onclick="buyGreenSkin()">3,000 COINS</button>
+
+  </div>
+
+  <!-- NEW FIREWORK SKIN -->
+
+  <div class="shopItem" style="grid-column:1/-1;border-color:#765d27">
+
+   <div class="shopIcon">🎆</div>
+
+   <div class="shopName">FIREWORK BUTCHER</div>
+
+   <div class="shopDesc">The official 1.5 Mini Celebration Butcher skin.</div>
+
+   <button class="buyBtn" id="fireworkSkinBuy" onclick="unlockFireworkSkin()">
+
+    1,500 COINS
+
+   </button>
+
+  </div>
+
+ </div>
+
+ <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =======================================================
-
-     LEVELS
-
-======================================================= -->
+<!-- LEVELS -->
 
 <div id="levelsPanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">LEVELS</div>
 
-    LEVELS
+ <div class="levelBox">
 
-  </div>
+  <div class="levelNumber">LEVEL <span id="levelDisplay">1</span></div>
 
-  <div class="levelBox">
+  <div><span id="xpDisplay">0</span> / <span id="xpNeeded">100</span> XP</div>
 
-    <div class="levelNumber">
+  <div class="xpBar"><div id="xpFill"></div></div>
 
-      LEVEL <span id="levelDisplay">1</span>
+  <p style="color:#777;font-size:11px">MAX LEVEL: 50</p>
 
-    </div>
+ </div>
 
-    <div>
+ <div class="panelSub">SKINS UNLOCK THROUGH LEVELS.</div>
 
-      <span id="xpDisplay">0</span>
-
-      /
-
-      <span id="xpNeeded">100</span>
-
-      XP
-
-    </div>
-
-    <div class="xpBar">
-
-      <div id="xpFill"></div>
-
-    </div>
-
-    <p style="color:#777;font-size:11px;">
-
-      MAX LEVEL: 50
-
-    </p>
-
-  </div>
-
-  <div class="panelSub">
-
-    SKINS UNLOCK THROUGH LEVELS.
-
-  </div>
-
-  <button class="backBtn"
-
-          onclick="closePanels()">
-
-    BACK
-
-  </button>
+ <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
-<!-- =======================================================
-
-     CREATOR CODE
-
-======================================================= -->
+<!-- CREATOR -->
 
 <div id="creatorPanel" class="panel">
 
-  <div class="panelTitle">
+ <div class="panelTitle">CREATOR</div>
 
-    CREATOR
+ <div class="creatorBox">
 
-  </div>
+  <h2>👑 CREATOR CODE</h2>
 
-  <div class="creatorBox">
+  <p>Enter the exclusive creator code to unlock the creator skin.</p>
 
-    <h2>👑 CREATOR CODE</h2>
+  <input id="creatorInput" class="creatorInput"
 
-    <p>
+   type="text" placeholder="ENTER CODE"
 
-      Enter the exclusive creator code
+   autocomplete="off">
 
-      to unlock the creator skin.
+  <button class="creatorRedeem" onclick="redeemCreatorCode()">REDEEM</button>
 
-    </p>
+ </div>
 
-    <input
-
-      id="creatorInput"
-
-      class="creatorInput"
-
-      type="text"
-
-      placeholder="ENTER CODE"
-
-      autocomplete="off">
-
-    <button class="creatorRedeem"
-
-            onclick="redeemCreatorCode()">
-
-      REDEEM
-
-    </button>
-
-  </div>
-
-  <button class="backBtn"
-
-          onclick="closePanels()">
-
-    BACK
-
-  </button>
+ <button class="backBtn" onclick="closePanels()">BACK</button>
 
 </div>
 
@@ -3070,473 +1776,271 @@ button{
 
 <div id="gameScreen">
 
-  <div id="world">
+ <div id="world">
 
-    <div id="map">
+  <div id="map">
 
-      <div class="outdoor">
+   <div class="outdoor">
 
-        <div class="grassPatch"
+    <div class="grassPatch" style="left:80px;top:110px"></div>
 
-             style="left:80px;top:110px;"></div>
+    <div class="grassPatch" style="left:1050px;top:180px"></div>
 
-        <div class="grassPatch"
+    <div class="grassPatch" style="left:1120px;top:600px"></div>
 
-             style="left:1050px;top:180px;"></div>
+    <div class="grassPatch" style="left:100px;top:700px"></div>
 
-        <div class="grassPatch"
+    <div class="tree" style="left:80px;top:250px"></div>
 
-             style="left:1120px;top:600px;"></div>
+    <div class="tree" style="left:1080px;top:80px"></div>
 
-        <div class="grassPatch"
+    <div class="tree" style="left:1180px;top:350px"></div>
 
-             style="left:100px;top:700px;"></div>
+    <div class="tree" style="left:1050px;top:720px"></div>
 
-        <div class="tree"
+    <div class="tree" style="left:150px;top:580px"></div>
 
-             style="left:80px;top:250px;"></div>
+    <div class="fence horizontal" style="left:20px;top:40px;width:1320px"></div>
 
-        <div class="tree"
+    <div class="fence horizontal" style="left:20px;bottom:40px;width:1320px"></div>
 
-             style="left:1080px;top:80px;"></div>
+    <div class="fence vertical" style="left:20px;top:40px;height:820px"></div>
 
-        <div class="tree"
+    <div class="fence vertical" style="right:20px;top:40px;height:820px"></div>
 
-             style="left:1180px;top:350px;"></div>
+   </div>
 
-        <div class="tree"
+   <div class="house">
 
-             style="left:1050px;top:720px;"></div>
+    <div class="houseLabel">ABANDONED HOME</div>
 
-        <div class="tree"
+    <div class="room bedroom" data-room="bedroom">
 
-             style="left:150px;top:580px;"></div>
+     <div class="roomName">BEDROOM</div>
 
-        <div class="fence horizontal"
+     <div class="bed">
 
-             style="left:20px;top:40px;width:1320px;"></div>
+      <div class="bedHead"></div>
 
-        <div class="fence horizontal"
+      <div class="blanket"></div>
 
-             style="left:20px;bottom:40px;width:1320px;"></div>
+      <div class="pillow"></div>
 
-        <div class="fence vertical"
+     </div>
 
-             style="left:20px;top:40px;height:820px;"></div>
-
-        <div class="fence vertical"
-
-             style="right:20px;top:40px;height:820px;"></div>
-
-      </div>
-
-      <!-- HOUSE -->
-
-      <div class="house">
-
-        <div class="houseLabel">
-
-          ABANDONED HOME
-
-        </div>
-
-        <!-- BEDROOM -->
-
-        <div class="room bedroom"
-
-             data-room="bedroom">
-
-          <div class="roomName">
-
-            BEDROOM
-
-          </div>
-
-          <div class="bed">
-
-            <div class="bedHead"></div>
-
-            <div class="blanket"></div>
-
-            <div class="pillow"></div>
-
-          </div>
-
-          <div class="dresser"></div>
-
-        </div>
-
-        <!-- HALL -->
-
-        <div class="room hall"
-
-             data-room="hall">
-
-          <div class="roomName">
-
-            HALLWAY
-
-          </div>
-
-          <div class="hallRunner"></div>
-
-        </div>
-
-        <!-- KITCHEN -->
-
-        <div class="room kitchen"
-
-             data-room="kitchen">
-
-          <div class="roomName">
-
-            KITCHEN
-
-          </div>
-
-          <div class="counter top"></div>
-
-          <div class="stove"></div>
-
-          <div class="fridge"></div>
-
-          <div class="counter bottom"></div>
-
-        </div>
-
-        <!-- LIVING -->
-
-        <div class="room living"
-
-             data-room="living">
-
-          <div class="roomName">
-
-            LIVING ROOM
-
-          </div>
-
-          <div class="tv"></div>
-
-          <div class="tvStand"></div>
-
-          <div class="couch"></div>
-
-        </div>
-
-        <!-- BATHROOM -->
-
-        <div class="room bathroom"
-
-             data-room="bathroom">
-
-          <div class="roomName">
-
-            BATHROOM
-
-          </div>
-
-          <div class="bath"></div>
-
-          <div class="toilet"></div>
-
-          <div class="sink"></div>
-
-        </div>
-
-        <!-- STORAGE -->
-
-        <div class="storage">
-
-          <div class="storageBox"
-
-               style="left:15px;top:15px;"></div>
-
-          <div class="storageBox"
-
-               style="left:80px;top:15px;"></div>
-
-          <div class="storageBox"
-
-               style="left:145px;top:15px;"></div>
-
-        </div>
-
-        <!-- DOORS -->
-
-        <div class="door"
-
-             style="left:275px;top:120px;"
-
-             onclick="openDoor('Bedroom')">
-
-          <span class="doorLabel">
-
-            OPEN
-
-          </span>
-
-        </div>
-
-        <div class="door"
-
-             style="left:455px;top:120px;"
-
-             onclick="openDoor('Kitchen')">
-
-          <span class="doorLabel">
-
-            OPEN
-
-          </span>
-
-        </div>
-
-        <div class="door"
-
-             style="left:455px;top:430px;"
-
-             onclick="openDoor('Bathroom')">
-
-          <span class="doorLabel">
-
-            OPEN
-
-          </span>
-
-        </div>
-
-        <div class="door"
-
-             style="left:120px;top:250px;"
-
-             onclick="openDoor('Living Room')">
-
-          <span class="doorLabel">
-
-            OPEN
-
-          </span>
-
-        </div>
-
-      </div>
-
-      <!-- KILLER -->
-
-      <div id="killer"
-
-           class="zombie">
-
-        <div class="killerHead">
-
-          <div class="killerEye a"></div>
-
-          <div class="killerEye b"></div>
-
-        </div>
-
-        <div class="killerBody"></div>
-
-        <div class="killerWeapon"></div>
-
-      </div>
-
-      <!-- SURVIVORS -->
-
-      <div id="survivor1"
-
-           class="survivor">
-
-        <div class="survivorHead"></div>
-
-        <div class="survivorBody"></div>
-
-      </div>
-
-      <div id="survivor2"
-
-           class="survivor">
-
-        <div class="survivorHead"></div>
-
-        <div class="survivorBody"></div>
-
-      </div>
-
-      <div id="survivor3"
-
-           class="survivor">
-
-        <div class="survivorHead"></div>
-
-        <div class="survivorBody"></div>
-
-      </div>
-
-      <div id="survivor4"
-
-           class="survivor">
-
-        <div class="survivorHead"></div>
-
-        <div class="survivorBody"></div>
-
-      </div>
+     <div class="dresser"></div>
 
     </div>
 
-  </div>
+    <div class="room hall" data-room="hall">
 
-  <!-- HUD -->
+     <div class="roomName">HALLWAY</div>
 
-  <div id="hud">
-
-    <div class="hudTop">
-
-      <div class="hudBox">
-
-        ❤️ <span id="health">100</span>
-
-      </div>
-
-      <div class="hudBox">
-
-        🪙 <span id="coins">300</span>
-
-      </div>
-
-      <div class="hudBox">
-
-        ⭐ LV <span id="hudLevel">1</span>
-
-      </div>
+     <div class="hallRunner"></div>
 
     </div>
 
-    <div id="objective">
+    <div class="room kitchen" data-room="kitchen">
 
-      FIND AND ELIMINATE SURVIVORS — 0 / 3
+     <div class="roomName">KITCHEN</div>
+
+     <div class="counter top"></div>
+
+     <div class="stove"></div>
+
+     <div class="fridge"></div>
+
+     <div class="counter bottom"></div>
 
     </div>
 
-    <div id="matchTimer">
+    <div class="room living" data-room="living">
 
-      SURVIVORS ESCAPE IN: 90
+     <div class="roomName">LIVING ROOM</div>
+
+     <div class="tv"></div>
+
+     <div class="tvStand"></div>
+
+     <div class="couch"></div>
 
     </div>
 
+    <div class="room bathroom" data-room="bathroom">
+
+     <div class="roomName">BATHROOM</div>
+
+     <div class="bath"></div>
+
+     <div class="toilet"></div>
+
+     <div class="sink"></div>
+
+    </div>
+
+    <div class="storage">
+
+     <div class="storageBox" style="left:15px;top:15px"></div>
+
+     <div class="storageBox" style="left:80px;top:15px"></div>
+
+     <div class="storageBox" style="left:145px;top:15px"></div>
+
+    </div>
+
+    <div class="door" style="left:275px;top:120px" onclick="openDoor('Bedroom')">
+
+     <span class="doorLabel">OPEN</span>
+
+    </div>
+
+    <div class="door" style="left:455px;top:120px" onclick="openDoor('Kitchen')">
+
+     <span class="doorLabel">OPEN</span>
+
+    </div>
+
+    <div class="door" style="left:455px;top:430px" onclick="openDoor('Bathroom')">
+
+     <span class="doorLabel">OPEN</span>
+
+    </div>
+
+    <div class="door" style="left:120px;top:250px" onclick="openDoor('Living Room')">
+
+     <span class="doorLabel">OPEN</span>
+
+    </div>
+
+   </div>
+
+   <div id="killer" class="zombie">
+
+    <div class="killerHead">
+
+     <div class="killerEye a"></div>
+
+     <div class="killerEye b"></div>
+
+    </div>
+
+    <div class="killerBody"></div>
+
+    <div class="killerWeapon"></div>
+
+   </div>
+
+   <div id="survivor1" class="survivor">
+
+    <div class="survivorHead"></div><div class="survivorBody"></div>
+
+   </div>
+
+   <div id="survivor2" class="survivor">
+
+    <div class="survivorHead"></div><div class="survivorBody"></div>
+
+   </div>
+
+   <div id="survivor3" class="survivor">
+
+    <div class="survivorHead"></div><div class="survivorBody"></div>
+
+   </div>
+
+   <div id="survivor4" class="survivor">
+
+    <div class="survivorHead"></div><div class="survivorBody"></div>
+
+   </div>
+
   </div>
 
-  <!-- JOYSTICK -->
+ </div>
 
-  <div id="joystick">
+ <div id="hud">
 
-    <div id="joystickKnob"></div>
+  <div class="hudTop">
 
-  </div>
+   <div class="hudBox">❤️ <span id="health">100</span></div>
 
-  <!-- ACTIONS -->
+   <div class="hudBox">🪙 <span id="coins">300</span></div>
 
-  <div class="actionControls">
-
-    <button class="ctrl"
-
-            onclick="search()">
-
-      🔍
-
-    </button>
-
-    <button class="ctrl attack"
-
-            onclick="attack()">
-
-      🔪
-
-    </button>
+   <div class="hudBox">⭐ LV <span id="hudLevel">1</span></div>
 
   </div>
+
+  <div id="objective">FIND AND ELIMINATE SURVIVORS — 0 / 3</div>
+
+  <div id="matchTimer">SURVIVORS ESCAPE IN: 90</div>
+
+ </div>
+
+ <div id="joystick">
+
+  <div id="joystickKnob"></div>
+
+ </div>
+
+ <div class="actionControls">
+
+  <button class="ctrl" onclick="search()">🔍</button>
+
+  <button class="ctrl attack" onclick="attack()">🔪</button>
+
+ </div>
 
 </div>
 
-<!-- =======================================================
-
-     MESSAGE
-
-======================================================= -->
+<!-- MESSAGE -->
 
 <div id="message"></div>
 
-<!-- =======================================================
+<!-- COMPLETE -->
 
-     COMPLETE
+<div id="completeScreen" class="popupScreen">
 
-======================================================= -->
+ <div class="popup">
 
-<div id="completeScreen"
+  <h1>HOUSE CLEARED</h1>
 
-     class="popupScreen">
+  <p id="completeText">Every survivor was eliminated.</p>
 
-  <div class="popup">
+  <button onclick="restartHouse()">PLAY AGAIN</button>
 
-    <h1>HOUSE CLEARED</h1>
+  <button onclick="returnMenu()">MAIN MENU</button>
 
-    <p id="completeText">
-
-      Every survivor was eliminated.
-
-    </p>
-
-    <button onclick="restartHouse()">
-
-      PLAY AGAIN
-
-    </button>
-
-    <button onclick="returnMenu()">
-
-      MAIN MENU
-
-    </button>
-
-  </div>
+ </div>
 
 </div>
 
-<!-- =======================================================
+<!-- DEATH -->
 
-     DEATH
+<div id="deathScreen" class="popupScreen">
 
-======================================================= -->
+ <div class="popup">
 
-<div id="deathScreen"
+  <h1>YOU DIED</h1>
 
-     class="popupScreen">
+  <p>The survivors fought back.</p>
 
-  <div class="popup">
+  <button onclick="restartHouse()">TRY AGAIN</button>
 
-    <h1>YOU DIED</h1>
+  <button onclick="returnMenu()">MAIN MENU</button>
 
-    <p>
+ </div>
 
-      The survivors fought back.
+</div>
 
-    </p>
+<!-- INSTALL PROMPT -->
 
-    <button onclick="restartHouse()">
+<div id="installPrompt">
 
-      TRY AGAIN
+ <strong>📱 INSTALL HOUSES OF HORROR</strong>
 
-    </button>
+ <span>Add Houses of Horror to your Home Screen like an app.</span>
 
-    <button onclick="returnMenu()">
-
-      MAIN MENU
-
-    </button>
-
-  </div>
+ <button class="installBtn" onclick="installApp()">INSTALL APP</button>
 
 </div>
 
@@ -3546,1363 +2050,1063 @@ button{
 
    SAVE SYSTEM
 
+   IMPORTANT: SAME SAVE PREFIX AS ORIGINAL 1.5
+
 ========================================================= */
 
-const SAVE_PREFIX = "horror15_";
+const SAVE_PREFIX="horror15_";
 
-let coins =
+let coins=Number(localStorage.getItem(SAVE_PREFIX+"coins")||300);
 
-  Number(localStorage.getItem(SAVE_PREFIX+"coins") || 300);
+let level=Number(localStorage.getItem(SAVE_PREFIX+"level")||1);
 
-let level =
+let xp=Number(localStorage.getItem(SAVE_PREFIX+"xp")||0);
 
-  Number(localStorage.getItem(SAVE_PREFIX+"level") || 1);
+let upgrades={
 
-let xp =
+ speed:Number(localStorage.getItem(SAVE_PREFIX+"speed")||0),
 
-  Number(localStorage.getItem(SAVE_PREFIX+"xp") || 0);
+ damage:Number(localStorage.getItem(SAVE_PREFIX+"damage")||0),
 
-let upgrades = {
+ tracker:Number(localStorage.getItem(SAVE_PREFIX+"tracker")||0),
 
-  speed:Number(localStorage.getItem(SAVE_PREFIX+"speed") || 0),
-
-  damage:Number(localStorage.getItem(SAVE_PREFIX+"damage") || 0),
-
-  tracker:Number(localStorage.getItem(SAVE_PREFIX+"tracker") || 0),
-
-  health:Number(localStorage.getItem(SAVE_PREFIX+"health") || 0)
+ health:Number(localStorage.getItem(SAVE_PREFIX+"health")||0)
 
 };
 
-let unlockedSkins =
+let unlockedSkins=JSON.parse(
 
-  JSON.parse(
+ localStorage.getItem(SAVE_PREFIX+"skins")||'["zombie_base"]'
 
-    localStorage.getItem(
+);
 
-      SAVE_PREFIX+"skins"
+let equippedSkin=localStorage.getItem(SAVE_PREFIX+"equipped")||"zombie_base";
 
-    ) || '["zombie_base"]'
+let creatorUnlocked=
 
-  );
-
-let equippedSkin =
-
-  localStorage.getItem(
-
-    SAVE_PREFIX+"equipped"
-
-  ) || "zombie_base";
-
-let creatorUnlocked =
-
-  localStorage.getItem(
-
-    SAVE_PREFIX+"creator"
-
-  ) === "true";
+ localStorage.getItem(SAVE_PREFIX+"creator")==="true";
 
 /* =========================================================
 
-   LIMITED SKIN TIMER
+ GREEN TIMER — SAME ORIGINAL SAVE
 
 ========================================================= */
 
-let greenSkinEnd =
+let greenSkinEnd=Number(
 
-  Number(
+ localStorage.getItem(SAVE_PREFIX+"greenEnd")||0
 
-    localStorage.getItem(
-
-      SAVE_PREFIX+"greenEnd"
-
-    ) || 0
-
-  );
+);
 
 if(!greenSkinEnd){
 
-  greenSkinEnd =
+ greenSkinEnd=Date.now()+3*24*60*60*1000;
 
-    Date.now() +
-
-    (3 * 24 * 60 * 60 * 1000);
-
-  localStorage.setItem(
-
-    SAVE_PREFIX+"greenEnd",
-
-    greenSkinEnd
-
-  );
+ localStorage.setItem(SAVE_PREFIX+"greenEnd",greenSkinEnd);
 
 }
 
 /* =========================================================
 
-   GAME STATE
+ GAME STATE
 
 ========================================================= */
 
-let selectedKiller = 3;
+let selectedKiller=3;
 
-let currentHouse = 1;
+let currentHouse=1;
 
-let gameRunning = false;
+let gameRunning=false;
 
-let killer = {
+let killer={
 
-  x:700,
+ x:700,y:700,speed:3.2,
 
-  y:700,
-
-  speed:3.2,
-
-  health:100,
-
-  maxHealth:100,
-
-  damage:40
+ health:100,maxHealth:100,damage:40
 
 };
 
-let survivors = [];
+let survivors=[];
 
-let killed = 0;
+let killed=0;
 
-let matchTime = 90;
+let matchTime=90;
 
-let matchTimerInterval = null;
+let matchTimerInterval=null;
 
 /* =========================================================
 
-   ELEMENTS
+ ELEMENTS
 
 ========================================================= */
 
-const menu =
+const menu=document.getElementById("menu");
 
-  document.getElementById("menu");
+const killerPanel=document.getElementById("killerPanel");
 
-const killerPanel =
+const housePanel=document.getElementById("housePanel");
 
-  document.getElementById("killerPanel");
+const lockerPanel=document.getElementById("lockerPanel");
 
-const housePanel =
+const shopPanel=document.getElementById("shopPanel");
 
-  document.getElementById("housePanel");
+const levelsPanel=document.getElementById("levelsPanel");
 
-const lockerPanel =
+const creatorPanel=document.getElementById("creatorPanel");
 
-  document.getElementById("lockerPanel");
+const gameScreen=document.getElementById("gameScreen");
 
-const shopPanel =
+const map=document.getElementById("map");
 
-  document.getElementById("shopPanel");
+const killerEl=document.getElementById("killer");
 
-const levelsPanel =
+const messageEl=document.getElementById("message");
 
-  document.getElementById("levelsPanel");
+const joystick=document.getElementById("joystick");
 
-const creatorPanel =
-
-  document.getElementById("creatorPanel");
-
-const gameScreen =
-
-  document.getElementById("gameScreen");
-
-const map =
-
-  document.getElementById("map");
-
-const killerEl =
-
-  document.getElementById("killer");
-
-const messageEl =
-
-  document.getElementById("message");
-
-const joystick =
-
-  document.getElementById("joystick");
-
-const joystickKnob =
-
-  document.getElementById("joystickKnob");
+const joystickKnob=document.getElementById("joystickKnob");
 
 /* =========================================================
 
-   SAVE
+ SAVE
 
 ========================================================= */
 
 function saveData(){
 
-  localStorage.setItem(
+ localStorage.setItem(SAVE_PREFIX+"coins",coins);
 
-    SAVE_PREFIX+"coins",
+ localStorage.setItem(SAVE_PREFIX+"level",level);
 
-    coins
+ localStorage.setItem(SAVE_PREFIX+"xp",xp);
 
-  );
+ Object.keys(upgrades).forEach(type=>{
 
-  localStorage.setItem(
+  localStorage.setItem(SAVE_PREFIX+type,upgrades[type]);
 
-    SAVE_PREFIX+"level",
+ });
 
-    level
+ localStorage.setItem(
 
-  );
+  SAVE_PREFIX+"skins",
 
-  localStorage.setItem(
+  JSON.stringify(unlockedSkins)
 
-    SAVE_PREFIX+"xp",
+ );
 
-    xp
+ localStorage.setItem(SAVE_PREFIX+"equipped",equippedSkin);
 
-  );
-
-  Object.keys(upgrades).forEach(type=>{
-
-    localStorage.setItem(
-
-      SAVE_PREFIX+type,
-
-      upgrades[type]
-
-    );
-
-  });
-
-  localStorage.setItem(
-
-    SAVE_PREFIX+"skins",
-
-    JSON.stringify(unlockedSkins)
-
-  );
-
-  localStorage.setItem(
-
-    SAVE_PREFIX+"equipped",
-
-    equippedSkin
-
-  );
-
-  localStorage.setItem(
-
-    SAVE_PREFIX+"creator",
-
-    creatorUnlocked
-
-  );
+ localStorage.setItem(SAVE_PREFIX+"creator",creatorUnlocked);
 
 }
 
 /* =========================================================
 
-   PANELS
+ PANELS
 
 ========================================================= */
 
 function hideAllPanels(){
 
-  killerPanel.style.display="none";
+ killerPanel.style.display="none";
 
-  housePanel.style.display="none";
+ housePanel.style.display="none";
 
-  lockerPanel.style.display="none";
+ lockerPanel.style.display="none";
 
-  shopPanel.style.display="none";
+ shopPanel.style.display="none";
 
-  levelsPanel.style.display="none";
+ levelsPanel.style.display="none";
 
-  creatorPanel.style.display="none";
+ creatorPanel.style.display="none";
 
 }
 
 function openKillers(){
 
-  menu.style.display="none";
+ menu.style.display="none";
 
-  hideAllPanels();
+ hideAllPanels();
 
-  killerPanel.style.display="block";
+ killerPanel.style.display="block";
 
 }
 
 function openShop(){
 
-  menu.style.display="none";
+ menu.style.display="none";
 
-  hideAllPanels();
+ hideAllPanels();
 
-  shopPanel.style.display="block";
+ shopPanel.style.display="block";
 
-  updateShop();
+ updateShop();
 
 }
 
 function openLocker(){
 
-  menu.style.display="none";
+ menu.style.display="none";
 
-  hideAllPanels();
+ hideAllPanels();
 
-  lockerPanel.style.display="block";
+ lockerPanel.style.display="block";
 
-  renderLocker();
+ renderLocker();
 
 }
 
 function openLevels(){
 
-  menu.style.display="none";
+ menu.style.display="none";
 
-  hideAllPanels();
+ hideAllPanels();
 
-  levelsPanel.style.display="block";
+ levelsPanel.style.display="block";
 
-  updateLevelPanel();
+ updateLevelPanel();
 
 }
 
 function openCreator(){
 
-  menu.style.display="none";
+ menu.style.display="none";
 
-  hideAllPanels();
+ hideAllPanels();
 
-  creatorPanel.style.display="block";
+ creatorPanel.style.display="block";
 
 }
 
 function closePanels(){
 
-  hideAllPanels();
+ hideAllPanels();
 
-  menu.style.display="block";
+ menu.style.display="block";
 
 }
 
 /* =========================================================
 
-   KILLER SELECT
+ KILLER SELECT
 
 ========================================================= */
 
 function selectKiller(number,button){
 
-  selectedKiller=number;
+ selectedKiller=number;
 
-  document
+ document.querySelectorAll("#killerPanel .selectBtn")
 
-    .querySelectorAll(
+ .forEach(b=>b.classList.remove("active"));
 
-      "#killerPanel .selectBtn"
+ if(button)button.classList.add("active");
 
-    )
+ const names={
 
-    .forEach(b=>{
+  1:"THE BUTCHER",
 
-      b.classList.remove("active");
+  2:"THE STALKER",
 
-    });
+  3:"THE ZOMBIE"
 
-  if(button){
+ };
 
-    button.classList.add("active");
+ showMessage(names[number]+" SELECTED");
 
-  }
+ setTimeout(()=>{
 
-  const names={
+  killerPanel.style.display="none";
 
-    1:"THE BUTCHER",
+  housePanel.style.display="block";
 
-    2:"THE STALKER",
-
-    3:"THE ZOMBIE"
-
-  };
-
-  showMessage(
-
-    names[number]+" SELECTED"
-
-  );
-
-  setTimeout(()=>{
-
-    killerPanel.style.display="none";
-
-    housePanel.style.display="block";
-
-  },350);
+ },350);
 
 }
 
 /* =========================================================
 
-   HOUSE
+ HOUSE
 
 ========================================================= */
 
 function startHouse(number){
 
-  currentHouse=number;
+ currentHouse=number;
 
-  housePanel.style.display="none";
+ housePanel.style.display="none";
 
-  gameScreen.style.display="block";
+ gameScreen.style.display="block";
 
-  setupKiller();
+ setupKiller();
 
-  setupSurvivors();
+ setupSurvivors();
 
-  gameRunning=true;
+ gameRunning=true;
 
-  matchTime=90;
+ matchTime=90;
 
-  startMatchTimer();
+ startMatchTimer();
 
-  centerMap();
+ centerMap();
 
-  requestAnimationFrame(gameLoop);
+ requestAnimationFrame(gameLoop);
 
 }
 
 function setupSurvivors(){
 
-  killed=0;
+ killed=0;
 
-  survivors=[];
+ survivors=[];
 
-  const positions=[
+ const positions=[
 
-    {x:390,y:245},
+  {x:390,y:245},
 
-    {x:820,y:245},
+  {x:820,y:245},
 
-    {x:390,y:520},
+  {x:390,y:520},
 
-    {x:820,y:550}
+  {x:820,y:550}
 
-  ];
+ ];
 
-  const count =
+ const count=currentHouse===1?3:4;
 
-    currentHouse===1 ? 3 : 4;
+ for(let i=0;i<count;i++){
 
-  for(let i=0;i<count;i++){
+  survivors.push({
 
-    survivors.push({
+   x:positions[i].x,
 
-      x:positions[i].x,
+   y:positions[i].y,
 
-      y:positions[i].y,
+   alive:true,
 
-      alive:true,
+   hidden:true,
 
-      hidden:true,
+   moving:false
 
-      moving:false
+  });
 
-    });
+ }
 
-  }
+ for(let i=0;i<4;i++){
 
-  for(let i=0;i<4;i++){
+  const el=document.getElementById("survivor"+(i+1));
 
-    const el=
+  if(el)el.style.display="none";
 
-      document.getElementById(
+ }
 
-        "survivor"+(i+1)
-
-      );
-
-    if(el){
-
-      el.style.display =
-
-        i<count ? "none":"none";
-
-    }
-
-  }
-
-  updateObjective();
+ updateObjective();
 
 }
 
 /* =========================================================
 
-   KILLER SETUP
+ KILLER SETUP
 
 ========================================================= */
 
 function setupKiller(){
 
-  killer.x=650;
+ killer.x=650;
 
-  killer.y=650;
+ killer.y=650;
 
-  killer.maxHealth =
+ killer.maxHealth=100+upgrades.health*15;
 
-    100 +
+ killer.health=killer.maxHealth;
 
-    upgrades.health*15;
+ killer.damage=40+upgrades.damage*10;
 
-  killer.health =
+ killer.speed=3.2+upgrades.speed*.35;
 
-    killer.maxHealth;
+ killerEl.className="";
 
-  killer.damage =
+ if(selectedKiller===1){
 
-    40 +
+  killerEl.classList.add("butcher");
 
-    upgrades.damage*10;
+  killer.speed+=.15;
 
-  killer.speed =
+ }
 
-    3.2 +
+ if(selectedKiller===2){
 
-    upgrades.speed*.35;
+  killerEl.classList.add("stalker");
 
-  killerEl.className="";
+  killer.speed+=.5;
 
-  if(selectedKiller===1){
+ }
 
-    killerEl.classList.add("butcher");
+ if(selectedKiller===3){
 
-    killer.speed+=.15;
+  killerEl.classList.add("zombie");
 
-  }
+  killer.maxHealth+=30;
 
-  if(selectedKiller===2){
+  killer.health=killer.maxHealth;
 
-    killerEl.classList.add("stalker");
+  killer.damage+=5;
 
-    killer.speed+=.5;
+ }
 
-  }
-
-  if(selectedKiller===3){
-
-    killerEl.classList.add("zombie");
-
-    killer.maxHealth+=30;
-
-    killer.health=killer.maxHealth;
-
-    killer.damage+=5;
-
-  }
-
-  applyEquippedSkin();
+ applyEquippedSkin();
 
 }
 
 /* =========================================================
 
-   SKIN SYSTEM
+ SKIN SYSTEM
 
 ========================================================= */
 
 function applyEquippedSkin(){
 
-  killerEl.classList.remove(
+ killerEl.classList.remove(
 
-    "greenSkin",
+  "greenSkin",
 
-    "creatorSkin"
+  "creatorSkin",
 
-  );
+  "fireworkButcher"
 
-  if(equippedSkin==="green_zombie"){
+ );
 
-    if(selectedKiller===3){
+ /*
 
-      killerEl.classList.add(
+   FIREWORK BUTCHER ONLY WORKS WITH THE BUTCHER.
 
-        "zombie",
+ */
 
-        "greenSkin"
+ if(equippedSkin==="butcher_firework"){
 
-      );
+  if(selectedKiller===1){
 
-    }
+   killerEl.classList.add("butcher","fireworkButcher");
+
+  }
+
+  return;
+
+ }
+
+ if(equippedSkin==="green_zombie"){
+
+  if(selectedKiller===3){
+
+   killerEl.classList.add("zombie","greenSkin");
 
   }
 
-  if(equippedSkin==="creator_zombie"){
+ }
 
-    if(selectedKiller===3){
+ if(equippedSkin==="creator_zombie"){
 
-      killerEl.classList.add(
+  if(selectedKiller===3){
 
-        "zombie",
-
-        "creatorSkin"
-
-      );
-
-    }
+   killerEl.classList.add("zombie","creatorSkin");
 
   }
+
+ }
 
 }
 
 function equipSkin(id){
 
-  if(!unlockedSkins.includes(id)){
+ if(!unlockedSkins.includes(id)){
 
-    showMessage("SKIN LOCKED");
+  showMessage("SKIN LOCKED");
 
-    return;
+  return;
 
-  }
+ }
 
-  if(
+ if(
 
-    id!=="zombie_base" &&
+  id!=="zombie_base" &&
 
-    selectedKiller!==3
+  id!=="butcher_firework" &&
 
-  ){
+  selectedKiller!==3 &&
 
-    showMessage(
+  id!=="butcher_firework"
 
-      "THIS SKIN BELONGS TO THE ZOMBIE."
+ ){
 
-    );
+  showMessage("THIS SKIN BELONGS TO THE ZOMBIE.");
 
-    return;
+  return;
 
-  }
+ }
 
-  equippedSkin=id;
+ if(
 
-  saveData();
+  id==="butcher_firework" &&
 
-  applyEquippedSkin();
+  selectedKiller!==1
 
-  renderLocker();
+ ){
 
-  showMessage("SKIN EQUIPPED!");
+  showMessage("SELECT THE BUTCHER FIRST.");
+
+  return;
+
+ }
+
+ equippedSkin=id;
+
+ saveData();
+
+ applyEquippedSkin();
+
+ renderLocker();
+
+ showMessage("SKIN EQUIPPED!");
 
 }
 
 /* =========================================================
 
-   LOCKER
+ FIREWORK BUTCHER UNLOCK
+
+========================================================= */
+
+function unlockFireworkSkin(){
+
+ if(unlockedSkins.includes("butcher_firework")){
+
+  equipSkin("butcher_firework");
+
+  return;
+
+ }
+
+ if(coins<1500){
+
+  showMessage("YOU NEED 1,500 COINS");
+
+  return;
+
+ }
+
+ coins-=1500;
+
+ unlockedSkins.push("butcher_firework");
+
+ saveData();
+
+ renderLocker();
+
+ updateShop();
+
+ showMessage("🎆 FIREWORK BUTCHER UNLOCKED!");
+
+}
+
+/* =========================================================
+
+ LOCKER
 
 ========================================================= */
 
 function renderLocker(){
 
-  const grid =
+ const grid=document.getElementById("lockerGrid");
 
-    document.getElementById(
+ const now=Date.now();
 
-      "lockerGrid"
+ const greenAvailable=now<greenSkinEnd;
 
-    );
+ const skins=[
 
-  const now=Date.now();
+  {
 
-  const greenAvailable =
+   id:"zombie_base",
 
-    now < greenSkinEnd;
+   name:"RED ZOMBIE",
 
-  const skins=[
+   icon:"🧟",
 
-    {
+   status:"BASE KILLER",
 
-      id:"zombie_base",
+   unlocked:true
 
-      name:"RED ZOMBIE",
+  },
 
-      icon:"🧟",
+  {
 
-      status:"BASE KILLER",
+   id:"green_zombie",
 
-      unlocked:true
+   name:"GREEN ZOMBIE",
 
-    },
+   icon:"🟢",
 
-    {
+   status:greenAvailable?"LIMITED TIME":"EVENT ENDED",
 
-      id:"green_zombie",
+   unlocked:unlockedSkins.includes("green_zombie")
 
-      name:"GREEN ZOMBIE",
+  },
 
-      icon:"🟢",
+  {
 
-      status:
+   id:"creator_zombie",
 
-        greenAvailable
+   name:"CREATOR ZOMBIE",
 
-        ?"LIMITED TIME"
+   icon:"👑",
 
-        :"EVENT ENDED",
+   status:"CREATOR EXCLUSIVE",
 
-      unlocked:
+   unlocked:unlockedSkins.includes("creator_zombie")
 
-        unlockedSkins.includes(
+  },
 
-          "green_zombie"
+  {
 
-        )
+   id:"butcher_firework",
 
-    },
+   name:"FIREWORK BUTCHER",
 
-    {
+   icon:"🎆",
 
-      id:"creator_zombie",
+   status:"1.5 MINI CELEBRATION",
 
-      name:"CREATOR ZOMBIE",
+   unlocked:unlockedSkins.includes("butcher_firework")
 
-      icon:"👑",
+  },
 
-      status:"CREATOR EXCLUSIVE",
+  {
 
-      unlocked:
+   id:"butcher_10",
 
-        unlockedSkins.includes(
+   name:"BUTCHER: BLOOD",
 
-          "creator_zombie"
+   icon:"🔪",
 
-        )
+   status:"LEVEL 10",
 
-    },
+   unlocked:level>=10
 
-    {
+  },
 
-      id:"butcher_10",
+  {
 
-      name:"BUTCHER: BLOOD",
+   id:"stalker_20",
 
-      icon:"🔪",
+   name:"STALKER: NIGHT",
 
-      status:"LEVEL 10",
+   icon:"👤",
 
-      unlocked:
+   status:"LEVEL 20",
 
-        level>=10
+   unlocked:level>=20
 
-    },
+  },
 
-    {
+  {
 
-      id:"stalker_20",
+   id:"zombie_30",
 
-      name:"STALKER: NIGHT",
+   name:"ZOMBIE: ROTTEN",
 
-      icon:"👤",
+   icon:"🧟",
 
-      status:"LEVEL 20",
+   status:"LEVEL 30",
 
-      unlocked:
+   unlocked:level>=30
 
-        level>=20
+  },
 
-    },
+  {
 
-    {
+   id:"butcher_40",
 
-      id:"zombie_30",
+   name:"BUTCHER: DARK",
 
-      name:"ZOMBIE: ROTTEN",
+   icon:"🔪",
 
-      icon:"🧟",
+   status:"LEVEL 40",
 
-      status:"LEVEL 30",
+   unlocked:level>=40
 
-      unlocked:
+  },
 
-        level>=30
+  {
 
-    },
+   id:"zombie_50",
 
-    {
+   name:"ZOMBIE: ELITE",
 
-      id:"butcher_40",
+   icon:"🧟",
 
-      name:"BUTCHER: DARK",
+   status:"LEVEL 50",
 
-      icon:"🔪",
+   unlocked:level>=50
 
-      status:"LEVEL 40",
+  }
 
-      unlocked:
+ ];
 
-        level>=40
+ grid.innerHTML="";
 
-    },
+ skins.forEach(skin=>{
 
-    {
+  const card=document.createElement("div");
 
-      id:"zombie_50",
+  card.className="skinCard";
 
-      name:"ZOMBIE: ELITE",
+  if(equippedSkin===skin.id)
 
-      icon:"🧟",
+   card.classList.add("equipped");
 
-      status:"LEVEL 50",
+  let buttonHTML="";
 
-      unlocked:
+  if(skin.unlocked){
 
-        level>=50
+   buttonHTML=`
 
-    }
+    <button class="equipBtn"
 
-  ];
+     onclick="equipSkin('${skin.id}')">
 
-  grid.innerHTML="";
+     ${equippedSkin===skin.id?"EQUIPPED":"EQUIP"}
 
-  skins.forEach(skin=>{
+    </button>
 
-    const card =
+   `;
 
-      document.createElement("div");
+  }else{
 
-    card.className="skinCard";
+   buttonHTML=`<div class="lock">🔒</div>`;
 
-    if(
+  }
 
-      equippedSkin===skin.id
+  card.innerHTML=`
 
-    ){
+   <div class="skinVisual">${skin.icon}</div>
 
-      card.classList.add(
+   <div class="skinName">${skin.name}</div>
 
-        "equipped"
+   <div class="skinStatus">
 
-      );
+    ${skin.unlocked?"UNLOCKED":skin.status}
 
-    }
+   </div>
 
-    let buttonHTML="";
+   ${buttonHTML}
 
-    if(skin.unlocked){
+  `;
 
-      buttonHTML=`
+  grid.appendChild(card);
 
-        <button
-
-          class="equipBtn"
-
-          onclick="equipSkin('${skin.id}')">
-
-          ${
-
-            equippedSkin===skin.id
-
-            ?"EQUIPPED"
-
-            :"EQUIP"
-
-          }
-
-        </button>
-
-      `;
-
-    }else{
-
-      buttonHTML=`
-
-        <div class="lock">
-
-          🔒
-
-        </div>
-
-      `;
-
-    }
-
-    card.innerHTML=`
-
-      <div class="skinVisual">
-
-        ${skin.icon}
-
-      </div>
-
-      <div class="skinName">
-
-        ${skin.name}
-
-      </div>
-
-      <div class="skinStatus">
-
-        ${skin.unlocked
-
-          ?"UNLOCKED"
-
-          :skin.status}
-
-      </div>
-
-      ${buttonHTML}
-
-    `;
-
-    grid.appendChild(card);
-
-  });
+ });
 
 }
 
 /* =========================================================
 
-   CREATOR CODE
+ CREATOR
 
 ========================================================= */
 
 function redeemCreatorCode(){
 
-  const input =
+ const input=document.getElementById("creatorInput");
 
-    document.getElementById(
+ const code=input.value.trim().toUpperCase();
 
-      "creatorInput"
+ if(code==="CONNORCREATOR"){
 
-    );
+  if(!unlockedSkins.includes("creator_zombie"))
 
-  const code =
+   unlockedSkins.push("creator_zombie");
 
-    input.value
-
-      .trim()
-
-      .toUpperCase();
-
-  if(code==="CONNORCREATOR"){
-
-    if(
-
-      !unlockedSkins.includes(
-
-        "creator_zombie"
-
-      )
-
-    ){
-
-      unlockedSkins.push(
-
-        "creator_zombie"
-
-      );
-
-    }
-
-    creatorUnlocked=true;
-
-    saveData();
-
-    renderLocker();
-
-    input.value="";
-
-    showMessage(
-
-      "👑 CREATOR SKIN UNLOCKED!"
-
-    );
-
-  }else{
-
-    showMessage(
-
-      "INVALID CREATOR CODE"
-
-    );
-
-  }
-
-}
-
-/* =========================================================
-
-   GREEN ZOMBIE
-
-========================================================= */
-
-function buyGreenSkin(){
-
-  const now=Date.now();
-
-  if(now>=greenSkinEnd){
-
-    showMessage(
-
-      "GREEN ZOMBIE EVENT ENDED"
-
-    );
-
-    return;
-
-  }
-
-  if(
-
-    unlockedSkins.includes(
-
-      "green_zombie"
-
-    )
-
-  ){
-
-    equipSkin("green_zombie");
-
-    return;
-
-  }
-
-  if(coins<3000){
-
-    showMessage(
-
-      "YOU NEED 3,000 COINS"
-
-    );
-
-    return;
-
-  }
-
-  coins-=3000;
-
-  unlockedSkins.push(
-
-    "green_zombie"
-
-  );
+  creatorUnlocked=true;
 
   saveData();
 
   renderLocker();
 
-  updateShop();
+  input.value="";
 
-  showMessage(
+  showMessage("👑 CREATOR SKIN UNLOCKED!");
 
-    "🟢 GREEN ZOMBIE UNLOCKED!"
+ }else{
 
-  );
+  showMessage("INVALID CREATOR CODE");
+
+ }
+
+}
+
+/* =========================================================
+
+ GREEN ZOMBIE
+
+========================================================= */
+
+function buyGreenSkin(){
+
+ const now=Date.now();
+
+ if(now>=greenSkinEnd){
+
+  showMessage("GREEN ZOMBIE EVENT ENDED");
+
+  return;
+
+ }
+
+ if(unlockedSkins.includes("green_zombie")){
+
+  equipSkin("green_zombie");
+
+  return;
+
+ }
+
+ if(coins<3000){
+
+  showMessage("YOU NEED 3,000 COINS");
+
+  return;
+
+ }
+
+ coins-=3000;
+
+ unlockedSkins.push("green_zombie");
+
+ saveData();
+
+ renderLocker();
+
+ updateShop();
+
+ showMessage("🟢 GREEN ZOMBIE UNLOCKED!");
 
 }
 
 function updateGreenTimer(){
 
-  const label =
+ const label=document.getElementById("greenSkinTimer");
 
-    document.getElementById(
+ const button=document.getElementById("greenSkinBuy");
 
-      "greenSkinTimer"
+ if(!label)return;
 
-    );
+ const remaining=greenSkinEnd-Date.now();
 
-  const button =
+ if(remaining<=0){
 
-    document.getElementById(
+  label.innerText="EVENT ENDED";
 
-      "greenSkinBuy"
+  button.innerText="UNAVAILABLE";
 
-    );
+  button.disabled=true;
 
-  if(!label)return;
+  return;
 
-  const remaining =
+ }
 
-    greenSkinEnd-Date.now();
+ const days=Math.floor(remaining/(1000*60*60*24));
 
-  if(remaining<=0){
+ const hours=Math.floor(
 
-    label.innerText =
+  (remaining/(1000*60*60))%24
 
-      "EVENT ENDED";
+ );
 
-    button.innerText =
+ const minutes=Math.floor(
 
-      "UNAVAILABLE";
+  (remaining/(1000*60))%60
 
-    button.disabled=true;
+ );
 
-    return;
+ label.innerText=
 
-  }
+ `LIMITED TIME • ${days}D ${hours}H ${minutes}M LEFT`;
 
-  const days =
+ if(unlockedSkins.includes("green_zombie"))
 
-    Math.floor(
-
-      remaining/
-
-      (1000*60*60*24)
-
-    );
-
-  const hours =
-
-    Math.floor(
-
-      (remaining/
-
-      (1000*60*60))%24
-
-    );
-
-  const minutes =
-
-    Math.floor(
-
-      (remaining/
-
-      (1000*60))%60
-
-    );
-
-  label.innerText =
-
-    `LIMITED TIME • ${days}D ${hours}H ${minutes}M LEFT`;
-
-  if(
-
-    unlockedSkins.includes(
-
-      "green_zombie"
-
-    )
-
-  ){
-
-    button.innerText=
-
-      "OWNED";
-
-  }
+  button.innerText="OWNED";
 
 }
 
 /* =========================================================
 
-   LEVEL SYSTEM
+ LEVEL SYSTEM
 
 ========================================================= */
 
 function xpRequired(){
 
-  return 100+(level-1)*35;
+ return 100+(level-1)*35;
 
 }
 
 function addXP(amount){
 
-  if(level>=50){
+ if(level>=50){
 
-    level=50;
+  level=50;
 
-    xp=0;
-
-    saveData();
-
-    return;
-
-  }
-
-  xp+=amount;
-
-  while(
-
-    xp>=xpRequired() &&
-
-    level<50
-
-  ){
-
-    xp-=xpRequired();
-
-    level++;
-
-    showMessage(
-
-      "⭐ LEVEL UP! LEVEL "+level
-
-    );
-
-  }
-
-  checkLevelSkins();
+  xp=0;
 
   saveData();
 
-  updateLevelPanel();
+  return;
+
+ }
+
+ xp+=amount;
+
+ while(xp>=xpRequired()&&level<50){
+
+  xp-=xpRequired();
+
+  level++;
+
+  showMessage("⭐ LEVEL UP! LEVEL "+level);
+
+ }
+
+ checkLevelSkins();
+
+ saveData();
+
+ updateLevelPanel();
 
 }
 
 function checkLevelSkins(){
 
-  const levelSkins={
+ const levelSkins={
 
-    10:"butcher_10",
+  10:"butcher_10",
 
-    20:"stalker_20",
+  20:"stalker_20",
 
-    30:"zombie_30",
+  30:"zombie_30",
 
-    40:"butcher_40",
+  40:"butcher_40",
 
-    50:"zombie_50"
+  50:"zombie_50"
 
-  };
+ };
 
-  Object.keys(levelSkins)
+ Object.keys(levelSkins).forEach(lvl=>{
 
-    .forEach(lvl=>{
+  if(
 
-      if(
+   level>=Number(lvl)&&
 
-        level>=Number(lvl) &&
+   !unlockedSkins.includes(levelSkins[lvl])
 
-        !unlockedSkins.includes(
+  ){
 
-          levelSkins[lvl]
+   unlockedSkins.push(levelSkins[lvl]);
 
-        )
+  }
 
-      ){
-
-        unlockedSkins.push(
-
-          levelSkins[lvl]
-
-        );
-
-      }
-
-    });
+ });
 
 }
 
 function updateLevelPanel(){
 
-  document.getElementById(
+ document.getElementById("levelDisplay").innerText=level;
 
-    "levelDisplay"
+ document.getElementById("hudLevel").innerText=level;
 
-  ).innerText=level;
+ document.getElementById("xpDisplay").innerText=xp;
 
-  document.getElementById(
+ const needed=xpRequired();
 
-    "hudLevel"
+ document.getElementById("xpNeeded").innerText=needed;
 
-  ).innerText=level;
+ document.getElementById("xpFill").style.width=
 
-  document.getElementById(
-
-    "xpDisplay"
-
-  ).innerText=xp;
-
-  const needed=xpRequired();
-
-  document.getElementById(
-
-    "xpNeeded"
-
-  ).innerText=needed;
-
-  document.getElementById(
-
-    "xpFill"
-
-  ).style.width=
-
-    Math.min(
-
-      100,
-
-      (xp/needed)*100
-
-    )+"%";
+ Math.min(100,(xp/needed)*100)+"%";
 
 }
 
 /* =========================================================
 
-   SHOP
+ SHOP
 
 ========================================================= */
 
 function buyUpgrade(type){
 
-  const prices={
+ const prices={
 
-    speed:100,
+  speed:100,
 
-    damage:125,
+  damage:125,
 
-    tracker:150,
+  tracker:150,
 
-    health:175
+  health:175
 
-  };
+ };
 
-  const cost=prices[type];
+ const cost=prices[type];
 
-  if(coins<cost){
+ if(coins<cost){
 
-    showMessage(
+  showMessage("NOT ENOUGH COINS");
 
-      "NOT ENOUGH COINS"
+  return;
 
-    );
+ }
 
-    return;
+ coins-=cost;
 
-  }
+ upgrades[type]++;
 
-  coins-=cost;
+ saveData();
 
-  upgrades[type]++;
+ updateShop();
 
-  saveData();
-
-  updateShop();
-
-  showMessage(
-
-    "UPGRADE PURCHASED!"
-
-  );
+ showMessage("UPGRADE PURCHASED!");
 
 }
 
 function updateShop(){
 
-  document.getElementById(
+ document.getElementById("shopCoins").innerText=coins;
 
-    "shopCoins"
+ updateGreenTimer();
 
-  ).innerText=coins;
+ const fireworkButton=
 
-  updateGreenTimer();
+ document.getElementById("fireworkSkinBuy");
+
+ if(fireworkButton){
+
+  if(unlockedSkins.includes("butcher_firework")){
+
+   fireworkButton.innerText="OWNED";
+
+  }else{
+
+   fireworkButton.innerText="1,500 COINS";
+
+  }
+
+ }
 
 }
 
 /* =========================================================
 
-   MOVEMENT
+ MOVEMENT
 
 ========================================================= */
 
@@ -4914,885 +3118,501 @@ let joystickY=0;
 
 function updateJoystick(clientX,clientY){
 
-  const rect =
+ const rect=joystick.getBoundingClientRect();
 
-    joystick.getBoundingClientRect();
+ const centerX=rect.left+rect.width/2;
 
-  const centerX =
+ const centerY=rect.top+rect.height/2;
 
-    rect.left+rect.width/2;
+ let dx=clientX-centerX;
 
-  const centerY =
+ let dy=clientY-centerY;
 
-    rect.top+rect.height/2;
+ const maxDistance=40;
 
-  let dx=clientX-centerX;
+ const distance=Math.sqrt(dx*dx+dy*dy);
 
-  let dy=clientY-centerY;
+ if(distance>maxDistance){
 
-  const maxDistance=40;
+  dx=dx/distance*maxDistance;
 
-  const distance=
+  dy=dy/distance*maxDistance;
 
-    Math.sqrt(dx*dx+dy*dy);
+ }
 
-  if(distance>maxDistance){
+ joystickX=dx/maxDistance;
 
-    dx=
+ joystickY=dy/maxDistance;
 
-      dx/distance*
+ joystickKnob.style.transform=
 
-      maxDistance;
-
-    dy=
-
-      dy/distance*
-
-      maxDistance;
-
-  }
-
-  joystickX=
-
-    dx/maxDistance;
-
-  joystickY=
-
-    dy/maxDistance;
-
-  joystickKnob.style.transform=
-
-    `translate(${dx}px,${dy}px)`;
+ `translate(${dx}px,${dy}px)`;
 
 }
 
 function resetJoystick(){
 
-  joystickActive=false;
+ joystickActive=false;
 
-  joystickX=0;
+ joystickX=0;
 
-  joystickY=0;
+ joystickY=0;
 
-  joystickKnob.style.transform=
-
-    "translate(0,0)";
+ joystickKnob.style.transform="translate(0,0)";
 
 }
 
-joystick.addEventListener(
+joystick.addEventListener("pointerdown",e=>{
 
-  "pointerdown",
+ joystickActive=true;
 
-  e=>{
+ joystick.setPointerCapture(e.pointerId);
 
-    joystickActive=true;
+ updateJoystick(e.clientX,e.clientY);
 
-    joystick.setPointerCapture(
+});
 
-      e.pointerId
+joystick.addEventListener("pointermove",e=>{
 
-    );
+ if(!joystickActive)return;
 
-    updateJoystick(
+ updateJoystick(e.clientX,e.clientY);
 
-      e.clientX,
+});
 
-      e.clientY
+joystick.addEventListener("pointerup",resetJoystick);
 
-    );
-
-  }
-
-);
-
-joystick.addEventListener(
-
-  "pointermove",
-
-  e=>{
-
-    if(!joystickActive)return;
-
-    updateJoystick(
-
-      e.clientX,
-
-      e.clientY
-
-    );
-
-  }
-
-);
-
-joystick.addEventListener(
-
-  "pointerup",
-
-  resetJoystick
-
-);
-
-joystick.addEventListener(
-
-  "pointercancel",
-
-  resetJoystick
-
-);
+joystick.addEventListener("pointercancel",resetJoystick);
 
 function moveKiller(){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  killer.x +=
+ killer.x+=joystickX*killer.speed;
 
-    joystickX*
+ killer.y+=joystickY*killer.speed;
 
-    killer.speed;
+ killer.x=Math.max(35,Math.min(1365,killer.x));
 
-  killer.y +=
-
-    joystickY*
-
-    killer.speed;
-
-  /* MAP BOUNDARIES */
-
-  killer.x=
-
-    Math.max(
-
-      35,
-
-      Math.min(
-
-        1365,
-
-        killer.x
-
-      )
-
-    );
-
-  killer.y=
-
-    Math.max(
-
-      55,
-
-      Math.min(
-
-        845,
-
-        killer.y
-
-      )
-
-    );
+ killer.y=Math.max(55,Math.min(845,killer.y));
 
 }
 
 /* =========================================================
 
-   CAMERA
+ CAMERA
 
 ========================================================= */
 
 function centerMap(){
 
-  const viewportW=
+ const viewportW=window.innerWidth;
 
-    window.innerWidth;
+ const viewportH=window.innerHeight;
 
-  const viewportH=
+ let left=killer.x-viewportW/2;
 
-    window.innerHeight;
+ let top=killer.y-viewportH/2;
 
-  let left=
+ left=Math.max(0,Math.min(1400-viewportW,left));
 
-    killer.x-
+ top=Math.max(0,Math.min(900-viewportH,top));
 
-    viewportW/2;
+ map.style.transform=
 
-  let top=
-
-    killer.y-
-
-    viewportH/2;
-
-  left=
-
-    Math.max(
-
-      0,
-
-      Math.min(
-
-        1400-viewportW,
-
-        left
-
-      )
-
-    );
-
-  top=
-
-    Math.max(
-
-      0,
-
-      Math.min(
-
-        900-viewportH,
-
-        top
-
-      )
-
-    );
-
-  map.style.transform=
-
-    `translate(${-left}px,${-top}px)`;
+ `translate(${-left}px,${-top}px)`;
 
 }
 
 /* =========================================================
 
-   SEARCH
+ SEARCH
 
 ========================================================= */
 
 function search(){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  let closest=null;
+ let closest=null;
 
-  let distance=Infinity;
+ let distance=Infinity;
 
-  survivors.forEach(s=>{
+ survivors.forEach(s=>{
 
-    if(!s.alive)return;
+  if(!s.alive)return;
 
-    const dx=
+  const dx=killer.x-s.x;
 
-      killer.x-s.x;
+  const dy=killer.y-s.y;
 
-    const dy=
+  const d=Math.sqrt(dx*dx+dy*dy);
 
-      killer.y-s.y;
+  if(d<distance){
 
-    const d=
+   distance=d;
 
-      Math.sqrt(
-
-        dx*dx+dy*dy
-
-      );
-
-    if(d<distance){
-
-      distance=d;
-
-      closest=s;
-
-    }
-
-  });
-
-  const range=
-
-    130+
-
-    upgrades.tracker*25;
-
-  if(
-
-    closest &&
-
-    distance<=range
-
-  ){
-
-    closest.hidden=false;
-
-    showMessage(
-
-      "SURVIVOR FOUND!"
-
-    );
-
-    render();
-
-  }else{
-
-    showMessage(
-
-      "NOTHING HERE..."
-
-    );
+   closest=s;
 
   }
+
+ });
+
+ const range=130+upgrades.tracker*25;
+
+ if(closest&&distance<=range){
+
+  closest.hidden=false;
+
+  showMessage("SURVIVOR FOUND!");
+
+  render();
+
+ }else{
+
+  showMessage("NOTHING HERE...");
+
+ }
 
 }
 
 /* =========================================================
 
-   ATTACK
+ ATTACK
 
 ========================================================= */
 
 function attack(){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  let target=null;
+ let target=null;
 
-  let distance=Infinity;
+ let distance=Infinity;
 
-  survivors.forEach(s=>{
+ survivors.forEach(s=>{
 
-    if(
+  if(!s.alive||s.hidden)return;
 
-      !s.alive ||
+  const dx=killer.x-s.x;
 
-      s.hidden
+  const dy=killer.y-s.y;
 
-    )return;
+  const d=Math.sqrt(dx*dx+dy*dy);
 
-    const dx=
+  if(d<distance){
 
-      killer.x-s.x;
+   distance=d;
 
-    const dy=
-
-      killer.y-s.y;
-
-    const d=
-
-      Math.sqrt(
-
-        dx*dx+dy*dy
-
-      );
-
-    if(d<distance){
-
-      distance=d;
-
-      target=s;
-
-    }
-
-  });
-
-  if(
-
-    !target ||
-
-    distance>75
-
-  ){
-
-    showMessage(
-
-      "NO SURVIVOR IN RANGE"
-
-    );
-
-    return;
+   target=s;
 
   }
 
-  target.alive=false;
+ });
 
-  killed++;
+ if(!target||distance>75){
 
-  coins+=35;
+  showMessage("NO SURVIVOR IN RANGE");
 
-  addXP(30);
+  return;
 
-  saveData();
+ }
 
-  showMessage(
+ target.alive=false;
 
-    "SURVIVOR ELIMINATED +35"
+ killed++;
 
-  );
+ coins+=35;
 
-  updateObjective();
+ addXP(30);
 
-  render();
+ saveData();
 
-  if(
+ showMessage("SURVIVOR ELIMINATED +35");
 
-    killed>=survivors.length
+ updateObjective();
 
-  ){
+ render();
 
-    setTimeout(
+ if(killed>=survivors.length)
 
-      completeHouse,
-
-      500
-
-    );
-
-  }
+  setTimeout(completeHouse,500);
 
 }
 
 /* =========================================================
 
-   SURVIVOR AI
+ SURVIVOR AI
 
 ========================================================= */
 
 function survivorAI(){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  survivors.forEach(s=>{
+ survivors.forEach(s=>{
 
-    if(
+  if(!s.alive||s.hidden)return;
 
-      !s.alive ||
+  const dx=s.x-killer.x;
 
-      s.hidden
+  const dy=s.y-killer.y;
 
-    )return;
+  const distance=Math.sqrt(dx*dx+dy*dy);
 
-    const dx=
+  if(distance<190){
 
-      s.x-killer.x;
+   const d=distance||1;
 
-    const dy=
+   s.x+=(dx/d)*1.4;
 
-      s.y-killer.y;
+   s.y+=(dy/d)*1.4;
 
-    const distance=
+   s.x=Math.max(40,Math.min(1360,s.x));
 
-      Math.sqrt(
+   s.y=Math.max(60,Math.min(840,s.y));
 
-        dx*dx+dy*dy
+  }
 
-      );
-
-    if(distance<190){
-
-      const d=
-
-        distance||1;
-
-      s.x +=
-
-        (dx/d)*1.4;
-
-      s.y +=
-
-        (dy/d)*1.4;
-
-      s.x=
-
-        Math.max(
-
-          40,
-
-          Math.min(
-
-            1360,
-
-            s.x
-
-          )
-
-        );
-
-      s.y=
-
-        Math.max(
-
-          60,
-
-          Math.min(
-
-            840,
-
-            s.y
-
-          )
-
-        );
-
-    }
-
-  });
+ });
 
 }
 
 /* =========================================================
 
-   RENDER
+ RENDER
 
 ========================================================= */
 
 function render(){
 
-  killerEl.style.left=
+ killerEl.style.left=(killer.x-29)+"px";
 
-    (killer.x-29)+"px";
+ killerEl.style.top=(killer.y-41)+"px";
 
-  killerEl.style.top=
+ survivors.forEach((s,i)=>{
 
-    (killer.y-41)+"px";
+  const el=document.getElementById("survivor"+(i+1));
 
-  survivors.forEach(
+  if(!el)return;
 
-    (s,i)=>{
+  if(!s.alive||s.hidden){
 
-      const el=
+   el.style.display="none";
 
-        document.getElementById(
+   return;
 
-          "survivor"+(i+1)
+  }
 
-        );
+  el.style.display="block";
 
-      if(!el)return;
+  el.style.left=(s.x-19)+"px";
 
-      if(
+  el.style.top=(s.y-26)+"px";
 
-        !s.alive ||
+ });
 
-        s.hidden
+ document.getElementById("health").innerText=
 
-      ){
+ Math.max(0,Math.round(killer.health));
 
-        el.style.display="none";
+ document.getElementById("coins").innerText=coins;
 
-        return;
-
-      }
-
-      el.style.display="block";
-
-      el.style.left=
-
-        (s.x-19)+"px";
-
-      el.style.top=
-
-        (s.y-26)+"px";
-
-    }
-
-  );
-
-  document.getElementById(
-
-    "health"
-
-  ).innerText=
-
-    Math.max(
-
-      0,
-
-      Math.round(killer.health)
-
-    );
-
-  document.getElementById(
-
-    "coins"
-
-  ).innerText=coins;
-
-  document.getElementById(
-
-    "hudLevel"
-
-  ).innerText=level;
+ document.getElementById("hudLevel").innerText=level;
 
 }
 
 /* =========================================================
 
-   OBJECTIVE
+ OBJECTIVE
 
 ========================================================= */
 
 function updateObjective(){
 
-  document.getElementById(
+ document.getElementById("objective").innerText=
 
-    "objective"
-
-  ).innerText=
-
-    `FIND AND ELIMINATE SURVIVORS — ${killed} / ${survivors.length}`;
+ `FIND AND ELIMINATE SURVIVORS — ${killed} / ${survivors.length}`;
 
 }
 
 /* =========================================================
 
-   SURVIVORS CAN WIN
+ MATCH TIMER
 
 ========================================================= */
 
 function startMatchTimer(){
 
-  clearInterval(
+ clearInterval(matchTimerInterval);
 
-    matchTimerInterval
+ matchTimerInterval=setInterval(()=>{
 
-  );
+  if(!gameRunning){
 
-  matchTimerInterval=
+   clearInterval(matchTimerInterval);
 
-    setInterval(()=>{
+   return;
 
-      if(!gameRunning){
+  }
 
-        clearInterval(
+  matchTime--;
 
-          matchTimerInterval
+  document.getElementById("matchTimer").innerText=
 
-        );
+   "SURVIVORS ESCAPE IN: "+matchTime;
 
-        return;
+  if(matchTime<=0){
 
-      }
+   clearInterval(matchTimerInterval);
 
-      matchTime--;
+   gameRunning=false;
 
-      document.getElementById(
+   document.getElementById("deathScreen")
 
-        "matchTimer"
+   .querySelector("p")
 
-      ).innerText=
+   .innerText="The survivors escaped.";
 
-        "SURVIVORS ESCAPE IN: "+
+   document.getElementById("deathScreen").style.display="flex";
 
-        matchTime;
+  }
 
-      if(matchTime<=0){
-
-        clearInterval(
-
-          matchTimerInterval
-
-        );
-
-        gameRunning=false;
-
-        document.getElementById(
-
-          "deathScreen"
-
-        ).querySelector("p")
-
-          .innerText=
-
-          "The survivors escaped.";
-
-        document.getElementById(
-
-          "deathScreen"
-
-        ).style.display="flex";
-
-      }
-
-    },1000);
+ },1000);
 
 }
 
 /* =========================================================
 
-   DOORS
+ DOORS
 
 ========================================================= */
 
 function openDoor(roomName){
 
-  showMessage(
-
-    roomName+" DOOR OPENED"
-
-  );
+ showMessage(roomName+" DOOR OPENED");
 
 }
 
 /* =========================================================
 
-   DAMAGE
+ DAMAGE
 
 ========================================================= */
 
 function damageKiller(amount){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  killer.health-=amount;
+ killer.health-=amount;
 
-  if(killer.health<=0){
+ if(killer.health<=0){
 
-    killer.health=0;
+  killer.health=0;
 
-    gameRunning=false;
+  gameRunning=false;
 
-    document.getElementById(
+  document.getElementById("deathScreen").style.display="flex";
 
-      "deathScreen"
+ }
 
-    ).style.display="flex";
-
-  }
-
-  render();
+ render();
 
 }
 
 /* =========================================================
 
-   COMPLETE
+ COMPLETE
 
 ========================================================= */
 
 function completeHouse(){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  gameRunning=false;
+ gameRunning=false;
 
-  clearInterval(
+ clearInterval(matchTimerInterval);
 
-    matchTimerInterval
+ const reward=currentHouse===1?100:175;
 
-  );
+ coins+=reward;
 
-  const reward=
+ addXP(100);
 
-    currentHouse===1
+ saveData();
 
-    ?100
+ document.getElementById("completeText").innerHTML=
 
-    :175;
+ `Every survivor was eliminated.
 
-  coins+=reward;
+ <br><br>
 
-  addXP(100);
+ 🪙 +${reward} BONUS
 
-  saveData();
+ <br>
 
-  document.getElementById(
+ ⭐ +100 XP`;
 
-    "completeText"
-
-  ).innerHTML=
-
-    `Every survivor was eliminated.
-
-     <br><br>
-
-     🪙 +${reward} BONUS
-
-     <br>
-
-     ⭐ +100 XP`;
-
-  document.getElementById(
-
-    "completeScreen"
-
-  ).style.display="flex";
+ document.getElementById("completeScreen").style.display="flex";
 
 }
 
 /* =========================================================
 
-   RESTART
+ RESTART
 
 ========================================================= */
 
 function restartHouse(){
 
-  document.getElementById(
+ document.getElementById("deathScreen").style.display="none";
 
-    "deathScreen"
+ document.getElementById("completeScreen").style.display="none";
 
-  ).style.display="none";
+ setupKiller();
 
-  document.getElementById(
+ setupSurvivors();
 
-    "completeScreen"
+ gameRunning=true;
 
-  ).style.display="none";
+ matchTime=90;
 
-  setupKiller();
+ startMatchTimer();
 
-  setupSurvivors();
-
-  gameRunning=true;
-
-  matchTime=90;
-
-  startMatchTimer();
-
-  requestAnimationFrame(
-
-    gameLoop
-
-  );
+ requestAnimationFrame(gameLoop);
 
 }
 
 /* =========================================================
 
-   RETURN MENU
+ RETURN MENU
 
 ========================================================= */
 
 function returnMenu(){
 
-  gameRunning=false;
+ gameRunning=false;
 
-  clearInterval(
+ clearInterval(matchTimerInterval);
 
-    matchTimerInterval
+ resetJoystick();
 
-  );
+ gameScreen.style.display="none";
 
-  resetJoystick();
+ document.getElementById("completeScreen").style.display="none";
 
-  gameScreen.style.display="none";
+ document.getElementById("deathScreen").style.display="none";
 
-  document.getElementById(
+ hideAllPanels();
 
-    "completeScreen"
-
-  ).style.display="none";
-
-  document.getElementById(
-
-    "deathScreen"
-
-  ).style.display="none";
-
-  hideAllPanels();
-
-  menu.style.display="block";
+ menu.style.display="block";
 
 }
 
 /* =========================================================
 
-   GAME LOOP
+ GAME LOOP
 
 ========================================================= */
 
@@ -5800,37 +3620,29 @@ let lastAI=0;
 
 function gameLoop(time){
 
-  if(!gameRunning)return;
+ if(!gameRunning)return;
 
-  moveKiller();
+ moveKiller();
 
-  if(
+ if(time-lastAI>100){
 
-    time-lastAI>100
+  survivorAI();
 
-  ){
+  lastAI=time;
 
-    survivorAI();
+ }
 
-    lastAI=time;
+ centerMap();
 
-  }
+ render();
 
-  centerMap();
-
-  render();
-
-  requestAnimationFrame(
-
-    gameLoop
-
-  );
+ requestAnimationFrame(gameLoop);
 
 }
 
 /* =========================================================
 
-   MESSAGE
+ MESSAGE
 
 ========================================================= */
 
@@ -5838,87 +3650,121 @@ let messageTimer;
 
 function showMessage(text){
 
-  messageEl.innerText=text;
+ messageEl.innerText=text;
 
-  messageEl.classList.add("show");
+ messageEl.classList.add("show");
 
-  clearTimeout(
+ clearTimeout(messageTimer);
 
-    messageTimer
+ messageTimer=setTimeout(()=>{
 
-  );
+  messageEl.classList.remove("show");
 
-  messageTimer=
-
-    setTimeout(()=>{
-
-      messageEl.classList.remove(
-
-        "show"
-
-      );
-
-    },1800);
+ },1800);
 
 }
 
 /* =========================================================
 
-   KEYBOARD SUPPORT
+ KEYBOARD
 
 ========================================================= */
 
-document.addEventListener(
+document.addEventListener("keydown",e=>{
 
-  "keydown",
+ if(e.key===" ")attack();
 
-  e=>{
+ if(e.key.toLowerCase()==="e")search();
 
-    if(e.key===" "){
-
-      attack();
-
-    }
-
-    if(
-
-      e.key.toLowerCase()==="e"
-
-    ){
-
-      search();
-
-    }
-
-  }
-
-);
+});
 
 /* =========================================================
 
-   WINDOW RESIZE
+ RESIZE
 
 ========================================================= */
 
-window.addEventListener(
+window.addEventListener("resize",()=>{
 
-  "resize",
+ if(gameRunning)centerMap();
 
-  ()=>{
-
-    if(gameRunning){
-
-      centerMap();
-
-    }
-
-  }
-
-);
+});
 
 /* =========================================================
 
-   INITIALIZE
+ PWA / APP INSTALL
+
+========================================================= */
+
+let deferredInstallPrompt=null;
+
+window.addEventListener("beforeinstallprompt",e=>{
+
+ e.preventDefault();
+
+ deferredInstallPrompt=e;
+
+ const prompt=document.getElementById("installPrompt");
+
+ if(prompt)
+
+  prompt.style.display="block";
+
+});
+
+async function installApp(){
+
+ if(!deferredInstallPrompt){
+
+  showMessage("USE YOUR BROWSER'S ADD TO HOME SCREEN OPTION");
+
+  return;
+
+ }
+
+ deferredInstallPrompt.prompt();
+
+ const result=await deferredInstallPrompt.userChoice;
+
+ if(result.outcome==="accepted")
+
+  showMessage("📱 HOUSES OF HORROR INSTALLED!");
+
+ deferredInstallPrompt=null;
+
+ document.getElementById("installPrompt").style.display="none";
+
+}
+
+/* REGISTER SERVICE WORKER */
+
+if("serviceWorker" in navigator){
+
+ window.addEventListener("load",()=>{
+
+  navigator.serviceWorker
+
+   .register("./sw.js")
+
+   .then(()=>{
+
+    console.log("Houses of Horror service worker registered.");
+
+   })
+
+   .catch(err=>{
+
+    console.log("Service worker unavailable:",err);
+
+   });
+
+ });
+
+}
+
+/* =========================================================
+
+ INITIALIZE
 
 ========================================================= */
 
@@ -5939,472 +3785,3 @@ render();
 </body>
 
 </html>
-<!-- HOUSES OF HORROR 1.5 MINI CELEBRATION -->
-
-<meta name="theme-color" content="#050505">
-
-<meta name="mobile-web-app-capable" content="yes">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-<meta name="apple-mobile-web-app-title" content="Houses of Horror">
-
-<link rel="manifest" href="manifest.json">
-
-<style>
-
-/* =========================================================
-
-   1.5 MINI CELEBRATION BACKGROUND
-
-   ========================================================= */
-
-#celebrationBackground {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: -10;
-
-    overflow: hidden;
-
-    background:
-
-        radial-gradient(circle at 50% 20%, #252525 0%, #090909 45%, #000 100%);
-
-}
-
-#celebrationBackground::before,
-
-#celebrationBackground::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 5px;
-
-    height: 5px;
-
-    border-radius: 50%;
-
-    box-shadow:
-
-        8vw 12vh #fff,
-
-        18vw 28vh #777,
-
-        30vw 8vh #fff,
-
-        42vw 24vh #aaa,
-
-        55vw 12vh #fff,
-
-        68vw 30vh #888,
-
-        80vw 10vh #fff,
-
-        92vw 25vh #aaa,
-
-        12vw 55vh #777,
-
-        25vw 42vh #fff,
-
-        38vw 62vh #aaa,
-
-        62vw 48vh #fff,
-
-        75vw 64vh #777,
-
-        88vw 52vh #fff;
-
-    animation: sparkle 2.5s infinite alternate;
-
-}
-
-#celebrationBackground::after {
-
-    transform: scale(1.5);
-
-    opacity: .5;
-
-    animation-delay: 1s;
-
-}
-
-@keyframes sparkle {
-
-    from {
-
-        opacity: .25;
-
-        transform: scale(.7);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: scale(1.25);
-
-    }
-
-}
-
-/* =========================================================
-
-   BLOOD COVERED LOGO
-
-   ========================================================= */
-
-#celebrationLogo {
-
-    position: absolute;
-
-    top: 7%;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(90vw, 650px);
-
-    text-align: center;
-
-    font-family: Impact, Haettenschweiler, sans-serif;
-
-    font-size: clamp(42px, 9vw, 88px);
-
-    line-height: .85;
-
-    letter-spacing: 3px;
-
-    color: #eee;
-
-    text-shadow:
-
-        4px 4px 0 #000,
-
-        0 0 15px #000;
-
-}
-
-#celebrationLogo span {
-
-    color: #8d0000;
-
-    text-shadow:
-
-        3px 3px 0 #000,
-
-        0 0 10px #300000;
-
-}
-
-/* Fake blood drips */
-
-#celebrationLogo::after {
-
-    content: "🩸  🩸     🩸";
-
-    display: block;
-
-    color: #8d0000;
-
-    font-size: 25px;
-
-    letter-spacing: 15px;
-
-    margin-top: 8px;
-
-}
-
-/* =========================================================
-
-   1.5 MINI CELEBRATION TITLE
-
-   ========================================================= */
-
-#miniCelebrationTitle {
-
-    position: absolute;
-
-    top: 24%;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 100%;
-
-    text-align: center;
-
-    color: white;
-
-    font-family: Impact, sans-serif;
-
-    font-size: clamp(22px, 5vw, 42px);
-
-    letter-spacing: 5px;
-
-    text-shadow: 3px 3px 0 #000;
-
-}
-
-/* =========================================================
-
-   FIREWORK BUTCHER
-
-   ========================================================= */
-
-#fireworkButcher {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 4%;
-
-    transform: translateX(-50%);
-
-    width: min(48vw, 330px);
-
-    height: min(62vw, 430px);
-
-}
-
-/* Head */
-
-.butcher-head {
-
-    position: absolute;
-
-    left: 30%;
-
-    top: 5%;
-
-    width: 40%;
-
-    aspect-ratio: 1;
-
-    background: #8b0000;
-
-    border: 5px solid #111;
-
-    border-radius: 48% 48% 45% 45%;
-
-    box-shadow: 0 0 20px #000;
-
-}
-
-/* Butcher mask */
-
-.butcher-mask {
-
-    position: absolute;
-
-    left: 10%;
-
-    top: 35%;
-
-    width: 80%;
-
-    height: 42%;
-
-    background: #aaa;
-
-    border: 4px solid #111;
-
-    border-radius: 35%;
-
-}
-
-.butcher-mask::before {
-
-    content: "••";
-
-    position: absolute;
-
-    top: 18%;
-
-    left: 30%;
-
-    font-size: 30px;
-
-    letter-spacing: 20px;
-
-    color: #111;
-
-}
-
-/* Body */
-
-.butcher-body {
-
-    position: absolute;
-
-    left: 20%;
-
-    top: 30%;
-
-    width: 60%;
-
-    height: 65%;
-
-    background: #151515;
-
-    border: 5px solid #080808;
-
-    border-radius: 25px 25px 10px 10px;
-
-}
-
-/* Apron */
-
-.butcher-apron {
-
-    position: absolute;
-
-    left: 25%;
-
-    top: 12%;
-
-    width: 50%;
-
-    height: 80%;
-
-    background: #ddd;
-
-    border: 3px solid #222;
-
-    clip-path: polygon(12% 0,88% 0,100% 100%,0 100%);
-
-}
-
-/* Firework decorations */
-
-.butcher-firework-burst {
-
-    position: absolute;
-
-    width: 100%;
-
-    height: 100%;
-
-    pointer-events: none;
-
-}
-
-.butcher-firework-burst::before,
-
-.butcher-firework-burst::after {
-
-    content: "✦";
-
-    position: absolute;
-
-    font-size: 55px;
-
-    text-shadow:
-
-        25px -20px 0 #fff,
-
-        -25px 30px 0 #aaa,
-
-        35px 45px 0 #fff,
-
-        -40px -45px 0 #777;
-
-    animation: fireworkPulse 1.2s infinite alternate;
-
-}
-
-.butcher-firework-burst::before {
-
-    top: -8%;
-
-    left: -25%;
-
-}
-
-.butcher-firework-burst::after {
-
-    top: 5%;
-
-    right: -30%;
-
-    animation-delay: .6s;
-
-}
-
-@keyframes fireworkPulse {
-
-    from {
-
-        transform: scale(.65);
-
-        opacity: .45;
-
-    }
-
-    to {
-
-        transform: scale(1.15);
-
-        opacity: 1;
-
-    }
-
-}
-
-/* =========================================================
-
-   SKIN LABEL
-
-   ========================================================= */
-
-#fireworkSkinLabel {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 1%;
-
-    transform: translateX(-50%);
-
-    background: rgba(0,0,0,.85);
-
-    border: 2px solid #777;
-
-    border-radius: 8px;
-
-    padding: 8px 18px;
-
-    color: white;
-
-    font-family: Arial, sans-serif;
-
-    font-weight: bold;
-
-    text-align: center;
-
-    white-space: nowrap;
-
-}
-
-#fireworkSkinLabel small {
-
-    display: block;
-
-    color: #aaa;
-
-    margin-top: 3px;
-
-}
-
-</style>

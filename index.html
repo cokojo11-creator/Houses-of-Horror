@@ -5939,3 +5939,472 @@ render();
 </body>
 
 </html>
+<!-- HOUSES OF HORROR 1.5 MINI CELEBRATION -->
+
+<meta name="theme-color" content="#050505">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="apple-mobile-web-app-title" content="Houses of Horror">
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+/* =========================================================
+
+   1.5 MINI CELEBRATION BACKGROUND
+
+   ========================================================= */
+
+#celebrationBackground {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(circle at 50% 20%, #252525 0%, #090909 45%, #000 100%);
+
+}
+
+#celebrationBackground::before,
+
+#celebrationBackground::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    box-shadow:
+
+        8vw 12vh #fff,
+
+        18vw 28vh #777,
+
+        30vw 8vh #fff,
+
+        42vw 24vh #aaa,
+
+        55vw 12vh #fff,
+
+        68vw 30vh #888,
+
+        80vw 10vh #fff,
+
+        92vw 25vh #aaa,
+
+        12vw 55vh #777,
+
+        25vw 42vh #fff,
+
+        38vw 62vh #aaa,
+
+        62vw 48vh #fff,
+
+        75vw 64vh #777,
+
+        88vw 52vh #fff;
+
+    animation: sparkle 2.5s infinite alternate;
+
+}
+
+#celebrationBackground::after {
+
+    transform: scale(1.5);
+
+    opacity: .5;
+
+    animation-delay: 1s;
+
+}
+
+@keyframes sparkle {
+
+    from {
+
+        opacity: .25;
+
+        transform: scale(.7);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1.25);
+
+    }
+
+}
+
+/* =========================================================
+
+   BLOOD COVERED LOGO
+
+   ========================================================= */
+
+#celebrationLogo {
+
+    position: absolute;
+
+    top: 7%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(90vw, 650px);
+
+    text-align: center;
+
+    font-family: Impact, Haettenschweiler, sans-serif;
+
+    font-size: clamp(42px, 9vw, 88px);
+
+    line-height: .85;
+
+    letter-spacing: 3px;
+
+    color: #eee;
+
+    text-shadow:
+
+        4px 4px 0 #000,
+
+        0 0 15px #000;
+
+}
+
+#celebrationLogo span {
+
+    color: #8d0000;
+
+    text-shadow:
+
+        3px 3px 0 #000,
+
+        0 0 10px #300000;
+
+}
+
+/* Fake blood drips */
+
+#celebrationLogo::after {
+
+    content: "🩸  🩸     🩸";
+
+    display: block;
+
+    color: #8d0000;
+
+    font-size: 25px;
+
+    letter-spacing: 15px;
+
+    margin-top: 8px;
+
+}
+
+/* =========================================================
+
+   1.5 MINI CELEBRATION TITLE
+
+   ========================================================= */
+
+#miniCelebrationTitle {
+
+    position: absolute;
+
+    top: 24%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    color: white;
+
+    font-family: Impact, sans-serif;
+
+    font-size: clamp(22px, 5vw, 42px);
+
+    letter-spacing: 5px;
+
+    text-shadow: 3px 3px 0 #000;
+
+}
+
+/* =========================================================
+
+   FIREWORK BUTCHER
+
+   ========================================================= */
+
+#fireworkButcher {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 4%;
+
+    transform: translateX(-50%);
+
+    width: min(48vw, 330px);
+
+    height: min(62vw, 430px);
+
+}
+
+/* Head */
+
+.butcher-head {
+
+    position: absolute;
+
+    left: 30%;
+
+    top: 5%;
+
+    width: 40%;
+
+    aspect-ratio: 1;
+
+    background: #8b0000;
+
+    border: 5px solid #111;
+
+    border-radius: 48% 48% 45% 45%;
+
+    box-shadow: 0 0 20px #000;
+
+}
+
+/* Butcher mask */
+
+.butcher-mask {
+
+    position: absolute;
+
+    left: 10%;
+
+    top: 35%;
+
+    width: 80%;
+
+    height: 42%;
+
+    background: #aaa;
+
+    border: 4px solid #111;
+
+    border-radius: 35%;
+
+}
+
+.butcher-mask::before {
+
+    content: "••";
+
+    position: absolute;
+
+    top: 18%;
+
+    left: 30%;
+
+    font-size: 30px;
+
+    letter-spacing: 20px;
+
+    color: #111;
+
+}
+
+/* Body */
+
+.butcher-body {
+
+    position: absolute;
+
+    left: 20%;
+
+    top: 30%;
+
+    width: 60%;
+
+    height: 65%;
+
+    background: #151515;
+
+    border: 5px solid #080808;
+
+    border-radius: 25px 25px 10px 10px;
+
+}
+
+/* Apron */
+
+.butcher-apron {
+
+    position: absolute;
+
+    left: 25%;
+
+    top: 12%;
+
+    width: 50%;
+
+    height: 80%;
+
+    background: #ddd;
+
+    border: 3px solid #222;
+
+    clip-path: polygon(12% 0,88% 0,100% 100%,0 100%);
+
+}
+
+/* Firework decorations */
+
+.butcher-firework-burst {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+}
+
+.butcher-firework-burst::before,
+
+.butcher-firework-burst::after {
+
+    content: "✦";
+
+    position: absolute;
+
+    font-size: 55px;
+
+    text-shadow:
+
+        25px -20px 0 #fff,
+
+        -25px 30px 0 #aaa,
+
+        35px 45px 0 #fff,
+
+        -40px -45px 0 #777;
+
+    animation: fireworkPulse 1.2s infinite alternate;
+
+}
+
+.butcher-firework-burst::before {
+
+    top: -8%;
+
+    left: -25%;
+
+}
+
+.butcher-firework-burst::after {
+
+    top: 5%;
+
+    right: -30%;
+
+    animation-delay: .6s;
+
+}
+
+@keyframes fireworkPulse {
+
+    from {
+
+        transform: scale(.65);
+
+        opacity: .45;
+
+    }
+
+    to {
+
+        transform: scale(1.15);
+
+        opacity: 1;
+
+    }
+
+}
+
+/* =========================================================
+
+   SKIN LABEL
+
+   ========================================================= */
+
+#fireworkSkinLabel {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 1%;
+
+    transform: translateX(-50%);
+
+    background: rgba(0,0,0,.85);
+
+    border: 2px solid #777;
+
+    border-radius: 8px;
+
+    padding: 8px 18px;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+}
+
+#fireworkSkinLabel small {
+
+    display: block;
+
+    color: #aaa;
+
+    margin-top: 3px;
+
+}
+
+</style>

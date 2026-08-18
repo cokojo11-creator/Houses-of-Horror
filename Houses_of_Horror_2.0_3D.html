@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#050505">
+<title>Houses of Horror 2.0 — 3D</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505;color:#fff;font-family:Arial,sans-serif;touch-action:none}
+button{font:inherit;cursor:pointer}
+#game{position:fixed;inset:0;background:#050505}
+#menu{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 20%,#351010 0,transparent 30%),linear-gradient(#090909,#020202)}
+#menu:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,#fff 0 1px,transparent 2px),radial-gradient(circle at 80% 25%,#aaa 0 1px,transparent 2px),radial-gradient(circle at 60% 10%,#fff 0 1px,transparent 2px);opacity:.5}
+.menuBox{position:relative;width:min(92%,480px);padding:25px}
+.logo{font-size:clamp(43px,13vw,75px);font-weight:1000;letter-spacing:5px;text-shadow:0 5px #000,0 0 30px #000}
+.logo small{display:block;color:#8d0000;font-size:.34em;letter-spacing:9px;margin-top:-4px}
+.version{display:inline-block;margin:12px;padding:7px 13px;border:1px solid #704040;color:#d8b0b0;background:#000c;font-size:10px;letter-spacing:2px}
+.menuBtn{display:block;width:100%;margin:9px 0;padding:15px;border:2px solid #393939;border-radius:5px;background:linear-gradient(#292929,#101010);color:#fff;font-weight:bold;letter-spacing:2px;box-shadow:0 5px #000}
+.menuBtn.red{border-color:#713636;background:linear-gradient(#552525,#160909)}
+.menuBtn:active{transform:translateY(3px);box-shadow:0 2px #000}
+#gameScreen{position:absolute;inset:0;display:none;z-index:5}
+#three{position:absolute;inset:0}
+#hud{position:absolute;inset:0;pointer-events:none;z-index:10}
+.hudTop{display:flex;justify-content:space-between;padding:9px;gap:5px}
+.hudBox{background:#000c;border:1px solid #444;padding:8px 10px;border-radius:5px;font-size:11px}
+#objective{position:absolute;top:55px;left:50%;transform:translateX(-50%);width:90%;max-width:430px;text-align:center;background:#000c;border:1px solid #444;padding:8px;font-size:10px}
+#timer{position:absolute;top:93px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:bold;color:#d88}
+#joystick{position:absolute;z-index:15;left:20px;bottom:20px;width:130px;height:130px;border-radius:50%;background:#0008;border:2px solid #ffffff2e}
+#knob{position:absolute;left:39px;top:39px;width:50px;height:50px;border-radius:50%;background:#aaa7;border:2px solid #fff5}
+.actions{position:absolute;right:15px;bottom:18px;display:flex;gap:8px;pointer-events:auto}
+.ctrl{width:64px;height:64px;border-radius:50%;border:2px solid #555;background:#0909;color:#fff;font-size:21px}
+.ctrl.attack{width:76px;height:76px;border-color:#813737;background:#210909}
+#message{position:absolute;z-index:30;left:50%;bottom:110px;transform:translateX(-50%);padding:10px 15px;background:#000e;border:1px solid #555;border-radius:5px;opacity:0;transition:.2s;pointer-events:none;white-space:nowrap}
+#message.show{opacity:1}
+.panel{position:absolute;inset:0;z-index:25;display:none;overflow:auto;padding:25px 14px;background:radial-gradient(circle,#252525,#040404 75%)}
+.title{text-align:center;font-size:31px;font-weight:1000;letter-spacing:3px;margin:8px}
+.sub{text-align:center;color:#777;font-size:11px;margin-bottom:20px}
+.cards,.shop{width:min(95%,700px);margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.card{padding:15px 10px;min-height:210px;text-align:center;background:linear-gradient(#252525,#101010);border:1px solid #444;border-radius:7px}
+.icon{font-size:55px;height:75px;display:flex;align-items:center;justify-content:center}
+.card h3{font-size:13px;letter-spacing:1px}
+.card p{color:#888;font-size:10px;line-height:1.4;min-height:40px}
+.select,.buy,.back{width:100%;padding:10px;border:1px solid #555;border-radius:4px;background:#292929;color:#fff;font-weight:bold}
+.back{display:block;width:auto;margin:22px auto;padding:11px 35px}
+#lockerGrid{width:min(96%,700px);margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.skin{padding:14px;text-align:center;border:1px solid #444;border-radius:8px;background:linear-gradient(#242424,#0e0e0e)}
+.skin .icon{height:70px}.skinName{font-weight:bold;font-size:13px}.status{color:#999;font-size:10px;margin:7px}.equipped{border-color:#9a4a4a}.equipped button{background:#713434}
+.popup{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:#000e}
+.popupBox{width:min(90%,420px);padding:28px;text-align:center;background:#111;border:2px solid #444}
+.popupBox h1{font-size:34px;margin:0 0 10px}.popupBox button{width:100%;padding:13px;margin-top:10px;background:#252525;color:#fff;border:1px solid #555}
+@media(max-width:520px){.cards{grid-template-columns:1fr;max-width:330px}.card{min-height:175px}}
+</style>
+</head>
+<body>
+<div id="game">
+<div id="menu">
+ <div class="menuBox">
+  <div class="logo">HOUSES<small>OF HORROR</small></div>
+  <div class="version">VERSION 2.0 — FULL 3D</div>
+  <button class="menuBtn red" onclick="openKillers()">🔪 PLAY</button>
+  <button class="menuBtn" onclick="openLocker()">🔒 LOCKER ROOM</button>
+  <button class="menuBtn" onclick="openShop()">🛒 ITEM SHOP</button>
+  <button class="menuBtn" onclick="openLevels()">⭐ LEVELS</button>
+  <button class="menuBtn" onclick="openCreator()">👑 CREATOR CODE</button>
+ </div>
+</div>
+
+<div id="killerPanel" class="panel">
+ <div class="title">CHOOSE YOUR KILLER</div><div class="sub">NOW IN FULL 3D.</div>
+ <div class="cards">
+  <div class="card"><div class="icon">🔪</div><h3>THE BUTCHER</h3><p>Balanced killer with reliable speed and damage.</p><button class="select" onclick="selectKiller(1)">SELECT</button></div>
+  <div class="card"><div class="icon">👤</div><h3>THE STALKER</h3><p>Fast killer built for aggressive chases.</p><button class="select" onclick="selectKiller(2)">SELECT</button></div>
+  <div class="card"><div class="icon">🧟</div><h3>THE ZOMBIE</h3><p>The original RED base Zombie. Tough and brutal.</p><button class="select" onclick="selectKiller(3)">SELECT</button></div>
+ </div>
+ <button class="back" onclick="closePanels()">BACK</button>
+</div>
+
+<div id="housePanel" class="panel">
+ <div class="title">CHOOSE MAP</div><div class="sub">THE NEW 3D MAP IS HERE.</div>
+ <div class="cards">
+  <div class="card"><div class="icon">🏚️</div><h3>ABANDONED HOME</h3><p>Explore the full 3D house, rooms and yard.</p><button class="select" onclick="startGame(1)">ENTER</button></div>
+  <div class="card"><div class="icon">🌲</div><h3>NIGHT WOODS</h3><p>A new outdoor 3D map with trees, fog and survivors.</p><button class="select" onclick="startGame(2)">ENTER</button></div>
+ </div>
+ <button class="back" onclick="openKillers()">BACK</button>
+</div>
+
+<div id="lockerPanel" class="panel">
+ <div class="title">LOCKER ROOM</div><div class="sub">YOUR SKINS.</div>
+ <div id="lockerGrid"></div><button class="back" onclick="closePanels()">BACK</button>
+</div>
+
+<div id="shopPanel" class="panel">
+ <div class="title">ITEM SHOP</div><div class="sub">🪙 <span id="shopCoins">300</span> COINS</div>
+ <div class="shop">
+  <div class="card"><div class="icon">⚡</div><h3>SPEED</h3><p>Increase killer speed.</p><button class="buy" onclick="buy('speed',100)">100 COINS</button></div>
+  <div class="card"><div class="icon">💀</div><h3>DAMAGE</h3><p>Increase attack damage.</p><button class="buy" onclick="buy('damage',125)">125 COINS</button></div>
+  <div class="card"><div class="icon">👁️</div><h3>TRACKER</h3><p>Increase survivor search range.</p><button class="buy" onclick="buy('tracker',150)">150 COINS</button></div>
+  <div class="card"><div class="icon">❤️</div><h3>TOUGHNESS</h3><p>Increase maximum health.</p><button class="buy" onclick="buy('health',175)">175 COINS</button></div>
+  <div class="card"><div class="icon">🟢</div><h3>GREEN ZOMBIE</h3><p>Limited-time Zombie skin.</p><button class="buy" onclick="buyGreen()">3,000 COINS</button></div>
+  <div class="card"><div class="icon">🎆</div><h3>FIREWORK BUTCHER</h3><p>1.5 celebration skin.</p><button class="buy" onclick="buyFirework()">1,500 COINS</button></div>
+ </div><button class="back" onclick="closePanels()">BACK</button>
+</div>
+
+<div id="levelsPanel" class="panel">
+ <div class="title">LEVELS</div>
+ <div class="card" style="max-width:500px;margin:25px auto"><div class="icon">⭐</div><h3>LEVEL <span id="level">1</span></h3><p><span id="xp">0</span> XP</p><div style="height:16px;background:#050505;border:1px solid #555;border-radius:9px;overflow:hidden"><div id="xpFill" style="height:100%;width:0%;background:#9b4040"></div></div><p>MAX LEVEL: 50</p></div>
+ <button class="back" onclick="closePanels()">BACK</button>
+</div>
+
+<div id="creatorPanel" class="panel">
+ <div class="title">CREATOR</div>
+ <div class="card" style="max-width:480px;margin:25px auto"><div class="icon">👑</div><h3>CREATOR CODE</h3><p>Enter the exclusive code to unlock the Creator Zombie.</p><input id="creatorInput" placeholder="ENTER CODE" style="width:100%;padding:12px;background:#080808;color:#fff;border:1px solid #555;text-align:center"><br><br><button class="buy" onclick="creator()">REDEEM</button></div>
+ <button class="back" onclick="closePanels()">BACK</button>
+</div>
+
+<div id="gameScreen">
+ <div id="three"></div>
+ <div id="hud">
+  <div class="hudTop"><div class="hudBox">❤️ <span id="health">100</span></div><div class="hudBox">🪙 <span id="coins">300</span></div><div class="hudBox">⭐ LV <span id="hudLevel">1</span></div></div>
+  <div id="objective">FIND AND ELIMINATE SURVIVORS — 0 / 3</div>
+  <div id="timer">SURVIVORS ESCAPE IN: 90</div>
+ </div>
+ <div id="joystick"><div id="knob"></div></div>
+ <div class="actions"><button class="ctrl" onclick="search()">🔍</button><button class="ctrl attack" onclick="attack()">🔪</button></div>
+</div>
+
+<div id="message"></div>
+<div id="complete" class="popup"><div class="popupBox"><h1>HOUSE CLEARED</h1><p id="completeText"></p><button onclick="restart()">PLAY AGAIN</button><button onclick="returnMenu()">MAIN MENU</button></div></div>
+<div id="death" class="popup"><div class="popupBox"><h1>YOU DIED</h1><p id="deathText">The survivors escaped.</p><button onclick="restart()">TRY AGAIN</button><button onclick="returnMenu()">MAIN MENU</button></div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.min.js"></script>
+<script>
+const PREFIX="horror20_";
+let coins=+localStorage.getItem(PREFIX+"coins")||300;
+let level=+localStorage.getItem(PREFIX+"level")||1;
+let xp=+localStorage.getItem(PREFIX+"xp")||0;
+let upgrades={speed:+localStorage.getItem(PREFIX+"speed")||0,damage:+localStorage.getItem(PREFIX+"damage")||0,tracker:+localStorage.getItem(PREFIX+"tracker")||0,health:+localStorage.getItem(PREFIX+"health")||0};
+let skins=JSON.parse(localStorage.getItem(PREFIX+"skins")||'["zombie_base"]');
+let equipped=localStorage.getItem(PREFIX+"equipped")||"zombie_base";
+let selectedKiller=3,currentMap=1,running=false,timeLeft=90,kills=0,timerInt=null;
+function save(){localStorage.setItem(PREFIX+"coins",coins);localStorage.setItem(PREFIX+"level",level);localStorage.setItem(PREFIX+"xp",xp);Object.keys(upgrades).forEach(k=>localStorage.setItem(PREFIX+k,upgrades[k]));localStorage.setItem(PREFIX+"skins",JSON.stringify(skins));localStorage.setItem(PREFIX+"equipped",equipped)}
+function hidePanels(){document.querySelectorAll(".panel").forEach(x=>x.style.display="none")}
+function openKillers(){hidePanels();menu.style.display="none";killerPanel.style.display="block"}
+function openLocker(){hidePanels();menu.style.display="none";lockerPanel.style.display="block";renderLocker()}
+function openShop(){hidePanels();menu.style.display="none";shopPanel.style.display="block";shopCoins.textContent=coins}
+function openLevels(){hidePanels();menu.style.display="none";levelsPanel.style.display="block";updateLevel()}
+function openCreator(){hidePanels();menu.style.display="none";creatorPanel.style.display="block"}
+function closePanels(){hidePanels();menu.style.display="flex"}
+function selectKiller(n){selectedKiller=n;hidePanels();housePanel.style.display="block"}
+function showMessage(t){message.textContent=t;message.classList.add("show");clearTimeout(window.mt);window.mt=setTimeout(()=>message.classList.remove("show"),1700)}
+function xpNeed(){return 100+(level-1)*35}
+function addXP(n){xp+=n;while(level<50&&xp>=xpNeed()){xp-=xpNeed();level++;showMessage("⭐ LEVEL "+level)};if(level>=50){level=50;xp=0}save();updateLevel()}
+function updateLevel(){levelDisplay.textContent=level;hudLevel.textContent=level;xp.textContent=xp;xpFill.style.width=Math.min(100,xp/xpNeed()*100)+"%"}
+function buy(type,cost){if(coins<cost)return showMessage("NOT ENOUGH COINS");coins-=cost;upgrades[type]++;save();shopCoins.textContent=coins;showMessage("UPGRADE PURCHASED!")}
+function buyGreen(){if(skins.includes("green_zombie"))return equip("green_zombie");if(coins<3000)return showMessage("YOU NEED 3,000 COINS");coins-=3000;skins.push("green_zombie");save();showMessage("🟢 GREEN ZOMBIE UNLOCKED!")}
+function buyFirework(){if(skins.includes("butcher_firework"))return equip("butcher_firework");if(coins<1500)return showMessage("YOU NEED 1,500 COINS");coins-=1500;skins.push("butcher_firework");save();showMessage("🎆 FIREWORK BUTCHER UNLOCKED!")}
+function creator(){if(creatorInput.value.trim().toUpperCase()!=="CONNORCREATOR")return showMessage("INVALID CREATOR CODE");if(!skins.includes("creator_zombie"))skins.push("creator_zombie");save();creatorInput.value="";showMessage("👑 CREATOR SKIN UNLOCKED!")}
+function equip(id){if(!skins.includes(id))return showMessage("SKIN LOCKED");equipped=id;save();renderLocker();showMessage("SKIN EQUIPPED!")}
+function renderLocker(){lockerGrid.innerHTML="";let a=[["zombie_base","🧟","RED ZOMBIE","BASE KILLER"],["green_zombie","🟢","GREEN ZOMBIE","SHOP SKIN"],["creator_zombie","👑","CREATOR ZOMBIE","CREATOR EXCLUSIVE"],["butcher_firework","🎆","FIREWORK BUTCHER","1.5 CELEBRATION"]];a.forEach(s=>{let owned=skins.includes(s[0]);let d=document.createElement("div");d.className="skin"+(equipped===s[0]?" equipped":"");d.innerHTML=`<div class="icon">${s[1]}</div><div class="skinName">${s[2]}</div><div class="status">${owned?s[3]:"LOCKED"}</div>${owned?`<button class="buy" onclick="equip('${s[0]}')">${equipped===s[0]?"EQUIPPED":"EQUIP"}</button>`:"🔒"}`;lockerGrid.appendChild(d)})}
+
+let scene,camera,renderer,clock,player,playerParts=[],survivors=[],keys={},joyX=0,joyY=0;
+const WORLD=90;
+function mat(c){return new THREE.MeshStandardMaterial({color:c,roughness:.9})}
+function box(w,h,d,c,x,y,z){let m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m}
+function cyl(r,h,c,x,y,z){let m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,12),mat(c));m.position.set(x,y,z);m.castShadow=true;scene.add(m);return m}
+function createPlayer(){
+ player=new THREE.Group();
+ let head=cyl(.65,1.3,selectedKiller===3?0xb52d2d:selectedKiller===1?0xa87559:0xbd8b6e,0,2.7,0);
+ player.add(head);
+ let body=box(1.7,2.5,1.15,selectedKiller===3?0x7b1010:selectedKiller===1?0x202020:0x090909,0,1.15,0);player.add(body);
+ let weapon=box(.18,2.0, .18,0xaaaaaa,1.05,1.1,.1);weapon.rotation.z=-.55;player.add(weapon);
+ scene.add(player);player.position.set(0,0,25)
+}
+function createSurvivor(x,z,i){
+ let g=new THREE.Group();let h=cyl(.45,.9,0xb98768,0,2.1,0);g.add(h);
+ let b=box(1.1,2,0.8,[0x4d6872,0x604d72,0x69724d,0x6d4b3e][i%4],0,1,0);g.add(b);
+ g.position.set(x,0,z);g.userData={alive:true,hidden:true,found:false};scene.add(g);survivors.push(g)
+}
+function buildHouse(){
+ box(34,.5,28,0x3b4636,0,0,0);
+ box(34,12,.7,0x5b4b3b,0,6,-14);box(.7,12,28,0x5b4b3b,-17,6,0);box(.7,12,28,0x5b4b3b,17,6,0);
+ box(34,12,.7,0x5b4b3b,0,6,14);
+ box(20,.35,22,0x6b5a49,-6,.3,2);box(12,.35,22,0x67584a,11,.3,2);
+ box(9,4,5,0x40302a,-8,2,5);box(4,3,4,0x34251d,7,1.5,-7);
+ box(7,1.5,5,0x282a2e,-7,.8,-7);box(5,2,1,0x151515,-7,3,-10);
+ box(3,5,3,0x858585,13,2.5,-7);
+ box(8,1,2,0x432c20,8,.5,6);box(2,2,2,0x252525,8,1.7,6);
+ // interior doorway openings / dividers
+ box(.5,10,8,0x332921,0,5,-4);box(6,10,.5,0x332921,6,5,0);
+ // porch
+ box(10,.5,5,0x4b3626,0,.3,18);box(12,5,.5,0x5b4030,0,2.5,20);
+}
+function buildWoods(){
+ box(WORLD,.5,WORLD,0x1d321b,0,0,0);
+ for(let i=0;i<45;i++){let x=(Math.random()-.5)*82,z=(Math.random()-.5)*82;if(Math.abs(x)<10&&Math.abs(z)<10)continue;cyl(.5,5,0x4b3020,x,2.5,z);let crown=cyl(2.8,4,0x142d17,x,6,z);crown.scale.z=.8}
+ for(let i=-40;i<=40;i+=8){box(5,1,1,0x60452d,i,.7,-42);box(1,1,5,0x60452d,-42,.7,i)}
+}
+function setupWorld(){
+ scene=new THREE.Scene();scene.background=new THREE.Color(currentMap===1?0x101713:0x07110a);scene.fog=new THREE.FogExp2(currentMap===1?0x111713:0x081109,.018);
+ camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,300);camera.position.set(0,12,18);
+ renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;three.innerHTML="";three.appendChild(renderer.domElement);
+ clock=new THREE.Clock();
+ scene.add(new THREE.HemisphereLight(0x8899aa,0x101010,1.3));let light=new THREE.DirectionalLight(0xffffff,1.2);light.position.set(20,35,10);light.castShadow=true;light.shadow.mapSize.set(1024,1024);scene.add(light);
+ if(currentMap===1)buildHouse();else buildWoods();
+ createPlayer();
+ let pos=currentMap===1?[[-11,-9],[10,-9],[-10,8],[10,8]]:[[15,-20],[-20,15],[25,20],[-25,-10]];
+ pos.forEach((p,i)=>createSurvivor(p[0],p[1],i));
+}
+function startGame(mapNo){currentMap=mapNo;hidePanels();gameScreen.style.display="block";kills=0;timeLeft=90;running=true;setupWorld();updateHUD();clearInterval(timerInt);timerInt=setInterval(()=>{if(!running)return;timeLeft--;timer.textContent="SURVIVORS ESCAPE IN: "+timeLeft;if(timeLeft<=0)die("The survivors escaped.")},1000);animate()}
+function updateHUD(){health.textContent=100+upgrades.health*15;coinsEl();hudLevel.textContent=level;objective.textContent=`FIND AND ELIMINATE SURVIVORS — ${kills} / ${survivors.length}`}
+function coinsEl(){document.getElementById("coins").textContent=coins}
+function nearest(){let best=null,bd=999;survivors.forEach(s=>{if(!s.userData.alive)return;let d=player.position.distanceTo(s.position);if(d<bd){bd=d;best=s}});return [best,bd]}
+function search(){if(!running)return;let [s,d]=nearest();if(s&&d<16){s.userData.hidden=false;s.userData.found=true;showMessage("SURVIVOR FOUND!")}else showMessage("NOTHING HERE...")}
+function attack(){if(!running)return;let [s,d]=nearest();if(s&&d<6&&!s.userData.hidden){s.userData.alive=false;s.visible=false;kills++;coins+=35;addXP(30);objective.textContent=`FIND AND ELIMINATE SURVIVORS — ${kills} / ${survivors.length}`;coinsEl();showMessage("SURVIVOR ELIMINATED +35");if(kills>=survivors.length)setTimeout(win,400)}else showMessage("NO SURVIVOR IN RANGE")}
+function die(reason){running=false;clearInterval(timerInt);deathText.textContent=reason;death.style.display="flex"}
+function win(){if(!running)return;running=false;clearInterval(timerInt);let reward=currentMap===1?100:175;coins+=reward;addXP(100);completeText.innerHTML=`Every survivor was eliminated.<br><br>🪙 +${reward} BONUS<br>⭐ +100 XP`;complete.style.display="flex"}
+function restart(){complete.style.display="none";death.style.display="none";if(renderer){renderer.dispose();renderer.domElement.remove()}startGame(currentMap)}
+function returnMenu(){running=false;clearInterval(timerInt);complete.style.display="none";death.style.display="none";gameScreen.style.display="none";menu.style.display="flex";if(renderer){renderer.dispose();renderer.domElement.remove()}}
+function animate(){if(!running)return;requestAnimationFrame(animate);let dt=Math.min(clock.getDelta(),.05);let speed=(selectedKiller===2?8:6)+upgrades.speed*.7;let mx=joyX,my=joyY;if(keys.w)my-=1;if(keys.s)my+=1;if(keys.a)mx-=1;if(keys.d)mx+=1;let len=Math.hypot(mx,my);if(len>1){mx/=len;my/=len}player.position.x+=mx*speed*dt;player.position.z+=my*speed*dt;player.position.x=Math.max(-WORLD/2+2,Math.min(WORLD/2-2,player.position.x));player.position.z=Math.max(-WORLD/2+2,Math.min(WORLD/2-2,player.position.z));
+ survivors.forEach(s=>{if(!s.userData.alive||s.userData.hidden)return;let d=player.position.distanceTo(s.position);if(d<12){let dx=s.position.x-player.position.x,dz=s.position.z-player.position.z,l=Math.hypot(dx,dz)||1;s.position.x+=dx/l*dt*2;s.position.z+=dz/l*dt*2}});
+ let camTarget=new THREE.Vector3(player.position.x,7,player.position.z+12);camera.position.lerp(camTarget,.12);camera.lookAt(player.position.x,1.5,player.position.z);renderer.render(scene,camera)}
+const joy=document.getElementById("joystick"),knob=document.getElementById("knob");let active=false;
+function joyMove(x,y){let r=joy.getBoundingClientRect(),dx=x-(r.left+r.width/2),dy=y-(r.top+r.height/2),m=Math.hypot(dx,dy),max=40;if(m>max){dx=dx/m*max;dy=dy/m*max}joyX=dx/max;joyY=dy/max;knob.style.transform=`translate(${dx}px,${dy}px)`}
+joy.addEventListener("pointerdown",e=>{active=true;joy.setPointerCapture(e.pointerId);joyMove(e.clientX,e.clientY)});joy.addEventListener("pointermove",e=>{if(active)joyMove(e.clientX,e.clientY)});function joyReset(){active=false;joyX=joyY=0;knob.style.transform="translate(0,0)"}joy.addEventListener("pointerup",joyReset);joy.addEventListener("pointercancel",joyReset);
+document.addEventListener("keydown",e=>{keys[e.key.toLowerCase()]=true;if(e.key===" ")attack();if(e.key.toLowerCase()==="e")search()});document.addEventListener("keyup",e=>keys[e.key.toLowerCase()]=false);
+addEventListener("resize",()=>{if(camera&&renderer){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)}})
+save();updateLevel();renderLocker();
+</script>
+</body>
+</html>
